@@ -32,6 +32,10 @@ under the [MIT license](LICENSE.md).
 
 ### Graphics
 
+* `A_Font_with_Serifs.ttf` -
+  [A Font with Serifs](https://www.fontfreak.com/font_A-Font-With-Serifs.htm)
+  (regular) by A. Skersys (extate) on
+  [fontfreak.com](https://www.fontfreak.com/).
 * `skeleton` -
   [Skeleton Sprite](https://opengameart.org/content/skeleton-sprite) by
   [goo30](https://opengameart.org/users/goo30) on

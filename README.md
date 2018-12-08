@@ -15,7 +15,7 @@ story yet.
 This whole thing was inspired by this image, which I think was done by
 [Jim Holloway](https://en.wikipedia.org/wiki/Jim_Holloway_(artist)):
 
-![First of all, you're being a dick right now.](your-being-a-dick.png)
+![First of all, you're being a dick right now.](youre-being-a-dick.png)
 
 The image has been popular on the Internet for quite a while; please let me
 know the copyright status if you have some idea (or are Jim; dude, I loved

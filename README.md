@@ -30,6 +30,10 @@ Development](https://www.edx.org/course/cs50s-introduction-to-game-development).
 Check the `.lua` file headers for individual credits; stuff I wrote is released
 under the [MIT license](LICENSE.md).
 
+### Libraries
+
+* [middleclass](https://github.com/kikito/middleclass)
+
 ### Graphics
 
 * `A_Font_with_Serifs.ttf` -

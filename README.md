@@ -40,6 +40,9 @@ under the [MIT license](LICENSE.md).
   [A Font with Serifs](https://www.fontfreak.com/font_A-Font-With-Serifs.htm)
   (regular) by A. Skersys (extate) on
   [fontfreak.com](https://www.fontfreak.com/).
+* `lpc-terrains` - [LPC Terrains](https://opengameart.org/content/lpc-terrains)
+  by [bluecarrot16](https://opengameart.org/users/bluecarrot16) on
+  [OpenGameArt.org](https://opengameart.org/).
 * `skeleton` -
   [Skeleton Sprite](https://opengameart.org/content/skeleton-sprite) by
   [goo30](https://opengameart.org/users/goo30) on

@@ -3,10 +3,21 @@
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
 
-local Class = require 'lib/middleclass/middleclass'
+-- All the stuff we've loaded already.
+gameResources = {
+    fonts = {},
+    images = {},
+    screens = { -- Separate from state, we can be in Pause on top of a screen.
+        base = require 'src/screens/base',
+        loading = require 'src/screens/loading'
+    },
+    states = {}
+}
 
+-- Current state of the game.
 gameState = {
-    fonts = {}
+    screen = nil, -- Currently displayed screen.
+    tick = 0
 }
 
 -- Love callbacks.
@@ -15,13 +26,18 @@ function love.load()
 
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
-    -- Load the minimum required to provide some sort of loading screen,
-    -- where we'll do the actual loading.
-    gameState.fonts.default = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 32)
+    -- Minimal loading screen.
+    gameState.screen = gameResources.screens.loading:new(gameResources)
 end
 
 function love.draw()
-    love.graphics.setFont(gameState.fonts.default)
-    love.graphics.setColor(0, 1, 0, 1)
-    love.graphics.print('Insert game here.', 5, 5)
+    gameState.screen:draw()
+end
+
+-- Event generation.
+function love.keypressed(key)
+    print('A key is pressed: ' .. key)
+    if gameState.screen:handle(key) == false then
+        print('Unhandled key press.')
+    end
 end

@@ -1,6 +1,7 @@
 -- Allowed globals.
 std = "max+love"
 new_globals = {
+    "gameResources",
     "gameState"
 }
 

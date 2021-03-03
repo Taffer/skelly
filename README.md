@@ -40,6 +40,10 @@ under the [MIT license](LICENSE.md).
   [A Font with Serifs](https://www.fontfreak.com/font_A-Font-With-Serifs.htm)
   (regular) by A. Skersys (extate) on
   [fontfreak.com](https://www.fontfreak.com/).
+* `love-game-0.10` -
+  [Löve game icon](https://love2d.org/wiki/File:love-game-0.10.png) from the
+  wiki, uploaded by Qubodup, based on an SVG original from Arch linux (which
+  probably came from rude's BitBucket).
 * `lpc-terrains` - [LPC Terrains](https://opengameart.org/content/lpc-terrains)
   by [bluecarrot16](https://opengameart.org/users/bluecarrot16) on
   [OpenGameArt.org](https://opengameart.org/).

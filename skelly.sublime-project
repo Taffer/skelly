@@ -2,7 +2,8 @@
 	"folders":
 	[
 		{
-			"path": "."
+			"path": ".",
+            "name": "Skelly"
 		}
 	],
     "build_systems":

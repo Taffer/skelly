@@ -3,13 +3,15 @@
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
 
+
 -- All the stuff we've loaded already.
 gameResources = {
     fonts = {},
     images = {},
     screens = { -- Separate from state, we can be in Pause on top of a screen.
         base = require 'src/screens/base',
-        loading = require 'src/screens/loading'
+        loading = require 'src/screens/loading',
+        presents = require 'src/screens/presents'
     },
     states = {}
 }
@@ -17,7 +19,7 @@ gameResources = {
 -- Current state of the game.
 gameState = {
     screen = nil, -- Currently displayed screen.
-    tick = 0
+    next_screen = '' -- Which screen is next?
 }
 
 -- Love callbacks.
@@ -27,17 +29,31 @@ function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
     -- Minimal loading screen.
-    gameState.screen = gameResources.screens.loading:new(gameResources)
+    gameState.screen = gameResources.screens.presents:new(gameResources)
+    gameState.next_screen = 'loading'
 end
 
 function love.draw()
     gameState.screen:draw()
 end
 
+function love.update(dt)
+    gameState.screen:update(dt)
+
+    if gameState.screen:exit() then
+        if gameState.next_screen == 'loading' then
+            gameState.screen = gameResources.screens.loading:new(gameResources)
+            gameState.next_screen = 'there is no next screen'
+        else
+            love.event.quit()
+        end
+    end
+end
+
 -- Event generation.
-function love.keypressed(key)
-    print('A key is pressed: ' .. key)
+function love.keyreleased(key)
+    print('A key is released: ' .. key)
     if gameState.screen:handle(key) == false then
-        print('Unhandled key press.')
+        print('Unhandled key.')
     end
 end

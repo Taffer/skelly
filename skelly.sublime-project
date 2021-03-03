@@ -10,7 +10,7 @@
     [
         {
             "name": "Launch Löve2D",
-            "shell_cmd": "love .",
+            "shell_cmd": "love $project_path",
             "file_regex": "^Error: (?:[^:]+: )?([^: ]+?):(\\d+):() ([^:]*)$",
         },
     ],

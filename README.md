@@ -40,6 +40,10 @@ under the [MIT license](LICENSE.md).
   [A Font with Serifs](https://www.fontfreak.com/font_A-Font-With-Serifs.htm)
   (regular) by A. Skersys (extate) on
   [fontfreak.com](https://www.fontfreak.com/).
+* `LiberationMono-Bold.ttf` - An open source font from the
+  [liberationfonts](https://github.com/liberationfonts/liberation-fonts) repo;
+  this is licensed under the
+  [SIL Open Font License](https://github.com/liberationfonts/liberation-fonts/blob/master/LICENSE).
 * `love-game-0.10` -
   [Löve game icon](https://love2d.org/wiki/File:love-game-0.10.png) from the
   wiki, uploaded by Qubodup, based on an SVG original from Arch linux (which

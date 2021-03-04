@@ -15,7 +15,9 @@ gameResources = {
         -- love_logo: love-game-0.10 (presents)
         -- skelly_title: Gersdorff_Feldbuch_skeleton (title)
     },
-    music = {},
+    music = {
+        -- theme: Heroic Demise (New) (presents)
+    },
     sounds = {},
 
     screens = { -- Separate from state, we can be in Pause on top of a screen.
@@ -65,6 +67,7 @@ function love.update(dt)
             gameState.screen = gameResources.screens.loading:new(gameResources)
             gameState.next_screen = 'there is no next screen'
         else
+            love.audio.stop()
             love.event.quit()
         end
     end

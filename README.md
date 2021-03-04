@@ -72,4 +72,6 @@ Sound resource credits go here.
 
 ### Music
 
-Music resource credits go here.
+* `Heroic Demise (New).mp3` - By [Matthew Pablo](https://matthewpablo.com/),
+  found on
+  [OpenGameArt.org](https://opengameart.org/content/heroic-demise-updated-version).

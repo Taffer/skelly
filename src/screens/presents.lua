@@ -14,6 +14,8 @@ function PresentsScreen:initialize(resources)
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
     self.resources.fonts.default_mono = love.graphics.newFont('graphics/LiberationMono-Bold.ttf', 16)
     self.resources.images.love_logo = love.graphics.newImage('graphics/love-game-0.10.png')
+    self.resources.music.theme = love.audio.newSource('music/Heroic Demise (New).mp3',  'stream')
+    love.audio.play(self.resources.music.theme) -- start playing ASAP
 
     self.taffer_text = "Taffer presents…"
     self.love_text = "A game made with LÖVE…"

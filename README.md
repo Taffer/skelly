@@ -36,14 +36,24 @@ under the [MIT license](LICENSE.md).
 
 ### Graphics
 
+Fonts:
+
 * `A_Font_with_Serifs.ttf` -
   [A Font with Serifs](https://www.fontfreak.com/font_A-Font-With-Serifs.htm)
   (regular) by A. Skersys (extate) on
   [fontfreak.com](https://www.fontfreak.com/).
+* `Gypsy Curse.ttf` - A free font created by Chad Savage at
+  [Sinister Fonts](https://www.sinisterfonts.com/)
 * `LiberationMono-Bold.ttf` - An open source font from the
   [liberationfonts](https://github.com/liberationfonts/liberation-fonts) repo;
   this is licensed under the
   [SIL Open Font License](https://github.com/liberationfonts/liberation-fonts/blob/master/LICENSE).
+
+Images:
+
+* `Gersdorff_Feldbuch_skeleton.png` -
+  [Hans von Gersdorff (ca. 1455 - 1529): „Feldbuch der Wundarzney, Die Knochenanatomie.](https://commons.wikimedia.org/wiki/Skeleton#/media/File:Gersdorff_Feldbuch_skeleton.jpg)
+  from Wikimedia Commons with some image manipulation.
 * `love-game-0.10` -
   [Löve game icon](https://love2d.org/wiki/File:love-game-0.10.png) from the
   wiki, uploaded by Qubodup, based on an SVG original from Arch linux (which

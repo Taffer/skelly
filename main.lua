@@ -6,13 +6,25 @@
 
 -- All the stuff we've loaded already.
 gameResources = {
-    fonts = {},
-    images = {},
+    fonts = {
+        -- default_mono: LiberationMono-Bold 16-pixel (presents)
+        -- default_serif: A_Font_with_Serifs 72-pixel (presents)
+        -- skelly_title: Gypsy Curse 144-pixel (title)
+    },
+    images = {
+        -- love_logo: love-game-0.10 (presents)
+        -- skelly_title: Gersdorff_Feldbuch_skeleton (title)
+    },
+    music = {},
+    sounds = {},
+
     screens = { -- Separate from state, we can be in Pause on top of a screen.
         loading = require 'src/screens/loading', -- place holder
 
-        presents = require 'src/screens/presents' -- Splash screen
+        presents = require 'src/screens/presents', -- Splash screen
+        title_loading = require 'src/screens/title' -- Title/loading screen
     },
+
     states = {}
 }
 
@@ -30,7 +42,7 @@ function love.load()
 
     -- Minimal loading screen.
     gameState.screen = gameResources.screens.presents:new(gameResources)
-    gameState.next_screen = 'loading'
+    gameState.next_screen = 'title'
 end
 
 function love.draw()
@@ -40,8 +52,16 @@ end
 function love.update(dt)
     gameState.screen:update(dt)
 
+    -- Screen state machine:
+    --
+    -- presents -> title -> journey -> exit
+    --                             \-> newgame -> intro -> game
+    --                             \-------------------/
     if gameState.screen:exit() then
-        if gameState.next_screen == 'loading' then
+        if gameState.next_screen == 'title' then
+            gameState.screen = gameResources.screens.title_loading:new(gameResources)
+            gameState.next_screen = 'loading'
+        elseif gameState.next_screen == 'loading' then
             gameState.screen = gameResources.screens.loading:new(gameResources)
             gameState.next_screen = 'there is no next screen'
         else

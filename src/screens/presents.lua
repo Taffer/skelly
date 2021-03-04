@@ -17,6 +17,11 @@ function PresentsScreen:initialize(resources)
 
     self.taffer_text = "Taffer presents…"
     self.love_text = "A game made with LÖVE…"
+
+    self.alpha = 0 -- Alpha level for the fade-in/out animation.
+    self.ticks = 0
+    self.pi_over_180 = math.pi / 180
+    self.degrees_per_second = 45
 end
 
 -- Render this screen's contents.
@@ -33,7 +38,7 @@ function PresentsScreen:draw()
     local width = font_default:getWidth(self.taffer_text)
     local x = (screen_width - width) / 2
 
-    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setColor(1, 1, 1, self.alpha)
     love.graphics.setFont(font_default)
     love.graphics.print(self.taffer_text, x, 16)
 
@@ -52,6 +57,15 @@ end
 
 -- Update the screen.
 function PresentsScreen:update(dt)
+    self.ticks = self.ticks + dt
+
+    local degrees = self.ticks * self.degrees_per_second -- 1 second = 90 degrees
+
+    self.alpha = math.sin(degrees * self.pi_over_180)
+
+    if degrees > 180 then -- sin(180 degrees) is back to 0 alpha
+        self.exit_screen = true
+    end
 end
 
 -- Exit this screen?

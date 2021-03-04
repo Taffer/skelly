@@ -9,9 +9,9 @@ gameResources = {
     fonts = {},
     images = {},
     screens = { -- Separate from state, we can be in Pause on top of a screen.
-        base = require 'src/screens/base',
-        loading = require 'src/screens/loading',
-        presents = require 'src/screens/presents'
+        loading = require 'src/screens/loading', -- place holder
+
+        presents = require 'src/screens/presents' -- Splash screen
     },
     states = {}
 }

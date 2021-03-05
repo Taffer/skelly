@@ -6,6 +6,30 @@
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/base'
 
+local rsrc_list = require 'src/rsrc_list'
+
+local function loader(resource, file_list)
+    local yield = coroutine.yield
+
+    -- Load the files listed into the resource table.
+    for k,v in pairs(file_list.images) do
+        resource.images[k] = love.graphics.newImage(v)
+        yield(v)
+    end
+
+    for k,v in pairs(file_list.music) do
+        resource.music[k] = love.audio.newSource(v, 'stream')
+        yield(v)
+    end
+
+    for k,v in pairs(file_list.sounds) do
+        resource.sounds[k] = love.audio.newSource(v, 'static')
+        yield(v)
+    end
+
+    return resource.text.title.loading_done
+end
+
 local TitleScreen = Class('TitleScreen', ScreenBase)
 
 function TitleScreen:initialize(resources)
@@ -28,6 +52,7 @@ function TitleScreen:initialize(resources)
 
     self.loaded_resource = ""
     self.loading_finished = false
+    self.loading_routine = nil
 end
 
 -- Render this screen's contents.
@@ -74,6 +99,19 @@ function TitleScreen:update(dt)
 
     if degrees > 180 then -- sin(180 degrees) is back to 0 alpha
         self.exit_screen = true
+    end
+
+    -- Load resources.
+    if self.loading_routine then
+        local resume = coroutine.resume
+        alive, self.loaded_resource = resume(self.loading_routine,self.resources, rsrc_list)
+        if not alive then
+            self.loading_finished = true
+            self.loaded_resource = self.resources.text.title.loading_done
+
+        end
+    else
+        self.loading_routine = coroutine.create(loader)
     end
 end
 

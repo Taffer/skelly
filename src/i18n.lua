@@ -17,7 +17,8 @@ local internationalization = {
 
         title = { -- 'title' screen
             subtitle_text = 'A tale of the Skeleton War',
-            loading_text = 'Loading…'
+            loading_text = 'Loading…',
+            loading_done = 'Done.'
         }
     },
 
@@ -34,7 +35,8 @@ local internationalization = {
 
         title = { -- 'title' screen
             subtitle_text = 'Una historia de la Guerra de los Esqueletos',
-            loading_text = 'Cargando…'
+            loading_text = 'Cargando…',
+            loading_done = 'Terminado.'
         }
     }
 }

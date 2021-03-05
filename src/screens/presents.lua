@@ -13,7 +13,7 @@ local PresentsScreen = Class('PresentsScreen', ScreenBase)
 function PresentsScreen:initialize(resources)
     ScreenBase.initialize(self, resources)
 
-    self.resources.text = text.es -- Default English.
+    self.resources.text = text.en -- Default English.
 
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
     self.resources.fonts.default_mono = love.graphics.newFont('graphics/LiberationMono-Bold.ttf', 16)

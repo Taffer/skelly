@@ -32,7 +32,7 @@ under the [MIT license](LICENSE.md).
 
 ### Libraries
 
-* [middleclass](https://github.com/kikito/middleclass)
+* [middleclass](https://github.com/kikito/middleclass) by Enrique García Cota
 
 ### Graphics
 
@@ -65,6 +65,8 @@ Images:
   [Skeleton Sprite](https://opengameart.org/content/skeleton-sprite) by
   [goo30](https://opengameart.org/users/goo30) on
   [OpenGameArt.org](https://opengameart.org/).
+* `taffer-sketch.png` - A sketch I did of my usual avatar with some image
+  manipulation.
 
 ### Sounds
 

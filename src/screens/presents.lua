@@ -1,4 +1,4 @@
--- Skelly initial loading screen, "Taffer presents".
+-- Skelly splash screen, "Taffer presents".
 --
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
@@ -6,19 +6,25 @@
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/base'
 
+local text = require 'src/i18n'
+
 local PresentsScreen = Class('PresentsScreen', ScreenBase)
 
 function PresentsScreen:initialize(resources)
     ScreenBase.initialize(self, resources)
 
+    self.resources.text = text.es -- Default English.
+
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
     self.resources.fonts.default_mono = love.graphics.newFont('graphics/LiberationMono-Bold.ttf', 16)
     self.resources.images.love_logo = love.graphics.newImage('graphics/love-game-0.10.png')
+    self.resources.images.taffer = love.graphics.newImage('graphics/taffer-sketch.png')
     self.resources.music.theme = love.audio.newSource('music/Heroic Demise (New).mp3',  'stream')
+    love.audio.setVolume(0.1)
     love.audio.play(self.resources.music.theme) -- start playing ASAP
 
-    self.taffer_text = "Taffer presents…"
-    self.love_text = "A game made with LÖVE…"
+    self.taffer_text = self.resources.text.presents.taffer_text
+    self.love_text = self.resources.text.presents.love_text
 
     self.alpha = 0 -- Alpha level for the fade-in/out animation.
     self.ticks = 0
@@ -33,13 +39,13 @@ function PresentsScreen:draw()
     local font_default = rsrc.fonts.default_serif
     local font_mono = rsrc.fonts.default_mono
     local image_love = rsrc.images.love_logo
+    local image_taffer = rsrc.images.taffer
 
     love.graphics.clear(0, 0, 0, 1)
 
     local screen_width = love.graphics.getWidth()
     local width = font_default:getWidth(self.taffer_text)
     local x = (screen_width - width) / 2
-
     love.graphics.setColor(1, 1, 1, self.alpha)
     love.graphics.setFont(font_default)
     love.graphics.print(self.taffer_text, x, 16)
@@ -47,12 +53,14 @@ function PresentsScreen:draw()
     local scale = 0.25
     width = image_love:getWidth() * scale
     x = (screen_width - width) / 2
-
     love.graphics.draw(image_love, x, 360, 0, scale, scale)
+
+    width = image_taffer:getWidth()
+    x = (screen_width - width) / 2
+    love.graphics.draw(image_taffer, x, 100)
 
     width = font_mono:getWidth(self.love_text)
     x = (screen_width - width) / 2
-
     love.graphics.setFont(font_mono)
     love.graphics.print(self.love_text, x, 640)
 end

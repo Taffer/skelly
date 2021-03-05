@@ -19,6 +19,9 @@ gameResources = {
         -- theme: Heroic Demise (New) (presents)
     },
     sounds = {},
+    text = {
+        -- all translatable text (presents)
+    },
 
     screens = { -- Separate from state, we can be in Pause on top of a screen.
         loading = require 'src/screens/loading', -- place holder

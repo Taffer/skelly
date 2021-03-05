@@ -1,4 +1,4 @@
--- Skelly initial loading screen, "Taffer presents".
+-- Skelly title/loading screen.
 --
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
@@ -14,12 +14,12 @@ function TitleScreen:initialize(resources)
     self.resources.fonts.skelly_title = love.graphics.newFont('graphics/Gypsy Curse.ttf', 144)
     self.resources.images.skelly_title = love.graphics.newImage('graphics/Gersdorff_Feldbuch_skeleton.png')
 
-    self.loading_text = "Loading…"
     self.loading_x = 16
     self.loading_y = love.graphics.getHeight() - 16 - self.resources.fonts.default_mono:getHeight()
 
-    self.skelly_text = "Skelly" -- This won't be localized.
-    self.subtitle_text = "A tale of the Skeleton War"
+    self.skelly_text = self.resources.text.skelly_title
+    self.subtitle_text = self.resources.text.title.subtitle_text
+    self.loading_text = self.resources.text.title.loading_text
 
     self.alpha = 0 -- Alpha level for the fade-in/out animation.
     self.ticks = 0

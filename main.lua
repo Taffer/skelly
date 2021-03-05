@@ -14,6 +14,7 @@ gameResources = {
     images = {
         -- love_logo: love-game-0.10 (presents)
         -- skelly_title: Gersdorff_Feldbuch_skeleton (title)
+        -- taffer: taffer-sketch (title)
     },
     music = {
         -- theme: Heroic Demise (New) (presents)
@@ -24,7 +25,7 @@ gameResources = {
     },
 
     screens = { -- Separate from state, we can be in Pause on top of a screen.
-        loading = require 'src/screens/loading', -- place holder
+        placeholder = require 'src/screens/placeholder', -- place holder
 
         presents = require 'src/screens/presents', -- Splash screen
         title_loading = require 'src/screens/title' -- Title/loading screen
@@ -65,9 +66,9 @@ function love.update(dt)
     if gameState.screen:exit() then
         if gameState.next_screen == 'title' then
             gameState.screen = gameResources.screens.title_loading:new(gameResources)
-            gameState.next_screen = 'loading'
-        elseif gameState.next_screen == 'loading' then
-            gameState.screen = gameResources.screens.loading:new(gameResources)
+            gameState.next_screen = 'placeholder'
+        elseif gameState.next_screen == 'placeholder' then
+            gameState.screen = gameResources.screens.placeholder:new(gameResources)
             gameState.next_screen = 'there is no next screen'
         else
             love.audio.stop()

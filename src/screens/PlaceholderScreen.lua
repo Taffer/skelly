@@ -4,11 +4,11 @@
 -- MIT license, see LICENSE.md for details.
 
 local Class = require 'lib/middleclass/middleclass'
-local ScreenBase = require 'src/screens/base'
+local ScreenBase = require 'src/screens/ScreenBase'
 
-local LoadingScreen = Class('LoadingScreen', ScreenBase)
+local PlaceholderScreen = Class('PlaceholderScreen', ScreenBase)
 
-function LoadingScreen:initialize(resources)
+function PlaceholderScreen:initialize(resources)
     ScreenBase.initialize(self, resources)
 
     self.resources.fonts.default = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 32)
@@ -18,7 +18,7 @@ function LoadingScreen:initialize(resources)
 end
 
 -- Render this screen's contents.
-function LoadingScreen:draw()
+function PlaceholderScreen:draw()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(self.resources.images.loading)
     love.graphics.setFont(self.resources.fonts.default)
@@ -30,7 +30,7 @@ end
 --
 -- If you handled it, return true; false means the event continues on to the
 -- next handler.
-function LoadingScreen:handle(event)
+function PlaceholderScreen:handle(event)
     if not event then
         print('No event.')
         return true
@@ -46,4 +46,4 @@ function LoadingScreen:handle(event)
     return ScreenBase.handle(self, event)
 end
 
-return LoadingScreen
+return PlaceholderScreen

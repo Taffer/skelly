@@ -28,10 +28,10 @@ gameResources = {
     },
 
     screens = { -- Separate from state, we can be in Pause on top of a screen.
-        placeholder = require 'src/screens/placeholder', -- place holder
+        placeholder = require 'src/screens/PlaceholderScreen', -- place holder
 
-        presents = require 'src/screens/presents', -- Splash screen
-        title_loading = require 'src/screens/title' -- Title/loading screen
+        presents = require 'src/screens/PresentsScreen', -- Splash screen
+        title_loading = require 'src/screens/TitleScreen' -- Title/loading
     },
 
     states = {}

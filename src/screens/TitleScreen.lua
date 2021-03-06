@@ -4,7 +4,7 @@
 -- MIT license, see LICENSE.md for details.
 
 local Class = require 'lib/middleclass/middleclass'
-local ScreenBase = require 'src/screens/base'
+local ScreenBase = require 'src/screens/ScreenBase'
 
 local rsrc_list = require 'src/rsrc_list'
 

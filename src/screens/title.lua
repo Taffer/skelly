@@ -72,7 +72,8 @@ function TitleScreen:draw()
     local width = font_mono:getWidth(self.loading_text)
     local x = (screen_width - width) / 2
     love.graphics.setFont(font_mono)
-    love.graphics.print(self.loading_text .. ' ' .. self.loaded_resource, self.loading_x, self.loading_y)
+    love.graphics.print(self.loading_text .. ' ' .. (self.loaded_resource or ""),
+        self.loading_x, self.loading_y)
 
     width = font_mono:getWidth(self.subtitle_text)
     x = (screen_width - width) / 2

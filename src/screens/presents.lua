@@ -13,14 +13,15 @@ local PresentsScreen = Class('PresentsScreen', ScreenBase)
 function PresentsScreen:initialize(resources)
     ScreenBase.initialize(self, resources)
 
-    self.resources.text = text.en -- Default English.
+    -- Default English.
+    self.resources.text = text[gameState.settings.language] or text.en
 
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
     self.resources.fonts.default_mono = love.graphics.newFont('graphics/LiberationMono-Bold.ttf', 16)
     self.resources.images.love_logo = love.graphics.newImage('graphics/love-game-0.10.png')
     self.resources.images.taffer = love.graphics.newImage('graphics/taffer-sketch.png')
     self.resources.music.theme = love.audio.newSource('music/Heroic Demise (New).mp3',  'stream')
-    love.audio.setVolume(0.1)
+    love.audio.setVolume(gameState.settings.music_volume)
     love.audio.play(self.resources.music.theme) -- start playing ASAP
 
     self.taffer_text = self.resources.text.presents.taffer_text

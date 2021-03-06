@@ -37,7 +37,14 @@ gameResources = {
 -- Current state of the game.
 gameState = {
     screen = nil, -- Currently displayed screen.
-    next_screen = '' -- Which screen is next?
+    next_screen = '', -- Which screen is next?
+
+    -- Player settings
+    settings = {
+        music_volume = 1.0,
+
+        language = 'en'
+    }
 }
 
 -- Love callbacks.
@@ -45,6 +52,8 @@ function love.load()
     math.randomseed(os.time())
 
     love.graphics.setDefaultFilter('nearest', 'nearest')
+
+    io.stdout:setvbuf("no") -- Don't buffer console output.
 
     -- Minimal loading screen.
     gameState.screen = gameResources.screens.presents:new(gameResources)

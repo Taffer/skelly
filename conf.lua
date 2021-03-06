@@ -13,7 +13,7 @@ function love.conf(t)
     t.window.width = 1280
     t.window.height = 720
 
-    t.identity = t.window.title
+    t.identity = 'ca.taffer.skelly'
     t.version = 11.3 -- Made with Love 11.3.
     t.console = true
 end

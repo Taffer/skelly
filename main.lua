@@ -3,6 +3,9 @@
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
 
+local settings_filename = 'settings.bin'
+
+local bitser = require 'lib/bitser/bitser'
 
 -- All the stuff we've loaded already.
 gameResources = {
@@ -40,12 +43,33 @@ gameState = {
     next_screen = '', -- Which screen is next?
 
     -- Player settings
-    settings = {
-        music_volume = 1.0,
-
-        language = 'en'
-    }
+    settings = {}
 }
+
+-- Serialize/deserialize settings.
+local function load_settings(name)
+    local binary_data, size = love.filesystem.read(name)
+    if binary_data then
+        gameState.settings = bitser.loads(binary_data)
+    else
+        print('Error reading settings file: ' .. size)
+
+        gameState.settings = {
+            -- Default settings.
+            music_volume = 1.0,
+
+            language = 'en'
+        }
+    end
+end
+
+local function save_settings(name, table)
+    local binary_data = bitser.dumps(table)
+    local success, message = love.filesystem.write(name, binary_data)
+    if not success then
+        print('Error writing settings file: ' .. message)
+    end
+end
 
 -- Love callbacks.
 function love.load()
@@ -54,6 +78,9 @@ function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
     io.stdout:setvbuf("no") -- Don't buffer console output.
+
+    -- Load settings if they exist. If not, create defaults.
+    load_settings(settings_filename)
 
     -- Minimal loading screen.
     gameState.screen = gameResources.screens.presents:new(gameResources)
@@ -80,6 +107,7 @@ function love.update(dt)
             gameState.screen = gameResources.screens.placeholder:new(gameResources)
             gameState.next_screen = 'there is no next screen'
         else
+            save_settings(settings_filename, gameState.settings)
             love.audio.stop()
             love.event.quit()
         end

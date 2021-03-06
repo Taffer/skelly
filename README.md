@@ -32,6 +32,7 @@ under the [MIT license](LICENSE.md).
 
 ### Libraries
 
+* [bitser](https://github.com/gvx/bitser) by Jasmijn Wellner
 * [middleclass](https://github.com/kikito/middleclass) by Enrique García Cota
 
 ### Graphics

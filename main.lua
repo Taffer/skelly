@@ -24,7 +24,7 @@ gameResources = {
     },
     sounds = {},
     text = {
-        -- all translatable text (presents)
+        -- all translatable text (presents, see src/i18n)
     },
 
     screens = { -- Separate from state, we can be in Pause on top of a screen.

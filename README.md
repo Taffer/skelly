@@ -45,7 +45,8 @@ Fonts:
   [fontfreak.com](https://www.fontfreak.com/).
 * `Gypsy Curse.ttf` - A free font created by Chad Savage at
   [Sinister Fonts](https://www.sinisterfonts.com/)
-* `LiberationMono-Bold.ttf` - An open source font from the
+* `LiberationMono-Bold.ttf`, `LiberationSerif-Bold.ttf` - An open source font
+  from the
   [liberationfonts](https://github.com/liberationfonts/liberation-fonts) repo;
   this is licensed under the
   [SIL Open Font License](https://github.com/liberationfonts/liberation-fonts/blob/master/LICENSE).

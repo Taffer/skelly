@@ -55,6 +55,7 @@ Images:
 * `Gersdorff_Feldbuch_skeleton.png` -
   [Hans von Gersdorff (ca. 1455 - 1529): „Feldbuch der Wundarzney, Die Knochenanatomie.](https://commons.wikimedia.org/wiki/Skeleton#/media/File:Gersdorff_Feldbuch_skeleton.jpg)
   from Wikimedia Commons with some image manipulation.
+* `kenney.nl` - Assets from the awesome [Kenney.nl](https://www.kenney.nl/).
 * `love-game-0.10` -
   [Löve game icon](https://love2d.org/wiki/File:love-game-0.10.png) from the
   wiki, uploaded by Qubodup, based on an SVG original from Arch linux (which

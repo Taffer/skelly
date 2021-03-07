@@ -30,6 +30,7 @@ gameResources = {
     screens = { -- Separate from state, we can be in Pause on top of a screen.
         placeholder = require 'src/screens/PlaceholderScreen', -- place holder
 
+        journey = require 'src/screens/JourneyScreen', -- Journey Onward
         presents = require 'src/screens/PresentsScreen', -- Splash screen
         title_loading = require 'src/screens/TitleScreen' -- Title/loading
     },
@@ -102,6 +103,11 @@ function love.update(dt)
     if gameState.screen:exit() then
         if gameState.next_screen == 'title' then
             gameState.screen = gameResources.screens.title_loading:new(gameResources)
+            gameState.next_screen = 'journey'
+        elseif gameState.next_screen == 'journey' then
+            gameState.screen = gameResources.screens.journey:new(gameResources)
+            -- The UI in JourneyScreen will change this depending on which
+            -- UI element you've chosen.
             gameState.next_screen = 'placeholder'
         elseif gameState.next_screen == 'placeholder' then
             gameState.screen = gameResources.screens.placeholder:new(gameResources)

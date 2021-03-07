@@ -19,7 +19,7 @@ function PresentsScreen:initialize(resources)
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
     self.resources.fonts.default_mono = love.graphics.newFont('graphics/LiberationMono-Bold.ttf', 16)
     self.resources.images.love_logo = love.graphics.newImage('graphics/love-game-0.10.png')
-    self.resources.images.taffer = love.graphics.newImage('graphics/taffer-sketch.png')
+    self.resources.images.taffer = love.graphics.newImage('graphics/taffer-ronos-512x512.png')
     self.resources.music.theme = love.audio.newSource('music/Heroic Demise (New).mp3',  'stream')
     love.audio.setVolume(gameState.settings.music_volume)
     love.audio.play(self.resources.music.theme) -- start playing ASAP
@@ -51,14 +51,15 @@ function PresentsScreen:draw()
     love.graphics.setFont(font_default)
     love.graphics.print(self.taffer_text, x, 16)
 
-    local scale = 0.125
-    width = image_love:getWidth() * scale
+    local love_scale = 0.125
+    width = image_love:getWidth() * love_scale
     x = (screen_width - width) / 2
-    love.graphics.draw(image_love, x, 500, 0, scale, scale)
+    love.graphics.draw(image_love, x, 500, 0, love_scale, love_scale)
 
-    width = image_taffer:getWidth()
+    local taffer_scale = 0.5
+    width = image_taffer:getWidth() * taffer_scale
     x = (screen_width - width) / 2
-    love.graphics.draw(image_taffer, x, 150)
+    love.graphics.draw(image_taffer, x, 150, 0, taffer_scale, taffer_scale)
 
     width = font_mono:getWidth(self.love_text)
     x = (screen_width - width) / 2

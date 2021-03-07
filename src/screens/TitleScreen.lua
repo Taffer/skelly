@@ -12,6 +12,11 @@ local function loader(resource, file_list)
     local yield = coroutine.yield
 
     -- Load the files listed into the resource table.
+    for k,v in pairs(file_list.fonts) do
+        resource.fonts[k] = love.graphics.newFont(v.src, v.size)
+        yield(v.src)
+    end
+
     for k,v in pairs(file_list.images) do
         resource.images[k] = love.graphics.newImage(v)
         yield(v)

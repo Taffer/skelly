@@ -5,6 +5,10 @@
 
 -- List of all resources to load during the Loading... screen.
 local resource_list = {
+    fonts = {
+        button_font = {size = 16, src = 'graphics/LiberationSerif-Bold.ttf'},
+    },
+
     images = {
         -- I don't need all of these, but I haven't decided yet.
         ui_blue = 'graphics/kenney.nl/uipack/Spritesheet/blueSheet.png',

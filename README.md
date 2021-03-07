@@ -68,8 +68,8 @@ Images:
   [Skeleton Sprite](https://opengameart.org/content/skeleton-sprite) by
   [goo30](https://opengameart.org/users/goo30) on
   [OpenGameArt.org](https://opengameart.org/).
-* `taffer-sketch.png` - A sketch I did of my usual avatar with some image
-  manipulation.
+* `taffer-ronos-512x512.png` - An image I commissioned from
+  [ronos_art](https://www.fiverr.com/ronos_art) on Fiverr.
 
 ### Sounds
 

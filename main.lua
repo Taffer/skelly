@@ -10,19 +10,27 @@ local bitser = require 'lib/bitser/bitser'
 -- All the stuff we've loaded already.
 gameResources = {
     fonts = {
-        -- default_mono: LiberationMono-Bold 16-pixel (presents)
-        -- default_serif: A_Font_with_Serifs 72-pixel (presents)
-        -- skelly_title: Gypsy Curse 144-pixel (title)
+        -- default_mono: LiberationMono-Bold 16-pixel (Presents)
+        -- default_serif: A_Font_with_Serifs 72-pixel (Presents)
+        -- skelly_title: Gypsy Curse 144-pixel (Title)
+        --
+        -- Everything else is loaded in Title by the loader.
     },
     images = {
-        -- love_logo: love-game-0.10 (presents)
-        -- skelly_title: Gersdorff_Feldbuch_skeleton (title)
-        -- taffer: taffer-sketch (title)
+        -- love_logo: love-game-0.10 (Presents)
+        -- skelly_title: Gersdorff_Feldbuch_skeleton (Title)
+        -- taffer: taffer-sketch (Title)
+        --
+        -- Everything else is loaded in Title by the loader.
     },
     music = {
-        -- theme: Heroic Demise (New) (presents)
+        -- theme: Heroic Demise (New) (Presents)
+        --
+        -- Everything else is loaded in Title by the loader.
     },
-    sounds = {},
+    sounds = {
+        -- Everything is loaded in Title by the loader.
+    },
     text = {
         -- all translatable text (presents, see src/i18n)
     },

@@ -10,8 +10,9 @@ local text = require 'src/i18n'
 
 local PresentsScreen = Class('PresentsScreen', ScreenBase)
 
-function PresentsScreen:initialize(resources)
-    ScreenBase.initialize(self, resources)
+function PresentsScreen:initialize(resources, state)
+    ScreenBase.initialize(self, resources, state)
+    self:setNextScreen('Title')
 
     -- Default English.
     self.resources.text = text[gameState.settings.language] or text.en
@@ -56,7 +57,7 @@ function PresentsScreen:draw()
     x = (screen_width - width) / 2
     love.graphics.draw(image_love, x, 500, 0, love_scale, love_scale)
 
-    local taffer_scale = 0.5
+    local taffer_scale = 0.65
     width = image_taffer:getWidth() * taffer_scale
     x = (screen_width - width) / 2
     love.graphics.draw(image_taffer, x, 150, 0, taffer_scale, taffer_scale)

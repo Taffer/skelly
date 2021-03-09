@@ -9,8 +9,10 @@ local Button = require 'src/ui/Button'
 
 local JourneyScreen = Class('JourneyScreen', ScreenBase)
 
-function JourneyScreen:initialize(resources)
-    ScreenBase.initialize(self, resources)
+function JourneyScreen:initialize(resources, state)
+    ScreenBase.initialize(self, resources, state)
+
+    -- next_screen will be set when a button is chosen.
 
     self.skelly_text = self.resources.text.skelly_title
     self.subtitle_text = self.resources.text.title.subtitle_text

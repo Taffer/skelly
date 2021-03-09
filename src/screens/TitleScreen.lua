@@ -37,8 +37,9 @@ end
 
 local TitleScreen = Class('TitleScreen', ScreenBase)
 
-function TitleScreen:initialize(resources)
-    ScreenBase.initialize(self, resources)
+function TitleScreen:initialize(resources, state)
+    ScreenBase.initialize(self, resources, state)
+    self:setNextScreen('Journey')
 
     self.resources.fonts.skelly_title = love.graphics.newFont('graphics/Gypsy Curse.ttf', 144)
     self.resources.images.skelly_title = love.graphics.newImage('graphics/Gersdorff_Feldbuch_skeleton.png')

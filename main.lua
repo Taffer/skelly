@@ -49,7 +49,6 @@ gameResources = {
 -- Current state of the game.
 gameState = {
     screen = nil, -- Currently displayed screen.
-    next_screen = '', -- Which screen is next?
 
     -- Player settings
     settings = {}
@@ -100,26 +99,29 @@ function love.draw()
     gameState.screen:draw()
 end
 
+-- Presents isn't in the lookup table because we never switch to it, it's
+-- only a starting point.
+local ScreenLookup = {
+    Title = gameResources.screens.title_loading,
+    Journey = gameResources.screens.journey,
+
+    Placeholder = gameResources.screens.placeholder -- not a real screen
+}
+
 function love.update(dt)
     gameState.screen:update(dt)
 
     -- Screen state machine:
     --
-    -- presents -> title -> journey -> exit
-    --                             \-> newgame -> intro -> game
+    -- Presents -> Title -> Journey -> exit
+    --                             \-> Newgame -> Intro -> Game
     --                             \-------------------/
+    --
+    local lookup = ScreenLookup
     if gameState.screen:exit() then
-        if gameState.next_screen == 'title' then
-            gameState.screen = gameResources.screens.title_loading:new(gameResources)
-            gameState.next_screen = 'journey'
-        elseif gameState.next_screen == 'journey' then
-            gameState.screen = gameResources.screens.journey:new(gameResources)
-            -- The UI in JourneyScreen will change this depending on which
-            -- UI element you've chosen.
-            gameState.next_screen = 'placeholder'
-        elseif gameState.next_screen == 'placeholder' then
-            gameState.screen = gameResources.screens.placeholder:new(gameResources)
-            gameState.next_screen = 'there is no next screen'
+        local next_screen = gameState.screen:getNextScreen()
+        if next_screen then
+            gameState.screen = lookup[next_screen]:new(gameResources, gameState)
         else
             save_settings(settings_filename, gameState.settings)
             love.audio.stop()

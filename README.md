@@ -65,10 +65,16 @@ Images:
   [Atlas 1](https://opengameart.org/content/lpc-tile-atlas),
   [Atlas 2](https://opengameart.org/content/lpc-tile-atlas2). See the
   `Attribution.txt` and `Attribution2.txt` for details.
+* `lpc-medieval-fantasy-character-sprites` -
+  [LPC Medieval fantasy character sprites](https://opengameart.org/content/lpc-medieval-fantasy-character-sprites)
 * `lpc-terrains` - [LPC Terrains](https://opengameart.org/content/lpc-terrains)
   by [bluecarrot16](https://opengameart.org/users/bluecarrot16) on
   [OpenGameArt.org](https://opengameart.org/). See
   `graphics/lpc-terrains/CREDITS-terrain.txt` for details.
+* `lpc-thatched-roof-cottage` -
+  [LPC Thatched Roof Cottage](https://opengameart.org/content/lpc-thatched-roof-cottage).
+* `lpc-zombie` - Great LPC zombie by
+  [BenCreating](https://opengameart.org/content/lpc-zombie).
 * `skeleton` -
   [Skeleton Sprite](https://opengameart.org/content/skeleton-sprite) by
   [goo30](https://opengameart.org/users/goo30) on
@@ -78,7 +84,7 @@ Images:
 
 ### Sounds
 
-Sound resource credits go here.
+* `kenney.nl` - Assets from the awesome [Kenney.nl](https://www.kenney.nl/).
 
 ### Music
 

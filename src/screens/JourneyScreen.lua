@@ -14,7 +14,6 @@ function JourneyScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
 
     -- next_screen will be set when a button is chosen.
-    --self:setNextScreen('Credits')
 
     self.skelly_text = self.resources.text.skelly_title
     self.subtitle_text = self.resources.text.title.subtitle_text
@@ -128,7 +127,7 @@ function JourneyScreen:handle(event)
         elseif self.settings_button:intersects(event.mouse_x, event.mouse_y) then
             print('Clicked SETTINGS')
         elseif self.credits_button:intersects(event.mouse_x, event.mouse_y) then
-            print('Clicked CREDITS')
+            self:setNextScreen('Credits')
         elseif self.exit_button:intersects(event.mouse_x, event.mouse_y) then
             self.exit_screen = true
             return true

@@ -149,14 +149,6 @@ function love.keyreleased(key)
     end
 end
 
-function love.mousepressed(x, y, button, is_touch, presses)
-    local event = UIEvent:new({mousedown = button, x = x, y = y, touch = is_touch, presses = presses})
-
-    if gameState.screen:handle(event) == false then
-        print('Unhandled mouse press event.')
-    end
-end
-
 function love.mousereleased(x, y, button, is_touch, presses)
     local event = UIEvent:new({mouseup = button, x = x, y = y, touch = is_touch, presses = presses})
 

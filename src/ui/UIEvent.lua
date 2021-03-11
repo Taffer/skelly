@@ -20,10 +20,6 @@ function UIEvent:initialize(event)
         self.keys[event.keydown] = true
     elseif event.keyup then
         self.keys[event.keyup] = false
-    elseif event.mousedown then
-        self.button = event.mousedown
-        self.mouse_x = event.x
-        self.mouse_y = event.y
     elseif event.mouseup then
         self.button = event.mouseup
         self.mouse_x = event.x

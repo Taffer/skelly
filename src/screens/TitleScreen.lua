@@ -132,7 +132,7 @@ end
 -- If you handled it, return true; false means the event continues on to the
 -- next handler.
 function TitleScreen:handle(event)
-    if event == 'escape' then
+    if event.keys['escape'] then
         -- Escape doesn't kick you out until loading is done, sorry.
         if self.loading_finished then
             self.exit_screen = true

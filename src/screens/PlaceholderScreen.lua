@@ -31,16 +31,9 @@ end
 -- If you handled it, return true; false means the event continues on to the
 -- next handler.
 function PlaceholderScreen:handle(event)
-    if not event then
-        print('No event.')
+    if event.keys['escape'] then
+        self.exit_screen = true
         return true
-    end
-
-    if event ~= 'escape' then
-        if string.len(self.text) > 20 then
-            self.text = string.sub(self.text, 20)
-        end
-        self.text = self.text .. event
     end
 
     return ScreenBase.handle(self, event)

@@ -5,6 +5,7 @@
 
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
+
 local Button = require 'src/ui/Button'
 
 local JourneyScreen = Class('JourneyScreen', ScreenBase)
@@ -13,6 +14,7 @@ function JourneyScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
 
     -- next_screen will be set when a button is chosen.
+    --self:setNextScreen('Credits')
 
     self.skelly_text = self.resources.text.skelly_title
     self.subtitle_text = self.resources.text.title.subtitle_text
@@ -111,7 +113,7 @@ end
 -- If you handled it, return true; false means the event continues on to the
 -- next handler.
 function JourneyScreen:handle(event)
-    if event == 'escape' then
+    if event.keys['escape'] then
         -- Escape doesn't kick you out until loading is done, sorry.
         self.exit_screen = true
         return true

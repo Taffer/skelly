@@ -42,7 +42,7 @@ local credits = { -- Credits; the keys also need to be translated.
         ['Löve game icon'] = 'Uploaded by Qubodup on the Löve wiki? rude on GitHub?',
         ['Taffer logo'] = 'ronos_art (Fiverr)',
         ['UI elements'] = 'Kenney.nl',
-    }
+    },
 
     -- Music
     ['Music and Sounds'] = {
@@ -111,7 +111,7 @@ local internationalization = {
             loading_done = 'Terminado.',
             loading_text = 'Cargando…',
             subtitle_text = 'Una historia de la Guerra de los Esqueletos',
-        }
+        },
 
         -- Not translated yet.
         credits = credits,

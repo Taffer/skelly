@@ -91,7 +91,7 @@ end
 -- If you handled it, return true; false means the event continues on to the
 -- next handler.
 function PresentsScreen:handle(event)
-    if event == 'escape' then
+    if event.keys['escape'] then
         self.exit_screen = true
         return true
     end

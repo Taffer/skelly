@@ -3,9 +3,10 @@
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
 
-local settings_filename = 'settings.bin'
-
 local bitser = require 'lib/bitser/bitser'
+local UIEvent = require 'lib/ui/UIEvent'
+
+local settings_filename = 'settings.bin'
 
 -- All the stuff we've loaded already.
 gameResources = {
@@ -40,7 +41,8 @@ gameResources = {
 
         journey = require 'src/screens/JourneyScreen', -- Journey Onward
         presents = require 'src/screens/PresentsScreen', -- Splash screen
-        title_loading = require 'src/screens/TitleScreen' -- Title/loading
+        title_loading = require 'src/screens/TitleScreen', -- Title/loading
+        credits = require 'src/screens/CreditsScreen', -- Credits
     },
 
     states = {}
@@ -91,8 +93,7 @@ function love.load()
     load_settings(settings_filename)
 
     -- Minimal loading screen.
-    gameState.screen = gameResources.screens.presents:new(gameResources)
-    gameState.next_screen = 'title'
+    gameState.screen = gameResources.screens.presents:new(gameResources, gameState)
 end
 
 function love.draw()
@@ -104,6 +105,7 @@ end
 local ScreenLookup = {
     Title = gameResources.screens.title_loading,
     Journey = gameResources.screens.journey,
+    Credits = gameResources.screens.credits,
 
     Placeholder = gameResources.screens.placeholder -- not a real screen
 }
@@ -131,9 +133,26 @@ function love.update(dt)
 end
 
 -- Event generation.
-function love.keyreleased(key)
-    print('A key is released: ' .. key)
-    if gameState.screen:handle(key) == false then
-        print('Unhandled key.')
+function love.keypressed(key)
+    local event = UIEvent:new()
+    event:KeyPressed(key)
+
+    if gameState.screen:handle(event) == false then
+        print('Unhandled event.')
     end
+end
+
+function love.keyreleased(key)
+    local event = UIEvent:new()
+    event:keyReleased(key)
+
+    if gameState.screen:handle(event) == false then
+        print('Unhandled event.')
+    end
+end
+
+function love.mousepressed(x, y, button, is_touch, presses)
+end
+
+function love.mousereleased(x, y, button, is_touch, presses)
 end

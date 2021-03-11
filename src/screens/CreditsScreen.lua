@@ -11,8 +11,7 @@ local CreditsScreen = Class('CreditsScreen', ScreenBase)
 
 function CreditsScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
-
-    -- next_screen will be set when a button is chosen.
+    self:setNextScreen('Journey')
 
     self.skelly_text = self.resources.text.skelly_title
     self.subtitle_text = self.resources.text.title.subtitle_text

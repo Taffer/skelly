@@ -15,6 +15,8 @@ function Button:initialize(resources, font, text, x, y)
     self.text = text
     self.x = x
     self.y = y
+    self.width = 190
+    self.height = 49
 
     -- All these magic numbers are gross.
     self.quad_up   = love.graphics.newQuad(  0, 282, 190, 49, self.ui)
@@ -41,6 +43,14 @@ function Button:draw()
         love.graphics.setColor(0, 0, 0, 1) -- black
         love.graphics.print(self.text, self.x + self.text_x, self.y + self.text_y)
     end
+end
+
+function Button:intersects(x, y)
+    if x < self.x or y < self.y then return false end
+
+    if x > (self.x + self.width) or y > (self.y + self.height) then return false end
+
+    return true
 end
 
 return Button

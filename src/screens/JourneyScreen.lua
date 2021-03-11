@@ -119,6 +119,22 @@ function JourneyScreen:handle(event)
         return true
     end
 
+    if event.button then
+        -- Mouse click.
+        if self.journey_button:intersects(event.mouse_x, event.mouse_y) then
+            print('Clicked JOURNEY ONWARD')
+        elseif self.newgame_button:intersects(event.mouse_x, event.mouse_y) then
+            print('Clicked NEW GAME')
+        elseif self.settings_button:intersects(event.mouse_x, event.mouse_y) then
+            print('Clicked SETTINGS')
+        elseif self.credits_button:intersects(event.mouse_x, event.mouse_y) then
+            print('Clicked CREDITS')
+        elseif self.exit_button:intersects(event.mouse_x, event.mouse_y) then
+            self.exit_screen = true
+            return true
+        end
+    end
+
     return ScreenBase.handle(self, event)
 end
 

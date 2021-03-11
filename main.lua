@@ -4,7 +4,7 @@
 -- MIT license, see LICENSE.md for details.
 
 local bitser = require 'lib/bitser/bitser'
-local UIEvent = require 'lib/ui/UIEvent'
+local UIEvent = require 'src/ui/UIEvent'
 
 local settings_filename = 'settings.bin'
 
@@ -134,25 +134,33 @@ end
 
 -- Event generation.
 function love.keypressed(key)
-    local event = UIEvent:new()
-    event:KeyPressed(key)
+    local event = UIEvent:new({keydown = key})
 
     if gameState.screen:handle(event) == false then
-        print('Unhandled event.')
+        print('Unhandled key press event.')
     end
 end
 
 function love.keyreleased(key)
-    local event = UIEvent:new()
-    event:keyReleased(key)
+    local event = UIEvent:new({keyup = key})
 
     if gameState.screen:handle(event) == false then
-        print('Unhandled event.')
+        print('Unhandled key release event.')
     end
 end
 
 function love.mousepressed(x, y, button, is_touch, presses)
+    local event = UIEvent:new({mousedown = button, x = x, y = y, touch = is_touch, presses = presses})
+
+    if gameState.screen:handle(event) == false then
+        print('Unhandled mouse press event.')
+    end
 end
 
 function love.mousereleased(x, y, button, is_touch, presses)
+    local event = UIEvent:new({mouseup = button, x = x, y = y, touch = is_touch, presses = presses})
+
+    if gameState.screen:handle(event) == false then
+        print('Unhandled mouse release event.')
+    end
 end

@@ -7,26 +7,33 @@ local Class = require 'lib/middleclass/middleclass'
 
 local UIEvent = Class('UIEvent')
 
-function UIEvent:initialize()
-    self.keys = {} -- keypress
+local keys = {} -- keys that are pressed
 
-    self.click = nil -- mouse click
+function UIEvent:initialize(event)
+    self.keys = keys
+
+    self.button = nil
     self.mouse_x = 0
     self.mouse_y = 0
-end
 
-function UIEvent:keyPressed(key)
-    self.keys[key] = true
-end
-
-function UIEvent:keyReleased(key)
-    self.keys[key] = nil
-end
-
-function UIEvent:mouseClicked(button, x, y)
-    self.click = button
-    self.x = x
-    self.y = y
+    if event.keydown then
+        self.keys[event.keydown] = true
+    elseif event.keyup then
+        self.keys[event.keyup] = false
+    elseif event.mousedown then
+        self.button = event.mousedown
+        self.mouse_x = event.x
+        self.mouse_y = event.y
+    elseif event.mouseup then
+        self.button = event.mouseup
+        self.mouse_x = event.x
+        self.mouse_y = event.y
+    else
+        print('UNKNOWN EVENT')
+        for k,v in pairs(event) do
+            print('-->', k, '=', v)
+        end
+    end
 end
 
 return UIEvent

@@ -54,7 +54,7 @@ function TitleScreen:initialize(resources, state)
     self.alpha = 0 -- Alpha level for the fade-in/out animation.
     self.ticks = 0
     self.pi_over_180 = math.pi / 180
-    self.degrees_per_second = 45
+    self.degrees_per_second = 90
 
     self.loaded_resource = ""
     self.loading_finished = false
@@ -111,7 +111,7 @@ function TitleScreen:update(dt)
     -- Load resources.
     if self.loading_routine then
         local resume = coroutine.resume
-        alive, self.loaded_resource = resume(self.loading_routine,self.resources, rsrc_list)
+        alive, self.loaded_resource = resume(self.loading_routine, self.resources, rsrc_list)
         if not alive then
             self.loading_finished = true
             self.loaded_resource = self.resources.text.title.loading_done

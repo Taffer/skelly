@@ -31,7 +31,7 @@ function PresentsScreen:initialize(resources, state)
     self.alpha = 0 -- Alpha level for the fade-in/out animation.
     self.ticks = 0
     self.pi_over_180 = math.pi / 180
-    self.degrees_per_second = 45 / 2 -- Fade in/out takes ~2 seconds for each.
+    self.degrees_per_second = 180 -- Fade in/out takes ~2 seconds for each.
 end
 
 -- Render this screen's contents.

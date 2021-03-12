@@ -7,7 +7,9 @@
 local credits = { -- Credits; the keys also need to be translated.
     -- Libraries
     ['Additional coding'] = {
-        ['LÖVE'] = 'LOVE Development Team',
+        ['LÖVE'] = {
+            'LOVE Development Team'
+        },
 
         ['Lua libraries'] = {
             'Enrique García Cota',
@@ -37,11 +39,21 @@ local credits = { -- Credits; the keys also need to be translated.
             'Stephen Challener (AKA Redshrike)',
         },
 
-        ['Fancy skeleton'] = 'Hans von Gersdorff',
-        ['Title screen skeleton'] = 'goo30 (OpenGameArt)',
-        ['Löve game icon'] = 'Uploaded by Qubodup on the Löve wiki? rude on GitHub?',
-        ['Taffer logo'] = 'ronos_art (Fiverr)',
-        ['UI elements'] = 'Kenney.nl',
+        ['Fancy skeleton'] = {
+            'Hans von Gersdorff'
+        },
+        ['Title screen skeleton'] = {
+            'goo30 (OpenGameArt)'
+        },
+        ['Löve game icon'] = {
+            'Uploaded by Qubodup on the Löve wiki? rude on GitHub?',
+        },
+        ['Taffer logo'] = {
+            'ronos_art (Fiverr)'
+        },
+        ['UI elements'] = {
+            'Kenney.nl',
+        }
     },
 
     -- Music
@@ -52,7 +64,15 @@ local credits = { -- Credits; the keys also need to be translated.
 
     -- Leftovers
     ['Everything else'] = {
-        ['Design, Coding, Writing'] = 'Taffer (Chris Herborth)'
+        ['Design, Coding, Writing'] = {
+            'Taffer (Chris Herborth)'
+        }
+    },
+
+    ['Special thanks'] = {
+        'Lynette and Alex',
+        'Molly and Maisey',
+        'My online nerd buddies'
     }
 }
 

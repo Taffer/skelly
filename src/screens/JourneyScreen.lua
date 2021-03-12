@@ -42,9 +42,9 @@ function JourneyScreen:initialize(resources, state)
     local x = (love.graphics.getWidth() - 190) / 2
 
     local button_font = self.resources.fonts.button_font
-    self.journey_button = Button:new(self.resources, button_font, self.journey_text, x, 380)
-    self.newgame_button = Button:new(self.resources, button_font, self.newgame_text, x, 430)
-    self.settings_button = Button:new(self.resources, button_font, self.settings_text, x, 480)
+    self.journey_button = Button:new(self.resources, button_font, self.journey_text, x, 350)
+    self.newgame_button = Button:new(self.resources, button_font, self.newgame_text, x, 410)
+    self.settings_button = Button:new(self.resources, button_font, self.settings_text, x, 470)
 
     self.credits_button = Button:new(self.resources, button_font, self.credits_text, x, 550)
 

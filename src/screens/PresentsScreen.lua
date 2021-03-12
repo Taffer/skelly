@@ -60,7 +60,7 @@ function PresentsScreen:draw()
     local taffer_scale = 0.65
     width = image_taffer:getWidth() * taffer_scale
     x = (screen_width - width) / 2
-    love.graphics.draw(image_taffer, x, 150, 0, taffer_scale, taffer_scale)
+    love.graphics.draw(image_taffer, x, 120, 0, taffer_scale, taffer_scale)
 
     width = font_mono:getWidth(self.love_text)
     x = (screen_width - width) / 2

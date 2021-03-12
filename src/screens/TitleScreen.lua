@@ -115,7 +115,6 @@ function TitleScreen:update(dt)
         if not alive then
             self.loading_finished = true
             self.loaded_resource = self.resources.text.title.loading_done
-
         end
     else
         self.loading_routine = coroutine.create(loader)

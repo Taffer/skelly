@@ -9,36 +9,13 @@ local Button = require 'src/ui/Button'
 
 local CreditsScreen = Class('CreditsScreen', ScreenBase)
 
-local function next_credit(credits)
-    local yield = coroutine.yield
-
-    -- Top level of credits.
-    for k, v in credits do
-        yield(k)
-
-        if type(v) == 'string' then
-            yield(v)
-        elseif type(v) == 'table' then
-            for a, b in v do
-                yield(a)
-
-                if type(b) == 'string' then
-                    yield(b)
-                elseif type(b) == 'table' then
-                    yield('<table>')
-                end
-            end
-        end
-    end
-end
-
 function CreditsScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
     self:setNextScreen('Journey')
 
     self.skelly_text = self.resources.text.skelly_title
     self.subtitle_text = self.resources.text.title.subtitle_text
-    self.credits = self.resources.text.journey.credits_table
+    self.credits = self.resources.text.credits
 
     self.alpha = 0 -- Alpha level for the fade-in/out animation.
     self.ticks = 0
@@ -58,7 +35,7 @@ function CreditsScreen:initialize(resources, state)
     self.max_columns = math.floor(880 / self.font_em)
     self.max_lines = math.floor(450 / self.font_lh)
     self.lines_to_add = 0
-    self.credits_routine = nil
+    self.credits_idx = 1
 end
 
 -- Render this screen's contents.
@@ -123,20 +100,14 @@ function CreditsScreen:update(dt)
     if self.ticks > 1 then
         self.lines_to_add = self.lines_to_add + dt
 
-        while self.lines_to_add > 0.1 do
-            local alive
-            local credit
-            if self.credits_routine then
-                local resume = coroutine.resume
-                alive, credit = resume(self.credits_routine, self.credits)
-            else
-                self.credits_routine = coroutine.create(next_credit)
+        while self.lines_to_add > 0.25 do
+            table.insert(self.buffer, self.credits[self.credits_idx][2])
+            self.credits_idx = self.credits_idx + 1
+            if self.credits_idx > #self.credits then
+                self.credits_idx = 1
             end
 
-            if alive then
-                table.insert(self.buffer, credit or 'nil')
-            end
-            self.lines_to_add = self.lines_to_add - 0.1
+            self.lines_to_add = self.lines_to_add - 0.25
         end
     end
 end

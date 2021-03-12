@@ -6,74 +6,69 @@
 -- Currently incomplete and therefore untranslated.
 local credits = { -- Credits; the keys also need to be translated.
     -- Libraries
-    ['Additional coding'] = {
-        ['LÖVE'] = {
-            'LOVE Development Team'
-        },
+    {'h1', 'Additional coding'},
 
-        ['Lua libraries'] = {
-            'Enrique García Cota',
-            'Jasmijn Wellner',
-        },
-    },
+    {'h2', 'LÖVE'},
+    {'p', 'LOVE Development Team'},
+
+    {'h2', 'Lua libraries'},
+    {'p', 'Enrique García Cota'},
+    {'p', 'Jasmijn Wellner'},
 
     -- Graphics
-    ['Graphics'] = {
-        ["OpenGameArt.org's Liberated Pixel Cup"] = {
-            'Anamaris and Krusmira (aka? Emilio J Sanchez)',
-            'Barbara Rivera',
-            'Casper Nilsson',
-            'Charles Sanchez (AKA CharlesGabriel)',
-            'Chris Phillips',
-            'Daniel Armstrong (AKA HughSpectrum)',
-            'Daniel Eddeland',
-            'Johann CHARLOT',
-            'Jonas Klinger',
-            'Joshua Taylor',
-            'Lanea Zimmerman (AKA Sharm)',
-            'Leo Villeveygoux',
-            'Manuel Riecke (AKA MrBeast)',
-            'Mark Weyer',
-            'Matthew Nash',
-            'Skyler Robert Colladay',
-            'Stephen Challener (AKA Redshrike)',
-        },
+    {'h1', 'Graphics'},
 
-        ['Fancy skeleton'] = {
-            'Hans von Gersdorff'
-        },
-        ['Title screen skeleton'] = {
-            'goo30 (OpenGameArt)'
-        },
-        ['Löve game icon'] = {
-            'Uploaded by Qubodup on the Löve wiki? rude on GitHub?',
-        },
-        ['Taffer logo'] = {
-            'ronos_art (Fiverr)'
-        },
-        ['UI elements'] = {
-            'Kenney.nl',
-        }
-    },
+    {'h2', "OpenGameArt.org's Liberated Pixel Cup"},
+    {'p', 'Anamaris and Krusmira (aka? Emilio J Sanchez)'},
+    {'p', 'Barbara Rivera'},
+    {'p', 'Casper Nilsson'},
+    {'p', 'Charles Sanchez (AKA CharlesGabriel)'},
+    {'p', 'Chris Phillips'},
+    {'p', 'Daniel Armstrong (AKA HughSpectrum)'},
+    {'p', 'Daniel Eddeland'},
+    {'p', 'Johann CHARLOT'},
+    {'p', 'Jonas Klinger'},
+    {'p', 'Joshua Taylor'},
+    {'p', 'Lanea Zimmerman (AKA Sharm)'},
+    {'p', 'Leo Villeveygoux'},
+    {'p', 'Manuel Riecke (AKA MrBeast)'},
+    {'p', 'Mark Weyer'},
+    {'p', 'Matthew Nash'},
+    {'p', 'Skyler Robert Colladay'},
+    {'p', 'Stephen Challener (AKA Redshrike)'},
+
+    {'h2', 'Fancy skeleton'},
+    {'p', 'Hans von Gersdorff'},
+
+    {'h2', 'Title screen skeleton'},
+    {'p', 'goo30 (OpenGameArt)'},
+
+    {'h2', 'Löve game icon'},
+    {'p', 'Uploaded by Qubodup on the Löve wiki? rude on GitHub?'},
+
+    {'h2', 'Taffer logo'},
+    {'p', 'ronos_art (Fiverr)'},
+
+    {'h2', 'UI elements'},
+    {'p', 'Kenney.nl'},
 
     -- Music
-    ['Music and Sounds'] = {
-        'Kenney.nl',
-        'Matthew Pablo',
-    },
+    {'h1', 'Music and Sounds'},
+    {'p', 'Kenney.nl'},
+    {'p', 'Matthew Pablo'},
 
     -- Leftovers
-    ['Everything else'] = {
-        ['Design, Coding, Writing'] = {
-            'Taffer (Chris Herborth)'
-        }
-    },
+    {'h1', 'Everything else'},
+    {'h2', 'Design, Coding, Writing'},
+    {'p', 'Taffer (Chris Herborth)'},
 
-    ['Special thanks'] = {
-        'Lynette and Alex',
-        'Molly and Maisey',
-        'My online nerd buddies'
-    }
+    {'h1', 'Special thanks'},
+    {'p', 'Lynette and Alex'},
+    {'p', 'Molly and Maisey and those who came before'},
+    {'p', 'My online nerd buddies'},
+
+    -- Blank line for some space.
+    {'h1', ''}
 }
 
 -- "Complete" text that's been translated.

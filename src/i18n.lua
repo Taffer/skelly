@@ -4,7 +4,7 @@
 -- MIT license, see LICENSE.md for details.
 
 -- Currently incomplete and therefore untranslated.
-local credits = { -- Credits; the keys also need to be translated.
+local credits = { -- Credits; the 'h1', 'h2', 'p' are styles to be applied.
     -- Libraries
     {'h1', 'Additional coding'},
 

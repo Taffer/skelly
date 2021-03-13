@@ -25,8 +25,9 @@ function CreditsScreen:initialize(resources, state)
     self.credits_area = {200, 250, 880, 450}
 
     self.font = self.resources.fonts.default_mono
+    self.font:setLineHeight(1.1) -- little extra space
     self.font_em = self.font:getWidth('M')
-    self.font_lh = self.font:getHeight()
+    self.font_lh = self.font:getHeight() * self.font:getLineHeight()
 
     -- One drawback to this is if you leave the credits running forever, it'll
     -- consume all RAM.

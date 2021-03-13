@@ -29,26 +29,41 @@ function JourneyScreen:initialize(resources, state)
     self.degrees_per_second = 45
 
     -- UI quads
-    local ui = self.resources.images.ui_rpg
+    local ui_rpg = self.resources.images.ui_rpg
     self.quads = {
         --[[
     <SubTexture name="arrowBeige_left.png" x="303" y="486" width="22" height="21"/>
     <SubTexture name="arrowBeige_right.png" x="171" y="486" width="22" height="21"/>
         ]]
-        arrow_left  = love.graphics.newQuad(303, 486,  22, 21, ui),
-        arrow_right = love.graphics.newQuad(171, 486,  22, 21, ui),
+        arrow_left  = love.graphics.newQuad(303, 486,  22, 21, ui_rpg),
+        arrow_right = love.graphics.newQuad(171, 486,  22, 21, ui_rpg),
     }
 
     local x = (love.graphics.getWidth() - 190) / 2
 
     local button_font = self.resources.fonts.button_font
-    self.journey_button = Button:new(self.resources, button_font, self.journey_text, x, 350)
-    self.newgame_button = Button:new(self.resources, button_font, self.newgame_text, x, 410)
-    self.settings_button = Button:new(self.resources, button_font, self.settings_text, x, 470)
+    self.journey_button  = Button:new(x, 350, self.journey_text,  self.resources, button_font)
+    self.newgame_button  = Button:new(x, 410, self.newgame_text,  self.resources, button_font)
+    self.settings_button = Button:new(x, 470, self.settings_text, self.resources, button_font)
 
-    self.credits_button = Button:new(self.resources, button_font, self.credits_text, x, 550)
+    self.credits_button  = Button:new(x, 550, self.credits_text,  self.resources, button_font)
+    self.credits_button.onClick = function ()
+        self:setNextScreen('Credits')
+        self.exit_screen = true
+    end
 
-    self.exit_button = Button:new(self.resources, button_font, self.exit_text, x, 620)
+    self.exit_button  = Button:new(x, 620, self.exit_text,     self.resources, button_font)
+    self.exit_button.onClick = function ()
+        self.exit_screen = true
+    end
+
+    self.ui = {
+        self.journey_button,
+        self.newgame_button,
+        self.settings_button,
+        self.credits_button,
+        self.exit_button
+    }
 end
 
 -- Render this screen's contents.
@@ -76,13 +91,9 @@ function JourneyScreen:draw()
     love.graphics.print(self.skelly_text, x, 40)
 
     -- UI parts
-    self.journey_button:draw()
-    self.newgame_button:draw()
-    self.settings_button:draw()
-
-    self.credits_button:draw()
-
-    self.exit_button:draw()
+    for i in ipairs(self.ui) do
+        self.ui[i]:draw()
+    end
 end
 
 -- Update the screen.
@@ -120,17 +131,8 @@ function JourneyScreen:handle(event)
 
     if event.button then
         -- Mouse click.
-        if self.journey_button:intersects(event.mouse_x, event.mouse_y) then
-            print('Clicked JOURNEY ONWARD')
-        elseif self.newgame_button:intersects(event.mouse_x, event.mouse_y) then
-            print('Clicked NEW GAME')
-        elseif self.settings_button:intersects(event.mouse_x, event.mouse_y) then
-            print('Clicked SETTINGS')
-        elseif self.credits_button:intersects(event.mouse_x, event.mouse_y) then
-            self:setNextScreen('Credits')
-        elseif self.exit_button:intersects(event.mouse_x, event.mouse_y) then
-            self.exit_screen = true
-            return true
+        for i in ipairs(self.ui) do
+            self.ui[i]:onMousePress(event.mouse_x, event.mouse_y)
         end
     end
 

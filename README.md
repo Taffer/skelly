@@ -66,7 +66,10 @@ Images:
   [Atlas 2](https://opengameart.org/content/lpc-tile-atlas2). See the
   `Attribution.txt` and `Attribution2.txt` for details.
 * `lpc-medieval-fantasy-character-sprites` -
-  [LPC Medieval fantasy character sprites](https://opengameart.org/content/lpc-medieval-fantasy-character-sprites)
+  [LPC Medieval Fantasy Character Sprites](https://opengameart.org/content/lpc-medieval-fantasy-character-sprites)
+* `lpc-skeleton` -
+  [LPC Skeleton](https://opengameart.org/content/lpc-skeleton) (same as the
+  one from LPC Medieval Fantasy Character Sprites, but with spear animation).
 * `lpc-terrains` - [LPC Terrains](https://opengameart.org/content/lpc-terrains)
   by [bluecarrot16](https://opengameart.org/users/bluecarrot16) on
   [OpenGameArt.org](https://opengameart.org/). See

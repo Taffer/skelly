@@ -33,20 +33,42 @@ local resource_list = {
         skelly_throw_right = 'graphics/skeleton/throw_right.png',
         skelly_walk_left = 'graphics/skeleton/walk_left.png',
         skelly_walk_right = 'graphics/skeleton/walk_right.png',
+
+        skeleton_sprite = 'graphics/lpc-skeleton/skeleton.png',
+
+        zombie_bleeding_eye = 'graphics/lpc-zombie/Bleeding Eye.png',
+        zombie_bloody_arm   = 'graphics/lpc-zombie/Bloody Arm.png',
+        zombie_bloody_mouth = 'graphics/lpc-zombie/Bloody Mouth.png',
+        zombie_brain        = 'graphics/lpc-zombie/Brain.png',
+        zombie_ribs         = 'graphics/lpc-zombie/Ribs.png',
+        zombie_zombie       = 'graphics/lpc-zombie/Zombie.png',
+
+        -- Tile atlases used with Tiled.
+        tiles_base_out_atlas = 'graphics/lpc-atlas/base_out_atlas.png',
+        tiles_build_atlas    = 'graphics/lpc-atlas/build_atlas.png',
+        tiles_obj_misk_atlas = 'graphics/lpc-atlas/obj_misk_atlas.png',
+        tiles_terrain_atlas  = 'graphics/lpc-atlas/terrain_atlas.png',
+
+        tiles_cottage       = 'graphics/lpc-thatched-roof-cottage/cottage.png',
+        tiles_thatched_roof = 'graphics/lpc-thatched-roof-cottage/thatched-roof.png',
     },
 
     music = {
     },
 
     sounds = {
-        -- Yes, I know these are in the wrong spot, I wanted to keep Kenney's
-        -- UI Pack resources in one spot.
+        -- Yes, I know these are in the wrong spot in the filesystem, I wanted
+        -- to keep Kenney's UI Pack resources together.
         ui_click1 = 'graphics/kenney.nl/uipack/Bonus/click1.ogg',
         ui_click2 = 'graphics/kenney.nl/uipack/Bonus/click2.ogg',
         ui_rollover1 = 'graphics/kenney.nl/uipack/Bonus/rollover1.ogg',
         ui_rollover2 = 'graphics/kenney.nl/uipack/Bonus/rollover2.ogg',
         ui_switch1 = 'graphics/kenney.nl/uipack/Bonus/switch1.ogg',
         ui_switch2 = 'graphics/kenney.nl/uipack/Bonus/switch2.ogg',
+    },
+
+    maps = {
+        scene1_farm = 'maps/scene1-farm.lua',
     }
 }
 

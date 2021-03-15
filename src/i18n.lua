@@ -98,6 +98,12 @@ local internationalization = {
             subtitle_text = 'A tale of the Skeleton War',
         },
 
+        ui = { -- UI parts
+            ui_language = 'Language',
+            ui_languages = {'English', 'Español'},
+            ui_volume = 'Volume',
+        },
+
         -- Not translated yet.
         credits = credits,
     },
@@ -126,6 +132,12 @@ local internationalization = {
             loading_done = 'Terminado.',
             loading_text = 'Cargando…',
             subtitle_text = 'Una historia de la Guerra de los Esqueletos',
+        },
+
+        ui = { -- UI parts
+            ui_language = 'Idioma',
+            ui_languages = {'English', 'Español'},
+            ui_volume = 'Volumen',
         },
 
         -- Not translated yet.

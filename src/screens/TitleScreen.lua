@@ -32,6 +32,10 @@ local function loader(resource, file_list)
         yield(v)
     end
 
+    for k, v in pairs(file_list.maps) do
+        resource.maps[k] = dofile(v)
+    end
+
     return resource.text.title.loading_done
 end
 

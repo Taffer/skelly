@@ -36,6 +36,10 @@ gameResources = {
         -- all translatable text (presents, see src/i18n)
     },
 
+    maps = {
+        -- all Tiled maps
+    },
+
     screens = { -- Separate from state, we can be in Pause on top of a screen.
         placeholder = require 'src/screens/PlaceholderScreen', -- place holder
 
@@ -43,6 +47,11 @@ gameResources = {
         presents = require 'src/screens/PresentsScreen', -- Splash screen
         title_loading = require 'src/screens/TitleScreen', -- Title/loading
         credits = require 'src/screens/CreditsScreen', -- Credits
+        settings = require 'src/screens/SettingsScreen', -- Settings
+    },
+
+    overlays = { -- UI overlays that can be drawn on "any" screen.
+        settings = require 'src/ui/SettingsOverlay', -- Settings UI
     },
 
     states = {}

@@ -6,11 +6,11 @@
 local Class = require 'lib/middleclass/middleclass'
 local OverlayBase = require 'src/ui/OverlayBase'
 
-local SettingsOverlay = Class('SettingsOverlay', OverlayBase)
-
 local Button = require 'src/ui/Button'
 local ImageButton = require 'src/ui/ImageButton'
 local Spinner = require 'src/ui/Spinner'
+
+local SettingsOverlay = Class('SettingsOverlay', OverlayBase)
 
 function SettingsOverlay:initialize(resources, owner, x, y, width, height)
     OverlayBase.initialize(self, owner, x, y, width, height)

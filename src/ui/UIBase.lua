@@ -3,7 +3,7 @@
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
 
-local Class = require 'lib/middleclass'
+local Class = require 'lib/middleclass/middleclass'
 
 -- UI object base class
 local UIBase = Class('UIBase')
@@ -40,3 +40,5 @@ function UIBase:onMousePress(x, y, button)
         self:onClick(button)
     end
 end
+
+return UIBase

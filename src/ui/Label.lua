@@ -3,10 +3,15 @@
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
 
+local Class = require 'lib/middleclass/middleclass'
+local UIBase = require 'src/ui/UIBase'
+
 -- Label class
 local Label = Class('Label', UIBase)
 
 function Label:initialize(x, y, text, font, colour, align)
+    UIBase.initialize(self)
+
     self.orig_x = x
     self.y = y
     self.text = text
@@ -41,3 +46,5 @@ function Label:setText(text)
         self.x = self.orig_x - self.width / 2
     end
 end
+
+return Label

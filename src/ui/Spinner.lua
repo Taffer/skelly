@@ -3,7 +3,7 @@
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
 
-local Class = require 'lib/middleclass'
+local Class = require 'lib/middleclass/middleclass'
 local UIBase = require 'src/ui/UIBase'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
@@ -12,6 +12,8 @@ local Label = require 'src/ui/Label'
 local Spinner = Class('Label', UIBase)
 
 function Spinner:initialize(x, y, values, start_at, font, colour, texture, quads)
+    UIBase.initialize(self)
+
     self.x = x
     self.y = y
     self.values = values
@@ -81,3 +83,5 @@ end
 function Spinner:getValue()
     return self.text
 end
+
+return Spinner

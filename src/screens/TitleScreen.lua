@@ -5,6 +5,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
+local ImageButton = require 'src/ui/ImageButton'
+local Label = require 'src/ui/Label'
 
 local rsrc_list = require 'src/rsrc_list'
 
@@ -63,6 +65,21 @@ function TitleScreen:initialize(resources, state)
     self.loaded_resource = ""
     self.loading_finished = false
     self.loading_routine = nil
+
+    local title_image = self.resources.images.skelly_title
+    local title_quad = love.graphics.newQuad(0, 0, title_image:getWidth(), title_image:getHeight(), title_image)
+
+    local font_mono = self.resources.fonts.default_mono
+    local font_title = self.resources.fonts.skelly_title
+
+    self.loading_label = Label:new(self.loading_x, self.loading_y, self.loading_text, font_mono, {1, 1, 1, 1}, 'left')
+
+    self.ui = {
+        ImageButton:new(0, 0, title_image, title_quad),
+        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+        self.loading_label,
+    }
 end
 
 -- Render this screen's contents.
@@ -75,24 +92,12 @@ function TitleScreen:draw()
 
     love.graphics.clear(0, 0, 0, 1)
 
-    love.graphics.setColor(1, 1, 1, self.alpha)
-    love.graphics.draw(image_title, 0, 0)
+    self.loading_label:setText(self.loading_text .. ' ' .. (self.loaded_resource or ""))
 
-    local screen_width = love.graphics.getWidth()
-    local width = font_mono:getWidth(self.loading_text)
-    local x = (screen_width - width) / 2
-    love.graphics.setFont(font_mono)
-    love.graphics.print(self.loading_text .. ' ' .. (self.loaded_resource or ""),
-        self.loading_x, self.loading_y)
-
-    width = font_mono:getWidth(self.subtitle_text)
-    x = (screen_width - width) / 2
-    love.graphics.print(self.subtitle_text, x, 200)
-
-    width = font_title:getWidth(self.skelly_text)
-    x = (screen_width - width) / 2
-    love.graphics.setFont(font_title)
-    love.graphics.print(self.skelly_text, x, 40)
+    for i in ipairs(self.ui) do
+        self.ui[i]:setColor({1, 1, 1, self.alpha})
+        self.ui[i]:draw()
+    end
 end
 
 -- Update the screen.

@@ -5,7 +5,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
-local Button = require 'src/ui/Button'
+local ImageButton = require 'src/ui/ImageButton'
+local Label = require 'src/ui/Label'
 
 local CreditsScreen = Class('CreditsScreen', ScreenBase)
 
@@ -37,6 +38,19 @@ function CreditsScreen:initialize(resources, state)
     self.max_lines = math.floor(450 / self.font_lh)
     self.lines_to_add = 0
     self.credits_idx = 1
+
+    -- UI pieces
+    local title_image = self.resources.images.skelly_title
+    local title_quad = love.graphics.newQuad(0, 0, title_image:getWidth(), title_image:getHeight(), title_image)
+
+    local font_mono = self.resources.fonts.default_mono
+    local font_title = self.resources.fonts.skelly_title
+
+    self.ui = {
+        ImageButton:new(0, 0, title_image, title_quad),
+        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+    }
 end
 
 -- Render this screen's contents.
@@ -44,24 +58,13 @@ function CreditsScreen:draw()
     -- Premature optimization:
     local rsrc = self.resources
     local font_mono = rsrc.fonts.default_mono
-    local font_title = rsrc.fonts.skelly_title
-    local image_title = rsrc.images.skelly_title
 
     love.graphics.clear(0, 0, 0, 1)
 
-    love.graphics.setColor(1, 1, 1, self.alpha)
-    love.graphics.draw(image_title, 0, 0)
-
-    local screen_width = love.graphics.getWidth()
-    local width = font_mono:getWidth(self.subtitle_text)
-    local x = (screen_width - width) / 2
-    love.graphics.setFont(font_mono)
-    love.graphics.print(self.subtitle_text, x, 200)
-
-    width = font_title:getWidth(self.skelly_text)
-    x = (screen_width - width) / 2
-    love.graphics.setFont(font_title)
-    love.graphics.print(self.skelly_text, x, 40)
+    for i in ipairs(self.ui) do
+        self.ui[i]:setColor({1, 1, 1, self.alpha})
+        self.ui[i]:draw()
+    end
 
     -- Display the credits.
     local x, y, w, h = unpack(self.credits_area)

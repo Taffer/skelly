@@ -17,14 +17,20 @@ function ImageButton:initialize(x, y, texture, quad)
     self.texture = texture
     self.quad = quad
 
+    self.color = {1, 1, 1, 1} -- Default is draw it normally.
+
     local _, _, w, h = self.quad:getViewport()
     self.width = w
     self.height = h
 end
 
 function ImageButton:draw()
-    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setColor(unpack(self.color))
     love.graphics.draw(self.texture, self.quad, self.x, self.y)
+end
+
+function ImageButton:setColor(color)
+    self.color = color
 end
 
 return ImageButton

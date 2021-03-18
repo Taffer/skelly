@@ -62,7 +62,11 @@ gameState = {
     screen = nil, -- Currently displayed screen.
 
     -- Player settings
-    settings = {}
+    settings = {},
+
+    -- Display screen dimensions
+    scr_width = 0,
+    scr_height = 0,
 }
 
 -- Serialize/deserialize settings.
@@ -93,10 +97,11 @@ end
 -- Love callbacks.
 function love.load()
     math.randomseed(os.time())
-
     love.graphics.setDefaultFilter('nearest', 'nearest')
-
     io.stdout:setvbuf("no") -- Don't buffer console output.
+
+    gameState.scr_width = love.graphics.getWidth()
+    gameState.scr_height = love.graphics.getHeight()
 
     -- Load settings if they exist. If not, create defaults.
     load_settings(settings_filename)

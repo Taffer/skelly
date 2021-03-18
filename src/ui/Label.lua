@@ -9,14 +9,15 @@ local UIBase = require 'src/ui/UIBase'
 -- Label class
 local Label = Class('Label', UIBase)
 
-function Label:initialize(x, y, text, font, colour, align)
+function Label:initialize(x, y, text, font, color, align)
     UIBase.initialize(self)
 
     self.orig_x = x
+    self.x = x
     self.y = y
     self.text = text
     self.font = font
-    self.colour = colour
+    self.color = color
     self.align = align
 
     self.width = font:getWidth(self.text)
@@ -31,9 +32,13 @@ function Label:initialize(x, y, text, font, colour, align)
 end
 
 function Label:draw()
-    love.graphics.setColor(unpack(self.colour))
+    love.graphics.setColor(unpack(self.color))
     love.graphics.setFont(self.font)
     love.graphics.print(self.text, self.x, self.y)
+end
+
+function Label:setColor(color)
+    self.color = color
 end
 
 function Label:setText(text)

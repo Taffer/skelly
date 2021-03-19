@@ -7,6 +7,8 @@ local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
 
 local Button = require 'src/ui/Button'
+local ImageButton = require 'src/ui/ImageButton'
+local Label = require 'src/ui/Label'
 
 local JourneyScreen = Class('JourneyScreen', ScreenBase)
 
@@ -30,34 +32,40 @@ function JourneyScreen:initialize(resources, state)
 
     -- UI quads
     local ui_rpg = self.resources.images.ui_rpg
-    self.quads = {
-        --[[
-    <SubTexture name="arrowBeige_left.png" x="303" y="486" width="22" height="21"/>
-    <SubTexture name="arrowBeige_right.png" x="171" y="486" width="22" height="21"/>
-        ]]
-        arrow_left  = love.graphics.newQuad(303, 486,  22, 21, ui_rpg),
-        arrow_right = love.graphics.newQuad(171, 486,  22, 21, ui_rpg),
-    }
+    local button_quad = love.graphics.newQuad(0, 282, 190, 49, ui_rpg)
 
-    local x = (love.graphics.getWidth() - 190) / 2
+    local x = (state.scr_width - 190) / 2
 
     local button_font = self.resources.fonts.button_font
-    self.journey_button  = Button:new(x, 350, self.journey_text,  self.resources, button_font)
-    self.newgame_button  = Button:new(x, 410, self.newgame_text,  self.resources, button_font)
-    self.settings_button = Button:new(x, 470, self.settings_text, self.resources, button_font)
+    local button_color = {0, 0, 0, 1}
+    self.journey_button  = Button:new(x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
+    self.newgame_button  = Button:new(x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
+    self.settings_button = Button:new(x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
 
-    self.credits_button  = Button:new(x, 550, self.credits_text,  self.resources, button_font)
+    self.credits_button  = Button:new(x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
     self.credits_button.onClick = function ()
+        print('Credits clicked')
         self:setNextScreen('Credits')
-        self.exit_screen = true
+        self.exit_screen = false
     end
 
-    self.exit_button  = Button:new(x, 620, self.exit_text,     self.resources, button_font)
+    self.exit_button  = Button:new(x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
     self.exit_button.onClick = function ()
-        self.exit_screen = true
+        print('Exit clicked')
+        self.exit_screen = false
     end
+
+    local title_image = self.resources.images.skelly_title
+    local title_quad = love.graphics.newQuad(0, 0, title_image:getWidth(), title_image:getHeight(), title_image)
+
+    local font_mono = self.resources.fonts.default_mono
+    local font_title = self.resources.fonts.skelly_title
 
     self.ui = {
+        ImageButton:new(0, 0, title_image, title_quad),
+        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+
         self.journey_button,
         self.newgame_button,
         self.settings_button,
@@ -68,27 +76,7 @@ end
 
 -- Render this screen's contents.
 function JourneyScreen:draw()
-    -- Premature optimization:
-    local rsrc = self.resources
-    local font_mono = rsrc.fonts.default_mono
-    local font_title = rsrc.fonts.skelly_title
-    local image_title = rsrc.images.skelly_title
-
     love.graphics.clear(0, 0, 0, 1)
-
-    love.graphics.setColor(1, 1, 1, self.alpha)
-    love.graphics.draw(image_title, 0, 0)
-
-    local screen_width = love.graphics.getWidth()
-    local width = font_mono:getWidth(self.subtitle_text)
-    local x = (screen_width - width) / 2
-    love.graphics.setFont(font_mono)
-    love.graphics.print(self.subtitle_text, x, 200)
-
-    width = font_title:getWidth(self.skelly_text)
-    x = (screen_width - width) / 2
-    love.graphics.setFont(font_title)
-    love.graphics.print(self.skelly_text, x, 40)
 
     -- UI parts
     for i in ipairs(self.ui) do
@@ -131,8 +119,13 @@ function JourneyScreen:handle(event)
 
     if event.button then
         -- Mouse click.
+        local handled = false
         for i in ipairs(self.ui) do
-            self.ui[i]:onMousePress(event.mouse_x, event.mouse_y)
+            handled = handled or self.ui[i]:onMousePress(event.mouse_x, event.mouse_y)
+        end
+
+        if handled then
+            return true
         end
     end
 

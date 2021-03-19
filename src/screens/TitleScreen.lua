@@ -84,12 +84,6 @@ end
 
 -- Render this screen's contents.
 function TitleScreen:draw()
-    -- Premature optimization:
-    local rsrc = self.resources
-    local font_mono = rsrc.fonts.default_mono
-    local font_title = rsrc.fonts.skelly_title
-    local image_title = rsrc.images.skelly_title
-
     love.graphics.clear(0, 0, 0, 1)
 
     self.loading_label:setText(self.loading_text .. ' ' .. (self.loaded_resource or ""))

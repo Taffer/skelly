@@ -53,13 +53,6 @@ end
 
 -- Render this screen's contents.
 function PresentsScreen:draw()
-    -- Premature optimization:
-    local rsrc = self.resources
-    local font_default = rsrc.fonts.default_serif
-    local font_mono = rsrc.fonts.default_mono
-    local image_love = rsrc.images.love_logo
-    local image_taffer = rsrc.images.taffer
-
     love.graphics.clear(0, 0, 0, 1)
 
     for i in ipairs(self.ui) do

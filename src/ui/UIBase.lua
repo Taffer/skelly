@@ -32,13 +32,16 @@ end
 
 function UIBase:onMousePress(x, y, button)
     if not self:intersects(x, y) then
-        return
+        return false
     end
 
     -- We're ignoring the button, click with anything.
     if self.onClick then
         self:onClick(button)
+        return true
     end
+
+    return false
 end
 
 return UIBase

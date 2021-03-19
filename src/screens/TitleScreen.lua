@@ -80,6 +80,18 @@ function TitleScreen:initialize(resources, state)
         Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
         self.loading_label,
     }
+
+    self.onMousePress = (function()
+        if self.loading_finished then
+            self.exit_screen = true
+        end
+    end)
+
+    self.onKeyPress = (function()
+        if self.loading_finished then
+            self.exit_screen = true
+        end
+    end)
 end
 
 -- Render this screen's contents.
@@ -122,27 +134,6 @@ function TitleScreen:update(dt)
     else
         self.loading_routine = coroutine.create(loader)
     end
-end
-
--- Exit this screen?
-function TitleScreen:exit()
-    return self.exit_screen
-end
-
--- Handle events.
---
--- If you handled it, return true; false means the event continues on to the
--- next handler.
-function TitleScreen:handle(event)
-    if event.keys['escape'] or event.button then
-        -- Escape doesn't kick you out until loading is done, sorry.
-        if self.loading_finished then
-            self.exit_screen = true
-            return true
-        end
-    end
-
-    return ScreenBase.handle(self, event)
 end
 
 return TitleScreen

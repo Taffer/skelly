@@ -147,26 +147,22 @@ function love.update(dt)
 end
 
 -- Event generation.
-function love.keypressed(key)
-    local event = UIEvent:new({keydown = key})
-
-    if gameState.screen:handle(event) == false then
-        print('Unhandled key press event.')
-    end
+function love.keypressed(key, scancode, isRepeat)
+    gameState.screen:handleKeyPress(key, scancode, isRepeat)
 end
 
-function love.keyreleased(key)
-    local event = UIEvent:new({keyup = key})
-
-    if gameState.screen:handle(event) == false then
-        print('Unhandled key release event.')
-    end
+function love.keyreleased(key, scancode)
+    gameState.screen:handleKeyRelease(key, scancode)
 end
 
-function love.mousereleased(x, y, button, is_touch, presses)
-    local event = UIEvent:new({mouseup = button, x = x, y = y, touch = is_touch, presses = presses})
+function love.mousemoved(x, y, dx, dy, isTouch)
+    gameState.screen:handleMouseMoved(x, y, dx, dy, isTouch)
+end
 
-    if gameState.screen:handle(event) == false then
-        print('Unhandled mouse release event.')
-    end
+function love.mousepressed(x, y, button, isTouch, presses)
+    gameState.screen:handleMousePress(x, y, button, isTouch, presses)
+end
+
+function love.mousereleased(x, y, button, isTouch, presses)
+    gameState.screen:handleMouseRelease(x, y, button, isTouch, presses)
 end

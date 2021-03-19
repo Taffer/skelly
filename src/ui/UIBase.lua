@@ -14,7 +14,7 @@ function UIBase:initialize()
     self.width = 0
     self.height = 0
 
-    self.onClick = nil -- I've been clicked!
+    self.onMousePress = nil -- I've been clicked!
 end
 
 function UIBase:intersects(x, y)
@@ -30,18 +30,34 @@ function UIBase:intersects(x, y)
     return true
 end
 
-function UIBase:onMousePress(x, y, button)
-    if not self:intersects(x, y) then
-        return false
+function UIBase:onMousePress(x, y, button, isTouch, presses)
+    if self:intersects(x, y) and self.onMousePress then
+        self.onMousePress(x, y, button, isTouch, presses)
     end
+end
 
-    -- We're ignoring the button, click with anything.
-    if self.onClick then
-        self:onClick(button)
-        return true
+function UIBase:onMousePressRelease(x, y, button, isTouch, presses)
+    if self:intersects(x, y) and self.onMousePress then
+        self.onMouseRelease(x, y, button, isTouch, presses)
     end
+end
 
-    return false
+function UIBase:onMouseMoved(x, y, dx, dy, isTouch)
+    if self:intersects(x, y) and self.onMouseMoved then
+        self.onMouseMoved(x, y, dx, dy, isTouch)
+    end
+end
+
+function UIBase:handleKeyPress(key, scancode, isRepeat)
+    if self.onKeyPress then
+        self.onKeyPress(key, scancode, isRepeat)
+    end
+end
+
+function UIBase:handleKeyRelease(key, scancode)
+    if self.onKeyRelease then
+        self.onKeyRelease(key, scancode)
+    end
 end
 
 return UIBase

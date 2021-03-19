@@ -49,6 +49,14 @@ function PresentsScreen:initialize(resources, state)
         Label:new(state.scr_width / 2, 640, self.love_text,
             self.resources.fonts.default_mono, {1, 1, 1, 1}, 'centre'),
     }
+
+    self.onMousePress = (function()
+        self.exit_screen = true
+    end)
+
+    self.onKeyPress = (function()
+        self.exit_screen = true
+    end)
 end
 
 -- Render this screen's contents.
@@ -77,19 +85,6 @@ end
 -- Exit this screen?
 function PresentsScreen:exit()
     return self.exit_screen
-end
-
--- Handle events.
---
--- If you handled it, return true; false means the event continues on to the
--- next handler.
-function PresentsScreen:handle(event)
-    if event.keys['escape'] or event.button then
-        self.exit_screen = true
-        return true
-    end
-
-    return ScreenBase.handle(self, event)
 end
 
 return PresentsScreen

@@ -51,6 +51,14 @@ function CreditsScreen:initialize(resources, state)
         Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
         Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
     }
+
+    self.onMousePress = (function()
+        self.exit_screen = true
+    end)
+
+    self.onKeyPress = (function()
+        self.exit_screen = true
+    end)
 end
 
 -- Render this screen's contents.
@@ -115,23 +123,3 @@ function CreditsScreen:update(dt)
         end
     end
 end
-
--- Exit this screen?
-function CreditsScreen:exit()
-    return self.exit_screen
-end
-
--- Handle events.
---
--- If you handled it, return true; false means the event continues on to the
--- next handler.
-function CreditsScreen:handle(event)
-    if event.keys['escape'] or event.button then
-        self.exit_screen = true
-        return true
-    end
-
-    return ScreenBase.handle(self, event)
-end
-
-return CreditsScreen

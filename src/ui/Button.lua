@@ -24,9 +24,6 @@ function Button:initialize(x, y, texture, quad, text, font, color)
     local label_x = x + self.imageButton.width / 2
     local label_y = y + (self.imageButton.height - font:getHeight() * font:getLineHeight()) / 2
     self.labelButton = Label:new(label_x, label_y, text, font, color, 'centre')
-
-    -- Event handlers
-    self.onClick = nil
 end
 
 function Button:draw()

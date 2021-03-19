@@ -4,13 +4,13 @@
 -- MIT license, see LICENSE.md for details.
 
 local Class = require 'lib/middleclass/middleclass'
-local ScreenBase = require 'src/screens/ScreenBase'
+local UIScreenBase = require 'src/screens/UIScreenBase'
 
 local Button = require 'src/ui/Button'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 
-local JourneyScreen = Class('JourneyScreen', ScreenBase)
+local JourneyScreen = Class('JourneyScreen', UIScreenBase)
 
 function JourneyScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
@@ -43,16 +43,16 @@ function JourneyScreen:initialize(resources, state)
     self.settings_button = Button:new(x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
 
     self.credits_button  = Button:new(x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
-    self.credits_button.onClick = function ()
+    self.credits_button.onMousePress = function ()
         print('Credits clicked')
         self:setNextScreen('Credits')
-        self.exit_screen = false
+        self.exit_screen = true
     end
 
     self.exit_button  = Button:new(x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
-    self.exit_button.onClick = function ()
+    self.exit_button.onMousePress = function ()
         print('Exit clicked')
-        self.exit_screen = false
+        self.exit_screen = true
     end
 
     local title_image = self.resources.images.skelly_title
@@ -99,37 +99,6 @@ function JourneyScreen:update(dt)
     if degrees > 180 then -- sin(180 degrees) is back to 0 alpha
         self.exit_screen = true
     end
-end
-
--- Exit this screen?
-function JourneyScreen:exit()
-    return self.exit_screen
-end
-
--- Handle events.
---
--- If you handled it, return true; false means the event continues on to the
--- next handler.
-function JourneyScreen:handle(event)
-    if event.keys['escape'] then
-        -- Escape doesn't kick you out until loading is done, sorry.
-        self.exit_screen = true
-        return true
-    end
-
-    if event.button then
-        -- Mouse click.
-        local handled = false
-        for i in ipairs(self.ui) do
-            handled = handled or self.ui[i]:onMousePress(event.mouse_x, event.mouse_y)
-        end
-
-        if handled then
-            return true
-        end
-    end
-
-    return ScreenBase.handle(self, event)
 end
 
 return JourneyScreen

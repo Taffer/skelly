@@ -39,31 +39,32 @@ end
 -- Handle events.
 function ScreenBase:handleKeyPress(key, scancode, isRepeat)
     if self.onKeyPress then
-        self.onKeyPress(key, scancode, isRepeat)
+        self:onKeyPress(key, scancode, isRepeat)
     end
 end
 
 function ScreenBase:handleKeyRelease(key, scancode)
     if self.onKeyRelease then
-        self.onKeyRelease(key, scancode)
+        self:onKeyRelease(key, scancode)
     end
 end
 
 function ScreenBase:handleMousePress(x, y, button, isTouch, presses)
     if self.onMousePress then
-        self.onMousePress(x, y, button, isTouch, presses)
+        self:onMousePress(x, y, button, isTouch, presses)
     end
 end
 
 function ScreenBase:handleMouseRelease(x, y, button, isTouch, presses)
     if self.onMouseRelease then
-        self.onMouseRelease(x, y, button, isTouch, presses)
+        self:onMouseRelease(x, y, button, isTouch, presses)
     end
 end
 
 function ScreenBase:handleMouseMoved(x, y, dx, dy, isTouch)
+    print('-> ScreenBase mouse moved')
     if self.onMouseMoved then
-        self.onMouseMoved(x, y, dx, dy, isTouch)
+        self:onMouseMoved(x, y, dx, dy, isTouch)
     end
 end
 

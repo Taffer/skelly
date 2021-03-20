@@ -50,11 +50,11 @@ function PresentsScreen:initialize(resources, state)
             self.resources.fonts.default_mono, {1, 1, 1, 1}, 'centre'),
     }
 
-    self.onMousePress = (function()
+    self.onMouseRelease = (function(self)
         self.exit_screen = true
     end)
 
-    self.onKeyPress = (function()
+    self.onKeyRelease = (function(self)
         self.exit_screen = true
     end)
 end

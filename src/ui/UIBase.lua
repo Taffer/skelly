@@ -30,33 +30,33 @@ function UIBase:intersects(x, y)
     return true
 end
 
-function UIBase:onMousePress(x, y, button, isTouch, presses)
-    if self:intersects(x, y) and self.onMousePress then
-        self.onMousePress(x, y, button, isTouch, presses)
+function UIBase:handleMousePress(x, y, button, isTouch, presses)
+    if self.onMousePress and self:intersects(x, y) then
+        self:onMousePress(x, y, button, isTouch, presses)
     end
 end
 
-function UIBase:onMousePressRelease(x, y, button, isTouch, presses)
-    if self:intersects(x, y) and self.onMousePress then
-        self.onMouseRelease(x, y, button, isTouch, presses)
+function UIBase:handleMousePressRelease(x, y, button, isTouch, presses)
+    if self.onMousePress and self:intersects(x, y) then
+        self:onMouseRelease(x, y, button, isTouch, presses)
     end
 end
 
-function UIBase:onMouseMoved(x, y, dx, dy, isTouch)
-    if self:intersects(x, y) and self.onMouseMoved then
-        self.onMouseMoved(x, y, dx, dy, isTouch)
+function UIBase:handleMouseMoved(x, y, dx, dy, isTouch)
+    if self.onMouseMoved and self:intersects(x, y) then
+        self:onMouseMoved(x, y, dx, dy, isTouch)
     end
 end
 
 function UIBase:handleKeyPress(key, scancode, isRepeat)
     if self.onKeyPress then
-        self.onKeyPress(key, scancode, isRepeat)
+        self:onKeyPress(key, scancode, isRepeat)
     end
 end
 
 function UIBase:handleKeyRelease(key, scancode)
     if self.onKeyRelease then
-        self.onKeyRelease(key, scancode)
+        self:onKeyRelease(key, scancode)
     end
 end
 

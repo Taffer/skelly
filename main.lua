@@ -4,7 +4,6 @@
 -- MIT license, see LICENSE.md for details.
 
 local bitser = require 'lib/bitser/bitser'
-local UIEvent = require 'src/ui/UIEvent'
 
 local settings_filename = 'settings.bin'
 
@@ -70,6 +69,8 @@ gameState = {
 }
 
 -- Serialize/deserialize settings.
+--
+-- Maybe switch to human-readable: https://github.com/FivosM/ini_parser
 local function load_settings(name)
     local binary_data, size = love.filesystem.read(name)
     if binary_data then
@@ -156,6 +157,7 @@ function love.keyreleased(key, scancode)
 end
 
 function love.mousemoved(x, y, dx, dy, isTouch)
+    print('main mousemoved')
     gameState.screen:handleMouseMoved(x, y, dx, dy, isTouch)
 end
 

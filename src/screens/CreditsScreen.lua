@@ -52,11 +52,11 @@ function CreditsScreen:initialize(resources, state)
         Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
     }
 
-    self.onMousePress = (function()
+    self.onMouseRelease = (function(self)
         self.exit_screen = true
     end)
 
-    self.onKeyPress = (function()
+    self.onKeyRelease = (function(self)
         self.exit_screen = true
     end)
 end

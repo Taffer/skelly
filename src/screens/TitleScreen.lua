@@ -81,13 +81,13 @@ function TitleScreen:initialize(resources, state)
         self.loading_label,
     }
 
-    self.onMousePress = (function()
+    self.onMouseRelease = (function(self)
         if self.loading_finished then
             self.exit_screen = true
         end
     end)
 
-    self.onKeyPress = (function()
+    self.onKeyRelease = (function(self)
         if self.loading_finished then
             self.exit_screen = true
         end

@@ -13,7 +13,7 @@ local Label = require 'src/ui/Label'
 local JourneyScreen = Class('JourneyScreen', UIScreenBase)
 
 function JourneyScreen:initialize(resources, state)
-    ScreenBase.initialize(self, resources, state)
+    UIScreenBase.initialize(self, resources, state)
 
     -- next_screen will be set when a button is chosen.
 
@@ -43,14 +43,18 @@ function JourneyScreen:initialize(resources, state)
     self.settings_button = Button:new(x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
 
     self.credits_button  = Button:new(x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
-    self.credits_button.onMousePress = function ()
-        print('Credits clicked')
-        self:setNextScreen('Credits')
-        self.exit_screen = true
+    self.credits_button.onMouseRelease = function (self)
+        print('Credits clicked', self) -- self is a Button OH SHI
+        if self ~= nil and self.setNextScreen == nil then
+            print('WTF self.setNextScreen is nil?!')
+        else
+            self:setNextScreen('Credits')
+            self.exit_screen = true
+        end
     end
 
     self.exit_button  = Button:new(x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
-    self.exit_button.onMousePress = function ()
+    self.exit_button.onMouseRelease = function (self)
         print('Exit clicked')
         self.exit_screen = true
     end

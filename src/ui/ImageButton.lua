@@ -29,8 +29,4 @@ function ImageButton:draw()
     love.graphics.draw(self.texture, self.quad, self.x, self.y)
 end
 
-function ImageButton:setColor(color)
-    self.color = color
-end
-
 return ImageButton

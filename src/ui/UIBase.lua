@@ -16,7 +16,13 @@ function UIBase:initialize(parent)
     self.width = 0
     self.height = 0
 
+    self.color = {1, 1, 1, 1}
+
     self.onMousePress = nil -- I've been clicked!
+end
+
+function UIBase:setColor(color)
+    self.color = color
 end
 
 function UIBase:intersects(x, y)

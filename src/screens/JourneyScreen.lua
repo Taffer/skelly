@@ -6,6 +6,7 @@
 local Class = require 'lib/middleclass/middleclass'
 local UIScreenBase = require 'src/screens/UIScreenBase'
 
+local ColorFade = require 'src/ColorFade'
 local Button = require 'src/ui/Button'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
@@ -25,10 +26,7 @@ function JourneyScreen:initialize(resources, state)
     self.credits_text = self.resources.text.journey.credits_text
     self.exit_text = self.resources.text.journey.exit_text
 
-    self.alpha = 0 -- Alpha level for the fade-in/out animation.
-    self.ticks = 0
-    self.pi_over_180 = math.pi / 180
-    self.degrees_per_second = 45
+    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
 
     -- UI quads
     local ui_rpg = self.resources.images.ui_rpg
@@ -81,25 +79,14 @@ function JourneyScreen:draw()
 
     -- UI parts
     for i in ipairs(self.ui) do
+        self.ui[i]:setColor(self.fade:getColor()) -- bug: labels get white text
         self.ui[i]:draw()
     end
 end
 
 -- Update the screen.
 function JourneyScreen:update(dt)
-    self.ticks = self.ticks + dt
-
-    local degrees = self.ticks * self.degrees_per_second -- 1 second = 90 degrees
-    if degrees >= 90 then
-        -- Pause the animation until loading is done.
-        degrees = 90
-    end
-
-    self.alpha = math.sin(degrees * self.pi_over_180)
-
-    if degrees > 180 then -- sin(180 degrees) is back to 0 alpha
-        self.exit_screen = true
-    end
+    self.fade:update(dt)
 end
 
 return JourneyScreen

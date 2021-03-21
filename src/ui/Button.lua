@@ -29,7 +29,7 @@ function Button:initialize(parent, x, y, texture, quad, text, font, color)
     self.labelButton = Label:new(self, label_x, label_y, text, font, color, 'centre')
 end
 
-function Button:draw()
+function Button:draw(color)
     self.imageButton:draw()
     self.labelButton:draw()
 

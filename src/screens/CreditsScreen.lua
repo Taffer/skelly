@@ -5,6 +5,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
+
+local ColorFade = require 'src/ColorFade'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 
@@ -18,11 +20,9 @@ function CreditsScreen:initialize(resources, state)
     self.subtitle_text = self.resources.text.title.subtitle_text
     self.credits = self.resources.text.credits
 
-    self.alpha = 0 -- Alpha level for the fade-in/out animation.
-    self.ticks = 0
-    self.pi_over_180 = math.pi / 180
-    self.degrees_per_second = 45
+    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
 
+    self.ticks = 0
     self.credits_area = {200, 250, 880, 450}
 
     self.font = self.resources.fonts.default_mono
@@ -70,7 +70,7 @@ function CreditsScreen:draw()
     love.graphics.clear(0, 0, 0, 1)
 
     for i in ipairs(self.ui) do
-        self.ui[i]:setColor({1, 1, 1, self.alpha})
+        self.ui[i]:setColor(self.fade:getColor())
         self.ui[i]:draw()
     end
 
@@ -78,7 +78,7 @@ function CreditsScreen:draw()
     local x, y, w, h = unpack(self.credits_area)
     love.graphics.setColor(0, 0, 0, 0.75)
     love.graphics.rectangle('fill', x, y, w, h)
-    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setColor(unpack(self.fade:getColor()))
     love.graphics.setFont(self.font)
 
     local delta = 0
@@ -95,20 +95,10 @@ function CreditsScreen:draw()
 end
 
 -- Update the screen.
-function CreditsScreen:fadeInAnimation()
-    local degrees = self.ticks * self.degrees_per_second
-    if degrees > 90 then
-        degrees = 90
-    end
-
-    self.alpha = math.sin(degrees * self.pi_over_180)
-end
-
 function CreditsScreen:update(dt)
+    self.fade:update(dt)
+
     self.ticks = self.ticks + dt
-
-    self:fadeInAnimation()
-
     if self.ticks > 1 then
         self.lines_to_add = self.lines_to_add + dt
 

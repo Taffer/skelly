@@ -37,10 +37,6 @@ function Label:draw()
     love.graphics.print(self.text, self.x, self.y)
 end
 
-function Label:setColor(color)
-    self.color = color
-end
-
 function Label:setText(text)
     self.text = text
     self.width = self.font:getWidth(self.text)

@@ -5,6 +5,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
+
+local ColorFade = require 'src/ColorFade'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 
@@ -30,10 +32,8 @@ function PresentsScreen:initialize(resources, state)
     self.taffer_text = self.resources.text.presents.taffer_text
     self.love_text = self.resources.text.presents.love_text
 
-    self.alpha = 0 -- Alpha level for the fade-in/out animation.
-    self.ticks = 0
-    self.pi_over_180 = math.pi / 180
-    self.degrees_per_second = 180 -- Fade in/out takes ~2 seconds for each.
+    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
+    self.exit_countdown = 2 -- seconds after fade to automatically exit
 
     local love_logo = self.resources.images.love_logo
     local logo_quad = love.graphics.newQuad(0, 0, love_logo:getWidth(), love_logo:getHeight(), love_logo)
@@ -51,11 +51,15 @@ function PresentsScreen:initialize(resources, state)
     }
 
     self.onMouseRelease = (function(self)
-        self.exit_screen = true
+        if self.fade:isDone() then
+            self.exit_screen = true
+        end
     end)
 
     self.onKeyRelease = (function(self)
-        self.exit_screen = true
+        if self.fade:isDone() then
+            self.exit_screen = true
+        end
     end)
 end
 
@@ -64,21 +68,20 @@ function PresentsScreen:draw()
     love.graphics.clear(0, 0, 0, 1)
 
     for i in ipairs(self.ui) do
-        self.ui[i]:setColor({1, 1, 1, self.alpha})
+        self.ui[i]:setColor(self.fade:getColor())
         self.ui[i]:draw()
     end
 end
 
 -- Update the screen.
 function PresentsScreen:update(dt)
-    self.ticks = self.ticks + dt
+    self.fade:update(dt)
 
-    local degrees = self.ticks * self.degrees_per_second -- 1 second = 90 degrees
-
-    self.alpha = math.sin(degrees * self.pi_over_180)
-
-    if degrees > 180 then -- sin(180 degrees) is back to 0 alpha
-        self.exit_screen = true
+    if self.fade:isDone() then
+        self.exit_countdown = self.exit_countdown - dt
+        if self.exit_countdown < 0 then
+            self.exit_screen = true
+        end
     end
 end
 

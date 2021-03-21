@@ -22,9 +22,7 @@ function GameSettings:initialize(filename, defaults)
 end
 
 function GameSettings:save()
-    print('Attempting to save settings...')
-    local result = IniFile.save({ skelly = self.ini }, self.filename)
-    print('... result was:', result)
+    IniFile.save({ skelly = self.ini }, self.filename)
 end
 
 function GameSettings:get(x, default)

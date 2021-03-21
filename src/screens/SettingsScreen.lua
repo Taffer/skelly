@@ -17,79 +17,45 @@ function SettingsScreen:initialize(resources, state)
     self.skelly_text = self.resources.text.skelly_title
     self.subtitle_text = self.resources.text.title.subtitle_text
 
-    self.alpha = 0 -- Alpha level for the fade-in/out animation.
-    self.ticks = 0
-    self.pi_over_180 = math.pi / 180
-    self.degrees_per_second = 45
+    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
 
     self.overlay = SettingsOverlay:new(resources, self, 300, 350, 680, 400)
+
+    local title_image = self.resources.images.skelly_title
+    local title_quad = love.graphics.newQuad(0, 0, title_image:getWidth(), title_image:getHeight(), title_image)
+
+    local font_mono = self.resources.fonts.default_mono
+    local font_title = self.resources.fonts.skelly_title
+
+    self.ui = {
+        ImageButton:new(self, 0, 0, title_image, title_quad),
+        Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+    }
 end
 
 -- Render this screen's contents.
 function SettingsScreen:draw()
-    -- Premature optimization:
-    local rsrc = self.resources
-    local font_mono = rsrc.fonts.default_mono
-    local font_title = rsrc.fonts.skelly_title
-    local image_title = rsrc.images.skelly_title
-
     love.graphics.clear(0, 0, 0, 1)
 
-    love.graphics.setColor(1, 1, 1, self.alpha)
-    love.graphics.draw(image_title, 0, 0)
-
-    local screen_width = love.graphics.getWidth()
-    local width = font_mono:getWidth(self.subtitle_text)
-    local x = (screen_width - width) / 2
-    love.graphics.setFont(font_mono)
-    love.graphics.print(self.subtitle_text, x, 200)
-
-    width = font_title:getWidth(self.skelly_text)
-    x = (screen_width - width) / 2
-    love.graphics.setFont(font_title)
-    love.graphics.print(self.skelly_text, x, 40)
+    -- UI parts
+    for i in ipairs(self.ui) do
+        self.ui[i]:setColor(self.fade:getColor()) -- bug: labels get white text
+        self.ui[i]:draw()
+    end
 
     -- Display the settings overlay.
     self.overlay:draw()
 end
 
 -- Update the screen.
-function SettingsScreen:fadeInAnimation()
-    local degrees = self.ticks * self.degrees_per_second
-    if degrees > 90 then
-        degrees = 90
-    end
-
-    self.alpha = math.sin(degrees * self.pi_over_180)
-end
-
 function SettingsScreen:update(dt)
-    self.ticks = self.ticks + dt
-
-    self:fadeInAnimation()
+    self.fade:update(dt)
 end
 
 -- Exit this screen?
 function SettingsScreen:exit()
     return self.exit_screen
-end
-
--- Handle events.
---
--- If you handled it, return true; false means the event continues on to the
--- next handler.
-function SettingsScreen:handle(event)
-    if event.keys['escape'] then
-        self.exit_screen = true
-        return true
-    end
-
-    if event.button then
-        -- Mouse click.
-        self.overlay:onMousePress(event.mouse_x, event.mouse_y)
-    end
-
-    return ScreenBase.handle(self, event)
 end
 
 return SettingsScreen

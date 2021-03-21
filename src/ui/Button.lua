@@ -13,17 +13,20 @@ local Label = require 'src/ui/Label'
 
 local Button = Class('Button', UIBase)
 
-function Button:initialize(x, y, texture, quad, text, font, color)
-    UIBase.initialize(self)
+function Button:initialize(parent, x, y, texture, quad, text, font, color)
+    UIBase.initialize(self, parent)
 
     self.x = x
     self.y = y
 
-    self.imageButton = ImageButton:new(x, y, texture, quad)
+    self.imageButton = ImageButton:new(self, x, y, texture, quad)
+
+    self.width = self.imageButton.width
+    self.height = self.imageButton.height
 
     local label_x = x + self.imageButton.width / 2
     local label_y = y + (self.imageButton.height - font:getHeight() * font:getLineHeight()) / 2
-    self.labelButton = Label:new(label_x, label_y, text, font, color, 'centre')
+    self.labelButton = Label:new(self, label_x, label_y, text, font, color, 'centre')
 end
 
 function Button:draw()

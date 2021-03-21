@@ -72,24 +72,24 @@ function TitleScreen:initialize(resources, state)
     local font_mono = self.resources.fonts.default_mono
     local font_title = self.resources.fonts.skelly_title
 
-    self.loading_label = Label:new(self.loading_x, self.loading_y, self.loading_text, font_mono, {1, 1, 1, 1}, 'left')
+    self.loading_label = Label:new(self, self.loading_x, self.loading_y, self.loading_text, font_mono, {1, 1, 1, 1}, 'left')
 
     self.ui = {
-        ImageButton:new(0, 0, title_image, title_quad),
-        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
-        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+        ImageButton:new(self, 0, 0, title_image, title_quad),
+        Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
         self.loading_label,
     }
 
     self.onMouseRelease = (function(self)
-        if self.loading_finished then
-            self.exit_screen = true
+        if self.parent.loading_finished then
+            self.parent.exit_screen = true
         end
     end)
 
     self.onKeyRelease = (function(self)
-        if self.loading_finished then
-            self.exit_screen = true
+        if self.parent.loading_finished then
+            self.parent.exit_screen = true
         end
     end)
 end

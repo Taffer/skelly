@@ -9,8 +9,8 @@ local UIBase = require 'src/ui/UIBase'
 -- ImageButton class
 local ImageButton = Class('ImageButton', UIBase)
 
-function ImageButton:initialize(x, y, texture, quad)
-    UIBase.initialize(self)
+function ImageButton:initialize(parent, x, y, texture, quad)
+    UIBase.initialize(self, parent)
 
     self.x = x
     self.y = y

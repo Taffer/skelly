@@ -11,8 +11,8 @@ local Label = require 'src/ui/Label'
 -- Spinner class
 local Spinner = Class('Label', UIBase)
 
-function Spinner:initialize(x, y, values, start_at, font, colour, texture, quads)
-    UIBase.initialize(self)
+function Spinner:initialize(parent, x, y, values, start_at, font, colour, texture, quads)
+    UIBase.initialize(self, parent)
 
     self.x = x
     self.y = y

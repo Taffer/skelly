@@ -47,17 +47,17 @@ function CreditsScreen:initialize(resources, state)
     local font_title = self.resources.fonts.skelly_title
 
     self.ui = {
-        ImageButton:new(0, 0, title_image, title_quad),
-        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
-        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+        ImageButton:new(self, 0, 0, title_image, title_quad),
+        Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
     }
 
     self.onMouseRelease = (function(self)
-        self.exit_screen = true
+        self.parent.exit_screen = true
     end)
 
     self.onKeyRelease = (function(self)
-        self.exit_screen = true
+        self.parent.exit_screen = true
     end)
 end
 

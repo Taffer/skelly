@@ -12,8 +12,8 @@ local Spinner = require 'src/ui/Spinner'
 
 local SettingsOverlay = Class('SettingsOverlay', OverlayBase)
 
-function SettingsOverlay:initialize(resources, owner, x, y, width, height)
-    OverlayBase.initialize(self, owner, x, y, width, height)
+function SettingsOverlay:initialize(resources, parent, x, y, width, height)
+    OverlayBase.initialize(self, parent, x, y, width, height)
 
     -- Add components.
     --

@@ -58,7 +58,7 @@ gameResources = {
 
 -- Current state of the game.
 gameState = {
-    screen = nil, -- Currently displayed screen.
+    screen = 'nil', -- Currently displayed screen.
 
     -- Player settings
     settings = {},
@@ -137,6 +137,7 @@ function love.update(dt)
     local lookup = ScreenLookup
     if gameState.screen:exit() then
         local next_screen = gameState.screen:getNextScreen()
+        print('next_screen is', next_screen)
         if next_screen then
             gameState.screen = lookup[next_screen]:new(gameResources, gameState)
         else
@@ -157,7 +158,6 @@ function love.keyreleased(key, scancode)
 end
 
 function love.mousemoved(x, y, dx, dy, isTouch)
-    print('main mousemoved')
     gameState.screen:handleMouseMoved(x, y, dx, dy, isTouch)
 end
 

@@ -38,25 +38,22 @@ function JourneyScreen:initialize(resources, state)
 
     local button_font = self.resources.fonts.button_font
     local button_color = {0, 0, 0, 1}
-    self.journey_button  = Button:new(x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
-    self.newgame_button  = Button:new(x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
-    self.settings_button = Button:new(x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
+    self.journey_button  = Button:new(self, x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
+    self.newgame_button  = Button:new(self, x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
+    self.settings_button = Button:new(self, x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
 
-    self.credits_button  = Button:new(x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
+    self.credits_button  = Button:new(self, x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
     self.credits_button.onMouseRelease = function (self)
-        print('Credits clicked', self) -- self is a Button OH SHI
-        if self ~= nil and self.setNextScreen == nil then
-            print('WTF self.setNextScreen is nil?!')
-        else
-            self:setNextScreen('Credits')
-            self.exit_screen = true
-        end
+        print("Credit button clicked")
+        self.parent:setNextScreen('Credits')
+        self.parent.exit_screen = true
     end
 
-    self.exit_button  = Button:new(x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
+    self.exit_button  = Button:new(self, x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
     self.exit_button.onMouseRelease = function (self)
-        print('Exit clicked')
-        self.exit_screen = true
+        print("Exit button clicked")
+        self.parent:setNextScreen(nil)
+        self.parent.exit_screen = true
     end
 
     local title_image = self.resources.images.skelly_title
@@ -66,9 +63,9 @@ function JourneyScreen:initialize(resources, state)
     local font_title = self.resources.fonts.skelly_title
 
     self.ui = {
-        ImageButton:new(0, 0, title_image, title_quad),
-        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
-        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+        ImageButton:new(self, 0, 0, title_image, title_quad),
+        Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
 
         self.journey_button,
         self.newgame_button,

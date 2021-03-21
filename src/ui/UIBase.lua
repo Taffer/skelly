@@ -8,7 +8,9 @@ local Class = require 'lib/middleclass/middleclass'
 -- UI object base class
 local UIBase = Class('UIBase')
 
-function UIBase:initialize()
+function UIBase:initialize(parent)
+    self.parent = parent -- "Owner" of this UI object, for callbacks.
+
     self.x = 0
     self.y = 0
     self.width = 0
@@ -20,13 +22,16 @@ end
 function UIBase:intersects(x, y)
     -- Does x,y intersect with the button?
     if x < self.x or y < self.y then
+        print(string.format('%d, %d does not intersect with %d, %d', x, y, self.x, self.y))
         return false
     end
 
     if x > self.x + self.width or y > self.y + self.height then
+        print(string.format('%d, %d does not intersect with %d, %d', x, y, self.x, self.y))
         return false
     end
 
+    print(string.format('%d, %d INTERSECTS with %d, %d', x, y, self.x, self.y))
     return true
 end
 

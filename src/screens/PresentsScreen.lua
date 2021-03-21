@@ -42,20 +42,20 @@ function PresentsScreen:initialize(resources, state)
     local taffer_quad = love.graphics.newQuad(0, 0, taffer_logo:getWidth(), taffer_logo:getHeight(), taffer_logo)
 
     self.ui = {
-        Label:new(state.scr_width / 2, 16, self.taffer_text,
+        Label:new(self, state.scr_width / 2, 16, self.taffer_text,
             self.resources.fonts.default_serif, {1, 1, 1, 1}, 'centre'),
-        ImageButton:new((state.scr_width - taffer_logo:getWidth()) / 2, 120, taffer_logo, taffer_quad),
-        ImageButton:new((state.scr_width - love_logo:getWidth()) / 2, 500, love_logo, logo_quad),
-        Label:new(state.scr_width / 2, 640, self.love_text,
+        ImageButton:new(self, (state.scr_width - taffer_logo:getWidth()) / 2, 120, taffer_logo, taffer_quad),
+        ImageButton:new(self, (state.scr_width - love_logo:getWidth()) / 2, 500, love_logo, logo_quad),
+        Label:new(self, state.scr_width / 2, 640, self.love_text,
             self.resources.fonts.default_mono, {1, 1, 1, 1}, 'centre'),
     }
 
     self.onMouseRelease = (function(self)
-        self.exit_screen = true
+        self.parent.exit_screen = true
     end)
 
     self.onKeyRelease = (function(self)
-        self.exit_screen = true
+        self.parent.exit_screen = true
     end)
 end
 

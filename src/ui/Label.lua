@@ -9,8 +9,8 @@ local UIBase = require 'src/ui/UIBase'
 -- Label class
 local Label = Class('Label', UIBase)
 
-function Label:initialize(x, y, text, font, color, align)
-    UIBase.initialize(self)
+function Label:initialize(parent, x, y, text, font, color, align)
+    UIBase.initialize(self, parent)
 
     self.orig_x = x
     self.x = x

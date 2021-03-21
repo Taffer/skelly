@@ -10,8 +10,8 @@ local Class = require 'lib/middleclass/middleclass'
 
 local OverlayBase = Class('OverlayBase')
 
-function OverlayBase:initialize(owner, x, y, width, height)
-    self.owner = owner -- A Screen object.
+function OverlayBase:initialize(parent, x, y, width, height)
+    self.parent = parent -- A Screen object.
     self.x = x
     self.y = y
     self.width = width

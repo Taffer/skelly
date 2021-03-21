@@ -27,7 +27,7 @@ function UIScreenBase:handleKeyPress(key, scancode, isRepeat)
     end
 end
 
-function ScreenBase:handleKeyRelease(key, scancode)
+function UIScreenBase:handleKeyRelease(key, scancode)
     for i in ipairs(self.ui) do
         if self.ui[i].onKeyRelease then
             self.ui[i]:onKeyRelease(key, scancode)
@@ -35,23 +35,23 @@ function ScreenBase:handleKeyRelease(key, scancode)
     end
 end
 
-function ScreenBase:handleMousePress(x, y, button, isTouch, presses)
+function UIScreenBase:handleMousePress(x, y, button, isTouch, presses)
     for i in ipairs(self.ui) do
-        if self.ui[i].onMousePress then
+        if self.ui[i].onMousePress and self.ui[i]:intersects(x, y) then
             self.ui[i]:onMousePress(x, y, button, isTouch, presses)
         end
     end
 end
 
-function ScreenBase:handleMouseRelease(x, y, button, isTouch, presses)
+function UIScreenBase:handleMouseRelease(x, y, button, isTouch, presses)
     for i in ipairs(self.ui) do
-        if self.ui[i].onMouseRelease then
+        if self.ui[i].onMouseRelease and self.ui[i]:intersects(x, y) then
             self.ui[i]:onMouseRelease(x, y, button, isTouch, presses)
         end
     end
 end
 
-function ScreenBase:handleMouseMoved(x, y, dx, dy, isTouch)
+function UIScreenBase:handleMouseMoved(x, y, dx, dy, isTouch)
     for i in ipairs(self.ui) do
         if self.ui[i].onMouseMoved then
             self.ui[i]:onMouseMoved(x, y, dx, dy, isTouch)
@@ -59,4 +59,4 @@ function ScreenBase:handleMouseMoved(x, y, dx, dy, isTouch)
     end
 end
 
-return ScreenBase
+return UIScreenBase

@@ -62,7 +62,6 @@ function ScreenBase:handleMouseRelease(x, y, button, isTouch, presses)
 end
 
 function ScreenBase:handleMouseMoved(x, y, dx, dy, isTouch)
-    print('-> ScreenBase mouse moved')
     if self.onMouseMoved then
         self:onMouseMoved(x, y, dx, dy, isTouch)
     end
@@ -75,6 +74,7 @@ end
 
 function ScreenBase:setNextScreen(screen)
     self.next_screen = screen
+    print('setNextScreen', screen)
 end
 
 return ScreenBase

@@ -17,14 +17,14 @@ function PresentsScreen:initialize(resources, state)
     self:setNextScreen('Title')
 
     -- Default English.
-    self.resources.text = text[gameState.settings.language] or text.en
+    self.resources.text = text[gameState.settings:get('language', 'en')]
 
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
     self.resources.fonts.default_mono = love.graphics.newFont('graphics/LiberationMono-Bold.ttf', 16)
     self.resources.images.love_logo = love.graphics.newImage('graphics/love-game-0.10.png')
     self.resources.images.taffer = love.graphics.newImage('graphics/taffer-ronos.png')
     self.resources.music.theme = love.audio.newSource('music/Heroic Demise (New).mp3',  'stream')
-    love.audio.setVolume(gameState.settings.music_volume)
+    love.audio.setVolume(gameState.settings:get('music_volume', 1.0) * (gameState.settings:get('overall_volume', 1.0)))
     love.audio.play(self.resources.music.theme) -- start playing ASAP
 
     self.taffer_text = self.resources.text.presents.taffer_text
@@ -33,7 +33,7 @@ function PresentsScreen:initialize(resources, state)
     self.alpha = 0 -- Alpha level for the fade-in/out animation.
     self.ticks = 0
     self.pi_over_180 = math.pi / 180
-    self.degrees_per_second = 45 -- Fade in/out takes ~2 seconds for each.
+    self.degrees_per_second = 180 -- Fade in/out takes ~2 seconds for each.
 
     local love_logo = self.resources.images.love_logo
     local logo_quad = love.graphics.newQuad(0, 0, love_logo:getWidth(), love_logo:getHeight(), love_logo)

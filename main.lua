@@ -3,9 +3,16 @@
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
 
-local bitser = require 'lib/bitser/bitser'
+local DEBUG = false
 
-local settings_filename = 'settings.bin'
+local lovebird = nil
+if DEBUG then
+    lovebird = require 'lib/lovebird'
+end
+
+local GameSettings = require 'src/Settings'
+
+local settings_filename = 'settings.ini'
 
 -- All the stuff we've loaded already.
 gameResources = {
@@ -61,7 +68,7 @@ gameState = {
     screen = 'nil', -- Currently displayed screen.
 
     -- Player settings
-    settings = {},
+    settings = nil,
 
     -- Display screen dimensions
     scr_width = 0,
@@ -69,30 +76,22 @@ gameState = {
 }
 
 -- Serialize/deserialize settings.
---
--- Maybe switch to human-readable: https://github.com/FivosM/ini_parser
 local function load_settings(name)
-    local binary_data, size = love.filesystem.read(name)
-    if binary_data then
-        gameState.settings = bitser.loads(binary_data)
-    else
-        print('Error reading settings file: ' .. size)
+    local defaults = {
+        -- Default settings.
+        music_volume = 1.0,
+        sfx_volume = 1.0,
+        voice_volume = 1.0,
+        overall_volume = 1.0,
 
-        gameState.settings = {
-            -- Default settings.
-            music_volume = 1.0,
+        language = 'en'
+    }
 
-            language = 'en'
-        }
-    end
+    gameState.settings = GameSettings(name, defaults)
 end
 
-local function save_settings(name, table)
-    local binary_data = bitser.dumps(table)
-    local success, message = love.filesystem.write(name, binary_data)
-    if not success then
-        print('Error writing settings file: ' .. message)
-    end
+local function save_settings()
+    gameState.settings:save()
 end
 
 -- Love callbacks.
@@ -126,6 +125,10 @@ local ScreenLookup = {
 }
 
 function love.update(dt)
+    if lovebird then
+        lovebird.update()
+    end
+
     gameState.screen:update(dt)
 
     -- Screen state machine:
@@ -137,11 +140,10 @@ function love.update(dt)
     local lookup = ScreenLookup
     if gameState.screen:exit() then
         local next_screen = gameState.screen:getNextScreen()
-        print('Next screen is:', next_screen)
         if next_screen then
             gameState.screen = lookup[next_screen]:new(gameResources, gameState)
         else
-            save_settings(settings_filename, gameState.settings)
+            save_settings()
             love.audio.stop()
             love.event.quit()
         end

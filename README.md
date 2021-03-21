@@ -33,6 +33,8 @@ under the [MIT license](LICENSE.md).
 ### Libraries
 
 * [bitser](https://github.com/gvx/bitser) by Jasmijn Wellner
+* [ini](https://github.com/FivosM/ini_parser) by Fivos Moutavelis
+* [lovebird](https://github.com/rxi/lovebird) by rxi for debugging
 * [middleclass](https://github.com/kikito/middleclass) by Enrique García Cota
 
 ### Graphics

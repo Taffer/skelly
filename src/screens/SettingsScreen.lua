@@ -5,7 +5,10 @@
 
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
-local Button = require 'src/ui/Button'
+
+local ColorFade = require 'src/ColorFade'
+local ImageButton = require 'src/ui/ImageButton'
+local Label = require 'src/ui/Label'
 local SettingsOverlay = require 'src/ui/SettingsOverlay'
 
 local SettingsScreen = Class('SettingsScreen', ScreenBase)
@@ -19,7 +22,7 @@ function SettingsScreen:initialize(resources, state)
 
     self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
 
-    self.overlay = SettingsOverlay:new(resources, self, 300, 350, 680, 400)
+    -- self.overlay = SettingsOverlay:new(resources, self, 300, 350, 680, 400)
 
     local title_image = self.resources.images.skelly_title
     local title_quad = love.graphics.newQuad(0, 0, title_image:getWidth(), title_image:getHeight(), title_image)
@@ -45,7 +48,7 @@ function SettingsScreen:draw()
     end
 
     -- Display the settings overlay.
-    self.overlay:draw()
+    -- self.overlay:draw()
 end
 
 -- Update the screen.

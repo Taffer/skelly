@@ -120,6 +120,7 @@ local ScreenLookup = {
     Title = gameResources.screens.title_loading,
     Journey = gameResources.screens.journey,
     Credits = gameResources.screens.credits,
+    Settings = gameResources.screens.settings,
 
     Placeholder = gameResources.screens.placeholder -- not a real screen
 }

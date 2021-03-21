@@ -39,16 +39,21 @@ function JourneyScreen:initialize(resources, state)
     self.journey_button  = Button:new(self, x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
     self.newgame_button  = Button:new(self, x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
     self.settings_button = Button:new(self, x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
+    self.settings_button.onMouseRelease = function(self)
+        print("Settings button clicked")
+        self.parent:setNextScreen('Settings')
+        self.parent.exit_screen = true
+    end
 
     self.credits_button  = Button:new(self, x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
-    self.credits_button.onMouseRelease = function (self)
+    self.credits_button.onMouseRelease = function(self)
         print("Credits button clicked")
         self.parent:setNextScreen('Credits')
         self.parent.exit_screen = true
     end
 
     self.exit_button  = Button:new(self, x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
-    self.exit_button.onMouseRelease = function (self)
+    self.exit_button.onMouseRelease = function(self)
         print("Exit button clicked")
         self.parent:setNextScreen(nil)
         self.parent.exit_screen = true
@@ -79,7 +84,7 @@ function JourneyScreen:draw()
 
     -- UI parts
     for i in ipairs(self.ui) do
-        self.ui[i]:setColor(self.fade:getColor()) -- bug: labels get white text
+        self.ui[i]:setColor(self.fade:getColor()) -- bug: buttons draw normally
         self.ui[i]:draw()
     end
 end

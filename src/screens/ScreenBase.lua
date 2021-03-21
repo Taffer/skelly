@@ -73,8 +73,8 @@ function ScreenBase:getNextScreen()
 end
 
 function ScreenBase:setNextScreen(screen)
+    print('Setting next screen to:', screen)
     self.next_screen = screen
-    print('setNextScreen', screen)
 end
 
 return ScreenBase

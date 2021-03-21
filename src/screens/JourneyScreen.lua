@@ -44,7 +44,7 @@ function JourneyScreen:initialize(resources, state)
 
     self.credits_button  = Button:new(self, x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
     self.credits_button.onMouseRelease = function (self)
-        print("Credit button clicked")
+        print("Credits button clicked")
         self.parent:setNextScreen('Credits')
         self.parent.exit_screen = true
     end

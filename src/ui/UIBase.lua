@@ -22,16 +22,13 @@ end
 function UIBase:intersects(x, y)
     -- Does x,y intersect with the button?
     if x < self.x or y < self.y then
-        print(string.format('%d, %d does not intersect with %d, %d', x, y, self.x, self.y))
         return false
     end
 
     if x > self.x + self.width or y > self.y + self.height then
-        print(string.format('%d, %d does not intersect with %d, %d', x, y, self.x, self.y))
         return false
     end
 
-    print(string.format('%d, %d INTERSECTS with %d, %d', x, y, self.x, self.y))
     return true
 end
 

@@ -51,11 +51,11 @@ function PresentsScreen:initialize(resources, state)
     }
 
     self.onMouseRelease = (function(self)
-        self.parent.exit_screen = true
+        self.exit_screen = true
     end)
 
     self.onKeyRelease = (function(self)
-        self.parent.exit_screen = true
+        self.exit_screen = true
     end)
 end
 

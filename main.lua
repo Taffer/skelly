@@ -137,7 +137,7 @@ function love.update(dt)
     local lookup = ScreenLookup
     if gameState.screen:exit() then
         local next_screen = gameState.screen:getNextScreen()
-        print('next_screen is', next_screen)
+        print('Next screen is:', next_screen)
         if next_screen then
             gameState.screen = lookup[next_screen]:new(gameResources, gameState)
         else

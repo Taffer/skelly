@@ -33,6 +33,7 @@ function PresentsScreen:initialize(resources, state)
     self.love_text = self.resources.text.presents.love_text
 
     self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
+    self.fade_out = false -- fade in first...
     self.exit_countdown = 2 -- seconds after fade to automatically exit
 
     local love_logo = self.resources.images.love_logo
@@ -77,10 +78,19 @@ end
 function PresentsScreen:update(dt)
     self.fade:update(dt)
 
-    if self.fade:isDone() then
-        self.exit_countdown = self.exit_countdown - dt
-        if self.exit_countdown < 0 then
+    if self.fade_out then
+        -- If we're fading out...
+        if self.fade:isDone() then
             self.exit_screen = true
+        end
+    else
+        -- If we're fading in...
+        if self.fade:isDone() then
+            self.exit_countdown = self.exit_countdown - dt
+            if self.exit_countdown < 0 then
+                self.fade = ColorFade({1, 1, 1, 1}, {1, 1, 1, 0}, 2)
+                self.fade_out = true
+            end
         end
     end
 end

@@ -26,7 +26,7 @@ function JourneyScreen:initialize(resources, state)
     self.credits_text = self.resources.text.journey.credits_text
     self.exit_text = self.resources.text.journey.exit_text
 
-    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 2)
 
     -- UI quads
     local ui_rpg = self.resources.images.ui_rpg
@@ -84,8 +84,12 @@ function JourneyScreen:draw()
 
     -- UI parts
     for i in ipairs(self.ui) do
-        self.ui[i]:setColor(self.fade:getColor()) -- bug: buttons draw normally
         self.ui[i]:draw()
+    end
+
+    if not self.fade:isDone() then
+        love.graphics.setColor(unpack(self.fade:getColor()))
+        love.graphics.rectangle('fill', 0, 0, gameState.scr_width, gameState.scr_height)
     end
 end
 

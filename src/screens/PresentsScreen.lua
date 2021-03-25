@@ -32,7 +32,7 @@ function PresentsScreen:initialize(resources, state)
     self.taffer_text = self.resources.text.presents.taffer_text
     self.love_text = self.resources.text.presents.love_text
 
-    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 2)
     self.fade_out = false -- fade in first...
     self.exit_countdown = 2 -- seconds after fade to automatically exit
 
@@ -69,9 +69,11 @@ function PresentsScreen:draw()
     love.graphics.clear(0, 0, 0, 1)
 
     for i in ipairs(self.ui) do
-        self.ui[i]:setColor(self.fade:getColor())
         self.ui[i]:draw()
     end
+
+    love.graphics.setColor(unpack(self.fade:getColor()))
+    love.graphics.rectangle('fill', 0, 0, gameState.scr_width, gameState.scr_height)
 end
 
 -- Update the screen.
@@ -88,7 +90,7 @@ function PresentsScreen:update(dt)
         if self.fade:isDone() then
             self.exit_countdown = self.exit_countdown - dt
             if self.exit_countdown < 0 then
-                self.fade = ColorFade({1, 1, 1, 1}, {1, 1, 1, 0}, 2)
+                self.fade = ColorFade({0, 0, 0, 0}, {0, 0, 0, 1}, 2)
                 self.fade_out = true
             end
         end

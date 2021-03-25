@@ -59,7 +59,7 @@ function TitleScreen:initialize(resources, state)
     self.subtitle_text = self.resources.text.title.subtitle_text
     self.loading_text = self.resources.text.title.loading_text
 
-    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 2)
 
     self.loaded_resource = ""
     self.loading_finished = false
@@ -100,8 +100,12 @@ function TitleScreen:draw()
     self.loading_label:setText(self.loading_text .. ' ' .. (self.loaded_resource or ""))
 
     for i in ipairs(self.ui) do
-        self.ui[i]:setColor({1, 1, 1, self.alpha})
         self.ui[i]:draw()
+    end
+
+    if not self.fade:isDone() then
+        love.graphics.setColor(unpack(self.fade:getColor()))
+        love.graphics.rectangle('fill', 0, 0, gameState.scr_width, gameState.scr_height)
     end
 end
 

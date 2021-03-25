@@ -11,7 +11,7 @@ local Label = require 'src/ui/Label'
 -- Spinner class
 local Spinner = Class('Label', UIBase)
 
-function Spinner:initialize(parent, x, y, values, start_at, font, colour, texture, quads)
+function Spinner:initialize(parent, x, y, values, start_at, font, color, texture, quads)
     UIBase.initialize(self, parent)
 
     self.x = x
@@ -19,7 +19,7 @@ function Spinner:initialize(parent, x, y, values, start_at, font, colour, textur
     self.values = values
     self.text = values[start_at] or values[1]
     self.font = font
-    self.colour = colour
+    self.color = color
     self.texture = texture
     self.left_quad = quads[1] -- "Decrease" button
     self.right_quad = quads[2] -- "Increase" button
@@ -44,7 +44,7 @@ function Spinner:initialize(parent, x, y, values, start_at, font, colour, textur
     self.left_button = ImageButton:new(x, y, texture, self.left_quad)
     self.label = ImageButton:new(x + self.left_button.width, y, texture, self.label_quad)
     self.label_text = Label:new(label.x + label.width / 2, y + (self.label.height - text_height) / 2,
-        self.text, self.font, self.colour, 'centre')
+        self.text, self.font, self.color, 'centre')
     self.right_button = ImageButton(self.label.x + self.label.width, y, texture, self.right_quad)
 
     -- Callbacks

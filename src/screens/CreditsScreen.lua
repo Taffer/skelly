@@ -20,7 +20,7 @@ function CreditsScreen:initialize(resources, state)
     self.subtitle_text = self.resources.text.title.subtitle_text
     self.credits = self.resources.text.credits
 
-    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 2)
 
     self.ticks = 0
     self.credits_area = {200, 250, 880, 450}
@@ -70,7 +70,6 @@ function CreditsScreen:draw()
     love.graphics.clear(0, 0, 0, 1)
 
     for i in ipairs(self.ui) do
-        self.ui[i]:setColor(self.fade:getColor())
         self.ui[i]:draw()
     end
 
@@ -78,7 +77,6 @@ function CreditsScreen:draw()
     local x, y, w, h = unpack(self.credits_area)
     love.graphics.setColor(0, 0, 0, 0.75)
     love.graphics.rectangle('fill', x, y, w, h)
-    love.graphics.setColor(unpack(self.fade:getColor()))
     love.graphics.setFont(self.font)
 
     local delta = 0
@@ -88,9 +86,15 @@ function CreditsScreen:draw()
         buff_start = buff_end - self.max_lines + 1
     end
 
+    love.graphics.setColor(1, 1, 1, 1)
     for idx = buff_start, buff_end do
         love.graphics.print(self.buffer[idx], x, y + delta)
         delta = delta + self.font_lh
+    end
+
+    if not self.fade:isDone() then
+        love.graphics.setColor(unpack(self.fade:getColor()))
+        love.graphics.rectangle('fill', 0, 0, gameState.scr_width, gameState.scr_height)
     end
 end
 

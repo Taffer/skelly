@@ -35,8 +35,6 @@ function Spinner:initialize(parent, x, y, values, start_at, font, color, texture
     local vp_right = {self.right_quad:getViewport()}
     local vp_label = {self.label_quad:getViewport()}
 
-    print('Quads:', vp_left, vp_right, vp_label)
-
     -- We assume the text is small enough to fit into the label's area.
     self.width = vp_left[3] + vp_right[3] + vp_label[3]
     self.height = math.max(vp_left[4], vp_right[4], vp_label[4])

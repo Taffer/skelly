@@ -29,9 +29,6 @@ function SettingsOverlay:initialize(resources, parent, x, y, width, height)
     -- All need a spin box:  <| text |>
     -- With more localizations, we'll need a pop-up menu or radio buttons.
     self.texture = resources.images.ui_rpg
-    -- self.background_quad = love.graphics.newQuad(190, 100, 100, 100, self.texture)
-    -- self.background_image = ImageButton:new(self, x, y, self.texture, self.background_quad)
-    -- self:addInterface(self.background_image)
 
     local spinner_quads = {
         love.graphics.newQuad(303, 486, 22, 21, self.texture), -- "Decrease"

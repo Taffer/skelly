@@ -75,7 +75,8 @@ Images:
 * `lpc-terrains` - [LPC Terrains](https://opengameart.org/content/lpc-terrains)
   by [bluecarrot16](https://opengameart.org/users/bluecarrot16) on
   [OpenGameArt.org](https://opengameart.org/). See
-  `graphics/lpc-terrains/CREDITS-terrain.txt` for details.
+  `graphics/lpc-terrains/CREDITS-terrain.txt` for details. This is the version
+  I repacked so you can use it directly as a texture.
 * `lpc-thatched-roof-cottage` -
   [LPC Thatched Roof Cottage](https://opengameart.org/content/lpc-thatched-roof-cottage).
 * `lpc-zombie` - Great LPC zombie by

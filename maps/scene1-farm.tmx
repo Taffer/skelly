@@ -94,7 +94,7 @@
   <object id="13" name="army_path_4" x="1020" y="480">
    <point/>
   </object>
-  <object id="14" type="necro_path_1" x="1.33333" y="633.333">
+  <object id="14" name="necro_path_1" x="1.33333" y="633.333">
    <point/>
   </object>
   <object id="15" name="necro_path_2" x="381.333" y="641.333">

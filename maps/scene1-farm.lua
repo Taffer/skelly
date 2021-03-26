@@ -260,8 +260,8 @@ return {
         },
         {
           id = 14,
-          name = "",
-          type = "necro_path_1",
+          name = "necro_path_1",
+          type = "",
           shape = "point",
           x = 1.33333,
           y = 633.333,

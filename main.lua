@@ -54,6 +54,8 @@ gameResources = {
         title_loading = require 'src/screens/TitleScreen', -- Title/loading
         credits = require 'src/screens/CreditsScreen', -- Credits
         settings = require 'src/screens/SettingsScreen', -- Settings
+        new_game = require 'src/screens/NewGameScreen', -- New Game
+        intro = require 'src/screens/IntroScreen', -- Intro
     },
 
     overlays = { -- UI overlays that can be drawn on "any" screen.
@@ -73,6 +75,17 @@ gameState = {
     -- Display screen dimensions
     scr_width = 0,
     scr_height = 0,
+
+    -- Character
+    character = {
+        name = 'Skelly',
+        sex = 'Unknown',
+        sex_pref = 'Asexual',
+        third_person_pronoun = 'it', -- "It walked away."
+        object_pronoun = 'it', -- "Why don't you ask it."
+        calcium = 25, -- = 0, you are dead
+        willpower = 25, -- spend to come back to life
+    }
 }
 
 -- Serialize/deserialize settings.
@@ -121,10 +134,11 @@ local ScreenLookup = {
     Journey = gameResources.screens.journey,
     Credits = gameResources.screens.credits,
     Settings = gameResources.screens.settings,
+    NewGame = gameResources.screens.new_game,
+    Intro = gameResources.screens.intro,
 
     Placeholder = gameResources.screens.placeholder, -- not a real screen
     Game = gameResources.screens.placeholder, -- not a real screen
-    NewGame = gameResources.screens.placeholder, -- not a real screen
 }
 
 function love.update(dt)

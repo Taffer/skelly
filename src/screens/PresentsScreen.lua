@@ -32,7 +32,7 @@ function PresentsScreen:initialize(resources, state)
     self.taffer_text = self.resources.text.presents.taffer_text
     self.love_text = self.resources.text.presents.love_text
 
-    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 2)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
     self.fade_out = false -- fade in first...
     self.exit_countdown = 2 -- seconds after fade to automatically exit
 
@@ -90,7 +90,7 @@ function PresentsScreen:update(dt)
         if self.fade:isDone() then
             self.exit_countdown = self.exit_countdown - dt
             if self.exit_countdown < 0 then
-                self.fade = ColorFade({0, 0, 0, 0}, {0, 0, 0, 1}, 2)
+                self.fade = ColorFade({0, 0, 0, 0}, {0, 0, 0, 1}, 1)
                 self.fade_out = true
             end
         end

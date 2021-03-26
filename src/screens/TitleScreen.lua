@@ -59,7 +59,7 @@ function TitleScreen:initialize(resources, state)
     self.subtitle_text = self.resources.text.title.subtitle_text
     self.loading_text = self.resources.text.title.loading_text
 
-    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 2)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
 
     self.loaded_resource = ""
     self.loading_finished = false

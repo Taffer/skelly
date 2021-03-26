@@ -122,7 +122,9 @@ local ScreenLookup = {
     Credits = gameResources.screens.credits,
     Settings = gameResources.screens.settings,
 
-    Placeholder = gameResources.screens.placeholder -- not a real screen
+    Placeholder = gameResources.screens.placeholder, -- not a real screen
+    Game = gameResources.screens.placeholder, -- not a real screen
+    NewGame = gameResources.screens.placeholder, -- not a real screen
 }
 
 function love.update(dt)

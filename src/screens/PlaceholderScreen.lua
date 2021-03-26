@@ -10,11 +10,20 @@ local PlaceholderScreen = Class('PlaceholderScreen', ScreenBase)
 
 function PlaceholderScreen:initialize(resources)
     ScreenBase.initialize(self, resources)
+    self:setNextScreen('Journey')
 
     self.resources.fonts.default = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 32)
     self.resources.images.loading = love.graphics.newImage('graphics/youre-being-a-dick.png')
 
     self.text = 'Insert game here.'
+
+    self.onMouseRelease = (function(self)
+        self.exit_screen = true
+    end)
+
+    self.onKeyRelease = (function(self)
+        self.exit_screen = true
+    end)
 end
 
 -- Render this screen's contents.

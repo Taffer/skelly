@@ -26,7 +26,7 @@ function JourneyScreen:initialize(resources, state)
     self.credits_text = self.resources.text.journey.credits_text
     self.exit_text = self.resources.text.journey.exit_text
 
-    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 2)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
 
     -- UI quads
     local ui_rpg = self.resources.images.ui_rpg
@@ -36,8 +36,18 @@ function JourneyScreen:initialize(resources, state)
 
     local button_font = self.resources.fonts.button_font
     local button_color = {0, 0, 0, 1}
-    self.journey_button  = Button:new(self, x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
-    self.newgame_button  = Button:new(self, x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
+    self.journey_button = Button:new(self, x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
+    self.journey_button.onMouseRelease = function(self)
+        self.parent:setNextScreen('Game')
+        self.parent.exit_screen = true
+    end
+
+    self.newgame_button = Button:new(self, x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
+    self.newgame_button.onMouseRelease = function(self)
+        self.parent:setNextScreen('NewGame')
+        self.parent.exit_screen = true
+    end
+
     self.settings_button = Button:new(self, x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
     self.settings_button.onMouseRelease = function(self)
         print("Settings button clicked")
@@ -45,14 +55,14 @@ function JourneyScreen:initialize(resources, state)
         self.parent.exit_screen = true
     end
 
-    self.credits_button  = Button:new(self, x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
+    self.credits_button = Button:new(self, x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
     self.credits_button.onMouseRelease = function(self)
         print("Credits button clicked")
         self.parent:setNextScreen('Credits')
         self.parent.exit_screen = true
     end
 
-    self.exit_button  = Button:new(self, x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
+    self.exit_button = Button:new(self, x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
     self.exit_button.onMouseRelease = function(self)
         print("Exit button clicked")
         self.parent:setNextScreen(nil)

@@ -31,21 +31,23 @@ function Spinner:initialize(parent, x, y, values, start_at, font, color, texture
         self.index = start_at
     end
 
-    local vp_left = self.left_quad:getViewport() -- x, y, w, h
-    local vp_right = self.right_quad:getViewport()
-    local vp_label = self.label_quad:getViewport()
+    local vp_left = {self.left_quad:getViewport()} -- x, y, w, h
+    local vp_right = {self.right_quad:getViewport()}
+    local vp_label = {self.label_quad:getViewport()}
+
+    print('Quads:', vp_left, vp_right, vp_label)
 
     -- We assume the text is small enough to fit into the label's area.
     self.width = vp_left[3] + vp_right[3] + vp_label[3]
     self.height = math.max(vp_left[4], vp_right[4], vp_label[4])
 
-    local text_height = font:getHeight() * font:getLineheight()
+    local text_height = font:getHeight() * font:getLineHeight()
 
-    self.left_button = ImageButton:new(x, y, texture, self.left_quad)
-    self.label = ImageButton:new(x + self.left_button.width, y, texture, self.label_quad)
-    self.label_text = Label:new(label.x + label.width / 2, y + (self.label.height - text_height) / 2,
+    self.left_button = ImageButton:new(self, x, y, texture, self.left_quad)
+    self.label = ImageButton:new(self, x + self.left_button.width, y, texture, self.label_quad)
+    self.label_text = Label:new(self, self.label.x + self.label.width / 2, y + (self.label.height - text_height) / 2,
         self.text, self.font, self.color, 'centre')
-    self.right_button = ImageButton(self.label.x + self.label.width, y, texture, self.right_quad)
+    self.right_button = ImageButton(self, self.label.x + self.label.width, y, texture, self.right_quad)
 
     -- Callbacks
     self.left_button.onClick = (function()

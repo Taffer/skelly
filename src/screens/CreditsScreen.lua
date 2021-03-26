@@ -20,7 +20,7 @@ function CreditsScreen:initialize(resources, state)
     self.subtitle_text = self.resources.text.title.subtitle_text
     self.credits = self.resources.text.credits
 
-    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 2)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
 
     self.ticks = 0
     self.credits_area = {200, 250, 880, 450}

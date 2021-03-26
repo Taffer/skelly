@@ -20,9 +20,7 @@ function SettingsScreen:initialize(resources, state)
     self.skelly_text = self.resources.text.skelly_title
     self.subtitle_text = self.resources.text.title.subtitle_text
 
-    self.fade = ColorFade:new({1, 1, 1, 0}, {1, 1, 1, 1}, 2)
-
-    -- self.overlay = SettingsOverlay:new(resources, self, 300, 350, 680, 400)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
 
     local title_image = self.resources.images.skelly_title
     local title_quad = love.graphics.newQuad(0, 0, title_image:getWidth(), title_image:getHeight(), title_image)
@@ -35,6 +33,16 @@ function SettingsScreen:initialize(resources, state)
         Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
         Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
     }
+
+    self.overlay = SettingsOverlay:new(resources, self, 300, 350, 680, 400)
+
+    self.onMouseRelease = (function(self)
+        self.exit_screen = true
+    end)
+
+    self.onKeyRelease = (function(self)
+        self.exit_screen = true
+    end)
 end
 
 -- Render this screen's contents.
@@ -43,12 +51,16 @@ function SettingsScreen:draw()
 
     -- UI parts
     for i in ipairs(self.ui) do
-        self.ui[i]:setColor(self.fade:getColor()) -- bug: labels get white text
         self.ui[i]:draw()
     end
 
     -- Display the settings overlay.
-    -- self.overlay:draw()
+    self.overlay:draw()
+
+    if not self.fade:isDone() then
+        love.graphics.setColor(unpack(self.fade:getColor()))
+        love.graphics.rectangle('fill', 0, 0, gameState.scr_width, gameState.scr_height)
+    end
 end
 
 -- Update the screen.

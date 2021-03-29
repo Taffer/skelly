@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="25">
+ <editorsettings>
+  <export target="scene1-farm.lua" format="lua"/>
+ </editorsettings>
  <tileset firstgid="1" source="../graphics/lpc-terrains/terrain-map-v7-repacked.tsx"/>
  <tileset firstgid="16385" source="../graphics/lpc-atlas/obj_misk_atlas.tsx"/>
  <tileset firstgid="17409" source="../graphics/lpc-atlas/build_atlas.tsx"/>

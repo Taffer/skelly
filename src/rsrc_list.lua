@@ -20,7 +20,7 @@ local resource_list = {
         ui_rpg = 'graphics/kenney.nl/uipack-rpg/Spritesheet/uipack_rpg_sheet.png',
 
         -- I might not need both of these.
-        map_terrain = 'graphics/lpc-terrains/terrain-map-v7.png',
+        map_terrain = 'graphics/lpc-terrains/terrain-map-v7-repacked.png',
         map_sheet = 'graphics/lpc-terrains/terrain-v7.png',
 
         -- I should turn these into a sprite sheet.
@@ -63,12 +63,12 @@ local resource_list = {
         ui_click2 = 'graphics/kenney.nl/uipack/Bonus/click2.ogg',
         ui_rollover1 = 'graphics/kenney.nl/uipack/Bonus/rollover1.ogg',
         ui_rollover2 = 'graphics/kenney.nl/uipack/Bonus/rollover2.ogg',
-        ui_switch1 = 'graphics/kenney.nl/uipack/Bonus/switch1.ogg',
         ui_switch2 = 'graphics/kenney.nl/uipack/Bonus/switch2.ogg',
+        ui_switch3 = 'graphics/kenney.nl/uipack/Bonus/switch3.ogg',
     },
 
     maps = {
-        scene1_farm = 'maps/scene1-farm.lua',
+        scene1_farm = 'maps/scene1-farm',
     }
 }
 

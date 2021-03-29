@@ -80,9 +80,7 @@ gameState = {
     character = {
         name = 'Skelly',
         sex = 'Unknown',
-        sex_pref = 'Asexual',
-        third_person_pronoun = 'it', -- "It walked away."
-        object_pronoun = 'it', -- "Why don't you ask it."
+        sex_pref = 'None',
         calcium = 25, -- = 0, you are dead
         willpower = 25, -- spend to come back to life
     }

@@ -18,26 +18,47 @@ local function loader(resource, file_list)
     -- Load the files listed into the resource table.
     for k,v in pairs(file_list.fonts) do
         resource.fonts[k] = love.graphics.newFont(v.src, v.size)
+        if resource.fonts[k] == nil then
+            print('Unable to load font:', k)
+        end
+
         yield(v.src)
     end
 
     for k,v in pairs(file_list.images) do
         resource.images[k] = love.graphics.newImage(v)
+        if resource.images[k] == nil then
+            print('Unable to load image:', k)
+        end
+
         yield(v)
     end
 
     for k,v in pairs(file_list.music) do
         resource.music[k] = love.audio.newSource(v, 'stream')
+        if resource.music[k] == nil then
+            print('Unable to load music:', k)
+        end
+
         yield(v)
     end
 
     for k,v in pairs(file_list.sounds) do
         resource.sounds[k] = love.audio.newSource(v, 'static')
+        if resource.sounds[k] == nil then
+            print('Unable to load sound:', k)
+        end
+
         yield(v)
     end
 
     for k, v in pairs(file_list.maps) do
-        resource.maps[k] = dofile(v)
+        resource.maps[k] = require(v)
+        if resource.maps[k] == nil then
+            print('Unable to load map:', k)
+        end
+
+        yield(v)
     end
 
     return resource.text.title.loading_done

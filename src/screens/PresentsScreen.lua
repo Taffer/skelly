@@ -19,14 +19,14 @@ function PresentsScreen:initialize(resources, state)
     self:setNextScreen('Title')
 
     -- Default English.
-    self.resources.text = text[gameState.settings:get('language', 'en')]
+    self.resources.text = text[gameState.settings:get('language')]
 
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
     self.resources.fonts.default_mono = love.graphics.newFont('graphics/LiberationMono-Bold.ttf', 16)
     self.resources.images.love_logo = love.graphics.newImage('graphics/love-game-0.10.png')
     self.resources.images.taffer = love.graphics.newImage('graphics/taffer-ronos.png')
     self.resources.music.theme = love.audio.newSource('music/Heroic Demise (New).mp3',  'stream')
-    love.audio.setVolume(gameState.settings:get('music_volume', 1.0) * (gameState.settings:get('overall_volume', 1.0)))
+    love.audio.setVolume(gameState.settings:get('music_volume') * (gameState.settings:get('overall_volume')))
     love.audio.play(self.resources.music.theme) -- start playing ASAP
 
     self.taffer_text = self.resources.text.presents.taffer_text

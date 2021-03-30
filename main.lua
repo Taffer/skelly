@@ -76,7 +76,30 @@ gameState = {
     scr_width = 0,
     scr_height = 0,
 
+    -- -------------------------------------------------------------------------
+    -- Input device states
+    -- -------------------------------------------------------------------------
+    input_ticks = 0,
+    keyboard = {
+        -- Dict of key:state.
+    },
+    gamepad = {
+        id = nil,
+        -- Dict of axis:value.
+        -- Dict of button:state.
+    },
+    mouse = {
+        current_x = 0,
+        current_y = 0,
+        last_x = 0,
+        last_y = 0,
+
+        -- Dict of button:state
+    },
+
+    -- -------------------------------------------------------------------------
     -- Character
+    -- -------------------------------------------------------------------------
     character = {
         name = 'Skelly',
         sex = 'Unknown',
@@ -94,6 +117,8 @@ local function load_settings(name)
         sfx_volume = 1.0,
         voice_volume = 1.0,
         overall_volume = 1.0,
+
+        input_frequency = 200, -- in milliseconds
 
         language = 'en'
     }
@@ -144,6 +169,16 @@ function love.update(dt)
         lovebird.update()
     end
 
+    local gameState = gameState
+    local input_freq = gameState.settings:get('input_frequency')
+    gameState.input_ticks = gameState.input_ticks + dt
+    if gameState.input_ticks > input_freq then
+        -- Generate input events.
+        -- TODO: input events
+
+        gameState.input_ticks = gameState.input_ticks - input_freq
+    end
+
     gameState.screen:update(dt)
 
     -- Screen state machine:
@@ -165,23 +200,99 @@ function love.update(dt)
     end
 end
 
--- Event generation.
-function love.keypressed(key, scancode, isRepeat)
-    gameState.screen:handleKeyPress(key, scancode, isRepeat)
+-- =============================================================================
+-- Keyboard events
+-- =============================================================================
+function love.keypressed(_, scancode, _)
+    -- Use scancode instead of key as it'll handle shift, etc. properly.
+    -- Ignore isRepeat as we'll generate events ourselves.
+    local keyboard = gameState.keyboard
+
+    keyboard[scancode] = true
 end
 
-function love.keyreleased(key, scancode)
-    gameState.screen:handleKeyRelease(key, scancode)
+function love.keyreleased(_, scancode)
+    local keyboard = gameState.keyboard
+
+    keyboard[scancode] = false
 end
 
-function love.mousemoved(x, y, dx, dy, isTouch)
-    gameState.screen:handleMouseMoved(x, y, dx, dy, isTouch)
+-- =============================================================================
+-- Mouse events
+-- =============================================================================
+function love.mousemoved(x, y, _, _, _)
+    -- Ignore dx, dy for now, not sure if anything will need them (maybe pie
+    -- menus?). Ignore isTouch because we don't care.
+    local mouse = gameState.mouse
+
+    mouse.last_x = mouse.current_x
+    mouse.last_y = mouse.current_y
+    mouse.current_x = x
+    mouse.current_y = y
 end
 
-function love.mousepressed(x, y, button, isTouch, presses)
-    gameState.screen:handleMousePress(x, y, button, isTouch, presses)
+function love.mousepressed(x, y, button, _, _)
+    -- Ignore isTouch and presses.
+    --
+    -- Not sure if you get mousemoved before this or not.
+    love.mousemoved(x, y)
+
+    local mouse = gameState.mouse
+    mouse[button] = true
 end
 
-function love.mousereleased(x, y, button, isTouch, presses)
-    gameState.screen:handleMouseRelease(x, y, button, isTouch, presses)
+function love.mousereleased(x, y, button, _, _)
+    -- Not sure if you get mousemoved before this or not.
+    love.mousemoved(x, y)
+
+    local mouse = gameState.mouse
+    mouse[button] = false
+end
+
+function love.wheelmoved(x, y)
+    love.mousemoved(x, y)
+end
+
+-- =============================================================================
+-- Gamepad events
+--
+-- Gamepads other than the first one are ignored.
+-- =============================================================================
+function love.gamepadaxis(joystick, axis, value)
+    local gamepad = gameState.gamepad
+
+    if gamepad.id == nil then
+        gamepad.id = joystick:getID()[1]
+    end
+
+    local this_id = joystick:getID()[1]
+    if this_id == gamepad.id then
+        gamepad[axis] = value
+    end
+end
+
+function love.gamepadpressed(joystick, button)
+    local gamepad = gameState.gamepad
+
+    if gamepad.id == nil then
+        gamepad.id = joystick:getID()[1]
+    end
+
+    local this_id = joystick:getID()[1]
+    if this_id == gamepad.id then
+        gamepad[button] = true
+    end
+end
+
+function love.gamepadreleased(joystick, button)
+    local gamepad = gameState.gamepad
+
+    if gamepad.id == nil then
+        gamepad.id = joystick:getID()[1]
+    end
+
+    local this_id = joystick:getID()[1]
+    if this_id == gamepad.id then
+        gamepad[button] = false
+    end
 end

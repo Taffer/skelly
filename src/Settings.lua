@@ -18,6 +18,11 @@ function GameSettings:initialize(filename, defaults)
         self:save()
     else
         print(string.format('Loaded settings file %s.', filename))
+        for k, v in defaults do
+            -- Update settings with defaults; this will apply any new settings
+            -- to their default values.
+            self.ini[k] = self.ini[k] or v
+        end
     end
 end
 
@@ -25,8 +30,8 @@ function GameSettings:save()
     IniFile.save({ skelly = self.ini }, self.filename)
 end
 
-function GameSettings:get(x, default)
-    return self.ini[x] or default
+function GameSettings:get(x)
+    return self.ini[x]
 end
 
 function GameSettings:set(x, value)

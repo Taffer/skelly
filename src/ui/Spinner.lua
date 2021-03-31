@@ -46,27 +46,6 @@ function Spinner:initialize(parent, x, y, values, start_at, font, color, texture
     self.label_text = Label:new(self, self.label.x + self.label.width / 2, y + (self.label.height - text_height) / 2,
         self.text, self.font, self.color, 'centre')
     self.right_button = ImageButton(self, self.label.x + self.label.width, y, texture, self.right_quad)
-
-    -- Callbacks
-    self.left_button.onClick = (function()
-        self.index = self.index - 1
-        if self.index < 1 then
-            self.index = #self.values
-        end
-
-        self.text = self.values[self.index]
-        self.label_text:setText(self.text)
-    end)
-
-    self.right_button.onClick = (function()
-        self.index = self.index + 1
-        if self.index > #self.values then
-            self.index = 1
-        end
-
-        self.text = self.values[self.index]
-        self.label_text:setText(self.text)
-    end)
 end
 
 function Spinner:draw()

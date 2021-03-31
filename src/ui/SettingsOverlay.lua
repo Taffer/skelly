@@ -25,6 +25,7 @@ function SettingsOverlay:initialize(resources, parent, x, y, width, height)
     -- * Effects Volume: 0 - 100
     -- * Music Volume: 0 - 100
     -- * Voice Volume: 0 - 100
+    -- * [Cancel] [Apply]
     --
     -- All need a spin box:  <| text |>
     -- With more localizations, we'll need a pop-up menu or radio buttons.
@@ -32,7 +33,7 @@ function SettingsOverlay:initialize(resources, parent, x, y, width, height)
 
     local spinner_quads = {
         love.graphics.newQuad(303, 486, 22, 21, self.texture), -- "Decrease"
-        love.graphics.newQuad(171, 486, 22, 21, self.texture), -- "Incrase"
+        love.graphics.newQuad(171, 486, 22, 21, self.texture), -- "Increase"
         love.graphics.newQuad(0, 237, 190, 45, self.texture), -- Background
     }
 

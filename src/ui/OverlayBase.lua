@@ -20,75 +20,24 @@ function OverlayBase:initialize(parent, x, y, width, height)
     self.overlay = {} -- UI elements in the overlay.
 end
 
-function OverlayBase:addInterface(ui_part)
-    table.insert(self.overlay, ui_part)
+function OverlayBase:addElement(tag, uiElement)
+    self.overlay[tag] = uiElement
 end
 
 function OverlayBase:draw()
+    love.graphics.setColor(1, 1, 1, 0.25) -- This might not be dark enough.
+    love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+
     for i in ipairs(self.overlay) do
         self.overlay[i]:draw()
     end
 end
 
-function OverlayBase:onMouseMove(x, y)
-    if not self:intersects(x, y) then
-        return false
+-- Check for input events.
+function OverlayBase:checkInputs(keybord, mouse, gamepad)
+    for _, ui in pairs(self.overlay) do
+        ui:checkInputs(keyboard, mouse, gamepad)
     end
-
-    -- Did one of my UI elements handle the event?
-    for i in ipairs(self.overlay) do
-        local handled = self.overlay[i]:onMouseMove(event.mouse_x, event.mouse_y)
-        if handled then
-            return handled
-        end
-    end
-
-    return false
-end
-
-function OverlayBase:onMousePress(x, y)
-    if not self:intersects(x, y) then
-        return false
-    end
-
-    -- Did one of my UI elements handle the event?
-    for i in ipairs(self.overlay) do
-        local handled = self.overlay[i]:onMousePress(event.mouse_x, event.mouse_y)
-        if handled then
-            return handled
-        end
-    end
-
-    return false
-end
-
-function OverlayBase:onMouseRelease(x, y)
-    if not self:intersects(x, y) then
-        return false
-    end
-
-    -- Did one of my UI elements handle the event?
-    for i in ipairs(self.overlay) do
-        local handled = self.overlay[i]:onMouseRelease(event.mouse_x, event.mouse_y)
-        if handled then
-            return handled
-        end
-    end
-
-    return false
-end
-
-function OverlayBase:intersects(x, y)
-    -- Does x,y intersect with the overlay?
-    if x < self.x or y < self.y then
-        return false
-    end
-
-    if x > self.x + self.width or y > self.y + self.height then
-        return false
-    end
-
-    return true
 end
 
 return OverlayBase

@@ -17,8 +17,6 @@ function UIBase:initialize(parent)
     self.height = 0
 
     self.color = {1, 1, 1, 1}
-
-    self.onMousePress = nil -- I've been clicked!
 end
 
 function UIBase:setColor(color)
@@ -38,34 +36,8 @@ function UIBase:intersects(x, y)
     return true
 end
 
-function UIBase:handleMousePress(x, y, button, isTouch, presses)
-    if self.onMousePress and self:intersects(x, y) then
-        self:onMousePress(x, y, button, isTouch, presses)
-    end
-end
-
-function UIBase:handleMousePressRelease(x, y, button, isTouch, presses)
-    if self.onMousePress and self:intersects(x, y) then
-        self:onMouseRelease(x, y, button, isTouch, presses)
-    end
-end
-
-function UIBase:handleMouseMoved(x, y, dx, dy, isTouch)
-    if self.onMouseMoved and self:intersects(x, y) then
-        self:onMouseMoved(x, y, dx, dy, isTouch)
-    end
-end
-
-function UIBase:handleKeyPress(key, scancode, isRepeat)
-    if self.onKeyPress then
-        self:onKeyPress(key, scancode, isRepeat)
-    end
-end
-
-function UIBase:handleKeyRelease(key, scancode)
-    if self.onKeyRelease then
-        self:onKeyRelease(key, scancode)
-    end
+-- Check for input events.
+function UIBase:checkInputs(keybord, mouse, gamepad)
 end
 
 return UIBase

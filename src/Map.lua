@@ -15,10 +15,6 @@ function Map:initialize(resources, map_data)
     --
     -- @param resources Loaded Skelly resources.
     -- @param map_data  Loaded Tiled map data, in Lua format.
-    print('gameResources -', gameResources)
-    print('Map -', resources)
-    print('    -', map_data)
-
     self.width = map_data.width -- In tiles.
     self.height = map_data.height
 
@@ -113,7 +109,7 @@ function Map:render(viewport, layer, x, y)
             local this_quad = layer.data[self:getIndex(c, r)]
             local atlas, quad = unpack(self.quads[this_quad])
             if atlas ~= nil then
-                self.batches[atlas]:add(quad, x + c * self.tile_width, y + r * self.tile_height)
+                self.batches[atlas]:add(quad, x + (c - viewport.x) * self.tile_width, y + (r - viewport.y) * self.tile_height)
             end
         end
     end

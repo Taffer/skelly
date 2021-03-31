@@ -11,6 +11,9 @@ local UIScreenBase = require 'src/screens/UIScreenBase'
 local Map = require 'src/Map'
 local Viewport = require 'src/Viewport'
 
+-- =============================================================================
+-- Prototype UI locations, not for human consumption.
+-- =============================================================================
 local function draw_29x21(screen_width, screen_height)
     love.graphics.setColor(0, 1, 0, 1)
     dx = 8
@@ -29,6 +32,47 @@ local function draw_29x21(screen_width, screen_height)
 end
 
 -- =============================================================================
+-- Sloppy animation classes
+-- =============================================================================
+local PanViewport = Class('PanViewport')
+function PanViewport:initialize(viewport)
+    self.viewport = viewport
+    self.ticks = 0
+    self.done = false
+
+    self.step = 0.2 -- Tick every 0.2 seconds
+end
+
+function PanViewport:update(dt)
+    self.ticks = self.ticks + dt
+    if self.ticks > self.step then
+        self.ticks = self.ticks - self.step
+
+        local x = self.viewport.x
+        local y = self.viewport.y + 1
+        self.viewport:setPosition(x, y)
+
+        if self.viewport.y ~= y then
+            self.done = true
+        end
+    end
+end
+
+local WaitFor = Class('WatiFor')
+function WaitFor:initialize(length)
+    self.length = length
+    self.ticks = 0
+    self.done = false
+end
+
+function WaitFor:update(dt)
+    self.ticks = self.ticks + dt
+    if self.ticks > self.length then
+        self.done = true
+    end
+end
+
+-- =============================================================================
 local NewGameScreen = Class('NewGameScreen', UIScreenBase)
 function NewGameScreen:initialize(resources, state)
     UIScreenBase.initialize(self, resources, state)
@@ -43,13 +87,14 @@ function NewGameScreen:initialize(resources, state)
     -- Calcium: 25?
     -- Willpower: 25?
 
-    print('Yo, got any of them maps?')
-    for k, v in pairs(gameResources.maps) do
-        print('MAP:', k, v)
-    end
-
     self.map = Map:new(gameResources, gameResources.maps.scene1_farm)
     self.viewport = Viewport:new(self.map.width, self.map.height, 0, 0, 29, 21)
+
+    self.ani = {
+        WaitFor:new(2), -- Wait for 2 seconds
+        PanViewport:new(self.viewport), -- Pan to the bottom
+    }
+    self.ani_idx = 1
 end
 
 function NewGameScreen:draw()
@@ -60,6 +105,16 @@ function NewGameScreen:draw()
 
     self.map:render(self.viewport, self.map.tile_layers[1], 8, 8)
     self.map:render(self.viewport, self.map.tile_layers[2], 8, 8)
+end
+
+function NewGameScreen:update(dt)
+    if self.ani_idx <= #self.ani then
+        self.ani[self.ani_idx]:update(dt)
+
+        if self.ani[self.ani_idx].done then
+            self.ani_idx = self.ani_idx + 1
+        end
+    end
 end
 
 -- Check for input events.

@@ -37,11 +37,11 @@ function SettingsScreen:initialize(resources, state)
     self.overlay = SettingsOverlay:new(resources, self, 300, 350, 680, 400)
 
     self.onMouseRelease = (function(self)
-        self:exit()
+        self:setExit()
     end)
 
     self.onKeyRelease = (function(self)
-        self:exit()
+        self:setExit()
     end)
 end
 

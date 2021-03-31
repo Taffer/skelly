@@ -1,4 +1,4 @@
--- Skelly title/loading screen.
+-- Skelly text for internationalization.
 --
 -- By Chris Herborth (https://github.com/Taffer)
 -- MIT license, see LICENSE.md for details.
@@ -139,9 +139,6 @@ local internationalization = {
             ui_languages = {'English', 'Español'},
             ui_volume = 'Volumen',
         },
-
-        -- Not translated yet.
-        credits = credits,
     }
 }
 

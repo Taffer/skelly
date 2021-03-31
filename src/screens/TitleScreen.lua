@@ -61,7 +61,8 @@ local function loader(resource, file_list)
         yield(v)
     end
 
-    return resource.text.title.loading_done
+    local title_text = resource.text:getText('title')
+    return title_text.loading_done
 end
 
 local TitleScreen = Class('TitleScreen', ScreenBase)
@@ -76,9 +77,10 @@ function TitleScreen:initialize(resources, state)
     self.loading_x = 16
     self.loading_y = love.graphics.getHeight() - 16 - self.resources.fonts.default_mono:getHeight()
 
-    self.skelly_text = self.resources.text.skelly_title
-    self.subtitle_text = self.resources.text.title.subtitle_text
-    self.loading_text = self.resources.text.title.loading_text
+    local title_text = self.resources.text:getText('title')
+    self.skelly_text = self.resources.text:getText('skelly_title')
+    self.subtitle_text = title_text.subtitle_text
+    self.loading_text = title_text.loading_text
 
     self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
 
@@ -123,7 +125,7 @@ function TitleScreen:update(dt)
     self.fade:update(dt)
 
     if self.loading_finished and self.fade:isDone() then
-        self:exit()
+        self:setExit()
     end
 
     -- Load resources.
@@ -132,7 +134,8 @@ function TitleScreen:update(dt)
         alive, self.loaded_resource = resume(self.loading_routine, self.resources, rsrc_list)
         if not alive then
             self.loading_finished = true
-            self.loaded_resource = self.resources.text.title.loading_done
+            local title_text = self.resources.text:getText('title')
+            self.loaded_resource = title_text.loading_done
         end
     else
         self.loading_routine = coroutine.create(loader)
@@ -143,7 +146,7 @@ end
 function TitleScreen:checkInputs(keybord, mouse, gamepad)
     if self.loading_finished then
         if keyboard['escape'] or mouse['1'] or gamepad['a'] then
-            self:exit()
+            self:setExit()
         end
     end
 end

@@ -10,8 +10,6 @@ local ColorFade = require 'src/ColorFade'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 
-local text = require 'src/i18n'
-
 local PresentsScreen = Class('PresentsScreen', ScreenBase)
 
 function PresentsScreen:initialize(resources, state)
@@ -19,7 +17,7 @@ function PresentsScreen:initialize(resources, state)
     self:setNextScreen('Title')
 
     -- Default English.
-    self.resources.text = text[gameState.settings:get('language')]
+    self.resources.text:setLanguage(gameState.settings:get('language'))
 
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
     self.resources.fonts.default_mono = love.graphics.newFont('graphics/LiberationMono-Bold.ttf', 16)
@@ -29,8 +27,9 @@ function PresentsScreen:initialize(resources, state)
     love.audio.setVolume(gameState.settings:get('music_volume') * (gameState.settings:get('overall_volume')))
     love.audio.play(self.resources.music.theme) -- start playing ASAP
 
-    self.taffer_text = self.resources.text.presents.taffer_text
-    self.love_text = self.resources.text.presents.love_text
+    local presents_text = self.resources.text:getText('presents')
+    self.taffer_text = presents_text.taffer_text
+    self.love_text = presents_text.love_text
 
     self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
     self.fade_out = false -- fade in first...
@@ -71,7 +70,7 @@ function PresentsScreen:update(dt)
     if self.fade_out then
         -- If we're fading out...
         if self.fade:isDone() then
-            self:canExit()
+            self:setExit()
         end
     else
         -- If we're fading in...
@@ -88,7 +87,7 @@ end
 -- Check for input events.
 function PresentsScreen:checkInputs(keybord, mouse, gamepad)
     if keyboard['escape'] or mouse['1'] or gamepad['a'] then
-        self:exit()
+        self:setExit()
     end
 end
 

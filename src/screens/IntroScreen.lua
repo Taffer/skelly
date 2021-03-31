@@ -35,7 +35,7 @@ end
 -- Check for input events.
 function IntroScreen:checkInputs(keybord, mouse, gamepad)
     if keyboard['escape'] or mouse['1'] or gamepad['a'] then
-        self:exit()
+        self:setExit()
     end
 end
 

@@ -16,9 +16,10 @@ function CreditsScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
     self:setNextScreen('Journey')
 
-    self.skelly_text = self.resources.text.skelly_title
-    self.subtitle_text = self.resources.text.title.subtitle_text
-    self.credits = self.resources.text.credits
+    local title_text = self.resources.text:getText('title')
+    self.skelly_text = self.resources.text:getText('skelly_title')
+    self.subtitle_text = title_text.subtitle_text
+    self.credits = self.resources.text:getText('credits')
 
     self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
 
@@ -113,7 +114,7 @@ end
 -- Check for input events.
 function CreditsScreen:checkInputs(keybord, mouse, gamepad)
     if keyboard['escape'] or mouse['1'] or gamepad['a'] then
-        self:exit()
+        self:setExit()
     end
 end
 

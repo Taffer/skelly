@@ -65,7 +65,7 @@ end
 -- Check for input events.
 function NewGameScreen:checkInputs(keybord, mouse, gamepad)
     if keyboard['escape'] or mouse['1'] or gamepad['a'] then
-        self:exit()
+        self:setExit()
     end
 end
 

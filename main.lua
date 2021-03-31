@@ -10,7 +10,9 @@ if DEBUG then
     lovebird = require 'lib/lovebird'
 end
 
+local I18n = require 'src/i18n'
 local GameSettings = require 'src/Settings'
+local TextHandler = require 'src/TextHandler'
 
 local settings_filename = 'settings.ini'
 
@@ -42,9 +44,7 @@ gameResources = {
     sounds = {
         -- Everything is loaded in Title by the loader.
     },
-    text = {
-        -- all translatable text (presents, see src/i18n)
-    },
+    text = TextHandler:new(),
 
     maps = {
         -- all Tiled maps
@@ -153,6 +153,10 @@ function love.load()
     -- Load settings if they exist. If not, create defaults.
     load_settings(settings_filename)
 
+    -- Load strings.
+    gameResources.text:addLanguage('en', I18n['en'])
+    gameResources.text:addLanguage('es', I18n['es'])
+
     -- Minimal loading screen.
     gameState.screen = gameResources.screens.presents:new(gameResources, gameState)
 end
@@ -199,7 +203,7 @@ function love.update(dt)
     --                             \-------------------/
     --
     local lookup = ScreenLookup
-    if gameState.screen:canExit() then
+    if gameState.screen:getExit() then
         local next_screen = gameState.screen:getNextScreen()
         if next_screen then
             gameState.screen = lookup[next_screen]:new(gameResources, gameState)

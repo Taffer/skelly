@@ -15,16 +15,17 @@ local JourneyScreen = Class('JourneyScreen', UIScreenBase)
 
 function JourneyScreen:initialize(resources, state)
     UIScreenBase.initialize(self, resources, state)
-
     -- next_screen will be set when a button is chosen.
 
-    self.skelly_text = self.resources.text.skelly_title
-    self.subtitle_text = self.resources.text.title.subtitle_text
-    self.journey_text = self.resources.text.journey.onward_text
-    self.newgame_text = self.resources.text.journey.new_game_text
-    self.settings_text = self.resources.text.journey.settings_text
-    self.credits_text = self.resources.text.journey.credits_text
-    self.exit_text = self.resources.text.journey.exit_text
+    local title_text = self.resources.text:getText('title')
+    local journey_text = self.resources.text:getText('journey')
+    self.skelly_text = self.resources.text:getText('skelly_title')
+    self.subtitle_text = title_text.subtitle_text
+    self.journey_text = journey_text.onward_text
+    self.newgame_text = journey_text.new_game_text
+    self.settings_text = journey_text.settings_text
+    self.credits_text = journey_text.credits_text
+    self.exit_text = journey_text.exit_text
 
     self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
 
@@ -39,34 +40,34 @@ function JourneyScreen:initialize(resources, state)
     self.journey_button = Button:new(self, x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
     self.journey_button.onMouseRelease = function(self)
         self.parent:setNextScreen('Game')
-        self.parent:exit()
+        self.parent:setExit()
     end
 
     self.newgame_button = Button:new(self, x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
     self.newgame_button.onMouseRelease = function(self)
         self.parent:setNextScreen('NewGame')
-        self.parent:exit()
+        self.parent:setExit()
     end
 
     self.settings_button = Button:new(self, x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
     self.settings_button.onMouseRelease = function(self)
         print("Settings button clicked")
         self.parent:setNextScreen('Settings')
-        self.parent:exit()
+        self.parent:setExit()
     end
 
     self.credits_button = Button:new(self, x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
     self.credits_button.onMouseRelease = function(self)
         print("Credits button clicked")
         self.parent:setNextScreen('Credits')
-        self.parent:exit()
+        self.parent:setExit()
     end
 
     self.exit_button = Button:new(self, x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
     self.exit_button.onMouseRelease = function(self)
         print("Exit button clicked")
         self.parent:setNextScreen(nil)
-        self.parent:exit()
+        self.parent:setExit()
     end
 
     local title_image = self.resources.images.skelly_title

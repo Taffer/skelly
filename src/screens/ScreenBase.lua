@@ -25,11 +25,11 @@ function ScreenBase:update(dt)
 end
 
 -- Exit this screen?
-function ScreenBase:canExit()
+function ScreenBase:getExit()
     return self.exit_screen
 end
 
-function ScreenBase:exit()
+function ScreenBase:setExit()
     self.exit_screen = true
 end
 

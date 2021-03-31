@@ -18,7 +18,7 @@ function GameSettings:initialize(filename, defaults)
         self:save()
     else
         print(string.format('Loaded settings file %s.', filename))
-        for k, v in defaults do
+        for k, v in pairs(defaults) do
             -- Update settings with defaults; this will apply any new settings
             -- to their default values.
             self.ini[k] = self.ini[k] or v

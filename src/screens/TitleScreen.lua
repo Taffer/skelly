@@ -100,18 +100,6 @@ function TitleScreen:initialize(resources, state)
         Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
         self.loading_label,
     }
-
-    self.onMouseRelease = (function(self)
-        if self.loading_finished then
-            self.exit_screen = true
-        end
-    end)
-
-    self.onKeyRelease = (function(self)
-        if self.loading_finished then
-            self.exit_screen = true
-        end
-    end)
 end
 
 -- Render this screen's contents.
@@ -135,7 +123,7 @@ function TitleScreen:update(dt)
     self.fade:update(dt)
 
     if self.loading_finished and self.fade:isDone() then
-        self.exit_screen = true
+        self:exit()
     end
 
     -- Load resources.
@@ -148,6 +136,15 @@ function TitleScreen:update(dt)
         end
     else
         self.loading_routine = coroutine.create(loader)
+    end
+end
+
+-- Check for input events.
+function TitleScreen:checkInputs(keybord, mouse, gamepad)
+    if self.loading_finished then
+        if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+            self:exit()
+        end
     end
 end
 

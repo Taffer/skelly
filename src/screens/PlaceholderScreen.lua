@@ -35,17 +35,11 @@ function PlaceholderScreen:draw()
     love.graphics.print(self.text, 5, 5)
 end
 
--- Handle events.
---
--- If you handled it, return true; false means the event continues on to the
--- next handler.
-function PlaceholderScreen:handle(event)
-    if event.keys['escape'] or event.button then
-        self.exit_screen = true
-        return true
+-- Check for input events.
+function PlaceholderScreen:checkInputs(keybord, mouse, gamepad)
+    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+        self:exit()
     end
-
-    return ScreenBase.handle(self, event)
 end
 
 return PlaceholderScreen

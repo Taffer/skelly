@@ -50,18 +50,6 @@ function PresentsScreen:initialize(resources, state)
         Label:new(self, state.scr_width / 2, 640, self.love_text,
             self.resources.fonts.default_mono, {1, 1, 1, 1}, 'centre'),
     }
-
-    self.onMouseRelease = (function(self)
-        if self.fade:isDone() then
-            self.exit_screen = true
-        end
-    end)
-
-    self.onKeyRelease = (function(self)
-        if self.fade:isDone() then
-            self.exit_screen = true
-        end
-    end)
 end
 
 -- Render this screen's contents.
@@ -83,7 +71,7 @@ function PresentsScreen:update(dt)
     if self.fade_out then
         -- If we're fading out...
         if self.fade:isDone() then
-            self.exit_screen = true
+            self:canExit()
         end
     else
         -- If we're fading in...
@@ -97,9 +85,11 @@ function PresentsScreen:update(dt)
     end
 end
 
--- Exit this screen?
-function PresentsScreen:exit()
-    return self.exit_screen
+-- Check for input events.
+function PresentsScreen:checkInputs(keybord, mouse, gamepad)
+    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+        self:exit()
+    end
 end
 
 return PresentsScreen

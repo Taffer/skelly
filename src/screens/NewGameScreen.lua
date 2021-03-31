@@ -62,4 +62,11 @@ function NewGameScreen:draw()
     self.map:render(self.viewport, self.map.tile_layers[2], 8, 8)
 end
 
+-- Check for input events.
+function NewGameScreen:checkInputs(keybord, mouse, gamepad)
+    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+        self:exit()
+    end
+end
+
 return NewGameScreen

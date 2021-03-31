@@ -18,44 +18,14 @@ function UIScreenBase:initialize(resources, state)
     self.ui = {}
 end
 
--- Handle events.
-function UIScreenBase:handleKeyPress(key, scancode, isRepeat)
-    for i in ipairs(self.ui) do
-        if self.ui[i].onKeyPress then
-            self.ui[i]:onKeyPress(key, scancode, isRepeat)
-        end
-    end
+function UIScreenBase:addElement(tag, uiElement)
+    self.ui[tag] = uiElement
 end
 
-function UIScreenBase:handleKeyRelease(key, scancode)
-    for i in ipairs(self.ui) do
-        if self.ui[i].onKeyRelease then
-            self.ui[i]:onKeyRelease(key, scancode)
-        end
-    end
-end
-
-function UIScreenBase:handleMousePress(x, y, button, isTouch, presses)
-    for i in ipairs(self.ui) do
-        if self.ui[i].onMousePress and self.ui[i]:intersects(x, y) then
-            self.ui[i]:onMousePress(x, y, button, isTouch, presses)
-        end
-    end
-end
-
-function UIScreenBase:handleMouseRelease(x, y, button, isTouch, presses)
-    for i in ipairs(self.ui) do
-        if self.ui[i].onMouseRelease and self.ui[i]:intersects(x, y) then
-            self.ui[i]:onMouseRelease(x, y, button, isTouch, presses)
-        end
-    end
-end
-
-function UIScreenBase:handleMouseMoved(x, y, dx, dy, isTouch)
-    for i in ipairs(self.ui) do
-        if self.ui[i].onMouseMoved then
-            self.ui[i]:onMouseMoved(x, y, dx, dy, isTouch)
-        end
+-- Check for input events.
+function UIScreenBase:checkInputs(keybord, mouse, gamepad)
+    for _, ui in pairs(self.ui) do
+        ui:checkInputs(keyboard, mouse, gamepad)
     end
 end
 

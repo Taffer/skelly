@@ -14,6 +14,10 @@ local GameSettings = require 'src/Settings'
 
 local settings_filename = 'settings.ini'
 
+-- =============================================================================
+-- Global variables
+-- =============================================================================
+
 -- All the stuff we've loaded already.
 gameResources = {
     fonts = {
@@ -109,6 +113,10 @@ gameState = {
     }
 }
 
+-- =============================================================================
+-- Game settings
+-- =============================================================================
+
 -- Serialize/deserialize settings.
 local function load_settings(name)
     local defaults = {
@@ -130,7 +138,10 @@ local function save_settings()
     gameState.settings:save()
 end
 
+-- =============================================================================
 -- Love callbacks.
+-- =============================================================================
+
 function love.load()
     math.randomseed(os.time())
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -188,7 +199,7 @@ function love.update(dt)
     --                             \-------------------/
     --
     local lookup = ScreenLookup
-    if gameState.screen:exit() then
+    if gameState.screen:canExit() then
         local next_screen = gameState.screen:getNextScreen()
         if next_screen then
             gameState.screen = lookup[next_screen]:new(gameResources, gameState)
@@ -203,6 +214,7 @@ end
 -- =============================================================================
 -- Keyboard events
 -- =============================================================================
+
 function love.keypressed(_, scancode, _)
     -- Use scancode instead of key as it'll handle shift, etc. properly.
     -- Ignore isRepeat as we'll generate events ourselves.
@@ -220,6 +232,7 @@ end
 -- =============================================================================
 -- Mouse events
 -- =============================================================================
+
 function love.mousemoved(x, y, _, _, _)
     -- Ignore dx, dy for now, not sure if anything will need them (maybe pie
     -- menus?). Ignore isTouch because we don't care.
@@ -258,6 +271,7 @@ end
 --
 -- Gamepads other than the first one are ignored.
 -- =============================================================================
+
 function love.gamepadaxis(joystick, axis, value)
     local gamepad = gameState.gamepad
 

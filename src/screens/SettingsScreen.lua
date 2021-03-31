@@ -37,11 +37,11 @@ function SettingsScreen:initialize(resources, state)
     self.overlay = SettingsOverlay:new(resources, self, 300, 350, 680, 400)
 
     self.onMouseRelease = (function(self)
-        self.exit_screen = true
+        self:exit()
     end)
 
     self.onKeyRelease = (function(self)
-        self.exit_screen = true
+        self:exit()
     end)
 end
 
@@ -66,11 +66,6 @@ end
 -- Update the screen.
 function SettingsScreen:update(dt)
     self.fade:update(dt)
-end
-
--- Exit this screen?
-function SettingsScreen:exit()
-    return self.exit_screen
 end
 
 return SettingsScreen

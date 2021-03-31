@@ -51,14 +51,6 @@ function CreditsScreen:initialize(resources, state)
         Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
         Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
     }
-
-    self.onMouseRelease = (function(self)
-        self.exit_screen = true
-    end)
-
-    self.onKeyRelease = (function(self)
-        self.exit_screen = true
-    end)
 end
 
 -- Render this screen's contents.
@@ -115,6 +107,13 @@ function CreditsScreen:update(dt)
 
             self.lines_to_add = self.lines_to_add - 0.25
         end
+    end
+end
+
+-- Check for input events.
+function CreditsScreen:checkInputs(keybord, mouse, gamepad)
+    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+        self:exit()
     end
 end
 

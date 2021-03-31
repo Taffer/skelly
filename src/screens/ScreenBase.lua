@@ -14,13 +14,6 @@ function ScreenBase:initialize(resources, state)
 
     self.exit_screen = false -- Time to exit this screen?
     self.next_screen = nil   -- No next screen means Exit the game.
-
-    -- Event handlers.
-    self.onKeyPress = nil -- (key)
-    self.onKeyRelease = nil -- (key)
-    self.onMousePress = nil
-    self.onMouseRelease = nil
-    self.onMouseMoved = nil
 end
 
 -- Render this screen's contents.
@@ -32,39 +25,16 @@ function ScreenBase:update(dt)
 end
 
 -- Exit this screen?
-function ScreenBase:exit()
+function ScreenBase:canExit()
     return self.exit_screen
 end
 
--- Handle events.
-function ScreenBase:handleKeyPress(key, scancode, isRepeat)
-    if self.onKeyPress then
-        self:onKeyPress(key, scancode, isRepeat)
-    end
+function ScreenBase:exit()
+    self.exit_screen = true
 end
 
-function ScreenBase:handleKeyRelease(key, scancode)
-    if self.onKeyRelease then
-        self:onKeyRelease(key, scancode)
-    end
-end
-
-function ScreenBase:handleMousePress(x, y, button, isTouch, presses)
-    if self.onMousePress then
-        self:onMousePress(x, y, button, isTouch, presses)
-    end
-end
-
-function ScreenBase:handleMouseRelease(x, y, button, isTouch, presses)
-    if self.onMouseRelease then
-        self:onMouseRelease(x, y, button, isTouch, presses)
-    end
-end
-
-function ScreenBase:handleMouseMoved(x, y, dx, dy, isTouch)
-    if self.onMouseMoved then
-        self:onMouseMoved(x, y, dx, dy, isTouch)
-    end
+-- Check input events.
+function ScreenBase:checkInputs(keyboard, mouse, gamepad)
 end
 
 -- Screen state machine.

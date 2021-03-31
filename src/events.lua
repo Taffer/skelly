@@ -8,9 +8,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 
+-- =============================================================================
 local Event = Class('Event')
-
--- Constructor
 function Event:initialize(action, source, target)
     if not Event.Action[action] then
         action = Event.Action.__INVALID__

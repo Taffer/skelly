@@ -5,9 +5,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 
+-- =============================================================================
 local ScreenBase = Class('ScreenBase')
-
--- Constructor
 function ScreenBase:initialize(resources, state)
     self.resources = resources
     self.state = state

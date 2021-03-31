@@ -5,8 +5,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 
+-- =============================================================================
 local Viewport = Class('Viewport')
-
 function Viewport:initialize(map_width, map_height, x, y, width, height)
     self.map_width = map_width
     self.map_height = map_height

@@ -6,8 +6,8 @@
 local Class = require 'lib/middleclass/middleclass'
 local IniFile = require 'lib/ini'
 
+-- =============================================================================
 local GameSettings = Class('GameSettings')
-
 function GameSettings:initialize(filename, defaults)
     self.filename = filename
     self.ini = IniFile.load(filename)['skelly'] or nil

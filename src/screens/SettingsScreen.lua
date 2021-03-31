@@ -11,14 +11,16 @@ local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 local SettingsOverlay = require 'src/ui/SettingsOverlay'
 
+-- =============================================================================
 local SettingsScreen = Class('SettingsScreen', ScreenBase)
-
 function SettingsScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
     self:setNextScreen('Journey')
 
-    self.skelly_text = self.resources.text.skelly_title
-    self.subtitle_text = self.resources.text.title.subtitle_text
+    local title_text = self.resources.text:getText('title')
+    local settings_text = self.resources.text:getText('presents')
+    self.skelly_text = self.resources.text:getText('skelly_title')
+    self.subtitle_text = title_text.subtitle_text
 
     self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
 
@@ -29,20 +31,12 @@ function SettingsScreen:initialize(resources, state)
     local font_title = self.resources.fonts.skelly_title
 
     self.ui = {
-        ImageButton:new(self, 0, 0, title_image, title_quad),
-        Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
-        Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+        ImageButton:new(0, 0, title_image, title_quad),
+        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
     }
 
-    self.overlay = SettingsOverlay:new(resources, self, 300, 350, 680, 400)
-
-    self.onMouseRelease = (function(self)
-        self:setExit()
-    end)
-
-    self.onKeyRelease = (function(self)
-        self:setExit()
-    end)
+    self.overlay = SettingsOverlay:new(resources, 300, 350, 680, 400)
 end
 
 -- Render this screen's contents.

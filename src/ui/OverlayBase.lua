@@ -8,10 +8,9 @@
 
 local Class = require 'lib/middleclass/middleclass'
 
+-- =============================================================================
 local OverlayBase = Class('OverlayBase')
-
-function OverlayBase:initialize(parent, x, y, width, height)
-    self.parent = parent -- A Screen object.
+function OverlayBase:initialize(x, y, width, height)
     self.x = x
     self.y = y
     self.width = width
@@ -25,16 +24,16 @@ function OverlayBase:addElement(tag, uiElement)
 end
 
 function OverlayBase:draw()
-    love.graphics.setColor(1, 1, 1, 0.25) -- This might not be dark enough.
+    love.graphics.setColor(1, 1, 1, 1/3) -- This might not be dark enough.
     love.graphics.rectangle('fill', 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 
-    for i in ipairs(self.overlay) do
-        self.overlay[i]:draw()
+    for k, v in pairs(self.overlay) do
+        self.overlay[k]:draw()
     end
 end
 
 -- Check for input events.
-function OverlayBase:checkInputs(keybord, mouse, gamepad)
+function OverlayBase:checkInputs(keyboard, mouse, gamepad)
     for _, ui in pairs(self.overlay) do
         ui:checkInputs(keyboard, mouse, gamepad)
     end

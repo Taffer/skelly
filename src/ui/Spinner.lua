@@ -8,11 +8,10 @@ local UIBase = require 'src/ui/UIBase'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 
--- Spinner class
+-- =============================================================================
 local Spinner = Class('Label', UIBase)
-
-function Spinner:initialize(parent, x, y, values, start_at, font, color, texture, quads)
-    UIBase.initialize(self, parent)
+function Spinner:initialize(x, y, values, start_at, font, color, texture, quads)
+    UIBase.initialize(self)
 
     self.x = x
     self.y = y
@@ -41,11 +40,11 @@ function Spinner:initialize(parent, x, y, values, start_at, font, color, texture
 
     local text_height = font:getHeight() * font:getLineHeight()
 
-    self.left_button = ImageButton:new(self, x, y, texture, self.left_quad)
-    self.label = ImageButton:new(self, x + self.left_button.width, y, texture, self.label_quad)
-    self.label_text = Label:new(self, self.label.x + self.label.width / 2, y + (self.label.height - text_height) / 2,
+    self.left_button = ImageButton:new(x, y, texture, self.left_quad)
+    self.label = ImageButton:new(x + self.left_button.width, y, texture, self.label_quad)
+    self.label_text = Label:new(self.label.x + self.label.width / 2, y + (self.label.height - text_height) / 2,
         self.text, self.font, self.color, 'centre')
-    self.right_button = ImageButton(self, self.label.x + self.label.width, y, texture, self.right_quad)
+    self.right_button = ImageButton(self.label.x + self.label.width, y, texture, self.right_quad)
 end
 
 function Spinner:draw()

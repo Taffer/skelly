@@ -6,8 +6,8 @@
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
 
+-- =============================================================================
 local PlaceholderScreen = Class('PlaceholderScreen', ScreenBase)
-
 function PlaceholderScreen:initialize(resources)
     ScreenBase.initialize(self, resources)
     self:setNextScreen('Journey')
@@ -36,8 +36,8 @@ function PlaceholderScreen:draw()
 end
 
 -- Check for input events.
-function PlaceholderScreen:checkInputs(keybord, mouse, gamepad)
-    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+function PlaceholderScreen:checkInputs(keyboard, mouse, gamepad)
+    if keyboard['escape'] or mouse[1] or gamepad['a'] then
         self:setExit()
     end
 end

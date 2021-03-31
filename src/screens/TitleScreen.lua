@@ -65,8 +65,8 @@ local function loader(resource, file_list)
     return title_text.loading_done
 end
 
+-- =============================================================================
 local TitleScreen = Class('TitleScreen', ScreenBase)
-
 function TitleScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
     self:setNextScreen('Journey')
@@ -94,12 +94,12 @@ function TitleScreen:initialize(resources, state)
     local font_mono = self.resources.fonts.default_mono
     local font_title = self.resources.fonts.skelly_title
 
-    self.loading_label = Label:new(self, self.loading_x, self.loading_y, self.loading_text, font_mono, {1, 1, 1, 1}, 'left')
+    self.loading_label = Label:new(self.loading_x, self.loading_y, self.loading_text, font_mono, {1, 1, 1, 1}, 'left')
 
     self.ui = {
-        ImageButton:new(self, 0, 0, title_image, title_quad),
-        Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
-        Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+        ImageButton:new(0, 0, title_image, title_quad),
+        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
         self.loading_label,
     }
 end
@@ -143,9 +143,9 @@ function TitleScreen:update(dt)
 end
 
 -- Check for input events.
-function TitleScreen:checkInputs(keybord, mouse, gamepad)
+function TitleScreen:checkInputs(keyboard, mouse, gamepad)
     if self.loading_finished then
-        if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+        if keyboard['escape'] or mouse[1] or gamepad['a'] then
             self:setExit()
         end
     end

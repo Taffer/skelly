@@ -11,6 +11,12 @@ local Button = require 'src/ui/Button'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 
+local JourneyButton = Class('JourneyButton', Button)
+function JourneyButton:initialize(parent, x, y, texture, quad, text, font, color)
+    Button.initialize(self, x, y, texture, quad, text, font, color)
+    self.parent = parent
+end
+
 local JourneyScreen = Class('JourneyScreen', UIScreenBase)
 
 function JourneyScreen:initialize(resources, state)
@@ -37,35 +43,32 @@ function JourneyScreen:initialize(resources, state)
 
     local button_font = self.resources.fonts.button_font
     local button_color = {0, 0, 0, 1}
-    self.journey_button = Button:new(self, x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
-    self.journey_button.onMouseRelease = function(self)
+    self.journey_button = JourneyButton:new(self, x, 350, ui_rpg, button_quad, self.journey_text, button_font, button_color)
+    self.journey_button.selectOff = function(self)
         self.parent:setNextScreen('Game')
         self.parent:setExit()
     end
 
-    self.newgame_button = Button:new(self, x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
-    self.newgame_button.onMouseRelease = function(self)
+    self.newgame_button = JourneyButton:new(self, x, 410, ui_rpg, button_quad, self.newgame_text, button_font, button_color)
+    self.newgame_button.selectOff = function(self)
         self.parent:setNextScreen('NewGame')
         self.parent:setExit()
     end
 
-    self.settings_button = Button:new(self, x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
-    self.settings_button.onMouseRelease = function(self)
-        print("Settings button clicked")
+    self.settings_button = JourneyButton:new(self, x, 470, ui_rpg, button_quad, self.settings_text, button_font, button_color)
+    self.settings_button.selectOff = function(self)
         self.parent:setNextScreen('Settings')
         self.parent:setExit()
     end
 
-    self.credits_button = Button:new(self, x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
-    self.credits_button.onMouseRelease = function(self)
-        print("Credits button clicked")
+    self.credits_button = JourneyButton:new(self, x, 550, ui_rpg, button_quad, self.credits_text, button_font, button_color)
+    self.credits_button.selectOff = function(self)
         self.parent:setNextScreen('Credits')
         self.parent:setExit()
     end
 
-    self.exit_button = Button:new(self, x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
-    self.exit_button.onMouseRelease = function(self)
-        print("Exit button clicked")
+    self.exit_button = JourneyButton:new(self, x, 620, ui_rpg, button_quad, self.exit_text, button_font, button_color)
+    self.exit_button.selectOff = function(self)
         self.parent:setNextScreen(nil)
         self.parent:setExit()
     end
@@ -77,9 +80,9 @@ function JourneyScreen:initialize(resources, state)
     local font_title = self.resources.fonts.skelly_title
 
     self.ui = {
-        ImageButton:new(self, 0, 0, title_image, title_quad),
-        Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
-        Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+        ImageButton:new(0, 0, title_image, title_quad),
+        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
 
         self.journey_button,
         self.newgame_button,

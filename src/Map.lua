@@ -7,8 +7,8 @@ local Class = require 'lib/middleclass/middleclass'
 
 local Viewport = require 'src/Viewport'
 
+-- =============================================================================
 local Map = Class('Map')
-
 function Map:initialize(resources, map_data)
     -- Maps are assumed to be "orthogonal" and "right-down", using 32x32 tiles.
     -- Map sizes will vary.

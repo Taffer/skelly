@@ -6,8 +6,8 @@
 local Class = require 'lib/middleclass/middleclass'
 local UIScreenBase = require 'src/screens/UIScreenBase'
 
+-- =============================================================================
 local IntroScreen = Class('NewGameScreen', UIScreenBase)
-
 function IntroScreen:initialize(resources, state)
     UIScreenBase.initialize(self, resources, state)
     self:setNextScreen('Game')
@@ -33,8 +33,8 @@ function IntroScreen:initialize(resources, state)
 end
 
 -- Check for input events.
-function IntroScreen:checkInputs(keybord, mouse, gamepad)
-    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+function IntroScreen:checkInputs(keyboard, mouse, gamepad)
+    if keyboard['escape'] or mouse[1] or gamepad['a'] then
         self:setExit()
     end
 end

@@ -9,9 +9,8 @@
 local Class = require 'lib/middleclass/middleclass'
 local ScreenBase = require 'src/screens/ScreenBase'
 
+-- =============================================================================
 local UIScreenBase = Class('UIScreenBase', ScreenBase)
-
--- Constructor
 function UIScreenBase:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
 
@@ -23,7 +22,7 @@ function UIScreenBase:addElement(tag, uiElement)
 end
 
 -- Check for input events.
-function UIScreenBase:checkInputs(keybord, mouse, gamepad)
+function UIScreenBase:checkInputs(keyboard, mouse, gamepad)
     for _, ui in pairs(self.ui) do
         ui:checkInputs(keyboard, mouse, gamepad)
     end

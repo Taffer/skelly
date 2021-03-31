@@ -126,7 +126,7 @@ local function load_settings(name)
         voice_volume = 1.0,
         overall_volume = 1.0,
 
-        input_frequency = 200, -- in milliseconds
+        input_frequency = 50, -- in milliseconds
 
         language = 'en'
     }
@@ -185,11 +185,11 @@ function love.update(dt)
     end
 
     local gameState = gameState
-    local input_freq = gameState.settings:get('input_frequency')
+    local input_freq = gameState.settings:get('input_frequency') / 10000
     gameState.input_ticks = gameState.input_ticks + dt
     if gameState.input_ticks > input_freq then
         -- Generate input events.
-        -- TODO: input events
+        gameState.screen:checkInputs(gameState.keyboard, gameState.mouse, gameState.gamepad)
 
         gameState.input_ticks = gameState.input_ticks - input_freq
     end

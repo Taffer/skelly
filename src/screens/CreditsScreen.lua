@@ -10,8 +10,8 @@ local ColorFade = require 'src/ColorFade'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 
+-- =============================================================================
 local CreditsScreen = Class('CreditsScreen', ScreenBase)
-
 function CreditsScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
     self:setNextScreen('Journey')
@@ -48,9 +48,9 @@ function CreditsScreen:initialize(resources, state)
     local font_title = self.resources.fonts.skelly_title
 
     self.ui = {
-        ImageButton:new(self, 0, 0, title_image, title_quad),
-        Label:new(self, state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
-        Label:new(self, state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
+        ImageButton:new(0, 0, title_image, title_quad),
+        Label:new(state.scr_width / 2, 40, self.skelly_text, font_title, {1, 1, 1, 1}, 'centre'),
+        Label:new(state.scr_width / 2, 200, self.subtitle_text, font_mono, {1, 1, 1, 1}, 'centre'),
     }
 end
 
@@ -112,8 +112,8 @@ function CreditsScreen:update(dt)
 end
 
 -- Check for input events.
-function CreditsScreen:checkInputs(keybord, mouse, gamepad)
-    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+function CreditsScreen:checkInputs(keyboard, mouse, gamepad)
+    if keyboard['escape'] or mouse[1] or gamepad['a'] then
         self:setExit()
     end
 end

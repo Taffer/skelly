@@ -28,8 +28,8 @@ local function draw_29x21(screen_width, screen_height)
     love.graphics.rectangle('fill', 29 * 32 + dx * 2, dy, screen_width - 29 * 32 - dx * 3, screen_height - dy * 2)
 end
 
+-- =============================================================================
 local NewGameScreen = Class('NewGameScreen', UIScreenBase)
-
 function NewGameScreen:initialize(resources, state)
     UIScreenBase.initialize(self, resources, state)
     self:setNextScreen('Intro')
@@ -63,8 +63,8 @@ function NewGameScreen:draw()
 end
 
 -- Check for input events.
-function NewGameScreen:checkInputs(keybord, mouse, gamepad)
-    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+function NewGameScreen:checkInputs(keyboard, mouse, gamepad)
+    if keyboard['escape'] or mouse[1] or gamepad['a'] then
         self:setExit()
     end
 end

@@ -5,8 +5,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 
+-- =============================================================================
 local TextHandler = Class("TextHandler")
-
 function TextHandler:initialize()
     self.default = nil
     self.current = nil

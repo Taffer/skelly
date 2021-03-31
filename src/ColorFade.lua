@@ -5,9 +5,8 @@
 
 local Class = require 'lib/middleclass/middleclass'
 
+-- =============================================================================
 local ColorFade = Class("ColorFade")
-
--- Fades from one RGBA to another. Duration specified in seconds.
 function ColorFade:initialize(rgba1, rgba2, duration)
     self.r, self.g, self.b, self.a = unpack(rgba1)
     self.start_r, self.start_g, self.start_b, self.start_a = unpack(rgba1)

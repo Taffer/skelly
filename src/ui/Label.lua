@@ -6,11 +6,10 @@
 local Class = require 'lib/middleclass/middleclass'
 local UIBase = require 'src/ui/UIBase'
 
--- Label class
+-- =============================================================================
 local Label = Class('Label', UIBase)
-
-function Label:initialize(parent, x, y, text, font, color, align)
-    UIBase.initialize(self, parent)
+function Label:initialize(x, y, text, font, color, align)
+    UIBase.initialize(self)
 
     self.orig_x = x
     self.x = x

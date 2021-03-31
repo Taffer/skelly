@@ -9,14 +9,13 @@ local ScreenBase = require 'src/screens/ScreenBase'
 local ColorFade = require 'src/ColorFade'
 local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
+local UIBase = require 'src/ui/UIBase'
 
 local PresentsScreen = Class('PresentsScreen', ScreenBase)
-
 function PresentsScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
     self:setNextScreen('Title')
 
-    -- Default English.
     self.resources.text:setLanguage(gameState.settings:get('language'))
 
     self.resources.fonts.default_serif = love.graphics.newFont('graphics/A_Font_with_Serifs.ttf', 72)
@@ -42,11 +41,11 @@ function PresentsScreen:initialize(resources, state)
     local taffer_quad = love.graphics.newQuad(0, 0, taffer_logo:getWidth(), taffer_logo:getHeight(), taffer_logo)
 
     self.ui = {
-        Label:new(self, state.scr_width / 2, 16, self.taffer_text,
+        Label:new(state.scr_width / 2, 16, self.taffer_text,
             self.resources.fonts.default_serif, {1, 1, 1, 1}, 'centre'),
-        ImageButton:new(self, (state.scr_width - taffer_logo:getWidth()) / 2, 120, taffer_logo, taffer_quad),
-        ImageButton:new(self, (state.scr_width - love_logo:getWidth()) / 2, 500, love_logo, logo_quad),
-        Label:new(self, state.scr_width / 2, 640, self.love_text,
+        ImageButton:new((state.scr_width - taffer_logo:getWidth()) / 2, 120, taffer_logo, taffer_quad),
+        ImageButton:new((state.scr_width - love_logo:getWidth()) / 2, 500, love_logo, logo_quad),
+        Label:new(state.scr_width / 2, 640, self.love_text,
             self.resources.fonts.default_mono, {1, 1, 1, 1}, 'centre'),
     }
 end
@@ -85,8 +84,8 @@ function PresentsScreen:update(dt)
 end
 
 -- Check for input events.
-function PresentsScreen:checkInputs(keybord, mouse, gamepad)
-    if keyboard['escape'] or mouse['1'] or gamepad['a'] then
+function PresentsScreen:checkInputs(keyboard, mouse, gamepad)
+    if keyboard['escape'] or mouse[1] or gamepad['a'] then
         self:setExit()
     end
 end

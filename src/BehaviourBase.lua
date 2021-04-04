@@ -5,11 +5,14 @@
 
 local Class = require 'lib/middleclass/middleclass'
 
+local ANIMATION = require 'src/LPCAnimations'
+local FACING = require 'src/LPCFacings'
+
 local BehaviourBase = Class('BehaviourBase')
 function BehaviourBase:initialize(next_behaviour)
     self.next_behaviour = next_behaviour
-    self.animation = 'idle'
-    self.facing = 'forward'
+    self.animation = ANIMATION.IDLE
+    self.facing = FACING.FORWARD
 
     self.done = false
 end

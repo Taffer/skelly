@@ -6,6 +6,8 @@
 local Class = require 'lib/middleclass/middleclass'
 
 local ActorBase = require 'src/ActorBase'
+local ANIMATION = require 'src/LPCAnimations'
+local FACING = require 'src/LPCFacings'
 
 local SkeletonActor = Class('SkeletonActor', ActorBase)
 function SkeletonActor:initialize(sprite, behaviour, map, x, y)
@@ -17,8 +19,8 @@ function SkeletonActor:initialize(sprite, behaviour, map, x, y)
     self.map_x = x
     self.map_y = y
 
-    self.sprite:setAnimation('idle')
-    self.sprite:setFacing('forward')
+    self.sprite:setAnimation(ANIMATION.IDLE)
+    self.sprite:setFacing(FACING.FORWARD)
 end
 
 function SkeletonActor:update(dt)

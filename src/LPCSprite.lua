@@ -29,32 +29,32 @@ local lpcSpriteQuads = nil -- Quads singleton
 
 local LPCSprite = Class('LPCSprite')
 function LPCSprite:initialize(texture, framerate)
-    self.facings = {
-        away = 1,
-        left = 2,
-        forward = 3,
-        right = 4
-    }
-    self.facing_order = {'away', 'left', 'forward', 'right'}
-    self.animations = {
-        spellcast = 1,
-        thrust = 2,
-        walk = 3,
-        slash = 4,
-        shoot = 5,
-        hurt = 6,
-        idle = 7
-    }
-    self.animation_order = {'spellcast', 'thrust', 'walk', 'slash', 'shoot', 'hurt', 'idle'}
-    self.frames = {
-        spellcast = 7,
-        thrust = 8,
-        walk = 9,
-        slash = 6,
-        shoot = 13,
-        hurt = 6,
-        idle = 1
-    }
+    self.facings = {}
+    self.facings[FACING.AWAY]    = 1
+    self.facings[FACING.LEFT]    = 2,
+    self.facings[FACING.FORWARD] = 3,
+    self.facings[FACING.RIGHT]   = 4
+    self.facing_order = {FACing.away, Facing.left, Facing.forward, Facing.right}
+
+    self.animations = {}
+    self.animations[ANIMATION.SPELLCAST] = 1
+    self.animations[ANIMATION.THRUST]    = 2
+    self.animations[ANIMATION.WALK]      = 3
+    self.animations[ANIMATION.SLASH]     = 4
+    self.animations[ANIMATION.SHOOT]     = 5
+    self.animations[ANIMATION.HURT]      = 6
+    self.animations[ANIMATION.IDLE]      = 7
+    self.animation_order = {ANIMATION.SPELLCAST, ANIMATION.THRUST, ANIMATION.WALK, ANIMATION.SLASH, ANIMATION.SHOOT, ANIMATION.HURT,
+        ANIMATION.IDLE}
+
+    self.frames = {}
+    self.frames[ANIMATION.SPELLCAST] =  7
+    self.frames[ANIMATION.THRUST]    =  8
+    self.frames[ANIMATION.WALK]      =  9
+    self.frames[ANIMATION.SLASH]     =  6
+    self.frames[ANIMATION.SHOOT]     = 13
+    self.frames[ANIMATION.HURT]      =  6
+    self.frames[ANIMATION.IDLE]      =  1
 
     self.width = 64 -- Standard for LPC sprite sheets.
     self.height = 64
@@ -65,8 +65,8 @@ function LPCSprite:initialize(texture, framerate)
     self.framerate = framerate or 0.1 -- Too slow for default?
     self.ticks = 0
 
-    self.facing = 'forward' -- Default facing and animation.
-    self.animation = 'walk'
+    self.facing = FACING.FORWARD -- Default facing and animation.
+    self.animation = ANIMATION.WALK
     self.frame = 1
 
     self.texture = texture
@@ -83,7 +83,7 @@ function LPCSprite:generateQuads()
     for _, av in ipairs(self.animation_order) do
         lpcSpriteQuads[av] = {}
 
-        if av ~= 'hurt' and av ~= 'idle' then
+        if av ~= ANIMATION.HURT and av ~= ANIMATION.IDLE then
             for _, fv in ipairs(self.facing_order) do
                 lpcSpriteQuads[av][fv] = {}
 
@@ -101,19 +101,19 @@ function LPCSprite:generateQuads()
     y = self.texture:getHeight() - self.height
     for _, fv in ipairs(self.facing_order) do
         -- We'll lie and re-use these for all four facings.
-        lpcSpriteQuads['hurt'][fv] = {}
+        lpcSpriteQuads[ANIMATION.HURT][fv] = {}
     end
-    for i = 1, self.frames['hurt'] do
+    for i = 1, self.frames[ANIMATION.HURT] do
         local x = (i - 1) * self.width
         local quad = love.graphics.newQuad(x, y, self.width, self.height, self.texture)
         for _, fv in ipairs(self.facing_order) do
-            table.insert(lpcSpriteQuads['hurt'][fv], quad)
+            table.insert(lpcSpriteQuads[ANIMATION.HURT][fv], quad)
         end
     end
 
     -- 'idle' is a fake state that's just the first 'walk' frame.
     for _, fv in ipairs(self.facing_order) do
-        lpcSpriteQuads['idle'][fv] = lpcSpriteQuads['walk'][fv]
+        lpcSpriteQuads[ANIMATION.IDLE][fv] = lpcSpriteQuads[ANIMATION.WALK][fv]
     end
 end
 

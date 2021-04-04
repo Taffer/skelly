@@ -15,6 +15,11 @@ function Map:initialize(resources, map_data)
     --
     -- @param resources Loaded Skelly resources.
     -- @param map_data  Loaded Tiled map data, in Lua format.
+
+    -- Constants
+    self.OBJ_POINT = 'point'
+    self.OBJ_RECT = 'rectangle'
+
     self.width = map_data.width -- In tiles.
     self.height = map_data.height
 
@@ -160,7 +165,7 @@ end
 
 function Map:findPoint(layer_name, object_name)
     -- Find the x,y of the named point object on the named layer.
-    obj = self:findObject(layer_name, object_name, 'point')
+    obj = self:findObject(layer_name, object_name, self.OBJ_POINT)
 
     if obj == nil then
         return nil
@@ -172,7 +177,7 @@ end
 
 function Map:findRect(layer_name, object_name)
     -- Find the named rectangle object on the named layer.
-    obj = self:findObject(layer_name, object_name, 'rectangle')
+    obj = self:findObject(layer_name, object_name, self.OBJ_RECT)
 
     if obj == nil then
         return nil

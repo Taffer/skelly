@@ -11,6 +11,8 @@ local ImageButton = require 'src/ui/ImageButton'
 local Label = require 'src/ui/Label'
 local UIBase = require 'src/ui/UIBase'
 
+local FADE_TIME = 0.5 -- Set to 2.0 for production.
+
 local PresentsScreen = Class('PresentsScreen', ScreenBase)
 function PresentsScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
@@ -30,9 +32,9 @@ function PresentsScreen:initialize(resources, state)
     self.taffer_text = presents_text.taffer_text
     self.love_text = presents_text.love_text
 
-    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, FADE_TIME)
     self.fade_out = false -- fade in first...
-    self.exit_countdown = 2 -- seconds after fade to automatically exit
+    self.exit_countdown = FADE_TIME * 2 -- seconds after fade to automatically exit
 
     local love_logo = self.resources.images.love_logo
     local logo_quad = love.graphics.newQuad(0, 0, love_logo:getWidth(), love_logo:getHeight(), love_logo)
@@ -76,7 +78,7 @@ function PresentsScreen:update(dt)
         if self.fade:isDone() then
             self.exit_countdown = self.exit_countdown - dt
             if self.exit_countdown < 0 then
-                self.fade = ColorFade({0, 0, 0, 0}, {0, 0, 0, 1}, 1)
+                self.fade = ColorFade:new({0, 0, 0, 0}, {0, 0, 0, 1}, FADE_TIME)
                 self.fade_out = true
             end
         end

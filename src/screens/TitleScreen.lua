@@ -12,6 +12,8 @@ local Label = require 'src/ui/Label'
 
 local rsrc_list = require 'src/rsrc_list'
 
+local FADE_TIME = 0.5 -- Set to 2 for production.
+
 local function loader(resource, file_list)
     local yield = coroutine.yield
 
@@ -69,7 +71,8 @@ end
 local TitleScreen = Class('TitleScreen', ScreenBase)
 function TitleScreen:initialize(resources, state)
     ScreenBase.initialize(self, resources, state)
-    self:setNextScreen('Journey')
+    -- self:setNextScreen('Journey') -- Production
+    self:setNextScreen('NewGame')
 
     self.resources.fonts.skelly_title = love.graphics.newFont('graphics/Gypsy Curse.ttf', 144)
     self.resources.images.skelly_title = love.graphics.newImage('graphics/Gersdorff_Feldbuch_skeleton.png')
@@ -82,7 +85,7 @@ function TitleScreen:initialize(resources, state)
     self.subtitle_text = title_text.subtitle_text
     self.loading_text = title_text.loading_text
 
-    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, 1)
+    self.fade = ColorFade:new({0, 0, 0, 1}, {0, 0, 0, 0}, FADE_TIME)
 
     self.loaded_resource = ""
     self.loading_finished = false

@@ -120,4 +120,66 @@ function Map:render(viewport, layer, x, y)
     end
 end
 
+function Map:pointToScreen(viewport, offset_x, offset_y, x, y)
+    -- Convert a map point location to an on-screen location. Returns nil if
+    -- the point is outside the viewport.
+    --
+    -- offset_x, offset_y are where the map gets drawn (8,8 in our case.)
+    local viewport_x = viewport.x * self.tile_width
+    local viewport_y = viewport.y * self.tile_height
+    local viewport_width = viewport.width * self.tile_width
+    local viewport_height = viewport.height * self.tile_height
+
+    if x < viewport_x or x > (viewport_x + viewport_width) then
+        return nil
+    end
+    if y < viewport_y or y > (viewport_y + viewport_height) then
+        return nil
+    end
+
+    local screen_x = x + offset_x - viewport_x
+    local screen_y = y + offset_y - viewport_y
+
+    return {screen_x, screen_y}
+end
+
+function Map:findObject(layer_name, object_name, object_type)
+    -- Find the named object of the given type on the named object layer.
+    for _, layer in ipairs(self.obj_layers) do
+        if layer.name == layer_name then
+            for _, obj in ipairs(layer.objects) do
+                if obj.shape == object_type and obj.name == object_name then
+                    return obj
+                end
+            end
+        end
+    end
+
+    return nil
+end
+
+function Map:findPoint(layer_name, object_name)
+    -- Find the x,y of the named point object on the named layer.
+    obj = self:findObject(layer_name, object_name, 'point')
+
+    if obj == nil then
+        return nil
+    end
+
+    -- Tiled object coords are floats, we want pixels.
+    return {math.floor(obj.x), math.floor(obj.y)}
+end
+
+function Map:findRect(layer_name, object_name)
+    -- Find the named rectangle object on the named layer.
+    obj = self:findObject(layer_name, object_name, 'rectangle')
+
+    if obj == nil then
+        return nil
+    end
+
+    return {math.floor(obj.x), math.floor(obj.y), math.floor(obj.width), math.floor(obj.height)}
+end
+
+
 return Map

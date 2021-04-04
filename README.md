@@ -69,6 +69,10 @@ Images:
   `Attribution.txt` and `Attribution2.txt` for details.
 * `lpc-medieval-fantasy-character-sprites` -
   [LPC Medieval Fantasy Character Sprites](https://opengameart.org/content/lpc-medieval-fantasy-character-sprites)
+* `lpc-necromancer` - A
+  [Necromancer sprite](https://opengameart.org/content/lpc-necromancer-sprite)
+  I made using the
+  [Universal LPC Spritesheet Character Generator](http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator/).
 * `lpc-skeleton` -
   [LPC Skeleton](https://opengameart.org/content/lpc-skeleton) (same as the
   one from LPC Medieval Fantasy Character Sprites, but with spear animation).

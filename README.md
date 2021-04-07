@@ -85,6 +85,8 @@ Images:
   [LPC Thatched Roof Cottage](https://opengameart.org/content/lpc-thatched-roof-cottage).
 * `lpc-zombie` - Great LPC zombie by
   [BenCreating](https://opengameart.org/content/lpc-zombie).
+* `pygame-logo` - [Pygame's logo](https://www.pygame.org/docs/logos.html) by
+  TheCorruptor.
 * `skeleton` -
   [Skeleton Sprite](https://opengameart.org/content/skeleton-sprite) by
   [goo30](https://opengameart.org/users/goo30) on

@@ -100,6 +100,7 @@ Images:
 
 ### Music
 
-* `Heroic Demise (New).mp3` - By [Matthew Pablo](https://matthewpablo.com/),
+* `Heroic Demise (New).ogg` - By [Matthew Pablo](https://matthewpablo.com/),
   found on
-  [OpenGameArt.org](https://opengameart.org/content/heroic-demise-updated-version).
+  [OpenGameArt.org](https://opengameart.org/content/heroic-demise-updated-version),
+  converted to `.ogg` format for Pygame.

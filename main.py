@@ -13,6 +13,7 @@ import time
 
 import src.GameSettings
 import src.screens.Presents
+import src.screens.Title
 
 
 WINDOW_TITLE = 'Skelly'
@@ -72,36 +73,18 @@ class Game:
 
     def update(self, dt):
         self.screen.update(dt)
-        '''
-        local input_freq = gameState.settings:get('input_frequency') / 10000
-        gameState.input_ticks = gameState.input_ticks + dt
-        if gameState.input_ticks > input_freq then
-            -- Generate input events.
-            gameState.screen:checkInputs(gameState.keyboard, gameState.mouse, gameState.gamepad)
 
-            gameState.input_ticks = gameState.input_ticks - input_freq
-        end
-
-        gameState.screen:update(dt)
-
-        -- Screen state machine:
-        --
-        -- Presents -> Title -> Journey -> exit
-        --                             \-> Newgame -> Intro -> Game
-        --                             \-------------------/
-        --
-        local lookup = ScreenLookup
-        if gameState.screen:getExit() then
-            local next_screen = gameState.screen:getNextScreen()
-            if next_screen then
-                gameState.screen = lookup[next_screen]:new(gameResources, gameState)
-            else
-                save_settings()
-                love.audio.stop()
-                love.event.quit()
-            end
-        end
-        '''
+        # Screen state machine:
+        if self.screen.can_exit:
+            next_screen = self.screen.next_screen
+            if next_screen == 'Presents':  # "Taffer presents" screen
+                self.screen = src.screens.Presents.Presents(self)
+            elif next_screen == 'Title':  # Title screen
+                self.screen = src.screens.Title.Title(self)
+            else:
+                self.save_settings()
+                pygame.mixer.music.stop()
+                sys.exit()
 
     def draw(self):
         self.screen.draw()

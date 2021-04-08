@@ -84,9 +84,10 @@ class Title(Base):
         self.loading_text = 'Loading…'
 
         self.fade = ColorFade((0, 0, 0, 255), (0, 0, 0, 0), 1)  # 1 second fade
+        self.fade_out = False
 
         self.loaded_resource = ""
-        self.loading_finished = False
+        self.loading_finished = True
         '''
         self.loading_routine = nil
         '''
@@ -121,9 +122,16 @@ class Title(Base):
     def update(self, dt):
         self.fade.update(dt)
 
-        if self.fade.isDone():
-            self.can_exit = True
-
+        if self.fade_out:
+            # If we're fading out...
+            if self.fade.isDone():
+                self.can_exit = True
+        else:
+            # If we're fading in...
+            if self.fade.isDone():
+                if self.loading_finished:
+                    self.fade = ColorFade((0, 0, 0, 0), (0, 0, 0, 255), 1)
+                    self.fade_out = True
         '''
         -- Load resources.
         if self.loading_routine then

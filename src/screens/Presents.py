@@ -7,6 +7,7 @@ MIT license, see LICENSE.md for details.
 import pygame
 
 from .Base import Base, ColorFade
+from ..ui.ImageButton import ImageButton
 
 
 class Presents(Base):
@@ -40,15 +41,12 @@ class Presents(Base):
         self.fade_out = False
         self.exit_countdown = 2  # Seconds after fade to auto-exit.
 
-        self.taffer_logo = self.game.resources['images']['taffer']
-        self.taffer_logo_rect = self.taffer_logo.get_rect()
-        self.taffer_logo_rect.left = (self.game.screen_width - self.taffer_logo_rect.width) / 2
-        self.taffer_logo_rect.top = 120
+        rect = self.game.resources['images']['taffer'].get_rect()
+        self.taffer_logo = ImageButton((self.game.screen_width - rect.width) / 2, 120, self.game.resources['images']['taffer'])
 
-        self.pygame_logo = self.game.resources['images']['pygame_logo']
-        self.pygame_logo_rect = self.pygame_logo.get_rect()
-        self.pygame_logo_rect.left = (self.game.screen_width - self.pygame_logo_rect.width) / 2
-        self.pygame_logo_rect.top = 580
+        rect = self.game.resources['images']['pygame_logo'].get_rect()
+        self.pygame_logo = ImageButton((self.game.screen_width - rect.width) / 2, 580,
+                                       self.game.resources['images']['pygame_logo'])
 
         self.taffer_text_img = self.game.resources['fonts']['default_serif'].render(self.taffer_text, True, (255, 255, 255, 255))
         self.taffer_text_rect = self.taffer_text_img.get_rect()
@@ -64,8 +62,8 @@ class Presents(Base):
         self.game.surface.fill((0, 0, 0, 255))
 
         self.game.surface.blit(self.taffer_text_img, self.taffer_text_rect)
-        self.game.surface.blit(self.taffer_logo, self.taffer_logo_rect)
-        self.game.surface.blit(self.pygame_logo, self.pygame_logo_rect)
+        self.taffer_logo.draw()
+        self.pygame_logo.draw()
         self.game.surface.blit(self.pygame_text_img, self.pygame_text_rect)
 
         self.fade.draw()

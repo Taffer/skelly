@@ -7,6 +7,7 @@ MIT license, see LICENSE.md for details.
 import pygame
 
 from .Base import Base, ColorFade
+from ..ui.ImageButton import ImageButton
 
 
 '''
@@ -90,8 +91,7 @@ class Title(Base):
         self.loading_routine = nil
         '''
 
-        self.title_image = self.game.resources['images']['skelly_title']
-        self.title_rect = self.title_image.get_rect()
+        self.title_image = ImageButton(0, 0, self.game.resources['images']['skelly_title'])
 
         self.skelly_text_img = self.game.resources['fonts']['skelly_title'].render(self.skelly_text, True, (255, 255, 255, 255))
         self.skelly_text_rect = self.skelly_text_img.get_rect()
@@ -111,7 +111,7 @@ class Title(Base):
     def draw(self):
         self.game.surface.fill((0, 0, 0, 255))
 
-        self.game.surface.blit(self.title_image, self.title_rect)
+        self.title_image.draw()
         self.game.surface.blit(self.skelly_text_img, self.skelly_text_rect)
         self.game.surface.blit(self.subtitle_text_img, self.subtitle_text_rect)
         self.game.surface.blit(self.loading_label, self.loading_label_rect)

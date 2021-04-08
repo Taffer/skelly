@@ -5,10 +5,13 @@ By Chris Herborth (https://github.com/Taffer)
 MIT license, see LICENSE.md for details.
 '''
 
+import os
+import platform
 import pygame
 import sys
 import time
 
+import src.GameSettings
 import src.screens.Presents
 
 
@@ -17,6 +20,8 @@ WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 GAME_IDENTITY = 'ca.taffer.skelly'
 PYGAME_VERSION = (2, 0, 1)  # Expected minimum Pygame version.
+
+SETTINGS_FILENAME = 'settings.ini'
 
 
 class Game:
@@ -28,18 +33,42 @@ class Game:
 
         self.screen_width = WINDOW_WIDTH
         self.screen_height = WINDOW_HEIGHT
-        '''
-        -- Load settings if they exist. If not, create defaults.
-        load_settings(settings_filename)
 
+        self.settings = self.load_settings(SETTINGS_FILENAME)
+        '''
         -- Load strings.
         gameResources.text:addLanguage('en', I18n['en'])
         gameResources.text:addLanguage('es', I18n['es'])
-
-        -- Minimal loading screen.
-        gameState.screen = gameResources.screens.presents:new(gameResources, gameState)
         '''
         self.screen = src.screens.Presents.Presents(self)
+
+    def find_config_dir(self) -> str:
+        ''' Based on the OS, find the configuration directory.
+        '''
+        system = platform.system()
+        if system == 'Linux':
+            return os.path.join(os.getenv('HOME'), '.config', GAME_IDENTITY)
+        else:
+            raise RuntimeError(f'Unsupported system: {system}')
+
+    def load_settings(self, filename: str) -> src.GameSettings.GameSettings:
+        defaults = {
+            # Default settings.
+            'music_volume': 1.0,
+            'sfx_volume': 1.0,
+            'voice_volume': 1.0,
+            'overall_volume': 1.0,
+
+            'language': 'en'
+        }
+
+        dir = self.find_config_dir()
+        path = os.path.join(dir, filename)
+
+        return src.GameSettings.GameSettings(path, defaults)
+
+    def save_settings(self):
+        self.settings.save()
 
     def update(self, dt):
         self.screen.update(dt)
@@ -86,7 +115,7 @@ class Game:
 
 def main():
     if PYGAME_VERSION > pygame.version.vernum:
-        raise SystemExit('Pygame version too old:'.format(pygame.version.ver))
+        raise SystemExit('Pygame version too old: {0}'.format(pygame.version.ver))
 
     pygame.init()
 
@@ -114,6 +143,7 @@ def main():
                 skelly.keypressed(event)
             elif event.type == pygame.KEYUP:
                 skelly.keyreleased(event)
+
 
 if __name__ == '__main__':
     main()

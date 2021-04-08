@@ -13,6 +13,11 @@ class Presents(Base):
     def __init__(self, game):
         super().__init__(game)
 
+        self.next_screen = 'Title'
+        '''
+        self.resources.text:setLanguage(gameState.settings:get('language'))
+        '''
+
         self.game.resources['fonts'] = {
             'default_serif': pygame.font.Font('graphics/A_Font_with_Serifs.ttf', 72),
             'default_mono': pygame.font.Font('graphics/LiberationMono-Bold.ttf', 16)
@@ -31,12 +36,6 @@ class Presents(Base):
         self.taffer_text = 'Taffer presents…'
         self.pygame_text = 'A game made with Pygame…'
 
-        '''
-        self:setNextScreen('Title')
-
-        self.resources.text:setLanguage(gameState.settings:get('language'))
-        '''
-
         self.fade = ColorFade((0, 0, 0, 255), (0, 0, 0, 0), 1)  # 1 second fade
         self.fade_out = False
         self.exit_countdown = 2  # Seconds after fade to auto-exit.
@@ -49,7 +48,7 @@ class Presents(Base):
         self.pygame_logo = self.game.resources['images']['pygame_logo']
         self.pygame_logo_rect = self.pygame_logo.get_rect()
         self.pygame_logo_rect.left = (self.game.screen_width - self.pygame_logo_rect.width) / 2
-        self.pygame_logo_rect.top = 500
+        self.pygame_logo_rect.top = 580
 
         self.taffer_text_img = self.game.resources['fonts']['default_serif'].render(self.taffer_text, True, (255, 255, 255, 255))
         self.taffer_text_rect = self.taffer_text_img.get_rect()

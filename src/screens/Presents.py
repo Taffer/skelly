@@ -9,6 +9,10 @@ import pygame
 from . import Base, ColorFade
 from ..ui import ImageButton, Label
 
+BLACK = pygame.colordict.THECOLORS['black']
+BLACK_ALPHA = (BLACK[0], BLACK[1], BLACK[2], 0)  # BLACK, but fully transparent
+WHITE = pygame.colordict.THECOLORS['white']
+
 
 class Presents(Base):
     def __init__(self, game):
@@ -37,30 +41,28 @@ class Presents(Base):
         self.taffer_text = 'Taffer presents…'
         self.pygame_text = 'A game made with Pygame…'
 
-        self.fade = ColorFade((0, 0, 0, 255), (0, 0, 0, 0), 1)  # 1 second fade
+        self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)  # 1 second fade
         self.fade_out = False
         self.exit_countdown = 2  # Seconds after fade to auto-exit.
 
+        self.ui = []
         rect = self.game.resources['images']['taffer'].get_rect()
-        self.taffer_logo = ImageButton((self.game.screen_width - rect.width) / 2, 120, self.game.resources['images']['taffer'])
+        self.ui.append(ImageButton((self.game.screen_width - rect.width) / 2, 120, self.game.resources['images']['taffer']))
 
         rect = self.game.resources['images']['pygame_logo'].get_rect()
-        self.pygame_logo = ImageButton((self.game.screen_width - rect.width) / 2, 580,
-                                       self.game.resources['images']['pygame_logo'])
+        self.ui.append(ImageButton((self.game.screen_width - rect.width) / 2, 580, self.game.resources['images']['pygame_logo']))
 
-        self.taffer_text_label = Label(self.game.screen_width / 2, 16, self.taffer_text,
-                                       self.game.resources['fonts']['default_serif'], (255, 255, 255, 255), 'centre')
+        self.ui.append(Label(self.game.screen_width / 2, 16, self.taffer_text, self.game.resources['fonts']['default_serif'],
+                       WHITE, 'centre'))
 
-        self.pygame_text_label = Label(self.game.screen_width / 2, 640, self.pygame_text,
-                                       self.game.resources['fonts']['default_mono'], (255, 255, 255, 255), 'centre')
+        self.ui.append(Label(self.game.screen_width / 2, 640, self.pygame_text, self.game.resources['fonts']['default_mono'],
+                       WHITE, 'centre'))
 
     def draw(self):
-        self.game.surface.fill((0, 0, 0, 255))
+        self.game.surface.fill(BLACK)
 
-        self.taffer_text_label.draw()
-        self.taffer_logo.draw()
-        self.pygame_logo.draw()
-        self.pygame_text_label.draw()
+        for item in self.ui:
+            item.draw()
 
         self.fade.draw()
 
@@ -76,5 +78,5 @@ class Presents(Base):
             if self.fade.isDone():
                 self.exit_countdown = self.exit_countdown - dt
                 if self.exit_countdown < 0:
-                    self.fade = ColorFade((0, 0, 0, 0), (0, 0, 0, 255), 1)
+                    self.fade = ColorFade(BLACK_ALPHA, BLACK, 1)
                     self.fade_out = True

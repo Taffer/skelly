@@ -32,7 +32,6 @@ class Label(Base):
             self.x = self.orig_x - self.rect.width
         elif self.align == 'centre' or self.align == 'center':
             self.x = self.orig_x - self.rect.width / 2
-            print('Set x to {0}'.format(self.x))
 
         self.rect.left = self.x
         self.rect.top = self.y

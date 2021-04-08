@@ -7,7 +7,11 @@ MIT license, see LICENSE.md for details.
 import pygame
 
 from . import Base, ColorFade
-from ..ui import ImageButton
+from ..ui import ImageButton, Label
+
+BLACK = pygame.colordict.THECOLORS['black']
+BLACK_ALPHA = (BLACK[0], BLACK[1], BLACK[2], 0)  # BLACK, but fully transparent
+WHITE = pygame.colordict.THECOLORS['white']
 
 
 '''
@@ -83,7 +87,7 @@ class Title(Base):
         self.subtitle_text = 'A tale of the Skeleton War'
         self.loading_text = 'Loading…'
 
-        self.fade = ColorFade((0, 0, 0, 255), (0, 0, 0, 0), 1)  # 1 second fade
+        self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)  # 1 second fade
         self.fade_out = False
 
         self.loaded_resource = ""
@@ -92,30 +96,23 @@ class Title(Base):
         self.loading_routine = nil
         '''
 
-        self.title_image = ImageButton(0, 0, self.game.resources['images']['skelly_title'])
+        self.ui = [
+            ImageButton(0, 0, self.game.resources['images']['skelly_title']),
+            Label(self.game.screen_width / 2, 40, self.skelly_text, self.game.resources['fonts']['skelly_title'],
+                  WHITE, 'centre'),
+            Label(self.game.screen_width / 2, 220, self.subtitle_text, self.game.resources['fonts']['default_mono'],
+                  WHITE, 'centre'),
+        ]
 
-        self.skelly_text_img = self.game.resources['fonts']['skelly_title'].render(self.skelly_text, True, (255, 255, 255, 255))
-        self.skelly_text_rect = self.skelly_text_img.get_rect()
-        self.skelly_text_rect.left = (self.game.screen_width - self.skelly_text_rect.width) / 2
-        self.skelly_text_rect.top = 40
-
-        self.subtitle_text_img = self.game.resources['fonts']['default_mono'].render(self.subtitle_text, True, (255, 255, 255, 255))
-        self.subtitle_text_rect = self.subtitle_text_img.get_rect()
-        self.subtitle_text_rect.left = (self.game.screen_width - self.subtitle_text_rect.width) / 2
-        self.subtitle_text_rect.top = self.skelly_text_rect.top + self.skelly_text_rect.height + 10
-
-        self.loading_label = self.game.resources['fonts']['default_mono'].render(self.loading_text, True, (255, 255, 255, 255))
-        self.loading_label_rect = self.loading_label.get_rect()
-        self.loading_label_rect.left = self.loading_x
-        self.loading_label_rect.top = self.loading_y
+        self.loading_label = Label(self.loading_x, self.loading_y, self.loading_text, self.game.resources['fonts']['default_mono'],
+                                   WHITE, 'left')
+        self.ui.append(self.loading_label)
 
     def draw(self):
-        self.game.surface.fill((0, 0, 0, 255))
+        self.game.surface.fill(BLACK)
 
-        self.title_image.draw()
-        self.game.surface.blit(self.skelly_text_img, self.skelly_text_rect)
-        self.game.surface.blit(self.subtitle_text_img, self.subtitle_text_rect)
-        self.game.surface.blit(self.loading_label, self.loading_label_rect)
+        for item in self.ui:
+            item.draw()
 
         self.fade.draw()
 
@@ -130,7 +127,7 @@ class Title(Base):
             # If we're fading in...
             if self.fade.isDone():
                 if self.loading_finished:
-                    self.fade = ColorFade((0, 0, 0, 0), (0, 0, 0, 255), 1)
+                    self.fade = ColorFade(BLACK_ALPHA, BLACK, 1)
                     self.fade_out = True
         '''
         -- Load resources.

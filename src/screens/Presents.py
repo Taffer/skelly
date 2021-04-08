@@ -7,7 +7,7 @@ MIT license, see LICENSE.md for details.
 import pygame
 
 from . import Base, ColorFade
-from ..ui import ImageButton
+from ..ui import ImageButton, Label
 
 
 class Presents(Base):
@@ -48,23 +48,19 @@ class Presents(Base):
         self.pygame_logo = ImageButton((self.game.screen_width - rect.width) / 2, 580,
                                        self.game.resources['images']['pygame_logo'])
 
-        self.taffer_text_img = self.game.resources['fonts']['default_serif'].render(self.taffer_text, True, (255, 255, 255, 255))
-        self.taffer_text_rect = self.taffer_text_img.get_rect()
-        self.taffer_text_rect.left = (self.game.screen_width - self.taffer_text_rect.width) / 2
-        self.taffer_text_rect.top = 16
+        self.taffer_text_label = Label(self.game.screen_width / 2, 16, self.taffer_text,
+                                       self.game.resources['fonts']['default_serif'], (255, 255, 255, 255), 'centre')
 
-        self.pygame_text_img = self.game.resources['fonts']['default_mono'].render(self.pygame_text, True, (255, 255, 255, 255))
-        self.pygame_text_rect = self.pygame_text_img.get_rect()
-        self.pygame_text_rect.left = (self.game.screen_width - self.pygame_text_rect.width) / 2
-        self.pygame_text_rect.top = 640
+        self.pygame_text_label = Label(self.game.screen_width / 2, 640, self.pygame_text,
+                                       self.game.resources['fonts']['default_mono'], (255, 255, 255, 255), 'centre')
 
     def draw(self):
         self.game.surface.fill((0, 0, 0, 255))
 
-        self.game.surface.blit(self.taffer_text_img, self.taffer_text_rect)
+        self.taffer_text_label.draw()
         self.taffer_logo.draw()
         self.pygame_logo.draw()
-        self.game.surface.blit(self.pygame_text_img, self.pygame_text_rect)
+        self.pygame_text_label.draw()
 
         self.fade.draw()
 

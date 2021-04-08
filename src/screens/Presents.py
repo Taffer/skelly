@@ -6,8 +6,8 @@ MIT license, see LICENSE.md for details.
 
 import pygame
 
-from .Base import Base, ColorFade
-from ..ui.ImageButton import ImageButton
+from . import Base, ColorFade
+from ..ui import ImageButton
 
 
 class Presents(Base):

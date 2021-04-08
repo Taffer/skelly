@@ -5,7 +5,7 @@
 
 import pygame
 
-from .Base import Base
+from . import Base
 
 
 class ImageButton(Base):

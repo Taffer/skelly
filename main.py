@@ -11,9 +11,8 @@ import pygame
 import sys
 import time
 
-import src.GameSettings
-import src.screens.Presents
-import src.screens.Title
+import src
+import src.screens
 
 
 WINDOW_TITLE = 'Skelly'
@@ -41,7 +40,7 @@ class Game:
         gameResources.text:addLanguage('en', I18n['en'])
         gameResources.text:addLanguage('es', I18n['es'])
         '''
-        self.screen = src.screens.Presents.Presents(self)
+        self.screen = src.screens.Presents(self)
 
     def find_config_dir(self) -> str:
         ''' Based on the OS, find the configuration directory.
@@ -52,7 +51,7 @@ class Game:
         else:
             raise RuntimeError(f'Unsupported system: {system}')
 
-    def load_settings(self, filename: str) -> src.GameSettings.GameSettings:
+    def load_settings(self, filename: str) -> src.GameSettings:
         defaults = {
             # Default settings.
             'music_volume': 1.0,
@@ -66,7 +65,7 @@ class Game:
         dir = self.find_config_dir()
         path = os.path.join(dir, filename)
 
-        return src.GameSettings.GameSettings(path, defaults)
+        return src.GameSettings(path, defaults)
 
     def save_settings(self):
         self.settings.save()
@@ -78,9 +77,9 @@ class Game:
         if self.screen.can_exit:
             next_screen = self.screen.next_screen
             if next_screen == 'Presents':  # "Taffer presents" screen
-                self.screen = src.screens.Presents.Presents(self)
+                self.screen = src.screens.Presents(self)
             elif next_screen == 'Title':  # Title screen
-                self.screen = src.screens.Title.Title(self)
+                self.screen = src.screens.Title(self)
             else:
                 self.save_settings()
                 pygame.mixer.music.stop()

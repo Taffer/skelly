@@ -7,8 +7,8 @@ MIT license, see LICENSE.md for details.
 import pygame
 
 from . import Base
-from . import ColorFade
 from .. import RESOURCE_LIST
+from ..ui import ColorFade
 from ..ui import ImageButton
 from ..ui import Label
 
@@ -74,8 +74,6 @@ class Title(Base):
         self.loading_y = self.game.screen_height - 16 - self.game.resources['fonts']['default_mono'].get_height()
 
         title_text = self.game.text.getText('title')
-        self.skelly_text = self.game.text.getText('skelly_title')
-        self.subtitle_text = title_text['subtitle_text']
         self.loading_text = title_text['loading_text']
         self.done_text = title_text['loading_done']
 
@@ -86,20 +84,16 @@ class Title(Base):
         self.loading_finished = False
         self.loading_routine = loader(self.game.resources, RESOURCE_LIST, self.done_text)
 
-        self.ui = [
-            ImageButton(0, 0, self.game.resources['images']['skelly_title']),
-            Label(self.game.screen_width / 2, 40, self.skelly_text, self.game.resources['fonts']['skelly_title'],
-                  WHITE, 'centre'),
-            Label(self.game.screen_width / 2, 220, self.subtitle_text, self.game.resources['fonts']['default_mono'],
-                  WHITE, 'centre'),
-        ]
+        self.addTitle()
 
+        self.ui = []
         self.loading_label = Label(self.loading_x, self.loading_y, self.loading_text, self.game.resources['fonts']['default_mono'],
                                    WHITE, 'left')
         self.ui.append(self.loading_label)
 
     def draw(self):
         self.game.surface.fill(BLACK)
+        self.drawTitle()
 
         for item in self.ui:
             item.draw()

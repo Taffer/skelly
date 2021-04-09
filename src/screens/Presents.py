@@ -7,7 +7,7 @@ MIT license, see LICENSE.md for details.
 import pygame
 
 from . import Base
-from . import ColorFade
+from ..ui import ColorFade
 from ..ui import ImageButton
 from ..ui import Label
 

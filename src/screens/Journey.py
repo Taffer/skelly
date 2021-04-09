@@ -6,8 +6,8 @@
 import pygame
 
 from . import Base
-from . import ColorFade
 from ..ui import Button
+from ..ui import ColorFade
 from ..ui import ImageButton
 from ..ui import Label
 
@@ -22,10 +22,9 @@ class Journey(Base):
 
         # next_screen is set when a button is clicked.
 
-        title_text = game.text.getText('title')
+        self.addTitle()
+
         journey_text = game.text.getText('journey')
-        self.skelly_text = game.text.getText('skelly_title')
-        self.subtitle_text = title_text['subtitle_text']
         self.journey_text = journey_text['onward_text']
         self.newgame_text = journey_text['new_game_text']
         self.settings_text = journey_text['settings_text']
@@ -48,25 +47,9 @@ class Journey(Base):
         self.credits_button = Button(x, 550, button_texture, self.credits_text, button_font, button_color)
         self.exit_button = Button(x, 620, button_texture, self.exit_text, button_font, button_color)
 
-        title_image = game.resources['images']['skelly_title']
-        font_mono = game.resources['fonts']['default_mono']
-        font_title = game.resources['fonts']['skelly_title']
-
         self.click_button = None  # Mouse-down on which button?
 
         self.ui = [
-            ImageButton(0, 0, title_image),
-            Label(game.screen_width / 2, 40, self.skelly_text, font_title, WHITE, 'centre'),
-            Label(game.screen_width / 2, 220, self.subtitle_text, font_mono, WHITE, 'centre'),
-
-            self.journey_button,
-            self.newgame_button,
-            self.settings_button,
-            self.credits_button,
-            self.exit_button,
-        ]
-
-        self.buttons = [
             self.journey_button,
             self.newgame_button,
             self.settings_button,
@@ -75,6 +58,9 @@ class Journey(Base):
         ]
 
     def draw(self):
+        self.game.surface.fill(BLACK)
+        self.drawTitle()
+
         for item in self.ui:
             item.draw()
 
@@ -105,7 +91,7 @@ class Journey(Base):
         y = event.pos[1]
 
         self.click_button = None
-        for button in self.buttons:
+        for button in self.ui:
             if button.intersects(x, y):
                 self.click_button = button
 

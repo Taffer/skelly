@@ -23,7 +23,7 @@ def loader(resource, file_list, done_text):
 
     for k, v in file_list['fonts'].items():
         try:
-            resource['fonts'][k] = pygame.font.Font(v['src'], v['size'])
+            resource['fonts'][k] = pygame.freetype.Font(v['src'], v['size'])
         except Exception as ex:
             print('Unable to load font: {0} {1}'.format(k, ex))
         yield v['src']
@@ -66,11 +66,11 @@ class Title(Base):
 
         self.next_screen = 'Journey'
 
-        self.game.resources['fonts']['skelly_title'] = pygame.font.Font('graphics/Gypsy Curse.ttf', 144)
+        self.game.resources['fonts']['skelly_title'] = pygame.freetype.Font('graphics/Gypsy Curse.ttf', 144)
         self.game.resources['images']['skelly_title'] = pygame.image.load('graphics/Gersdorff_Feldbuch_skeleton.png').convert()
 
         self.loading_x = 16
-        self.loading_y = self.game.screen_height - 16 - self.game.resources['fonts']['default_mono'].get_height()
+        self.loading_y = self.game.screen_height - 16 - self.game.resources['fonts']['default_mono'].get_sized_height()
 
         title_text = self.game.text.getText('title')
         self.loading_text = title_text['loading_text']

@@ -21,7 +21,7 @@ class Button(Base):
         self.rect.top = y
 
         label_x = x + self.rect.width / 2
-        label_y = y + (self.rect.height - font.get_height()) / 2
+        label_y = y + (self.rect.height - font.get_sized_height()) / 2
         self.labelButton = Label.Label(label_x, label_y, text, font, color, 'centre')
 
     def draw(self):

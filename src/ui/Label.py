@@ -19,14 +19,16 @@ class Label(Base):
         self.color = color
         self.align = align
 
+        self.texture = None
+        self.rect = None
+
         self.setText(text)
 
     def draw(self):
         pygame.display.get_surface().blit(self.texture, self.rect)
 
     def setText(self, text):
-        self.texture = self.font.render(text, True, self.color)
-        self.rect = self.texture.get_rect()
+        self.texture, self.rect = self.font.render(text, self.color)
 
         if self.align == 'right':
             self.x = self.orig_x - self.rect.width

@@ -1,17 +1,5 @@
--- Skelly "Intro" screen.
---
--- By Chris Herborth (https://github.com/Taffer)
--- MIT license, see LICENSE.md for details.
-
-local Class = require 'lib/middleclass/middleclass'
-local UIScreenBase = require 'src/screens/UIScreenBase'
-
--- =============================================================================
-local IntroScreen = Class('NewGameScreen', UIScreenBase)
-function IntroScreen:initialize(resources, state)
-    UIScreenBase.initialize(self, resources, state)
-    self:setNextScreen('Game')
-
+# Intro screen
+'''
     -- Intro animated:
     --
     -- Scene: 1 - Farm, viewport bottom-left
@@ -30,13 +18,4 @@ function IntroScreen:initialize(resources, state)
     --  Animate: Skelly looks around, is confused?
     --
     -- Transition to Game
-end
-
--- Check for input events.
-function IntroScreen:checkInputs(keyboard, mouse, gamepad)
-    if keyboard['escape'] or mouse[1] or gamepad['a'] then
-        self:setExit()
-    end
-end
-
-return IntroScreen
+'''

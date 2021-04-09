@@ -9,6 +9,7 @@ import os
 import platform
 import pygame
 import pygame.freetype
+import pygame.gfxdraw
 import sys
 import time
 
@@ -84,7 +85,9 @@ class Game:
         # Screen state machine:
         if self.screen.can_exit:
             next_screen = self.screen.next_screen
-            if next_screen == 'Journey':  # "Journey Onwards" screen
+            if next_screen == 'Credits':  # Credits screen
+                self.screen = src.screens.Credits(self)
+            elif next_screen == 'Journey':  # "Journey Onwards" screen
                 self.screen = src.screens.Journey(self)
             elif next_screen == 'Presents':  # "Taffer presents" screen
                 self.screen = src.screens.Presents(self)

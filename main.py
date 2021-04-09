@@ -29,7 +29,7 @@ class Game:
         self.surface = surface
 
         self.state = {}
-        self.resources = {
+        self.resources = {  # Loaded by loader() in the Title screen.
             'fonts': {},
             'images': {},
             'music': {},

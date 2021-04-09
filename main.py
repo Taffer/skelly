@@ -87,6 +87,8 @@ class Game:
                 self.screen = src.screens.Journey(self)
             elif next_screen == 'Presents':  # "Taffer presents" screen
                 self.screen = src.screens.Presents(self)
+            elif next_screen == 'Settings':  # Blank with Settings overlay
+                self.screen = src.screens.Settings(self)
             elif next_screen == 'Title':  # Title screen
                 self.screen = src.screens.Title(self)
             else:

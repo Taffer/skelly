@@ -29,7 +29,13 @@ class Game:
         self.surface = surface
 
         self.state = {}
-        self.resources = {}
+        self.resources = {
+            'fonts': {},
+            'images': {},
+            'music': {},
+            'sounds': {},
+            'maps': {},
+        }
 
         self.screen_width = WINDOW_WIDTH
         self.screen_height = WINDOW_HEIGHT

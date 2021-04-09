@@ -7,6 +7,7 @@ MIT license, see LICENSE.md for details.
 import pygame
 
 from . import Base, ColorFade
+from .. import RESOURCE_LIST
 from ..ui import ImageButton, Label
 
 BLACK = pygame.colordict.THECOLORS['black']
@@ -14,60 +15,48 @@ BLACK_ALPHA = (BLACK[0], BLACK[1], BLACK[2], 0)  # BLACK, but fully transparent
 WHITE = pygame.colordict.THECOLORS['white']
 
 
-'''
-local function loader(resource, file_list)
-    local yield = coroutine.yield
+def loader(resource, file_list, done_text):
+    ''' Load the files in the RESOURCE_LIST.
+    '''
+    yield ''
 
-    -- Load the files listed into the resource table.
-    for k,v in pairs(file_list.fonts) do
-        resource.fonts[k] = love.graphics.newFont(v.src, v.size)
-        if resource.fonts[k] == nil then
-            print('Unable to load font:', k)
-        end
+    for k, v in file_list['fonts'].items():
+        try:
+            resource['fonts'][k] = pygame.font.Font(v['src'], v['size'])
+        except Exception as ex:
+            print('Unable to load font: {0} {1}'.format(k, ex))
+        yield v['src']
 
-        yield(v.src)
-    end
+    for k, v in file_list['images'].items():
+        try:
+            resource['images'][k] = pygame.image.load(v)
+        except Exception as ex:
+            print('Unable to load image: {0} {1}'.format(k, ex))
+        yield v
 
-    for k,v in pairs(file_list.images) do
-        resource.images[k] = love.graphics.newImage(v)
-        if resource.images[k] == nil then
-            print('Unable to load image:', k)
-        end
+    for k, v in file_list['music'].items():
+        try:
+            resource['music'][k] = pygame.mixer.Sound(v)
+        except Exception as ex:
+            print('Unable to load music: {0} {1}'.format(k, ex))
+        yield v
 
-        yield(v)
-    end
+    for k, v in file_list['sounds'].items():
+        try:
+            resource['sounds'][k] = pygame.mixer.Sound(v)
+        except Exception as ex:
+            print('Unable to load sound: {0} {1}'.format(k, ex))
+        yield v
 
-    for k,v in pairs(file_list.music) do
-        resource.music[k] = love.audio.newSource(v, 'stream')
-        if resource.music[k] == nil then
-            print('Unable to load music:', k)
-        end
+    for k, v in file_list['maps'].items():
+        try:
+            with open(v) as fp:
+                resource['maps'][k] = fp.read()  # Load directly into Tiled obj?
+        except Exception as ex:
+            print('Unable to load map: {0} {1}'.format(k, ex))
+        yield v
 
-        yield(v)
-    end
-
-    for k,v in pairs(file_list.sounds) do
-        resource.sounds[k] = love.audio.newSource(v, 'static')
-        if resource.sounds[k] == nil then
-            print('Unable to load sound:', k)
-        end
-
-        yield(v)
-    end
-
-    for k, v in pairs(file_list.maps) do
-        resource.maps[k] = require(v)
-        if resource.maps[k] == nil then
-            print('Unable to load map:', k)
-        end
-
-        yield(v)
-    end
-
-    local title_text = resource.text:getText('title')
-    return title_text.loading_done
-end
-'''
+    yield done_text
 
 
 class Title(Base):
@@ -75,7 +64,6 @@ class Title(Base):
         super().__init__(game)
 
         self.next_screen = 'Journey'
-        # self.next_screen = 'NewGame'
 
         self.game.resources['fonts']['skelly_title'] = pygame.font.Font('graphics/Gypsy Curse.ttf', 144)
         self.game.resources['images']['skelly_title'] = pygame.image.load('graphics/Gersdorff_Feldbuch_skeleton.png')
@@ -93,10 +81,8 @@ class Title(Base):
         self.fade_out = False
 
         self.loaded_resource = ""
-        self.loading_finished = True
-        '''
-        self.loading_routine = nil
-        '''
+        self.loading_finished = False
+        self.loading_routine = loader(self.game.resources, RESOURCE_LIST, self.done_text)
 
         self.ui = [
             ImageButton(0, 0, self.game.resources['images']['skelly_title']),
@@ -131,17 +117,10 @@ class Title(Base):
                 if self.loading_finished:
                     self.fade = ColorFade(BLACK_ALPHA, BLACK, 1)
                     self.fade_out = True
-        '''
-        -- Load resources.
-        if self.loading_routine then
-            local resume = coroutine.resume
-            alive, self.loaded_resource = resume(self.loading_routine, self.resources, rsrc_list)
-            if not alive then
-                self.loading_finished = true
-                local title_text = self.resources.text:getText('title')
-                self.loaded_resource = title_text.loading_done
-            end
-        else
-            self.loading_routine = coroutine.create(loader)
-        end
-        '''
+
+            if not self.loading_finished:
+                try:
+                    result = self.loading_routine.__next__()
+                    self.loading_label.setText('{0} {1}'.format(self.loading_text, result))
+                except StopIteration:
+                    self.loading_finished = True

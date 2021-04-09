@@ -23,17 +23,13 @@ class Presents(Base):
         self.resources.text:setLanguage(gameState.settings:get('language'))
         '''
 
-        self.game.resources['fonts'] = {
-            'default_serif': pygame.font.Font('graphics/A_Font_with_Serifs.ttf', 72),
-            'default_mono': pygame.font.Font('graphics/LiberationMono-Bold.ttf', 16)
-            }
-        self.game.resources['images'] = {
-            'pygame_logo': pygame.image.load('graphics/pygame-logo.png'),
-            'taffer': pygame.image.load('graphics/taffer-ronos.png')
-            }
-        self.game.resources['music'] = {
-            'theme': pygame.mixer.music.load('music/Heroic Demise (New).ogg')
-        }
+        self.game.resources['fonts']['default_serif'] = pygame.font.Font('graphics/A_Font_with_Serifs.ttf', 72)
+        self.game.resources['fonts']['default_mono'] = pygame.font.Font('graphics/LiberationMono-Bold.ttf', 16)
+
+        self.game.resources['images']['pygame_logo'] = pygame.image.load('graphics/pygame-logo.png')
+        self.game.resources['images']['taffer'] = pygame.image.load('graphics/taffer-ronos.png')
+
+        self.game.resources['music']['theme'] = pygame.mixer.music.load('music/Heroic Demise (New).ogg')
 
         pygame.mixer.music.set_volume(self.game.settings.get('music_volume') * self.game.settings.get('overall_volume'))
         pygame.mixer.music.play()

@@ -9,12 +9,11 @@ import pygame
 from . import Base
 from .. import RESOURCE_LIST
 from ..ui import ColorFade
-from ..ui import ImageButton
 from ..ui import Label
 
-BLACK = pygame.colordict.THECOLORS['black']
-BLACK_ALPHA = (BLACK[0], BLACK[1], BLACK[2], 0)  # BLACK, but fully transparent
-WHITE = pygame.colordict.THECOLORS['white']
+BLACK = pygame.Color('black')
+BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully transparent
+WHITE = pygame.Color('white')
 
 
 def loader(resource, file_list, done_text):
@@ -31,7 +30,7 @@ def loader(resource, file_list, done_text):
 
     for k, v in file_list['images'].items():
         try:
-            resource['images'][k] = pygame.image.load(v)
+            resource['images'][k] = pygame.image.load(v).convert_alpha()
         except Exception as ex:
             print('Unable to load image: {0} {1}'.format(k, ex))
         yield v
@@ -68,7 +67,7 @@ class Title(Base):
         self.next_screen = 'Journey'
 
         self.game.resources['fonts']['skelly_title'] = pygame.font.Font('graphics/Gypsy Curse.ttf', 144)
-        self.game.resources['images']['skelly_title'] = pygame.image.load('graphics/Gersdorff_Feldbuch_skeleton.png')
+        self.game.resources['images']['skelly_title'] = pygame.image.load('graphics/Gersdorff_Feldbuch_skeleton.png').convert()
 
         self.loading_x = 16
         self.loading_y = self.game.screen_height - 16 - self.game.resources['fonts']['default_mono'].get_height()

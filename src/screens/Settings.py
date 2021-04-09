@@ -9,9 +9,9 @@ from . import Base
 # from . import SettingsOverlay
 from ..ui import ColorFade
 
-BLACK = pygame.colordict.THECOLORS['black']
-BLACK_ALPHA = (BLACK[0], BLACK[1], BLACK[2], 0)  # BLACK, but fully transparent
-WHITE = pygame.colordict.THECOLORS['white']
+BLACK = pygame.Color('black')
+BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully transparent
+WHITE = pygame.Color('white')
 
 
 class Settings(Base):

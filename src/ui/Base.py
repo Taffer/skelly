@@ -12,10 +12,4 @@ class Base:
         self.rect = pygame.Rect((0, 0, 0, 0))
 
     def intersects(self, x, y):
-        if x < self.rect.left or y < self.rect.top:
-            return False
-
-        if x > (self.rect.left + self.rect.width) or y > (self.rect.top + self.rect.height):
-            return False
-
-        return True
+        return self.rect.collidepoint(x, y)

@@ -7,11 +7,13 @@ MIT license, see LICENSE.md for details.
 from .Base import Base
 from .Journey import Journey
 from .Presents import Presents
+from .Settings import Settings
 from .Title import Title
 
 __all__ = [
     'Base',
     'Journey',
     'Presents',
+    'Settings',
     'Title',
 ]

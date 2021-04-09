@@ -9,7 +9,7 @@ import pygame
 from ..ui import ImageButton
 from ..ui import Label
 
-WHITE = pygame.colordict.THECOLORS['white']
+WHITE = pygame.Color('white')
 
 
 class Base:

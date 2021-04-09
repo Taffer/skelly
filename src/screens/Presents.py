@@ -11,9 +11,9 @@ from ..ui import ColorFade
 from ..ui import ImageButton
 from ..ui import Label
 
-BLACK = pygame.colordict.THECOLORS['black']
-BLACK_ALPHA = (BLACK[0], BLACK[1], BLACK[2], 0)  # BLACK, but fully transparent
-WHITE = pygame.colordict.THECOLORS['white']
+BLACK = pygame.Color('black')
+BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully transparent
+WHITE = pygame.Color('white')
 
 
 class Presents(Base):
@@ -28,8 +28,8 @@ class Presents(Base):
         self.game.resources['fonts']['default_serif'] = pygame.font.Font('graphics/A_Font_with_Serifs.ttf', 72)
         self.game.resources['fonts']['default_mono'] = pygame.font.Font('graphics/LiberationMono-Bold.ttf', 16)
 
-        self.game.resources['images']['pygame_logo'] = pygame.image.load('graphics/pygame-logo.png')
-        self.game.resources['images']['taffer'] = pygame.image.load('graphics/taffer-ronos.png')
+        self.game.resources['images']['pygame_logo'] = pygame.image.load('graphics/pygame-logo.png').convert_alpha()
+        self.game.resources['images']['taffer'] = pygame.image.load('graphics/taffer-ronos.png').convert_alpha()
 
         self.game.resources['music']['theme'] = pygame.mixer.music.load('music/Heroic Demise (New).ogg')
 

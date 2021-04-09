@@ -8,6 +8,7 @@ MIT license, see LICENSE.md for details.
 import os
 import platform
 import pygame
+import pygame.freetype
 import sys
 import time
 

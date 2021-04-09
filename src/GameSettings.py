@@ -23,9 +23,9 @@ class GameSettings:
         else:
             with open(self.filename) as fp:
                 data = json.load(fp)
-                for k in data:
+                for k, v in data.items():
                     # Overwrite any defaults with actual values.
-                    self.ini[k] = data[k]
+                    self.ini[k] = v
 
     def save(self):
         parts = os.path.split(self.filename)

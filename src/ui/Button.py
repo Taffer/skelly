@@ -16,12 +16,12 @@ class Button(Base):
         self.y = y
 
         self.imageButton = ImageButton.ImageButton(x, y, texture)
-        rect = texture.get_rect()
-        rect.left = x
-        rect.top = y
+        self.rect = texture.get_rect()
+        self.rect.left = x
+        self.rect.top = y
 
-        label_x = x + rect.width / 2
-        label_y = y + (rect.height - font.get_height()) / 2
+        label_x = x + self.rect.width / 2
+        label_y = y + (self.rect.height - font.get_height()) / 2
         self.labelButton = Label.Label(label_x, label_y, text, font, color, 'centre')
 
     def draw(self):

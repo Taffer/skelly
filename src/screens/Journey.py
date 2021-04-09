@@ -107,7 +107,6 @@ class Journey(Base):
         self.click_button = None
         for button in self.buttons:
             if button.intersects(x, y):
-                print('Clicked on {0}'.format(button.labelButton.text))
                 self.click_button = button
 
     def mouseup(self, event):

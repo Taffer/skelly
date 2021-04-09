@@ -38,8 +38,9 @@ class Presents(Base):
         pygame.mixer.music.set_volume(self.game.settings.get('music_volume') * self.game.settings.get('overall_volume'))
         pygame.mixer.music.play()
 
-        self.taffer_text = 'Taffer presents…'
-        self.pygame_text = 'A game made with Pygame…'
+        presents_text = self.game.text.getText('presents')
+        self.taffer_text = presents_text['taffer_text']
+        self.pygame_text = presents_text['pygame_text']
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)  # 1 second fade
         self.fade_out = False

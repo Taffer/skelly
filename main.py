@@ -35,11 +35,12 @@ class Game:
         self.screen_height = WINDOW_HEIGHT
 
         self.settings = self.load_settings(SETTINGS_FILENAME)
-        '''
-        -- Load strings.
-        gameResources.text:addLanguage('en', I18n['en'])
-        gameResources.text:addLanguage('es', I18n['es'])
-        '''
+
+        self.text = src.TextHandler()
+        self.text.addLanguage('en', src.I18N_EN)
+        self.text.addLanguage('es', src.I18N_ES)
+        self.text.setLanguage('en')
+
         self.screen = src.screens.Presents(self)
 
     def find_config_dir(self) -> str:

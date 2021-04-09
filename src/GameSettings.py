@@ -21,7 +21,6 @@ class GameSettings:
             # Save (and use) defaults.
             self.save()
         else:
-            print('Opening settings: {0}'.format(self.filename))
             with open(self.filename) as fp:
                 data = json.load(fp)
                 for k in data:

@@ -83,9 +83,11 @@ class Title(Base):
         self.loading_x = 16
         self.loading_y = self.game.screen_height - 16 - self.game.resources['fonts']['default_mono'].get_height()
 
-        self.skelly_text = 'Skelly'
-        self.subtitle_text = 'A tale of the Skeleton War'
-        self.loading_text = 'Loading…'
+        title_text = self.game.text.getText('title')
+        self.skelly_text = self.game.text.getText('skelly_title')
+        self.subtitle_text = title_text['subtitle_text']
+        self.loading_text = title_text['loading_text']
+        self.done_text = title_text['loading_done']
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)  # 1 second fade
         self.fade_out = False

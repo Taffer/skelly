@@ -6,9 +6,11 @@ MIT license, see LICENSE.md for details.
 
 import pygame
 
-from . import Base, ColorFade
+from . import Base
+from . import ColorFade
 from .. import RESOURCE_LIST
-from ..ui import ImageButton, Label
+from ..ui import ImageButton
+from ..ui import Label
 
 BLACK = pygame.colordict.THECOLORS['black']
 BLACK_ALPHA = (BLACK[0], BLACK[1], BLACK[2], 0)  # BLACK, but fully transparent

@@ -3,7 +3,9 @@
 # By Chris Herborth (https://github.com/Taffer)
 # MIT license, see LICENSE.md for details.
 
-from . import Base, ImageButton, Label
+from . import Base
+from . import ImageButton
+from . import Label
 
 
 class Button(Base):
@@ -13,14 +15,14 @@ class Button(Base):
         self.x = x
         self.y = y
 
-        self.imageButton = ImageButton(x, y, texture)
+        self.imageButton = ImageButton.ImageButton(x, y, texture)
         rect = texture.get_rect()
         rect.left = x
         rect.top = y
 
         label_x = x + rect.width / 2
         label_y = y + (rect.height - font.get_height()) / 2
-        self.labelButton = Label(label_x, label_y, text, font, color, 'centre')
+        self.labelButton = Label.Label(label_x, label_y, text, font, color, 'centre')
 
     def draw(self):
         self.imageButton.draw()

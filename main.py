@@ -83,7 +83,9 @@ class Game:
         # Screen state machine:
         if self.screen.can_exit:
             next_screen = self.screen.next_screen
-            if next_screen == 'Presents':  # "Taffer presents" screen
+            if next_screen == 'Journey':  # "Journey Onwards" screen
+                self.screen = src.screens.Journey(self)
+            elif next_screen == 'Presents':  # "Taffer presents" screen
                 self.screen = src.screens.Presents(self)
             elif next_screen == 'Title':  # Title screen
                 self.screen = src.screens.Title(self)
@@ -96,10 +98,19 @@ class Game:
         self.screen.draw()
 
     def keypressed(self, event):
-        pass
+        self.screen.keypressed(event)
 
     def keyreleased(self, event):
-        pass
+        self.screen.keyreleased(event)
+
+    def mousemoved(self, event):
+        self.screen.mousemoved(event)
+
+    def mousedown(self, event):
+        self.screen.mousedown(event)
+
+    def mouseup(self, event):
+        self.screen.mouseup(event)
 
 
 def main():
@@ -132,6 +143,12 @@ def main():
                 skelly.keypressed(event)
             elif event.type == pygame.KEYUP:
                 skelly.keyreleased(event)
+            elif event.type == pygame.MOUSEMOTION:
+                skelly.mousemoved(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                skelly.mousedown(event)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                skelly.mouseup(event)
 
 
 if __name__ == '__main__':

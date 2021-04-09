@@ -28,6 +28,21 @@ class Base:
         '''
         pass
 
+    def keypressed(self, event):
+        pass
+
+    def keyreleased(self, event):
+        pass
+
+    def mousemoved(self, event):
+        pass
+
+    def mousedown(self, event):
+        pass
+
+    def mouseup(self, event):
+        pass
+
 
 class ColorFade:
     def __init__(self, rgba1, rgba2, duration):

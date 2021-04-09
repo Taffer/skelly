@@ -52,11 +52,21 @@ class Journey(Base):
         font_mono = game.resources['fonts']['default_mono']
         font_title = game.resources['fonts']['skelly_title']
 
+        self.click_button = None  # Mouse-down on which button?
+
         self.ui = [
             ImageButton(0, 0, title_image),
             Label(game.screen_width / 2, 40, self.skelly_text, font_title, WHITE, 'centre'),
             Label(game.screen_width / 2, 220, self.subtitle_text, font_mono, WHITE, 'centre'),
 
+            self.journey_button,
+            self.newgame_button,
+            self.settings_button,
+            self.credits_button,
+            self.exit_button,
+        ]
+
+        self.buttons = [
             self.journey_button,
             self.newgame_button,
             self.settings_button,
@@ -73,3 +83,51 @@ class Journey(Base):
 
     def update(self, dt):
         self.fade.update(dt)
+
+    def keyreleased(self, event):
+        if event.key == pygame.K_j:  # Journey onward!
+            pass
+        elif event.key == pygame.K_n:  # New game
+            self.next_screen = 'NewGame'
+            self.can_exit = True
+        elif event.key == pygame.K_s:  # Settings
+            self.next_screen = 'Settings'
+            self.can_exit = True
+        elif event.key == pygame.K_c:  # Credits
+            self.next_screen = 'Credits'
+            self.can_exit = True
+        elif event.key == pygame.K_ESCAPE:  # Exit
+            self.next_screen = 'Exit'
+            self.can_exit = True
+
+    def mousedown(self, event):
+        x = event.pos[0]
+        y = event.pos[1]
+
+        self.click_button = None
+        for button in self.buttons:
+            if button.intersects(x, y):
+                print('Clicked on {0}'.format(button.labelButton.text))
+                self.click_button = button
+
+    def mouseup(self, event):
+        x = event.pos[0]
+        y = event.pos[1]
+
+        if self.click_button is not None and self.click_button.intersects(x, y):
+            if self.click_button == self.journey_button:
+                pass
+            elif self.click_button == self.newgame_button:
+                self.next_screen = 'NewGame'
+                self.can_exit = True
+            elif self.click_button == self.settings_button:
+                self.next_screen = 'Settings'
+                self.can_exit = True
+            elif self.click_button == self.credits_button:
+                self.next_screen = 'Credits'
+                self.can_exit = True
+            elif self.click_button == self.exit_button:
+                self.next_screen = 'Exit'
+                self.can_exit = True
+
+        self.click_button = None

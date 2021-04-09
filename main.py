@@ -127,6 +127,14 @@ def main():
 
     skelly = Game(window)
 
+    ignore_events = [pygame.JOYAXISMOTION, pygame.JOYBALLMOTION, pygame.JOYHATMOTION, pygame.JOYBUTTONUP, pygame.JOYBUTTONDOWN,
+                     pygame.VIDEORESIZE, pygame.VIDEOEXPOSE, pygame.AUDIODEVICEADDED, pygame.AUDIODEVICEREMOVED,
+                     pygame.FINGERMOTION, pygame.FINGERDOWN, pygame.FINGERUP, pygame.MULTIGESTURE,
+                     pygame.DROPBEGIN, pygame.DROPCOMPLETE, pygame.DROPFILE, pygame.DROPTEXT, pygame.MIDIIN, pygame.MIDIOUT,
+                     pygame.CONTROLLERDEVICEADDED, pygame.JOYDEVICEADDED, pygame.CONTROLLERDEVICEREMOVED,
+                     pygame.JOYDEVICEREMOVED, pygame.CONTROLLERDEVICEREMAPPED]
+    pygame.event.set_blocked(ignore_events)
+
     prev_time = time.time()
     dt = 0
     while True:

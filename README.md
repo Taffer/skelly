@@ -23,19 +23,13 @@ your work on the original _Paranoia_ books!).
 
 ## Credits
 
-This is written in Lua, using the [LÖVE](https://love2d.org/) 2D game engine. I
-didn't know about that until I stumbled on [CS50's Introduction to Game
-Development](https://www.edx.org/course/cs50s-introduction-to-game-development).
+This is written in Python 3, using the [Pygame](https://www.pygame.org/) 2D game
+engine.
 
-Check the `.lua` file headers for individual credits; stuff I wrote is released
-under the [MIT license](LICENSE.md).
+![Powered by Pygame](graphics/pygame-logo.png)
 
-### Libraries
-
-* [bitser](https://github.com/gvx/bitser) by Jasmijn Wellner
-* [ini](https://github.com/FivosM/ini_parser) by Fivos Moutavelis
-* [lovebird](https://github.com/rxi/lovebird) by rxi for debugging
-* [middleclass](https://github.com/kikito/middleclass) by Enrique García Cota
+[Pygame GUI](https://pygame-gui.readthedocs.io/en/latest/index.html) is also
+used.
 
 ### Graphics
 
@@ -59,10 +53,6 @@ Images:
   [Hans von Gersdorff (ca. 1455 - 1529): „Feldbuch der Wundarzney, Die Knochenanatomie.](https://commons.wikimedia.org/wiki/Skeleton#/media/File:Gersdorff_Feldbuch_skeleton.jpg)
   from Wikimedia Commons with some image manipulation.
 * `kenney.nl` - Assets from the awesome [Kenney.nl](https://www.kenney.nl/).
-* `love-game-0.10` -
-  [Löve game icon](https://love2d.org/wiki/File:love-game-0.10.png) from the
-  wiki, uploaded by Qubodup, based on an SVG original from Arch linux (which
-  probably came from rude's BitBucket).
 * `lpc-atlas` - LPC assets in handy sprite atlas form:
   [Atlas 1](https://opengameart.org/content/lpc-tile-atlas),
   [Atlas 2](https://opengameart.org/content/lpc-tile-atlas2). See the
@@ -85,6 +75,8 @@ Images:
   [LPC Thatched Roof Cottage](https://opengameart.org/content/lpc-thatched-roof-cottage).
 * `lpc-zombie` - Great LPC zombie by
   [BenCreating](https://opengameart.org/content/lpc-zombie).
+* `pygame-logo` - [Pygame's logo](https://www.pygame.org/docs/logos.html) by
+  TheCorruptor.
 * `skeleton` -
   [Skeleton Sprite](https://opengameart.org/content/skeleton-sprite) by
   [goo30](https://opengameart.org/users/goo30) on
@@ -98,6 +90,7 @@ Images:
 
 ### Music
 
-* `Heroic Demise (New).mp3` - By [Matthew Pablo](https://matthewpablo.com/),
+* `Heroic Demise (New).ogg` - By [Matthew Pablo](https://matthewpablo.com/),
   found on
-  [OpenGameArt.org](https://opengameart.org/content/heroic-demise-updated-version).
+  [OpenGameArt.org](https://opengameart.org/content/heroic-demise-updated-version),
+  converted to `.ogg` format for Pygame.

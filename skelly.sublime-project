@@ -13,5 +13,9 @@
             "shell_cmd": "love $project_path",
             "file_regex": "^Error: (?:[^:]+: )?([^: ]+?):(\\d+):() ([^:]*)$",
         },
+        {
+            "name": "Launch PyGame",
+            "shell_cmd": "cd $project_path ; python3 main.py",
+        },
     ],
 }

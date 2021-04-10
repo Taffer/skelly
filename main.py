@@ -89,6 +89,9 @@ class Game:
                 self.screen = src.screens.Credits(self)
             elif next_screen == 'Journey':  # "Journey Onwards" screen
                 self.screen = src.screens.Journey(self)
+            elif next_screen == 'NewGame':  # New Game/Intro screen
+                print('Switch to NewGame')
+                self.screen = src.screens.NewGame(self)
             elif next_screen == 'Presents':  # "Taffer presents" screen
                 self.screen = src.screens.Presents(self)
             elif next_screen == 'Settings':  # Blank with Settings overlay

@@ -18,7 +18,7 @@
 import pygame
 import pygame_gui
 
-from pygame_gui.elemements import UIDropDownMenu, UIHorizontalSlider, UILabel
+from pygame_gui.elements import UIDropDownMenu, UIHorizontalSlider, UILabel
 
 
 class SettingsOverlay:

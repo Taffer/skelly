@@ -14,8 +14,6 @@ class Map:
         tree = ElementTree.parse(map_path)
         self.root = tree.getroot()
         layers = self.root.findall('layer')
-        if len(layers) > 1:
-            raise SystemExit('Map has multiple layers, this experiment only deals with one.')
 
         # Map size in tiles.
         self.map_width = int(self.root.attrib['width'])
@@ -32,11 +30,12 @@ class Map:
         self.tiles = [None]  # Index 0 means "don't draw a tile" in Tiled.
         for tileset in tilesets:
             tileset_path = os.path.join(prefix, tileset.attrib['source'])
+            tileset_prefix = os.path.split(tileset_path)[0]
             tileset_tree = ElementTree.parse(tileset_path)
             tileset_root = tileset_tree.getroot()
 
             image = tileset_root.find('image')
-            image_path = os.path.join(prefix, image.attrib['source'])
+            image_path = os.path.join(tileset_prefix, image.attrib['source'])
             texture = pygame.image.load(image_path).convert_alpha()  # TODO: Do I need to keep a ref to these?
             texture_rect = texture.get_rect()
 
@@ -61,13 +60,14 @@ class Map:
                         this_data.append(int(c))
             self.layer_data[layer.attrib['name']] = this_data
 
-    def render(self, layer, surface, viewport):
+    def render(self, layer, surface, viewport, offset_x, offset_y):
         # TODO: How to batch this so it's faster?
         view_rect = viewport.rect
         for y in range(view_rect.height):
             for x in range(view_rect.width):
                 tile = self.tiles[self.layer_data[layer][self.getIndex(x, y)]]
-                target = pygame.Rect(x * self.tile_width, y * self.tile_height, self.tile_width, self.tile_height)
+                target = pygame.Rect(offset_x + x * self.tile_width, offset_y + y * self.tile_height,
+                                     self.tile_width, self.tile_height)
                 if tile is not None:
                     surface.blit(tile, target)
 

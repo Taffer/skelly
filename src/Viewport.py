@@ -8,7 +8,7 @@ class Viewport:
     '''
     def __init__(self, map_width, map_height, rect):
         self.map_tile_width = map_width
-        self.map.tile_height = map_height
+        self.map_tile_height = map_height
 
         self.rect = rect
 

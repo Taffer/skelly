@@ -7,6 +7,8 @@ import pygame
 import pygame.gfxdraw
 
 from . import Base
+from .. import Map
+from .. import Viewport
 
 BLACK = pygame.Color('black')
 BLUE = pygame.Color('blue')
@@ -160,12 +162,11 @@ class NewGame(Base):
         TODO: What about a "Fortune Teller" type thing to tweak stats?
         '''
 
-        # self.map = Map()
+        self.map = Map(game.resources['maps']['scene1_farm'])
+        rect = pygame.Rect(0, 0, 29, 21)
+        self.viewport = Viewport(self.map.map_width, self.map.map_height, rect)
 
         '''
-        self.map = Map:new(gameResources, gameResources.maps.scene1_farm)
-        self.viewport = Viewport:new(self.map.width, self.map.height, 0, 0, 29, 21)
-
         self.skeleton_sprite = LPCSprite:new(gameResources.images.skeleton_sprite)
         self.sprite_locs = {
             {   5, 617},
@@ -188,10 +189,9 @@ class NewGame(Base):
         self.game.surface.fill(BLACK)
         draw_29x21(self.game.surface)
 
+        self.map.render('Ground', self.game.surface, self.viewport, 8, 8)
+        self.map.render('Buildings', self.game.surface, self.viewport, 8, 8)
         '''
-        self.map:render(self.viewport, self.map.tile_layers[1], 8, 8)
-        self.map:render(self.viewport, self.map.tile_layers[2], 8, 8)
-
         self.ani[self.ani_idx]:draw()
         '''
 

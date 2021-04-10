@@ -50,11 +50,7 @@ def loader(resource, file_list, done_text):
         yield v
 
     for k, v in file_list['maps'].items():
-        try:
-            with open(v) as fp:
-                resource['maps'][k] = fp.read()  # Load directly into Tiled obj?
-        except Exception as ex:
-            print('Unable to load map: {0} {1}'.format(k, ex))
+        resource['maps'][k] = v  # Map class loads from paths.
         yield v
 
     yield done_text

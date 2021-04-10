@@ -51,6 +51,9 @@ class Base:
     def mouseup(self, event):
         pass
 
+    def userevent(self, event):
+        pass
+
     def addTitle(self):
         title_text = self.game.text.getText('title')
         skelly_text = self.game.text.getText('skelly_title')

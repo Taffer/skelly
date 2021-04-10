@@ -6,7 +6,7 @@
 import pygame
 
 from . import Base
-# from . import SettingsOverlay
+from ..ui import SettingsOverlay
 from ..ui import ColorFade
 
 BLACK = pygame.Color('black')

@@ -10,6 +10,7 @@ import platform
 import pygame
 import pygame.freetype
 import pygame.gfxdraw
+import pygame_gui
 import sys
 import time
 
@@ -29,6 +30,7 @@ SETTINGS_FILENAME = 'settings.ini'
 class Game:
     def __init__(self, surface):
         self.surface = surface
+        self.manager = pygame_gui.UIManager((WINDOW_WIDTH, WINDOW_HEIGHT))
 
         self.state = {}
         self.resources = {  # Loaded by loader() in the Title screen.
@@ -78,9 +80,11 @@ class Game:
 
     def save_settings(self):
         self.settings.save()
+        self.manager.draw_ui(self.surface)
 
     def update(self, dt):
         self.screen.update(dt)
+        self.manager.update(dt)
 
         # Screen state machine:
         if self.screen.can_exit:
@@ -121,6 +125,9 @@ class Game:
     def mouseup(self, event):
         self.screen.mouseup(event)
 
+    def userevent(self, event):
+        self.screen.userevent(event)
+
 
 def main():
     if PYGAME_VERSION > pygame.version.vernum:
@@ -154,6 +161,8 @@ def main():
         pygame.display.flip()
 
         for event in pygame.event.get():
+            skelly.manager.process_events(event)
+
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
@@ -166,6 +175,8 @@ def main():
                 skelly.mousedown(event)
             elif event.type == pygame.MOUSEBUTTONUP:
                 skelly.mouseup(event)
+            elif event.type == pygame.USEREVENT:
+                skelly.userevent(event)
 
 
 if __name__ == '__main__':

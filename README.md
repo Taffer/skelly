@@ -28,6 +28,9 @@ engine.
 
 ![Powered by Pygame](graphics/pygame-logo.png)
 
+[Pygame GUI](https://pygame-gui.readthedocs.io/en/latest/index.html) is also
+used.
+
 ### Graphics
 
 Fonts:

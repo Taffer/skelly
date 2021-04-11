@@ -92,6 +92,16 @@ I18N_EN = {
         'taffer_text': 'Taffer presents…',
     },
 
+    'settings': {  # 'Settings' overlay
+        'effects_volume': 'Effects Volume:',
+        'language': 'Language:',
+        'master_volume': 'Master Volume:',
+        'music_volume': 'Music Volume:',
+        'title': 'Skelly Settings',
+        'translations': ['English', 'Español'],
+        'voice_volume': 'Voice Volume:',
+    },
+
     'title': {  # 'Title' screen
         'loading_done': 'Done.',
         'loading_text': 'Loading…',

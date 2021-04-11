@@ -21,3 +21,13 @@ class TextHandler:
 
     def getText(self, tag):
         return self.lang[self.current].get(tag, self.lang[self.default].get(tag, f'~~{tag} not found~~'))
+
+    def code_for(self, language: str) -> str:
+        ''' Return the two-character language code for the named language.
+        '''
+        if language in ('English', 'Ingles'):
+            return 'en'
+        elif language in ('Spanish', 'Español'):
+            return 'es'
+
+        return 'en'  # Default is the development language, sorry.

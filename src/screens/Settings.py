@@ -21,14 +21,20 @@ class Settings(Base):
         self.next_screen = 'Journey'
 
         self.addTitle()
-
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
-
-        # self.overlay = SettingsOverlay:new(resources, 300, 350, 680, 400)
+        self.overlay = SettingsOverlay(game)
 
     def draw(self):
         self.game.surface.fill(BLACK)
         self.drawTitle()
 
+        self.game.manager.draw_ui(self.game.surface)
+
     def update(self, dt):
         self.fade.update(dt)
+
+        if self.overlay.overlay_closed:
+            self.can_exit = True
+
+    def userevent(self, event):
+        self.overlay.userevent(event)

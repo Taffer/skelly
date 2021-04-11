@@ -22,24 +22,53 @@ from pygame_gui.elements import UIDropDownMenu, UIHorizontalSlider, UILabel
 
 
 class SettingsOverlay:
-    def __init__(self, manager):
-        self.manager = manager
+    def __init__(self, game):
+        self.manager = game.manager
+        self.settings = game.settings
+        self.text = game.text
 
-        self.window = pygame_gui.elements.UIWindow(pygame.Rect(100, 250, 1080, 420))
+        self.overlay_closed = False
 
-        rect = pygame.Rect(10, 10, 100, 25)
-        self.master_vol_label = UILabel(rect, 'Master Volume:', manager, self.window)
-        self.music_vol_label = UILabel(rect, 'Music Volume:', manager, self.window)
-        self.effects_vol_label = UILabel(rect, 'Effects Volume:', manager, self.window)
-        self.voice_vol_label = UILabel(rect, 'Voice Volume:', manager, self.window)
+        settings_text = self.text.getText('settings')
 
-        self.master_slider = UIHorizontalSlider(rect, 1.0, (0.0, 1.0), manager, self.window)
-        self.music_slider = UIHorizontalSlider(rect, 1.0, (0.0, 1.0), manager, self.window)
-        self.effects_slider = UIHorizontalSlider(rect, 1.0, (0.0, 1.0), manager, self.window)
-        self.voice_slider = UIHorizontalSlider(rect, 1.0, (0.0, 1.0), manager, self.window)
+        self.window = pygame_gui.elements.UIWindow(pygame.Rect(100, 250, 1080, 420), self.manager, settings_text['title'])
 
-        self.language_label = UILabel(rect, 'Language:', manager, self.window)
-        self.language_menu = UIDropDownMenu(['English', 'Espanol'], 'English', rect, manager, self.window)
+        rect = pygame.Rect(10, 10, 150, 25)
+        self.master_vol_label = UILabel(rect, settings_text['master_volume'], self.manager, self.window)
+        rect.y += 50
+        self.music_vol_label = UILabel(rect, settings_text['music_volume'], self.manager, self.window)
+        rect.y += 50
+        self.effects_vol_label = UILabel(rect, settings_text['effects_volume'], self.manager, self.window)
+        rect.y += 50
+        self.voice_vol_label = UILabel(rect, settings_text['voice_volume'], self.manager, self.window)
+
+        rect = pygame.Rect(150, 10, 250, 25)
+        self.master_slider = UIHorizontalSlider(rect, self.settings.get('overall_volume'), (0.0, 1.0), self.manager, self.window)
+        rect.y += 50
+        self.music_slider = UIHorizontalSlider(rect, self.settings.get('music_volume'), (0.0, 1.0), self.manager, self.window)
+        rect.y += 50
+        self.effects_slider = UIHorizontalSlider(rect, self.settings.get('sfx_volume'), (0.0, 1.0), self.manager, self.window)
+        rect.y += 50
+        self.voice_slider = UIHorizontalSlider(rect, self.settings.get('voice_volume'), (0.0, 1.0), self.manager, self.window)
+
+        rect = pygame.Rect(10, 250, 100, 23)
+        self.language_label = UILabel(rect, settings_text['language'], self.manager, self.window)
+        rect = pygame.Rect(150, 250, 250, 25)
+        self.language_menu = UIDropDownMenu(settings_text['translations'], 'English', rect, self.manager, self.window)
 
     def userevent(self, event):
-        pass
+        if event.user_type == pygame_gui.UI_WINDOW_CLOSE:
+            if event.ui_element == self.window:
+                self.overlay_closed = True
+        elif event.user_type == pygame_gui.UI_DROP_DOWN_MENU_CHANGED:
+            if event.ui_element == self.language_menu:
+                self.settings.set('language', self.text.code_for(event.value))
+        elif event.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == self.master_slider:
+                self.settings.set('overall_volume', event.value)
+            elif event.ui_element == self.music_slider:
+                self.settings.set('music_volume', event.value)
+            elif event.ui_element == self.effects_slider:
+                self.settings.set('sfx_volume', event.value)
+            elif event.ui_element == self.voice_slider:
+                self.settings.set('voice_volume', event.value)

@@ -22,6 +22,9 @@ def main():
     window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption(WINDOW_TITLE)
 
+    icon = pygame.image.load('graphics/Gersdorff_Feldbuch_skeleton-icon.png').convert()
+    pygame.display.set_icon(icon)
+
     skelly = Game(window)
 
     ignore_events = [pygame.JOYAXISMOTION, pygame.JOYBALLMOTION, pygame.JOYHATMOTION, pygame.JOYBUTTONUP, pygame.JOYBUTTONDOWN,

@@ -4,16 +4,16 @@
 # MIT license, see LICENSE.md for details.
 
 # Currently incomplete and therefore untranslated.
-CREDITS = [  # Credits; the 'h1', 'h2', 'p' are styles to be applied.
+CREDITS_EN = [  # Credits; the 'h1', 'h2', 'p' are styles to be applied.
     # Libraries
     ('h1', 'Additional coding'),
 
-    ('h2', 'LÖVE'),
-    ('p', 'LOVE Development Team'),
+    ('h2', 'Pygame'),
+    ('p', 'Pygame Development Team'),
+    ('p', 'Especially the folks on the Pygame Discord')
 
-    ('h2', 'Lua libraries'),
-    ('p', 'Enrique García Cota'),
-    ('p', 'Jasmijn Wellner'),
+    ('h2', 'Pygame GUI'),
+    ('p', 'Dan Lawrence'),
 
     # Graphics
     ('h1', 'Graphics'),
@@ -43,8 +43,8 @@ CREDITS = [  # Credits; the 'h1', 'h2', 'p' are styles to be applied.
     ('h2', 'Title screen skeleton'),
     ('p', 'goo30 (OpenGameArt)'),
 
-    ('h2', 'Löve game icon'),
-    ('p', 'Uploaded by Qubodup on the Löve wiki? rude on GitHub?'),
+    ('h2', 'Pygame game icon'),
+    ('p', 'TheCorruptor'),
 
     ('h2', 'Taffer logo'),
     ('p', 'ronos_art (Fiverr)'),
@@ -115,7 +115,7 @@ I18N_EN = {
     },
 
     # Not translated yet.
-    'credits': CREDITS,
+    'credits': CREDITS_EN,
 }
 
 I18N_ES = {
@@ -139,6 +139,16 @@ I18N_ES = {
         'taffer_text': 'Taffer presenta…',
     },
 
+    'settings': {  # 'Settings' overlay
+        'effects_volume': 'Volumen de efectos:',
+        'language': 'Idioma:',
+        'master_volume': 'Volumen general:',
+        'music_volume': 'Volumen de la música:',
+        'title': 'Configuración de Skelly',
+        'translations': ['English', 'Español'],
+        'voice_volume': 'Volumen de voz:',
+    },
+
     'title': {  # 'Title' screen
         'loading_done': 'Terminado.',
         'loading_text': 'Cargando…',
@@ -152,5 +162,5 @@ I18N_ES = {
     },
 
     # Not translated yet.
-    'credits': CREDITS,
+    'credits': CREDITS_EN,
 }

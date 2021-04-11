@@ -6,11 +6,13 @@
 import os
 import pygame
 
+from typing import Tuple, Union
 from xml.etree import ElementTree
+from . import Viewport
 
 
 class Map:
-    def __init__(self, map_path):
+    def __init__(self, map_path: str):
         tree = ElementTree.parse(map_path)
         self.root = tree.getroot()
         layers = self.root.findall('layer')
@@ -60,7 +62,7 @@ class Map:
                         this_data.append(int(c))
             self.layer_data[layer.attrib['name']] = this_data
 
-    def render(self, layer, surface, viewport, offset_x, offset_y):
+    def render(self, layer: str, surface: pygame.Surface, viewport: Viewport, offset_x: int, offset_y: int):
         # TODO: How to batch this so it's faster?
         view_rect = viewport.rect
         for y in range(view_rect.height):
@@ -71,10 +73,10 @@ class Map:
                 if tile is not None:
                     surface.blit(tile, target)
 
-    def getIndex(self, x, y):
+    def getIndex(self, x: int, y: int) -> int:
         return x + y * self.map_width + 1
 
-    def pointToScreen(self, viewport, offset_x, offset_y, x, y):
+    def pointToScreen(self, viewport: Viewport, offset_x: int, offset_y: int, x: int, y: int) -> Tuple[int, int]:
         # Convert a map point location to an on-screen location. Returns None if
         # the point is outside the viewport.
         #
@@ -94,7 +96,7 @@ class Map:
 
         return (screen_x, screen_y)
 
-    def findPoint(self, layer_name, object_name):
+    def findPoint(self, layer_name: str, object_name: str) -> Union[None, Tuple[int, int]]:
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
             objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))
@@ -106,7 +108,7 @@ class Map:
 
         return None
 
-    def findRect(self, layer_name, object_name):
+    def findRect(self, layer_name: str, object_name: str) -> Union[None, pygame.Rect]:
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
             objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))

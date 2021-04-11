@@ -15,7 +15,7 @@ WHITE = pygame.Color('white')
 
 
 class Journey(Base):
-    def __init__(self, game):
+    def __init__(self, game: any):
         super().__init__(game)
 
         # next_screen is set when a button is clicked.
@@ -65,10 +65,10 @@ class Journey(Base):
         if not self.fade.isDone():
             self.fade.draw()
 
-    def update(self, dt):
+    def update(self, dt: float):
         self.fade.update(dt)
 
-    def keyreleased(self, event):
+    def keyreleased(self, event: pygame.event.Event):
         if event.key == pygame.K_j:  # Journey onward!
             pass
         elif event.key == pygame.K_n:  # New game
@@ -84,7 +84,7 @@ class Journey(Base):
             self.next_screen = 'Exit'
             self.can_exit = True
 
-    def mousedown(self, event):
+    def mousedown(self, event: pygame.event.Event):
         x = event.pos[0]
         y = event.pos[1]
 
@@ -93,7 +93,7 @@ class Journey(Base):
             if button.intersects(x, y):
                 self.click_button = button
 
-    def mouseup(self, event):
+    def mouseup(self, event: pygame.event.Event):
         x = event.pos[0]
         y = event.pos[1]
 

@@ -11,5 +11,5 @@ class Base:
     def __init__(self):
         self.rect = pygame.Rect((0, 0, 0, 0))
 
-    def intersects(self, x, y):
+    def intersects(self, x: int, y: int) -> bool:
         return self.rect.collidepoint(x, y)

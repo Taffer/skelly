@@ -16,7 +16,7 @@ GREEN = pygame.Color('green')
 RED = pygame.Color('red')
 
 
-def draw_29x21(surface):
+def draw_29x21(surface: pygame.Surface):
     ''' Prototype UI locations, not for human consumption.
     '''
     dx = 8
@@ -146,7 +146,7 @@ end
 
 
 class NewGame(Base):
-    def __init__(self, game):
+    def __init__(self, game: any):
         super().__init__(game)
         self.next_screen = 'Intro'  # TODO: This is sort of the intro...
         '''
@@ -195,7 +195,7 @@ class NewGame(Base):
         self.ani[self.ani_idx]:draw()
         '''
 
-    def update(self, dt):
+    def update(self, dt: float):
         pass
         '''
         if self.ani_idx <= #self.ani then

@@ -3,13 +3,16 @@
 # By Chris Herborth (https://github.com/Taffer)
 # MIT license, see LICENSE.md for details.
 
+import pygame
+import pygame.freetype
+
 from . import Base
 from . import ImageButton
 from . import Label
 
 
 class Button(Base):
-    def __init__(self, x, y, texture, text, font, color):
+    def __init__(self, x: int, y: int, texture: pygame.Surface, text: str, font: pygame.freetype.Font, color: pygame.Color):
         super().__init__()
 
         self.x = x

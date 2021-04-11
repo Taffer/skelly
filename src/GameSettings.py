@@ -9,7 +9,7 @@ import os
 
 
 class GameSettings:
-    def __init__(self, filename, defaults):
+    def __init__(self, filename: str, defaults: dict):
         ''' Create a GameSettings from the given .ini file.
 
         Defaults are copied, so new settings are applied properly.
@@ -38,8 +38,8 @@ class GameSettings:
         with open(self.filename, 'w') as fp:
             json.dump(self.ini, fp)
 
-    def get(self, key):
+    def get(self, key: str) -> any:
         return self.ini[key]
 
-    def set(self, key, value):
+    def set(self, key: str, value: any):
         self.ini[key] = value

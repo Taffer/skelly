@@ -16,7 +16,7 @@ BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully tra
 WHITE = pygame.Color('white')
 
 
-def loader(resource, file_list, done_text):
+def loader(resource, file_list: dict, done_text: str) -> str:
     ''' Load the files in the RESOURCE_LIST.
     '''
     yield ''
@@ -57,7 +57,7 @@ def loader(resource, file_list, done_text):
 
 
 class Title(Base):
-    def __init__(self, game):
+    def __init__(self, game: any):
         super().__init__(game)
 
         self.next_screen = 'Journey'
@@ -95,7 +95,7 @@ class Title(Base):
 
         self.fade.draw()
 
-    def update(self, dt):
+    def update(self, dt: float):
         self.fade.update(dt)
 
         if self.fade_out:

@@ -50,7 +50,7 @@ FRAMES = {
 
 
 class LPCSprite:  # TODO: Should this be a pygame.Sprite subclass?
-    def __init__(self, texture):
+    def __init__(self, texture: pygame.Surface):
         self.width = 64
         self.height = 64
 
@@ -101,11 +101,11 @@ class LPCSprite:  # TODO: Should this be a pygame.Sprite subclass?
         self.frame += 1
         self.checkFrame()
 
-    def setFacing(self, facing):
+    def setFacing(self, facing: str):
         self.facing = facing
         self.checkFrame()
 
-    def setAnimation(self, animation):
+    def setAnimation(self, animation: str):
         self.animation = animation
         self.checkFrame()
 

@@ -3,16 +3,19 @@
 # By Chris Herborth (https://github.com/Taffer)
 # MIT license, see LICENSE.md for details.
 
+import pygame
+
+
 class Viewport:
     ''' View into the map in tile co-ords.
     '''
-    def __init__(self, map_width, map_height, rect):
+    def __init__(self, map_width: int, map_height: int, rect: pygame.Rect):
         self.map_tile_width = map_width
         self.map_tile_height = map_height
 
         self.rect = rect
 
-    def setPosition(self, x, y):
+    def setPosition(self, x: int, y: int):
         if x + self.rect.width > self.map_tile_width:
             self.rect.x = self.map_tile_width - self.rect.width
         else:

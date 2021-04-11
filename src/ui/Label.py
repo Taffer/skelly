@@ -4,12 +4,13 @@
 # MIT license, see LICENSE.md for details.
 
 import pygame
+import pygame.freetype
 
 from . import Base
 
 
 class Label(Base):
-    def __init__(self, x, y, text, font, color, align):
+    def __init__(self, x: int, y: int, text: str, font: pygame.freetype.Font, color: pygame.Color, align: str):
         super().__init__()
 
         self.orig_x = x
@@ -27,7 +28,7 @@ class Label(Base):
     def draw(self):
         pygame.display.get_surface().blit(self.texture, self.rect)
 
-    def setText(self, text):
+    def setText(self, text: str):
         self.texture, self.rect = self.font.render(text, self.color)
 
         if self.align == 'right':

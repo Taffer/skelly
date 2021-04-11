@@ -9,7 +9,7 @@ from . import Base
 
 
 class ImageButton(Base):
-    def __init__(self, x, y, texture):
+    def __init__(self, x: int, y: int, texture: pygame.Surface):
         super().__init__()
 
         self.texture = texture

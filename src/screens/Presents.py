@@ -17,7 +17,7 @@ WHITE = pygame.Color('white')
 
 
 class Presents(Base):
-    def __init__(self, game):
+    def __init__(self, game: any):
         super().__init__(game)
 
         self.next_screen = 'Title'
@@ -65,7 +65,7 @@ class Presents(Base):
 
         self.fade.draw()
 
-    def update(self, dt):
+    def update(self, dt: float):
         self.fade.update(dt)
 
         if self.fade_out:

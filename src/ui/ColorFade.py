@@ -8,7 +8,7 @@ import pygame
 
 
 class ColorFade:
-    def __init__(self, rgba1, rgba2, duration):
+    def __init__(self, rgba1: pygame.Color, rgba2: pygame.Color, duration: float):
         self.rgba = tuple(rgba1)
         self.start_rgba = rgba1
         self.end_rgba = rgba2
@@ -31,7 +31,7 @@ class ColorFade:
     def isDone(self):
         return self.done
 
-    def update(self, dt):
+    def update(self, dt: float):
         if self.done:
             return
 
@@ -42,6 +42,7 @@ class ColorFade:
             self.done = True
             return
 
+        # TODO: Do this with Color.lerp() instead?
         diff = self.dt / self.duration
         self.rgba = tuple(map(lambda a, b: a + (b - a) * diff, self.start_rgba, self.end_rgba))
         self.texture.fill(self.rgba)

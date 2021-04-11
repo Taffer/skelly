@@ -13,7 +13,7 @@ WHITE = pygame.Color('white')
 
 
 class Base:
-    def __init__(self, game):
+    def __init__(self, game: any):
         ''' Initialize.
 
         @param game Game global state.
@@ -31,27 +31,27 @@ class Base:
         '''
         pass
 
-    def update(self, dt):
+    def update(self, dt: float):
         ''' Update the screen's contents.
         '''
         pass
 
-    def keypressed(self, event):
+    def keypressed(self, event: pygame.event.Event):
         pass
 
-    def keyreleased(self, event):
+    def keyreleased(self, event: pygame.event.Event):
         pass
 
-    def mousemoved(self, event):
+    def mousemoved(self, event: pygame.event.Event):
         pass
 
-    def mousedown(self, event):
+    def mousedown(self, event: pygame.event.Event):
         pass
 
-    def mouseup(self, event):
+    def mouseup(self, event: pygame.event.Event):
         pass
 
-    def userevent(self, event):
+    def userevent(self, event: pygame.event.Event):
         pass
 
     def addTitle(self):

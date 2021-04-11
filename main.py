@@ -28,7 +28,7 @@ SETTINGS_FILENAME = 'settings.ini'
 
 
 class Game:
-    def __init__(self, surface):
+    def __init__(self, surface: pygame.Surface):
         self.surface = surface
         self.manager = pygame_gui.UIManager((WINDOW_WIDTH, WINDOW_HEIGHT))
 
@@ -82,7 +82,7 @@ class Game:
         self.settings.save()
         self.manager.draw_ui(self.surface)
 
-    def update(self, dt):
+    def update(self, dt: float):
         self.screen.update(dt)
         self.manager.update(dt)
 
@@ -110,22 +110,22 @@ class Game:
     def draw(self):
         self.screen.draw()
 
-    def keypressed(self, event):
+    def keypressed(self, event: pygame.event.Event):
         self.screen.keypressed(event)
 
-    def keyreleased(self, event):
+    def keyreleased(self, event: pygame.event.Event):
         self.screen.keyreleased(event)
 
-    def mousemoved(self, event):
+    def mousemoved(self, event: pygame.event.Event):
         self.screen.mousemoved(event)
 
-    def mousedown(self, event):
+    def mousedown(self, event: pygame.event.Event):
         self.screen.mousedown(event)
 
-    def mouseup(self, event):
+    def mouseup(self, event: pygame.event.Event):
         self.screen.mouseup(event)
 
-    def userevent(self, event):
+    def userevent(self, event: pygame.event.Event):
         self.screen.userevent(event)
 
 

@@ -20,13 +20,13 @@ class Settings(Base):
 
         self.next_screen = 'Journey'
 
-        self.addTitle()
+        self.add_title()
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
         self.overlay = SettingsOverlay(game)
 
     def draw(self):
         self.game.surface.fill(BLACK)
-        self.drawTitle()
+        self.draw_title()
 
         self.game.manager.draw_ui(self.game.surface)
 

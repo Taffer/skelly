@@ -22,7 +22,7 @@ class TextHandler:
     def setLanguage(self, code: str):
         self.current = code
 
-    def getText(self, tag: str) -> Union[str, dict, list]:
+    def get_text(self, tag: str) -> Union[str, dict, list]:
         return self.lang[self.current].get(tag, self.lang[self.default].get(tag, f'~~{tag} not found~~'))
 
     def code_for(self, language: str) -> str:

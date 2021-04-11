@@ -29,7 +29,7 @@ class SettingsOverlay:
 
         self.overlay_closed = False
 
-        settings_text = self.text.getText('settings')
+        settings_text = self.text.get_text('settings')
 
         self.window = pygame_gui.elements.UIWindow(pygame.Rect(100, 250, 1080, 420), self.manager, settings_text['title'])
 

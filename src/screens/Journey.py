@@ -20,9 +20,9 @@ class Journey(Base):
 
         # next_screen is set when a button is clicked.
 
-        self.addTitle()
+        self.add_title()
 
-        journey_text = game.text.getText('journey')
+        journey_text = game.text.get_text('journey')
         self.journey_text = journey_text['onward_text']
         self.newgame_text = journey_text['new_game_text']
         self.settings_text = journey_text['settings_text']
@@ -57,12 +57,12 @@ class Journey(Base):
 
     def draw(self):
         self.game.surface.fill(BLACK)
-        self.drawTitle()
+        self.draw_title()
 
         for item in self.ui:
             item.draw()
 
-        if not self.fade.isDone():
+        if not self.fade.is_done():
             self.fade.draw()
 
     def update(self, dt: float):

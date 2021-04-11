@@ -54,9 +54,9 @@ class Base:
     def userevent(self, event: pygame.event.Event):
         pass
 
-    def addTitle(self):
-        title_text = self.game.text.getText('title')
-        skelly_text = self.game.text.getText('skelly_title')
+    def add_title(self):
+        title_text = self.game.text.get_text('title')
+        skelly_text = self.game.text.get_text('skelly_title')
         subtitle_text = title_text['subtitle_text']
 
         self.title_ui = [
@@ -69,7 +69,7 @@ class Base:
 
         self.has_title = True
 
-    def drawTitle(self):
+    def draw_title(self):
         if self.has_title:
             for item in self.title_ui:
                 item.draw()

@@ -67,16 +67,16 @@ class Map:
         view_rect = viewport.rect
         for y in range(view_rect.height):
             for x in range(view_rect.width):
-                tile = self.tiles[self.layer_data[layer][self.getIndex(x, y)]]
+                tile = self.tiles[self.layer_data[layer][self.get_index(x, y)]]
                 target = pygame.Rect(offset_x + x * self.tile_width, offset_y + y * self.tile_height,
                                      self.tile_width, self.tile_height)
                 if tile is not None:
                     surface.blit(tile, target)
 
-    def getIndex(self, x: int, y: int) -> int:
+    def get_index(self, x: int, y: int) -> int:
         return x + y * self.map_width + 1
 
-    def pointToScreen(self, viewport: Viewport, offset_x: int, offset_y: int, x: int, y: int) -> Tuple[int, int]:
+    def point_to_screen(self, viewport: Viewport, offset_x: int, offset_y: int, x: int, y: int) -> Tuple[int, int]:
         # Convert a map point location to an on-screen location. Returns None if
         # the point is outside the viewport.
         #
@@ -96,7 +96,7 @@ class Map:
 
         return (screen_x, screen_y)
 
-    def findPoint(self, layer_name: str, object_name: str) -> Union[None, Tuple[int, int]]:
+    def find_point(self, layer_name: str, object_name: str) -> Union[None, Tuple[int, int]]:
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
             objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))
@@ -108,7 +108,7 @@ class Map:
 
         return None
 
-    def findRect(self, layer_name: str, object_name: str) -> Union[None, pygame.Rect]:
+    def find_rect(self, layer_name: str, object_name: str) -> Union[None, pygame.Rect]:
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
             objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))

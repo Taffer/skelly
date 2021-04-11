@@ -10,7 +10,7 @@ CREDITS_EN = [  # Credits; the 'h1', 'h2', 'p' are styles to be applied.
 
     ('h2', 'Pygame'),
     ('p', 'Pygame Development Team'),
-    ('p', 'Especially the folks on the Pygame Discord')
+    ('p', 'Especially the folks on the Pygame Discord'),
 
     ('h2', 'Pygame GUI'),
     ('p', 'Dan Lawrence'),

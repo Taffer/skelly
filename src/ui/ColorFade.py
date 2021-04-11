@@ -23,12 +23,12 @@ class ColorFade:
         self.texture.fill(self.rgba)
         self.texture.set_alpha(self.rgba[-1])
 
-    def getColor(self):
+    def get_color(self):
         ''' Return the current colour.
         '''
         return self.rgba
 
-    def isDone(self):
+    def is_done(self):
         return self.done
 
     def update(self, dt: float):

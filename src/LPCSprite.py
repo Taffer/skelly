@@ -93,21 +93,21 @@ class LPCSprite:  # TODO: Should this be a pygame.Sprite subclass?
         for fv in LPC_FACING:
             self.frames['idle'][fv] = [self.frames['walk'][fv][0]]
 
-    def checkFrame(self):
+    def check_frame(self):
         if self.frame >= FRAMES[self.animation]:
             self.frame = 0
 
-    def nextFrame(self):
+    def next_frame(self):
         self.frame += 1
-        self.checkFrame()
+        self.check_frame()
 
-    def setFacing(self, facing: str):
+    def set_facing(self, facing: str):
         self.facing = facing
-        self.checkFrame()
+        self.check_frame()
 
-    def setAnimation(self, animation: str):
+    def set_animation(self, animation: str):
         self.animation = animation
-        self.checkFrame()
+        self.check_frame()
 
-    def getTexture(self):
+    def get_texture(self):
         self.frames[self.animation][self.facing][self.frame]

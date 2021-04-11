@@ -15,7 +15,7 @@ class Viewport:
 
         self.rect = rect
 
-    def setPosition(self, x: int, y: int):
+    def set_position(self, x: int, y: int):
         if x + self.rect.width > self.map_tile_width:
             self.rect.x = self.map_tile_width - self.rect.width
         else:

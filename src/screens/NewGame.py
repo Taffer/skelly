@@ -58,7 +58,7 @@ function PanViewport:update(dt, _)
 
         local x = self.viewport.x
         local y = self.viewport.y + 1
-        self.viewport:setPosition(x, y)
+        self.viewport:set_position(x, y)
 
         if self.viewport.y ~= y then
             self.done = true

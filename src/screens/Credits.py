@@ -20,7 +20,7 @@ class Credits(Base):
 
         self.next_screen = 'Journey'
 
-        self.credits = game.text.getText('credits')
+        self.credits = game.text.get_text('credits')
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
 
@@ -39,11 +39,11 @@ class Credits(Base):
         self.lines_to_add = 0
         self.credits_idx = 0
 
-        self.addTitle()
+        self.add_title()
 
     def draw(self):
         self.game.surface.fill(BLACK)
-        self.drawTitle()
+        self.draw_title()
 
         pygame.gfxdraw.box(self.game.surface, self.credits_area, CREDITS_BLACK)
 
@@ -57,7 +57,7 @@ class Credits(Base):
             self.font.render_to(self.game.surface, (self.credits_area.x, self.credits_area.y + delta), self.buffer[i], WHITE)
             delta += self.font_lh
 
-        if not self.fade.isDone():
+        if not self.fade.is_done():
             self.fade.draw()
 
     def update(self, dt: float):

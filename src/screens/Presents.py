@@ -36,7 +36,7 @@ class Presents(Base):
         pygame.mixer.music.set_volume(self.game.settings.get('music_volume') * self.game.settings.get('overall_volume'))
         pygame.mixer.music.play()
 
-        presents_text = self.game.text.getText('presents')
+        presents_text = self.game.text.get_text('presents')
         self.taffer_text = presents_text['taffer_text']
         self.pygame_text = presents_text['pygame_text']
 
@@ -70,11 +70,11 @@ class Presents(Base):
 
         if self.fade_out:
             # If we're fading out...
-            if self.fade.isDone():
+            if self.fade.is_done():
                 self.can_exit = True
         else:
             # If we're fading in...
-            if self.fade.isDone():
+            if self.fade.is_done():
                 self.exit_countdown = self.exit_countdown - dt
                 if self.exit_countdown < 0:
                     self.fade = ColorFade(BLACK_ALPHA, BLACK, 1)

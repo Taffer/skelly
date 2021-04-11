@@ -68,7 +68,7 @@ class Title(Base):
         self.loading_x = 16
         self.loading_y = self.game.screen_height - 16 - self.game.resources['fonts']['default_mono'].get_sized_height()
 
-        title_text = self.game.text.getText('title')
+        title_text = self.game.text.get_text('title')
         self.loading_text = title_text['loading_text']
         self.done_text = title_text['loading_done']
 
@@ -79,7 +79,7 @@ class Title(Base):
         self.loading_finished = False
         self.loading_routine = loader(self.game.resources, RESOURCE_LIST, self.done_text)
 
-        self.addTitle()
+        self.add_title()
 
         self.ui = []
         self.loading_label = Label(self.loading_x, self.loading_y, self.loading_text, self.game.resources['fonts']['default_mono'],
@@ -88,7 +88,7 @@ class Title(Base):
 
     def draw(self):
         self.game.surface.fill(BLACK)
-        self.drawTitle()
+        self.draw_title()
 
         for item in self.ui:
             item.draw()
@@ -100,11 +100,11 @@ class Title(Base):
 
         if self.fade_out:
             # If we're fading out...
-            if self.fade.isDone():
+            if self.fade.is_done():
                 self.can_exit = True
         else:
             # If we're fading in...
-            if self.fade.isDone():
+            if self.fade.is_done():
                 if self.loading_finished:
                     self.fade = ColorFade(BLACK_ALPHA, BLACK, 1)
                     self.fade_out = True
@@ -112,6 +112,6 @@ class Title(Base):
             if not self.loading_finished:
                 try:
                     result = self.loading_routine.__next__()
-                    self.loading_label.setText('{0} {1}'.format(self.loading_text, result))
+                    self.loading_label.set_text('{0} {1}'.format(self.loading_text, result))
                 except StopIteration:
                     self.loading_finished = True

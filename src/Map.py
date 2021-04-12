@@ -3,8 +3,11 @@
 # By Chris Herborth (https://github.com/Taffer)
 # MIT license, see LICENSE.md for details.
 
+import base64
 import os
+import struct
 import pygame
+import zlib
 
 from typing import Tuple, Union
 from xml.etree import ElementTree
@@ -52,14 +55,24 @@ class Map:
             # Decode the layer data. This map is using CSV, which is easy; for
             # help decoding other formats, check out my tileset crusher's code:
             # https://github.com/Taffer/crushtileset/
-            data = layer.find('data').text
+            data = layer.find('data')
+            data_contents = data.text
 
             this_data = []
-            lines = data.split()
-            for line in lines:
-                for c in line.split(','):
-                    if c != '':
-                        this_data.append(int(c))
+            if data.attrib['encoding'] == 'csv':
+                lines = data_contents.split()
+                for line in lines:
+                    for c in line.split(','):
+                        if c != '':
+                            this_data.append(int(c))
+            elif data.attrib['encoding'] == 'base64' and data.attrib.get('compression', 'none') == 'zlib':
+                the_data = base64.b64decode(data_contents)
+
+                # CSV data is organized into rows, so we make this one big row.
+                this_data = [x[0] for x in struct.iter_unpack('<I', zlib.decompress(the_data))]
+            else:
+                raise RuntimeError('Unsupported encoding/compression.')
+
             self.layer_data[layer.attrib['name']] = this_data
 
     def render(self, layer: str, surface: pygame.Surface, viewport: Viewport, offset_x: int, offset_y: int):

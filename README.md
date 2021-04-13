@@ -49,6 +49,8 @@ Fonts:
 
 Images:
 
+* `game-icons.net` - Game icons made by Delapouite, sbed, Quoting, Skoll, and
+  Lorc from [game-icons.net](https://game-icons.net/).
 * `Gersdorff_Feldbuch_skeleton.png` -
   [Hans von Gersdorff (ca. 1455 - 1529): „Feldbuch der Wundarzney, Die Knochenanatomie.](https://commons.wikimedia.org/wiki/Skeleton#/media/File:Gersdorff_Feldbuch_skeleton.jpg)
   from Wikimedia Commons with some image manipulation.

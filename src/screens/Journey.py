@@ -4,6 +4,7 @@
 # MIT license, see LICENSE.md for details.
 
 import pygame
+import pygame_gui
 
 from . import Base
 from ..ui import Button
@@ -31,19 +32,13 @@ class Journey(Base):
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
 
-        ui_rpg = game.resources['images']['ui_rpg']
-        button_rect = pygame.Rect(0, 282, 190, 49)
-        button_texture = ui_rpg.subsurface(button_rect)
-
         x = (game.screen_width - 190) / 2  # Buttons are 190 pixels wide.
 
-        button_font = game.resources['fonts']['button_font']
-        button_color = BLACK
-        self.journey_button = Button(x, 350, button_texture, self.journey_text, button_font, button_color)
-        self.newgame_button = Button(x, 410, button_texture, self.newgame_text, button_font, button_color)
-        self.settings_button = Button(x, 470, button_texture, self.settings_text, button_font, button_color)
-        self.credits_button = Button(x, 550, button_texture, self.credits_text, button_font, button_color)
-        self.exit_button = Button(x, 620, button_texture, self.exit_text, button_font, button_color)
+        self.journey_button = pygame_gui.elements.UIButton(pygame.Rect(x, 350, 190, 49), self.journey_text, self.game.manager)
+        self.newgame_button = pygame_gui.elements.UIButton(pygame.Rect(x, 410, 190, 49), self.newgame_text, self.game.manager)
+        self.settings_button = pygame_gui.elements.UIButton(pygame.Rect(x, 470, 190, 49), self.settings_text, self.game.manager)
+        self.credits_button = pygame_gui.elements.UIButton(pygame.Rect(x, 550, 190, 49), self.credits_text, self.game.manager)
+        self.exit_button = pygame_gui.elements.UIButton(pygame.Rect(x, 620, 190, 49), self.exit_text, self.game.manager)
 
         self.click_button = None  # Mouse-down on which button?
 
@@ -59,8 +54,7 @@ class Journey(Base):
         self.game.surface.fill(BLACK)
         self.draw_title()
 
-        for item in self.ui:
-            item.draw()
+        self.game.manager.draw_ui(self.game.surface)
 
         if not self.fade.is_done():
             self.fade.draw()
@@ -84,33 +78,22 @@ class Journey(Base):
             self.next_screen = 'Exit'
             self.can_exit = True
 
-    def mousedown(self, event: pygame.event.Event):
-        x = event.pos[0]
-        y = event.pos[1]
-
-        self.click_button = None
-        for button in self.ui:
-            if button.intersects(x, y):
-                self.click_button = button
-
-    def mouseup(self, event: pygame.event.Event):
-        x = event.pos[0]
-        y = event.pos[1]
-
-        if self.click_button is not None and self.click_button.intersects(x, y):
-            if self.click_button == self.journey_button:
+    def userevent(self, event: pygame.event.Event):
+        if event.user_type == pygame_gui.UI_WINDOW_CLOSE:
+            if event.ui_element == self.window:
+                self.overlay_closed = True
+        elif event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.journey_button:
                 pass
-            elif self.click_button == self.newgame_button:
+            elif event.ui_element == self.newgame_button:
                 self.next_screen = 'NewGame'
                 self.can_exit = True
-            elif self.click_button == self.settings_button:
+            elif event.ui_element == self.settings_button:
                 self.next_screen = 'Settings'
                 self.can_exit = True
-            elif self.click_button == self.credits_button:
+            elif event.ui_element == self.credits_button:
                 self.next_screen = 'Credits'
                 self.can_exit = True
-            elif self.click_button == self.exit_button:
+            elif event.ui_element == self.exit_button:
                 self.next_screen = 'Exit'
                 self.can_exit = True
-
-        self.click_button = None

@@ -79,11 +79,16 @@ class Journey(Base):
     def create_buttons(self):
         x = (self.game.screen_width - 190) / 2  # Buttons are 190 pixels wide.
 
-        self.journey_button = pygame_gui.elements.UIButton(pygame.Rect(x, 350, 190, 49), self.journey_text, self.game.manager)
-        self.newgame_button = pygame_gui.elements.UIButton(pygame.Rect(x, 410, 190, 49), self.newgame_text, self.game.manager)
-        self.settings_button = pygame_gui.elements.UIButton(pygame.Rect(x, 470, 190, 49), self.settings_text, self.game.manager)
-        self.credits_button = pygame_gui.elements.UIButton(pygame.Rect(x, 550, 190, 49), self.credits_text, self.game.manager)
-        self.exit_button = pygame_gui.elements.UIButton(pygame.Rect(x, 620, 190, 49), self.exit_text, self.game.manager)
+        self.journey_button = pygame_gui.elements.UIButton(pygame.Rect(x, 350, 190, 49), self.journey_text, self.game.manager,
+                                                           object_id='#menubutton')
+        self.newgame_button = pygame_gui.elements.UIButton(pygame.Rect(x, 410, 190, 49), self.newgame_text, self.game.manager,
+                                                           object_id='#menubutton')
+        self.settings_button = pygame_gui.elements.UIButton(pygame.Rect(x, 470, 190, 49), self.settings_text, self.game.manager,
+                                                            object_id='#menubutton')
+        self.credits_button = pygame_gui.elements.UIButton(pygame.Rect(x, 550, 190, 49), self.credits_text, self.game.manager,
+                                                           object_id='#menubutton')
+        self.exit_button = pygame_gui.elements.UIButton(pygame.Rect(x, 620, 190, 49), self.exit_text, self.game.manager,
+                                                        object_id='#menubutton')
 
     def switch_to(self, screen_name):
         self.next_screen = screen_name

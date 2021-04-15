@@ -1,5 +1,5 @@
 {
-    "button": {
+    "#menubutton": {
         "colours": {
             "normal_bg": "#D3BF8F",
             "normal_border": "#B1A077",

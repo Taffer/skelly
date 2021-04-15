@@ -32,13 +32,7 @@ class Journey(Base):
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
 
-        x = (game.screen_width - 190) / 2  # Buttons are 190 pixels wide.
-
-        self.journey_button = pygame_gui.elements.UIButton(pygame.Rect(x, 350, 190, 49), self.journey_text, self.game.manager)
-        self.newgame_button = pygame_gui.elements.UIButton(pygame.Rect(x, 410, 190, 49), self.newgame_text, self.game.manager)
-        self.settings_button = pygame_gui.elements.UIButton(pygame.Rect(x, 470, 190, 49), self.settings_text, self.game.manager)
-        self.credits_button = pygame_gui.elements.UIButton(pygame.Rect(x, 550, 190, 49), self.credits_text, self.game.manager)
-        self.exit_button = pygame_gui.elements.UIButton(pygame.Rect(x, 620, 190, 49), self.exit_text, self.game.manager)
+        self.create_buttons()
 
     def draw(self):
         self.game.surface.fill(BLACK)
@@ -56,34 +50,42 @@ class Journey(Base):
         if event.key == pygame.K_j:  # Journey onward!
             pass
         elif event.key == pygame.K_n:  # New game
-            self.next_screen = 'NewGame'
-            self.can_exit = True
+            self.switch_to('NewGame')
         elif event.key == pygame.K_s:  # Settings
-            self.next_screen = 'Settings'
-            self.can_exit = True
+            self.switch_to('Settings')
         elif event.key == pygame.K_c:  # Credits
-            self.next_screen = 'Credits'
-            self.can_exit = True
+            self.switch_to('Credits')
         elif event.key == pygame.K_ESCAPE:  # Exit
-            self.next_screen = 'Exit'
-            self.can_exit = True
+            self.switch_to('Exit')
 
     def userevent(self, event: pygame.event.Event):
         if event.user_type == pygame_gui.UI_WINDOW_CLOSE:
             if event.ui_element == self.window:
                 self.overlay_closed = True
+                self.game.manager.clear_and_reset()
+                self.create_buttons()  # Recreate the page's buttons.
         elif event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.journey_button:
                 pass
             elif event.ui_element == self.newgame_button:
-                self.next_screen = 'NewGame'
-                self.can_exit = True
+                self.switch_to('NewGame')
             elif event.ui_element == self.settings_button:
-                self.next_screen = 'Settings'
-                self.can_exit = True
+                self.switch_to('Settings')
             elif event.ui_element == self.credits_button:
-                self.next_screen = 'Credits'
-                self.can_exit = True
+                self.switch_to('Credits')
             elif event.ui_element == self.exit_button:
-                self.next_screen = 'Exit'
-                self.can_exit = True
+                self.switch_to('Exit')
+
+    def create_buttons(self):
+        x = (self.game.screen_width - 190) / 2  # Buttons are 190 pixels wide.
+
+        self.journey_button = pygame_gui.elements.UIButton(pygame.Rect(x, 350, 190, 49), self.journey_text, self.game.manager)
+        self.newgame_button = pygame_gui.elements.UIButton(pygame.Rect(x, 410, 190, 49), self.newgame_text, self.game.manager)
+        self.settings_button = pygame_gui.elements.UIButton(pygame.Rect(x, 470, 190, 49), self.settings_text, self.game.manager)
+        self.credits_button = pygame_gui.elements.UIButton(pygame.Rect(x, 550, 190, 49), self.credits_text, self.game.manager)
+        self.exit_button = pygame_gui.elements.UIButton(pygame.Rect(x, 620, 190, 49), self.exit_text, self.game.manager)
+
+    def switch_to(self, screen_name):
+        self.next_screen = screen_name
+        self.can_exit = True
+        self.game.manager.clear_and_reset()  # Kill our UI buttons.

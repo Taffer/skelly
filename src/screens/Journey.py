@@ -40,16 +40,6 @@ class Journey(Base):
         self.credits_button = pygame_gui.elements.UIButton(pygame.Rect(x, 550, 190, 49), self.credits_text, self.game.manager)
         self.exit_button = pygame_gui.elements.UIButton(pygame.Rect(x, 620, 190, 49), self.exit_text, self.game.manager)
 
-        self.click_button = None  # Mouse-down on which button?
-
-        self.ui = [
-            self.journey_button,
-            self.newgame_button,
-            self.settings_button,
-            self.credits_button,
-            self.exit_button,
-        ]
-
     def draw(self):
         self.game.surface.fill(BLACK)
         self.draw_title()

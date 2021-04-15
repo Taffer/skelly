@@ -9,6 +9,7 @@ import pygame.gfxdraw
 from . import Base
 from .. import Map
 from .. import Viewport
+from ..ui import ImageButton
 
 BLACK = pygame.Color('black')
 BLUE = pygame.Color('blue')
@@ -166,6 +167,45 @@ class NewGame(Base):
         rect = pygame.Rect(0, 0, 29, 21)
         self.viewport = Viewport(self.map.map_width, self.map.map_height, rect)
 
+        x = 16
+        y = game.screen_height - 40
+        dx = 48
+
+        self.icon_attack = ImageButton(x, y, game.resources['images']['icon-attack'])
+        x += dx
+        self.icon_cast = ImageButton(x, y, game.resources['images']['icon-cast'])
+        x += dx
+        self.icon_talk = ImageButton(x, y, game.resources['images']['icon-talk'])
+        x += dx
+        self.icon_look = ImageButton(x, y, game.resources['images']['icon-look'])
+        x += dx
+        self.icon_get = ImageButton(x, y, game.resources['images']['icon-get'])
+        x += dx
+        self.icon_drop = ImageButton(x, y, game.resources['images']['icon-drop'])
+        x += dx
+        self.icon_move = ImageButton(x, y, game.resources['images']['icon-move'])
+        x += dx
+        self.icon_use = ImageButton(x, y, game.resources['images']['icon-use'])
+        x += dx
+        self.icon_rest = ImageButton(x, y, game.resources['images']['icon-rest'])
+        x += dx
+        self.icon_combat_on = ImageButton(x, y, game.resources['images']['icon-combat-on'])
+        x += dx
+        self.icon_combat_off = ImageButton(x, y, game.resources['images']['icon-combat-off'])
+        self.ui = [
+            self.icon_attack,
+            self.icon_cast,
+            self.icon_talk,
+            self.icon_look,
+            self.icon_get,
+            self.icon_drop,
+            self.icon_move,
+            self.icon_use,
+            self.icon_rest,
+            self.icon_combat_on,
+            self.icon_combat_off,
+        ]
+
         '''
         self.skeleton_sprite = LPCSprite:new(gameResources.images.skeleton_sprite)
         self.sprite_locs = {
@@ -191,6 +231,9 @@ class NewGame(Base):
 
         self.map.render('Ground', self.game.surface, self.viewport, 8, 8)
         self.map.render('Buildings', self.game.surface, self.viewport, 8, 8)
+
+        for item in self.ui:
+            item.draw()
         '''
         self.ani[self.ani_idx]:draw()
         '''

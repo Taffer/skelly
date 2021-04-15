@@ -19,6 +19,19 @@ RESOURCE_LIST = {
 
         'ui_rpg': 'graphics/kenney.nl/uipack-rpg/Spritesheet/uipack_rpg_sheet.png',
 
+        # I should turn these into a sprite sheet.
+        'icon-attack': 'graphics/game-icons.net/sword-wound.png',
+        'icon-cast': 'graphics/game-icons.net/magic-swirl.png',
+        'icon-combat-off': 'graphics/game-icons.net/guards-with-minus.png',
+        'icon-combat-on': 'graphics/game-icons.net/guards.png',
+        'icon-drop': 'graphics/game-icons.net/fall-down.png',
+        'icon-get': 'graphics/game-icons.net/card-pickup.png',
+        'icon-look': 'graphics/game-icons.net/look-at.png',
+        'icon-move': 'graphics/game-icons.net/move.png',
+        'icon-rest': 'graphics/game-icons.net/camping-tent.png',
+        'icon-talk': 'graphics/game-icons.net/talk.png',
+        'icon-use': 'graphics/game-icons.net/button-finger.png',
+
         # I might not need both of these.
         'map_terrain': 'graphics/lpc-terrains/terrain-map-v7-repacked.png',
         'map_sheet': 'graphics/lpc-terrains/terrain-v7.png',

@@ -26,7 +26,7 @@ SETTINGS_FILENAME = 'settings.ini'
 class Game:
     def __init__(self, surface: pygame.Surface):
         self.surface = surface
-        self.manager = pygame_gui.UIManager((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.manager = pygame_gui.UIManager((WINDOW_WIDTH, WINDOW_HEIGHT), 'graphics/ui-theme.json')
 
         self.state = {}
         self.resources = {  # Loaded by loader() in the Title screen.

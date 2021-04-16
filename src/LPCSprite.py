@@ -49,7 +49,7 @@ FRAMES = {
 }
 
 
-class LPCSprite:  # TODO: Should this be a pygame.Sprite subclass?
+class LPCSprite:
     def __init__(self, texture: pygame.Surface):
         self.width = 64
         self.height = 64

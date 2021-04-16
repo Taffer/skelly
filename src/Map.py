@@ -41,7 +41,7 @@ class Map:
 
             image = tileset_root.find('image')
             image_path = os.path.join(tileset_prefix, image.attrib['source'])
-            texture = pygame.image.load(image_path).convert_alpha()  # TODO: Do I need to keep a ref to these?
+            texture = pygame.image.load(image_path).convert_alpha()
             texture_rect = texture.get_rect()
 
             # Create subsurfaces for the tiles in the atlas.
@@ -76,7 +76,8 @@ class Map:
             self.layer_data[layer.attrib['name']] = this_data
 
     def render(self, layer: str, surface: pygame.Surface, viewport: Viewport, offset_x: int, offset_y: int):
-        # TODO: How to batch this so it's faster?
+        # This use case seems to be faster than using blits(); the overhead of
+        # creating a list of tuples is probably what kills it.
         view_rect = viewport.rect
         for y in range(view_rect.height):
             for x in range(view_rect.width):

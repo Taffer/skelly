@@ -42,7 +42,6 @@ class ColorFade:
             self.done = True
             return
 
-        # TODO: Do this with Color.lerp() instead?
         diff = self.dt / self.duration
         self.rgba = tuple(map(lambda a, b: a + (b - a) * diff, self.start_rgba, self.end_rgba))
         self.texture.fill(self.rgba)

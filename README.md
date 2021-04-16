@@ -86,6 +86,11 @@ Images:
 * `taffer-ronos-512x512.png` - An image I commissioned from
   [ronos_art](https://www.fiverr.com/ronos_art) on Fiverr.
 
+Intro Grim Reaper by
+[Jazella](https://pixabay.com/users/jazella-1930366/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4567470)
+from
+[Pixabay](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4567470).
+
 ### Sounds
 
 * `kenney.nl` - Assets from the awesome [Kenney.nl](https://www.kenney.nl/).

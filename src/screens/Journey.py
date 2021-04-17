@@ -7,7 +7,6 @@ import pygame
 import pygame_gui
 
 from . import Base
-from ..ui import Button
 from ..ui import ColorFade
 
 BLACK = pygame.Color('black')
@@ -48,7 +47,7 @@ class Journey(Base):
 
     def keyreleased(self, event: pygame.event.Event):
         if event.key == pygame.K_j:  # Journey onward!
-            pass
+            pass  # TODO: Should be 'Game'
         elif event.key == pygame.K_n:  # New game
             self.switch_to('NewGame')
         elif event.key == pygame.K_s:  # Settings

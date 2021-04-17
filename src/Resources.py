@@ -64,6 +64,9 @@ RESOURCE_LIST = {
 
         'tiles_cottage': 'graphics/lpc-thatched-roof-cottage/cottage.png',
         'tiles_thatched_roof': 'graphics/lpc-thatched-roof-cottage/thatched-roof.png',
+
+        # Intro screens
+        'reaper': 'graphics/reaper.png',
     },
 
     'music': {

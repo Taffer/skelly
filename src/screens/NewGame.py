@@ -2,40 +2,20 @@
 #
 # By Chris Herborth (https://github.com/Taffer)
 # MIT license, see LICENSE.md for details.
-'''
-Character creation:
-
-    "Fortune Teller" type scene featuring Death
-
-Intro animated:
-
-Scene: 1 - Farm, viewport bottom-left
-    Enter: skeletons, walking along army_path_[1-4], exits
-    Enter: necromancer, walking necro_path_[1-4]
-    Animate: necromancer summons the skellies, RISE FROM YOUR GRAVE
-    Animate: spawn_loc_[1-3] - ground disturbed, skellies spawn, walk to
-             army_path_2 then follow army_path
-    Animate: necromancer walks necro_path_[5-9], exits
-
-    Skeleton hoard continues for a bit. After they're all passed:
-
-    Enter: cute bunny, hops around for a bit, leaves
-    Pan: viewport pans to top-left, more ambient nature/farm
-    Animate: spawn_skelly - ground disturbed, Skelly spawns
-    Animate: Skelly looks around, is confused?
-
-Transition to Game
-'''
 
 import pygame
 import pygame.gfxdraw
+import pygame_gui
+import random
 
 from . import Base
 from .. import Map
 from .. import Viewport
+from ..ui import ColorFade
 from ..ui import ImageButton
 
 BLACK = pygame.Color('black')
+BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully transparent
 BLUE = pygame.Color('blue')
 GREEN = pygame.Color('green')
 RED = pygame.Color('red')
@@ -170,22 +150,227 @@ end
 '''
 
 
+class StateBase:  # New Game screen state base class
+    def __init__(self, game: any, screen: any):
+        self.game = game
+        self.screen = screen
+        self.done = False
+
+    def update(self, dt: float):
+        pass
+
+    def draw(self):
+        pass
+
+    def is_done(self):
+        return self.done
+
+    def next_state(self):
+        raise NotImplementedError
+
+    def userevent(self, event: pygame.event.Event):
+        pass
+
+
+class Fortune1(StateBase):
+    # "You are at peace..."
+    def __init__(self, game: any, screen: any):
+        super().__init__(game, screen)
+        self.text = screen.fortune1_text
+
+        self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
+        self.reading_delay = 0
+
+        self.textbox = None
+
+    def update(self, dt: float):
+        self.fade.update(dt)
+        if self.fade.is_done():
+            self.reading_delay += dt
+            if self.reading_delay > 7.0:  # How fast can you read? 3-4 wpm.
+                self.done = True
+
+    def draw(self):
+        if self.textbox is not None:
+            self.game.manager.draw_ui(self.game.surface)
+        else:
+            rect = pygame.Rect(550, 110, 650, 100)
+            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='fortuneteller')
+
+        self.fade.draw()
+
+    def next_state(self):
+        return Fortune2(self.game, self.screen)
+
+
+class Fortune2(StateBase):
+    # "In the distance..."
+    def __init__(self, game: any, screen: any):
+        super().__init__(game, screen)
+        self.text = screen.fortune2_text
+
+        self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
+        self.reading_delay = 0
+
+        self.textbox = None
+
+    def update(self, dt: float):
+        self.fade.update(dt)
+        if self.fade.is_done():
+            self.reading_delay += dt
+            if self.reading_delay > 5.0:  # How fast can you read? 3-4 wpm.
+                self.done = True
+
+    def draw(self):
+        if self.textbox is not None:
+            self.game.manager.draw_ui(self.game.surface)
+        else:
+            rect = pygame.Rect(550, 110, 650, 100)
+            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='fortuneteller')
+
+        self.fade.draw()
+
+    def next_state(self):
+        return Fortune3(self.game, self.screen)
+
+
+class Fortune3(StateBase):
+    # Death fades in
+    def __init__(self, game: any, screen: any):
+        super().__init__(game, screen)
+        self.image = self.game.resources['images']['reaper']
+
+        self.fade = ColorFade(BLACK, BLACK_ALPHA, 3)
+
+        self.reaper = None
+
+    def update(self, dt: float):
+        self.fade.update(dt)
+        if self.fade.is_done():
+            self.done = True
+
+    def draw(self):
+        if self.reaper is not None:
+            self.game.manager.draw_ui(self.game.surface)
+        else:
+            rect = pygame.Rect(0, 0, self.game.screen_width, self.game.screen_height)
+            self.reaper = pygame_gui.elements.UIImage(rect, self.image, self.game.manager)
+
+        self.fade.draw()
+
+    def next_state(self):
+        return Fortune4(self.game, self.screen)
+
+
+class Fortune4(StateBase):
+    # "What was your name..."
+    def __init__(self, game: any, screen: any):
+        super().__init__(game, screen)
+        self.text = screen.fortune4_text
+        self.image = self.game.resources['images']['reaper']
+
+        self.reaper = None
+        self.textbox = None
+        self.name_entry = None
+        self.label = None
+        self.ok_button = None
+
+    def draw(self):
+        if self.reaper is not None:
+            self.game.manager.draw_ui(self.game.surface)
+        else:
+            rect = pygame.Rect(0, 0, self.game.screen_width, self.game.screen_height)
+            self.reaper = pygame_gui.elements.UIImage(rect, self.image, self.game.manager)
+
+            rect = pygame.Rect(550, 110, 650, 100)
+            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='#fortuneteller')
+
+            rect = pygame.Rect(700, 250, 450, 50)
+            self.name_entry = pygame_gui.elements.UITextEntryLine(rect, self.game.manager, object_id='#fortuneteller')
+            self.name_entry.set_text(self.screen.player_name)
+
+            rect = pygame.Rect(600, 250, 100, self.name_entry.relative_rect.height)
+            self.label = pygame_gui.elements.UILabel(rect, 'Name:', self.game.manager, object_id='#fortuneteller')
+
+            rect = pygame.Rect(700, 300, 190, 49)
+            self.ok_button = pygame_gui.elements.UIButton(rect, 'OK', self.game.manager, object_id='#menubutton')
+
+    def next_state(self):
+        return Fortune8(self.game, self.screen)
+
+    def userevent(self, event: pygame.event.Event):
+        if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.ok_button:
+                self.screen.player_name = self.name_entry.get_text()
+                self.done = True
+
+
+class Fortune8(StateBase):
+    def __init__(self, game: any, screen: any):
+        super().__init__(game, screen)
+
+    def draw(self):
+        draw_29x21(self.game.surface)
+
+        self.screen.map.render('Ground', self.game.surface, self.screen.viewport, 8, 8)
+        self.screen.map.render('Buildings', self.game.surface, self.screen.viewport, 8, 8)
+
+        for item in self.screen.ui:
+            item.draw()
+
+
 class NewGame(Base):
     def __init__(self, game: any):
         super().__init__(game)
-        self.next_screen = 'Intro'  # TODO: This is sort of the intro...
+        self.next_screen = 'Journey'  # TODO: Should be 'Game'
         '''
-        -- UI for creating a new character:
-        --
-        -- Name: [some reasonable length, default: Skelly]
-        --
-        -- Stats created (you don't get to pick):
-        --
-        -- Calcium: 25?
-        -- Willpower: 25?
+        Character creation:
 
-        TODO: What about a "Fortune Teller" type thing to tweak stats?
+            "Fortune Teller" type scene featuring Death
+
+        Intro animated:
+
+        Scene: 1 - Farm, viewport bottom-left
+            Enter: skeletons, walking along army_path_[1-4], exits
+            Enter: necromancer, walking necro_path_[1-4]
+            Animate: necromancer summons the skellies, RISE FROM YOUR GRAVE
+            Animate: spawn_loc_[1-3] - ground disturbed, skellies spawn, walk to
+                     army_path_2 then follow army_path
+            Animate: necromancer walks necro_path_[5-9], exits
+
+            Skeleton hoard continues for a bit. After they're all passed:
+
+            Enter: cute bunny, hops around for a bit, leaves
+            Pan: viewport pans to top-left, more ambient nature/farm
+            Animate: spawn_skelly - ground disturbed, Skelly spawns
+            Animate: Skelly looks around, is confused?
+
+        Transition to Game
         '''
+
+        fortune_text = self.game.text.get_text('newgame')
+        self.fortune1_text = fortune_text['fortune1']
+        self.fortune2_text = fortune_text['fortune2']
+        self.fortune4_text = fortune_text['fortune4']
+        self.fortune5_text = fortune_text['fortune5']
+
+        str_vs_fin = [
+            fortune_text['q1'],
+            fortune_text['q2'],
+            fortune_text['q3'],
+        ]
+        cal_vs_wil = [
+            fortune_text['q4'],
+            fortune_text['q5'],
+            fortune_text['q6'],
+        ]
+
+        random.shuffle(str_vs_fin)  # Randomnly choose 4 questions out of 6.
+        random.shuffle(cal_vs_wil)
+        self.questions = str_vs_fin[:2] + cal_vs_wil[:2]
+        random.shuffle(self.questions)
+
+        self.player_name = 'Skelly'
 
         self.map = Map(game.resources['maps']['scene1_farm'])
         rect = pygame.Rect(0, 0, 29, 21)
@@ -230,6 +415,8 @@ class NewGame(Base):
             self.icon_combat_off,
         ]
 
+        self.state = Fortune1(game, self)
+
         '''
         self.skeleton_sprite = LPCSprite:new(gameResources.images.skeleton_sprite)
         self.sprite_locs = {
@@ -251,19 +438,21 @@ class NewGame(Base):
 
     def draw(self):
         self.game.surface.fill(BLACK)
-        draw_29x21(self.game.surface)
 
-        self.map.render('Ground', self.game.surface, self.viewport, 8, 8)
-        self.map.render('Buildings', self.game.surface, self.viewport, 8, 8)
-
-        for item in self.ui:
-            item.draw()
+        self.state.draw()
         '''
         self.ani[self.ani_idx]:draw()
         '''
 
     def update(self, dt: float):
-        pass
+        self.state.update(dt)
+
+        if self.state.is_done():
+            try:
+                self.game.manager.clear_and_reset()
+                self.state = self.state.next_state()
+            except NotImplementedError:
+                self.can_exit = True
         '''
         if self.ani_idx <= #self.ani then
             self.ani[self.ani_idx]:update(dt, self.viewport)
@@ -273,3 +462,6 @@ class NewGame(Base):
             end
         end
         '''
+
+    def userevent(self, event: pygame.event.Event):
+        self.state.userevent(event)

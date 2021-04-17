@@ -87,6 +87,47 @@ I18N_EN = {
         'settings_text': 'Settings',
     },
 
+    'newgame': {  # 'NewGame' screen
+        'fortune1': 'You are at peace, drifting in the Void. You have no sense of time, or location, but you have no worries and feel content.',  # noqa: E501
+
+        'fortune2': 'In the distance, a light appears, growing steadily as it approaches you. Death is coming.',
+
+        'fortune4': 'What was your name in life?',
+
+        'fortune5': 'You are being called back. Before I release you, there are things I must know.',
+
+        'q1': (
+            "You have a locked box with something important inside. You've lost the key. Do you smash it open or pick the lock?",
+            'Smash it open',
+            'Pick the lock'
+        ),
+        'q2': (
+            'An angry wasp is flying around your head. Do you slap it when it lands, or brush it off until it leaves?',
+            'Slap it',
+            'Brush it off'
+        ),
+        'q3': (
+            'Strength vs. Finesse?',
+            'Strength',
+            'Finesse'
+        ),
+        'q4': (
+            'Physical toughness vs. Mental toughness?',
+            'Physical',
+            'Mental'
+        ),
+        'q5': (
+            'Physical toughness vs. Mental toughness?',
+            'Physical',
+            'Mental'
+        ),
+        'q6': (
+            'Physical toughness vs. Mental toughness?',
+            'Physical',
+            'Mental'
+        ),
+    },
+
     'presents': {  # 'Presents' screen
         'pygame_text': 'A game made with Pygame…',
         'taffer_text': 'Taffer presents…',

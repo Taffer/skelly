@@ -16,17 +16,26 @@ BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully tra
 WHITE = pygame.Color('white')
 
 
-def loader(resource, file_list: dict, done_text: str) -> str:
+def loader(game: any, file_list: dict, done_text: str) -> str:
     ''' Load the files in the RESOURCE_LIST.
     '''
     yield ''
 
+    resource = game.resources
+
+    for k, v in file_list['font_paths'].items():
+        try:
+            game.manager.add_font_paths(k, v['regular'], v['bold'], v['italic'], v['bold_italic'])
+        except Exception as ex:
+            print('Unable to add font paths: {0} {1}'.format(k, ex))
+        yield k
+
     for k, v in file_list['fonts'].items():
         try:
-            resource['fonts'][k] = pygame.freetype.Font(v['src'], v['size'])
+            game.manager.preload_fonts([v])
         except Exception as ex:
             print('Unable to load font: {0} {1}'.format(k, ex))
-        yield v['src']
+        yield v['name']
 
     for k, v in file_list['images'].items():
         try:
@@ -77,7 +86,7 @@ class Title(Base):
 
         self.loaded_resource = ""
         self.loading_finished = False
-        self.loading_routine = loader(self.game.resources, RESOURCE_LIST, self.done_text)
+        self.loading_routine = loader(self.game, RESOURCE_LIST, self.done_text)
 
         self.add_title()
 

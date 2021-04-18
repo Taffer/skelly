@@ -179,28 +179,32 @@ class Fortune1(StateBase):
         self.text = screen.fortune1_text
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
-        self.reading_delay = 0
 
         self.textbox = None
+        self.next_button = None
 
     def update(self, dt: float):
         self.fade.update(dt)
-        if self.fade.is_done():
-            self.reading_delay += dt
-            if self.reading_delay > 7.0:  # How fast can you read? 3-4 wpm.
-                self.done = True
 
     def draw(self):
         if self.textbox is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
             rect = pygame.Rect(550, 110, 650, 100)
-            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='fortuneteller')
+            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='#fortuneteller')
+
+            rect = pygame.Rect(1000, 300, 190, 49)
+            self.next_button = pygame_gui.elements.UIButton(rect, 'Next', self.game.manager, object_id='#menubutton')
 
         self.fade.draw()
 
     def next_state(self):
         return Fortune2(self.game, self.screen)
+
+    def userevent(self, event: pygame.event.Event):
+        if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.next_button:
+                self.done = True
 
 
 class Fortune2(StateBase):
@@ -210,28 +214,32 @@ class Fortune2(StateBase):
         self.text = screen.fortune2_text
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
-        self.reading_delay = 0
 
         self.textbox = None
+        self.next_button = None
 
     def update(self, dt: float):
         self.fade.update(dt)
-        if self.fade.is_done():
-            self.reading_delay += dt
-            if self.reading_delay > 5.0:  # How fast can you read? 3-4 wpm.
-                self.done = True
 
     def draw(self):
         if self.textbox is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
             rect = pygame.Rect(550, 110, 650, 100)
-            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='fortuneteller')
+            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='#fortuneteller')
+
+            rect = pygame.Rect(1000, 300, 190, 49)
+            self.next_button = pygame_gui.elements.UIButton(rect, 'Next', self.game.manager, object_id='#menubutton')
 
         self.fade.draw()
 
     def next_state(self):
         return Fortune3(self.game, self.screen)
+
+    def userevent(self, event: pygame.event.Event):
+        if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.next_button:
+                self.done = True
 
 
 class Fortune3(StateBase):
@@ -292,7 +300,7 @@ class Fortune4(StateBase):
             rect = pygame.Rect(600, 250, 100, self.name_entry.relative_rect.height)
             self.label = pygame_gui.elements.UILabel(rect, 'Name:', self.game.manager, object_id='#fortuneteller')
 
-            rect = pygame.Rect(700, 300, 190, 49)
+            rect = pygame.Rect(1000, 300, 190, 49)
             self.ok_button = pygame_gui.elements.UIButton(rect, 'OK', self.game.manager, object_id='#menubutton')
 
     def next_state(self):

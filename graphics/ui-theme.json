@@ -1,4 +1,29 @@
 {
+    "#fortuneteller": {
+        "colours": {
+            "normal_bg": "#D3BF8F",
+            "normal_border": "#B1A077",
+            "normal_text": "#000000",
+            "hovered_bg": "#97714A",
+            "hovered_border": "#B7916A",
+            "hovered_text": "#ECE3CE",
+            "selected_bg": "#ECE3CE",
+            "selected_border": "#D3BF8F",
+            "selected_text": "#000000",
+            "active_bg": "#D3BF8F",
+            "active_border": "#B1A077",
+            "active_text": "#000000",
+            "dark_bg": "#D3BF8F"
+        },
+        "font": {
+            "name": "LiberationSerif",
+            "size": 16,
+            "bold_path": "graphics/LiberationSerif-Bold.ttf",
+            "bold_italic_path": "graphics/LiberationSerif-BoldItalic.ttf",
+            "italic_path": "graphics/LiberationSerif-Italic.ttf",
+            "regular_path": "graphics/LiberationSerif-Regular.ttf"
+        }
+    },
     "#menubutton": {
         "colours": {
             "normal_bg": "#D3BF8F",
@@ -15,9 +40,12 @@
             "active_text": "#000000"
         },
         "font": {
-            "name": "LiberationSerif-Bold",
+            "name": "LiberationSerif",
             "size": 16,
-            "regular_path": "graphics/LiberationSerif-Bold.ttf"
+            "bold_path": "graphics/LiberationSerif-Bold.ttf",
+            "bold_italic_path": "graphics/LiberationSerif-BoldItalic.ttf",
+            "italic_path": "graphics/LiberationSerif-Italic.ttf",
+            "regular_path": "graphics/LiberationSerif-Regular.ttf"
         },
         "images": {
             "normal_image": {

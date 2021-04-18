@@ -5,8 +5,39 @@
 
 # List of all resources to load during the Loading... screen.
 RESOURCE_LIST = {
+    'font_paths': {
+        'LiberationSerif': {
+            'regular': 'graphics/LiberationSerif-Regular.ttf',
+            'bold': 'graphics/LiberationSerif-Bold.ttf',
+            'bold_italic': 'graphics/LiberationSerif-BolidItalic.ttf',
+            'italic': 'graphics/LiberationSerif-Italic.ttf'
+        },
+        'LiberationSerif-Bold': {
+            'regular': 'graphics/LiberationMono-Bold.ttf',
+            'bold': 'graphics/LiberationMono-Bold.ttf',
+            'bold_italic': 'graphics/LiberationMono-Bold.ttf',
+            'italic': 'graphics/LiberationMono-Bold.ttf',
+        }
+    },
     'fonts': {
-        'button_font': {'size': 16, 'src': 'graphics/LiberationSerif-Bold.ttf'},
+        # Note that the "regular" flavour of each font specified in the
+        # theme JSON is preloaded automatically. Doing it again here will
+        # give you a warning.
+        'serif-bold': {
+            'name': 'LiberationSerif',
+            'point_size': 16,
+            'style': 'bold'
+        },
+        'serif-bolditalic': {
+            'name': 'LiberationSerif',
+            'point_size': 16,
+            'style': 'bold_italic'
+        },
+        'serif-italic': {
+            'name': 'LiberationSerif',
+            'point_size': 16,
+            'style': 'italic'
+        },
     },
 
     'images': {

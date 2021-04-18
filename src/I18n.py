@@ -88,43 +88,63 @@ I18N_EN = {
     },
 
     'newgame': {  # 'NewGame' screen
-        'fortune1': 'You are at peace, drifting in the <i>Void</i>. You have no sense of time, or location, but you have no worries and feel content.',  # noqa: E501
+        'fortune1': 'You are at peace, drifting in the <i>Void</i>. '
+                    'You have no sense of time, or location, but you '
+                    'have no worries and feel content.',
 
-        'fortune2': 'In the distance, a light appears, growing steadily as it approaches you. <i>Death</i> is coming.',
+        'fortune2': 'In the distance, a light appears, growing steadily as '
+                    'it approaches you. <i>Death</i> is coming.',
 
         'fortune4': '<i>What was your name in life?</i>',
 
-        'fortune5': '<i>You are being called back. Before I release you, there are things I must know.</i>',
+        'fortune5': '<i>You are being called back. Before I release you, '
+                    'there are things I must know.</i>',
+
+        'fortune6': '<i>So be it.</i> Everything goes dark…',
 
         'q1': (
-            "<i>You have a locked box with something important inside. You've lost the key. Do you smash it open or pick the lock?</i>",  # noqa: E501
-            'Smash it open',
-            'Pick the lock'
+            '<i>You have a locked box with something important inside. '
+            "You've lost the key. Do you smash it open or pick the lock?</i>",
+            [
+                ('STR', 'Smash it open'),
+                ('DEX', 'Pick the lock')
+            ]
         ),
         'q2': (
-            '<i>An angry wasp is flying around your head. Do you slap it when it lands, or brush it off until it leaves?</i>',
-            'Slap it',
-            'Brush it off'
+            '<i>An angry wasp is flying around your head. '
+            'Do you slap it when it lands, or brush it off until it leaves?</i>',
+            [
+                ('STR', 'Slap it'),
+                ('DEX', 'Brush it off')
+            ]
         ),
         'q3': (
             '<i>Strength vs. Finesse?</i>',
-            'Strength',
-            'Finesse'
+            [
+                ('STR', 'Strength'),
+                ('DEX', 'Finesse')
+            ]
         ),
         'q4': (
             '<i>Physical toughness vs. Mental toughness?</i>',
-            'Physical',
-            'Mental'
+            [
+                ('CAL', 'Physical'),
+                ('WIL', 'Mental')
+            ]
         ),
         'q5': (
             '<i>Physical toughness vs. Mental toughness?</i>',
-            'Physical',
-            'Mental'
+            [
+                ('CAL', 'Physical'),
+                ('WIL', 'Mental')
+            ]
         ),
         'q6': (
             '<i>Physical toughness vs. Mental toughness?</i>',
-            'Physical',
-            'Mental'
+            [
+                ('CAL', 'Physical'),
+                ('WIL', 'Mental')
+            ]
         ),
     },
 

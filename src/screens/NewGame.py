@@ -281,7 +281,7 @@ class Fortune4(StateBase):
         self.textbox = None
         self.name_entry = None
         self.label = None
-        self.ok_button = None
+        self.next_button = None
 
     def draw(self):
         if self.reaper is not None:
@@ -301,16 +301,147 @@ class Fortune4(StateBase):
             self.label = pygame_gui.elements.UILabel(rect, 'Name:', self.game.manager, object_id='#fortuneteller')
 
             rect = pygame.Rect(1000, 300, 190, 49)
-            self.ok_button = pygame_gui.elements.UIButton(rect, 'OK', self.game.manager, object_id='#menubutton')
+            self.next_button = pygame_gui.elements.UIButton(rect, 'Next', self.game.manager, object_id='#menubutton')
+
+    def next_state(self):
+        return Fortune5(self.game, self.screen)
+
+    def userevent(self, event: pygame.event.Event):
+        if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.next_button:
+                self.screen.player_name = self.name_entry.get_text()
+                self.done = True
+
+
+class Fortune5(StateBase):
+    # "There are things I must know..."
+    def __init__(self, game: any, screen: any):
+        super().__init__(game, screen)
+        self.text = screen.fortune5_text
+        self.image = self.game.resources['images']['reaper']
+
+        self.reaper = None
+        self.textbox = None
+        self.next_button = None
+
+        self.answers = []
+        self.question_idx = 0
+
+    def draw(self):
+        if self.reaper is not None:
+            self.game.manager.draw_ui(self.game.surface)
+        else:
+            rect = pygame.Rect(0, 0, self.game.screen_width, self.game.screen_height)
+            self.reaper = pygame_gui.elements.UIImage(rect, self.image, self.game.manager)
+
+            rect = pygame.Rect(550, 110, 650, 100)
+            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='#fortuneteller')
+
+            rect = pygame.Rect(1000, 300, 190, 49)
+            self.next_button = pygame_gui.elements.UIButton(rect, 'Next', self.game.manager, object_id='#menubutton')
+
+    def next_state(self):
+        return Fortune5a(self.game, self.screen, 0)
+
+    def userevent(self, event: pygame.event.Event):
+        if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.next_button:
+                self.done = True
+
+
+class Fortune5a(StateBase):
+    # A question
+    def __init__(self, game: any, screen: any, question_idx: int):
+        super().__init__(game, screen)
+        self.text = screen.fortune5_text
+        self.image = self.game.resources['images']['reaper']
+
+        self.reaper = None
+        self.textbox = None
+        self.left_button = None
+        self.right_button = None
+
+        self.question_text = screen.questions[question_idx][0]
+        self.answers = screen.questions[question_idx][1]
+        random.shuffle(self.answers)
+
+        self.next_question = question_idx + 1
+
+    def draw(self):
+        if self.reaper is not None:
+            self.game.manager.draw_ui(self.game.surface)
+        else:
+            rect = pygame.Rect(0, 0, self.game.screen_width, self.game.screen_height)
+            self.reaper = pygame_gui.elements.UIImage(rect, self.image, self.game.manager)
+
+            rect = pygame.Rect(550, 110, 650, 100)
+            self.textbox = pygame_gui.elements.UITextBox(self.question_text, rect, self.game.manager, object_id='#fortuneteller')
+
+            rect = pygame.Rect(800, 300, 190, 49)
+            self.left_button = pygame_gui.elements.UIButton(rect, self.answers[0][1], self.game.manager, object_id='#menubutton')
+
+            rect = pygame.Rect(1000, 300, 190, 49)
+            self.right_button = pygame_gui.elements.UIButton(rect, self.answers[1][1], self.game.manager, object_id='#menubutton')
+
+    def next_state(self):
+        if self.next_question >= len(self.screen.questions):
+            return Fortune6(self.game, self.screen)
+        else:
+            return Fortune5a(self.game, self.screen, self.next_question)
+
+    def userevent(self, event: pygame.event.Event):
+        if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == self.left_button:
+                self.screen.answers.append(self.answers[0][0])
+                self.done = True
+            elif event.ui_element == self.right_button:
+                self.screen.answers.append(self.answers[1][0])
+                self.done = True
+
+
+class Fortune6(StateBase):
+    # "In the distance..."
+    def __init__(self, game: any, screen: any):
+        super().__init__(game, screen)
+        self.text = screen.fortune6_text
+        self.image = self.game.resources['images']['reaper']
+
+        self.fade = ColorFade(BLACK_ALPHA, BLACK, 1)
+
+        self.reaper = None
+        self.textbox = None
+        self.next_button = None
+        self.clicked_next = False
+
+    def update(self, dt: float):
+        if self.clicked_next:
+            self.fade.update(dt)
+
+    def draw(self):
+        if self.reaper is not None:
+            self.game.manager.draw_ui(self.game.surface)
+        else:
+            rect = pygame.Rect(0, 0, self.game.screen_width, self.game.screen_height)
+            self.reaper = pygame_gui.elements.UIImage(rect, self.image, self.game.manager)
+
+            rect = pygame.Rect(550, 110, 650, 100)
+            self.textbox = pygame_gui.elements.UITextBox(self.text, rect, self.game.manager, object_id='#fortuneteller')
+
+            rect = pygame.Rect(1000, 300, 190, 49)
+            self.next_button = pygame_gui.elements.UIButton(rect, 'Next', self.game.manager, object_id='#menubutton')
+
+        if self.clicked_next:
+            self.fade.draw()
+            if self.fade.is_done():
+                self.done = True
 
     def next_state(self):
         return Fortune8(self.game, self.screen)
 
     def userevent(self, event: pygame.event.Event):
         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
-            if event.ui_element == self.ok_button:
-                self.screen.player_name = self.name_entry.get_text()
-                self.done = True
+            if event.ui_element == self.next_button:
+                self.clicked_next = True
 
 
 class Fortune8(StateBase):
@@ -361,6 +492,7 @@ class NewGame(Base):
         self.fortune2_text = fortune_text['fortune2']
         self.fortune4_text = fortune_text['fortune4']
         self.fortune5_text = fortune_text['fortune5']
+        self.fortune6_text = fortune_text['fortune6']
 
         str_vs_fin = [
             fortune_text['q1'],
@@ -379,6 +511,7 @@ class NewGame(Base):
         random.shuffle(self.questions)
 
         self.player_name = 'Skelly'
+        self.answers = []
 
         self.map = Map(game.resources['maps']['scene1_farm'])
         rect = pygame.Rect(0, 0, 29, 21)

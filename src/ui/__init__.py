@@ -5,7 +5,6 @@ MIT license, see LICENSE.md for details.
 '''
 
 from .Base import Base
-from .Button import Button
 from .ColorFade import ColorFade
 from .ImageButton import ImageButton
 from .Label import Label
@@ -13,7 +12,6 @@ from .SettingsOverlay import SettingsOverlay
 
 __all__ = [
     'Base',
-    'Button',
     'ColorFade',
     'ImageButton',
     'Label',

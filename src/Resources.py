@@ -3,8 +3,10 @@
 # By Chris Herborth (https://github.com/Taffer)
 # MIT license, see LICENSE.md for details.
 
+from typing import Final
+
 # List of all resources to load during the Loading... screen.
-RESOURCE_LIST = {
+RESOURCE_LIST: Final = {
     'font_paths': {
         'LiberationSerif': {
             'regular': 'graphics/LiberationSerif-Regular.ttf',

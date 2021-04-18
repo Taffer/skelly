@@ -14,13 +14,15 @@ import sys
 import src
 import src.screens
 
-WINDOW_TITLE = 'Skelly'
-WINDOW_WIDTH = 1280
-WINDOW_HEIGHT = 720
-GAME_IDENTITY = 'ca.taffer.skelly'
-PYGAME_VERSION = (2, 0, 1)  # Expected minimum Pygame version.
+from typing import Final
 
-SETTINGS_FILENAME = 'settings.ini'
+WINDOW_TITLE: Final = 'Skelly'
+WINDOW_WIDTH: Final = 1280
+WINDOW_HEIGHT: Final = 720
+GAME_IDENTITY: Final = 'ca.taffer.skelly'
+PYGAME_VERSION: Final = (2, 0, 1)  # Expected minimum Pygame version.
+
+SETTINGS_FILENAME: Final = 'settings.ini'
 
 
 class Game:

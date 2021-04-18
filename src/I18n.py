@@ -3,8 +3,10 @@
 # By Chris Herborth (https://github.com/Taffer)
 # MIT license, see LICENSE.md for details.
 
+from typing import Final
+
 # Currently incomplete and therefore untranslated.
-CREDITS_EN = [  # Credits; the 'h1', 'h2', 'p' are styles to be applied.
+CREDITS_EN: Final = [  # Credits; the 'h1', 'h2', 'p' are styles to be applied.
     # Libraries
     ('h1', 'Additional coding'),
 
@@ -72,7 +74,7 @@ CREDITS_EN = [  # Credits; the 'h1', 'h2', 'p' are styles to be applied.
 ]
 
 # "Complete" text that's been translated.
-I18N_EN = {
+I18N_EN: Final = {
     # Original English by Chris Herborth.
 
     # DO NOT TRANSLATE:
@@ -179,7 +181,7 @@ I18N_EN = {
     'credits': CREDITS_EN,
 }
 
-I18N_ES = {
+I18N_ES: Final = {
     # Español translation attempted by Chris Herborth. These are likely to be
     # hilariously bad!
 

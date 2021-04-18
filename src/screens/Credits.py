@@ -1,4 +1,3 @@
-# Skelly credits screen.
 #
 # By Chris Herborth (https://github.com/Taffer)
 # MIT license, see LICENSE.md for details.

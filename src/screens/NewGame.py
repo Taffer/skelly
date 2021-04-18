@@ -151,7 +151,7 @@ end
 
 
 class StateBase:  # New Game screen state base class
-    def __init__(self, game: any, screen: any) -> None:
+    def __init__(self, game: any, screen: Base) -> None:
         self.game = game
         self.screen = screen
         self.done = False
@@ -174,7 +174,7 @@ class StateBase:  # New Game screen state base class
 
 class Fortune1(StateBase):
     # "You are at peace..."
-    def __init__(self, game: any, screen: any) -> None:
+    def __init__(self, game: any, screen: Base) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune1_text
 
@@ -209,7 +209,7 @@ class Fortune1(StateBase):
 
 class Fortune2(StateBase):
     # "In the distance..."
-    def __init__(self, game: any, screen: any) -> None:
+    def __init__(self, game: any, screen: Base) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune2_text
 
@@ -244,7 +244,7 @@ class Fortune2(StateBase):
 
 class Fortune3(StateBase):
     # Death fades in
-    def __init__(self, game: any, screen: any) -> None:
+    def __init__(self, game: any, screen: Base) -> None:
         super().__init__(game, screen)
         self.image = self.game.resources['images']['reaper']
 
@@ -272,7 +272,7 @@ class Fortune3(StateBase):
 
 class Fortune4(StateBase):
     # "What was your name..."
-    def __init__(self, game: any, screen: any) -> None:
+    def __init__(self, game: any, screen: Base) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune4_text
         self.image = self.game.resources['images']['reaper']
@@ -315,7 +315,7 @@ class Fortune4(StateBase):
 
 class Fortune5(StateBase):
     # "There are things I must know..."
-    def __init__(self, game: any, screen: any) -> None:
+    def __init__(self, game: any, screen: Base) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune5_text
         self.image = self.game.resources['images']['reaper']
@@ -351,7 +351,7 @@ class Fortune5(StateBase):
 
 class Fortune5a(StateBase):
     # A question
-    def __init__(self, game: any, screen: any, question_idx: int) -> None:
+    def __init__(self, game: any, screen: Base, question_idx: int) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune5_text
         self.image = self.game.resources['images']['reaper']
@@ -401,7 +401,7 @@ class Fortune5a(StateBase):
 
 class Fortune6(StateBase):
     # "In the distance..."
-    def __init__(self, game: any, screen: any) -> None:
+    def __init__(self, game: any, screen: Base) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune6_text
         self.image = self.game.resources['images']['reaper']
@@ -445,7 +445,7 @@ class Fortune6(StateBase):
 
 
 class Fortune8(StateBase):
-    def __init__(self, game: any, screen: any) -> None:
+    def __init__(self, game: any, screen: Base) -> None:
         super().__init__(game, screen)
 
     def draw(self) -> None:

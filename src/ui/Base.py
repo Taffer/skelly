@@ -8,7 +8,7 @@ import pygame
 
 
 class Base:
-    def __init__(self):
+    def __init__(self) -> None:
         self.rect = pygame.Rect((0, 0, 0, 0))
 
     def intersects(self, x: int, y: int) -> bool:

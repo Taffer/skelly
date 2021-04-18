@@ -8,7 +8,7 @@ import pygame
 
 
 class ColorFade:
-    def __init__(self, rgba1: pygame.Color, rgba2: pygame.Color, duration: float):
+    def __init__(self, rgba1: pygame.Color, rgba2: pygame.Color, duration: float) -> None:
         self.rgba = tuple(rgba1)
         self.start_rgba = rgba1
         self.end_rgba = rgba2
@@ -23,15 +23,15 @@ class ColorFade:
         self.texture.fill(self.rgba)
         self.texture.set_alpha(self.rgba[-1])
 
-    def get_color(self):
+    def get_color(self) -> pygame.Color:
         ''' Return the current colour.
         '''
         return self.rgba
 
-    def is_done(self):
+    def is_done(self) -> bool:
         return self.done
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         if self.done:
             return
 
@@ -47,5 +47,5 @@ class ColorFade:
         self.texture.fill(self.rgba)
         self.texture.set_alpha(self.rgba[-1])
 
-    def draw(self):
+    def draw(self) -> None:
         pygame.display.get_surface().blit(self.texture, self.screen_rect)

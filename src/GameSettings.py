@@ -9,7 +9,7 @@ import os
 
 
 class GameSettings:
-    def __init__(self, filename: str, defaults: dict):
+    def __init__(self, filename: str, defaults: dict) -> None:
         ''' Create a GameSettings from the given .ini file.
 
         Defaults are copied, so new settings are applied properly.
@@ -27,7 +27,7 @@ class GameSettings:
                     # Overwrite any defaults with actual values.
                     self.ini[k] = v
 
-    def save(self):
+    def save(self) -> None:
         parts = os.path.split(self.filename)
         if not os.path.exists(parts[0]):
             os.makedirs(parts[0])
@@ -41,5 +41,5 @@ class GameSettings:
     def get(self, key: str) -> any:
         return self.ini[key]
 
-    def set(self, key: str, value: any):
+    def set(self, key: str, value: any) -> None:
         self.ini[key] = value

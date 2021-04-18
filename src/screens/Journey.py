@@ -15,7 +15,7 @@ WHITE = pygame.Color('white')
 
 
 class Journey(Base):
-    def __init__(self, game: any):
+    def __init__(self, game: any) -> None:
         super().__init__(game)
 
         # next_screen is set when a button is clicked.
@@ -33,7 +33,7 @@ class Journey(Base):
 
         self.create_buttons()
 
-    def draw(self):
+    def draw(self) -> None:
         self.game.surface.fill(BLACK)
         self.draw_title()
 
@@ -42,10 +42,10 @@ class Journey(Base):
         if not self.fade.is_done():
             self.fade.draw()
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.fade.update(dt)
 
-    def keyreleased(self, event: pygame.event.Event):
+    def keyreleased(self, event: pygame.event.Event) -> None:
         if event.key == pygame.K_j:  # Journey onward!
             pass  # TODO: Should be 'Game'
         elif event.key == pygame.K_n:  # New game
@@ -57,7 +57,7 @@ class Journey(Base):
         elif event.key == pygame.K_ESCAPE:  # Exit
             self.switch_to('Exit')
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_WINDOW_CLOSE:
             if event.ui_element == self.window:
                 self.overlay_closed = True
@@ -75,7 +75,7 @@ class Journey(Base):
             elif event.ui_element == self.exit_button:
                 self.switch_to('Exit')
 
-    def create_buttons(self):
+    def create_buttons(self) -> None:
         x = (self.game.screen_width - 190) / 2  # Buttons are 190 pixels wide.
 
         self.journey_button = pygame_gui.elements.UIButton(pygame.Rect(x, 350, 190, 49), self.journey_text, self.game.manager,
@@ -89,7 +89,7 @@ class Journey(Base):
         self.exit_button = pygame_gui.elements.UIButton(pygame.Rect(x, 620, 190, 49), self.exit_text, self.game.manager,
                                                         object_id='#menubutton')
 
-    def switch_to(self, screen_name):
+    def switch_to(self, screen_name) -> None:
         self.next_screen = screen_name
         self.can_exit = True
         self.game.manager.clear_and_reset()  # Kill our UI buttons.

@@ -21,7 +21,7 @@ GREEN = pygame.Color('green')
 RED = pygame.Color('red')
 
 
-def draw_29x21(surface: pygame.Surface):
+def draw_29x21(surface: pygame.Surface) -> None:
     ''' Prototype UI locations, not for human consumption.
     '''
     dx = 8
@@ -151,30 +151,30 @@ end
 
 
 class StateBase:  # New Game screen state base class
-    def __init__(self, game: any, screen: any):
+    def __init__(self, game: any, screen: any) -> None:
         self.game = game
         self.screen = screen
         self.done = False
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         pass
 
-    def draw(self):
+    def draw(self) -> None:
         pass
 
-    def is_done(self):
+    def is_done(self) -> None:
         return self.done
 
-    def next_state(self):
+    def next_state(self) -> any:
         raise NotImplementedError
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         pass
 
 
 class Fortune1(StateBase):
     # "You are at peace..."
-    def __init__(self, game: any, screen: any):
+    def __init__(self, game: any, screen: any) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune1_text
 
@@ -183,10 +183,10 @@ class Fortune1(StateBase):
         self.textbox = None
         self.next_button = None
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.fade.update(dt)
 
-    def draw(self):
+    def draw(self) -> None:
         if self.textbox is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
@@ -198,10 +198,10 @@ class Fortune1(StateBase):
 
         self.fade.draw()
 
-    def next_state(self):
+    def next_state(self) -> StateBase:
         return Fortune2(self.game, self.screen)
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.next_button:
                 self.done = True
@@ -209,7 +209,7 @@ class Fortune1(StateBase):
 
 class Fortune2(StateBase):
     # "In the distance..."
-    def __init__(self, game: any, screen: any):
+    def __init__(self, game: any, screen: any) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune2_text
 
@@ -218,10 +218,10 @@ class Fortune2(StateBase):
         self.textbox = None
         self.next_button = None
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.fade.update(dt)
 
-    def draw(self):
+    def draw(self) -> None:
         if self.textbox is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
@@ -233,10 +233,10 @@ class Fortune2(StateBase):
 
         self.fade.draw()
 
-    def next_state(self):
+    def next_state(self) -> StateBase:
         return Fortune3(self.game, self.screen)
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.next_button:
                 self.done = True
@@ -244,7 +244,7 @@ class Fortune2(StateBase):
 
 class Fortune3(StateBase):
     # Death fades in
-    def __init__(self, game: any, screen: any):
+    def __init__(self, game: any, screen: any) -> None:
         super().__init__(game, screen)
         self.image = self.game.resources['images']['reaper']
 
@@ -252,12 +252,12 @@ class Fortune3(StateBase):
 
         self.reaper = None
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.fade.update(dt)
         if self.fade.is_done():
             self.done = True
 
-    def draw(self):
+    def draw(self) -> None:
         if self.reaper is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
@@ -266,13 +266,13 @@ class Fortune3(StateBase):
 
         self.fade.draw()
 
-    def next_state(self):
+    def next_state(self) -> StateBase:
         return Fortune4(self.game, self.screen)
 
 
 class Fortune4(StateBase):
     # "What was your name..."
-    def __init__(self, game: any, screen: any):
+    def __init__(self, game: any, screen: any) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune4_text
         self.image = self.game.resources['images']['reaper']
@@ -283,7 +283,7 @@ class Fortune4(StateBase):
         self.label = None
         self.next_button = None
 
-    def draw(self):
+    def draw(self) -> None:
         if self.reaper is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
@@ -303,10 +303,10 @@ class Fortune4(StateBase):
             rect = pygame.Rect(1000, 300, 190, 49)
             self.next_button = pygame_gui.elements.UIButton(rect, 'Next', self.game.manager, object_id='#menubutton')
 
-    def next_state(self):
+    def next_state(self) -> StateBase:
         return Fortune5(self.game, self.screen)
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.next_button:
                 self.screen.player_name = self.name_entry.get_text()
@@ -315,7 +315,7 @@ class Fortune4(StateBase):
 
 class Fortune5(StateBase):
     # "There are things I must know..."
-    def __init__(self, game: any, screen: any):
+    def __init__(self, game: any, screen: any) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune5_text
         self.image = self.game.resources['images']['reaper']
@@ -327,7 +327,7 @@ class Fortune5(StateBase):
         self.answers = []
         self.question_idx = 0
 
-    def draw(self):
+    def draw(self) -> None:
         if self.reaper is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
@@ -340,10 +340,10 @@ class Fortune5(StateBase):
             rect = pygame.Rect(1000, 300, 190, 49)
             self.next_button = pygame_gui.elements.UIButton(rect, 'Next', self.game.manager, object_id='#menubutton')
 
-    def next_state(self):
+    def next_state(self) -> StateBase:
         return Fortune5a(self.game, self.screen, 0)
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.next_button:
                 self.done = True
@@ -351,7 +351,7 @@ class Fortune5(StateBase):
 
 class Fortune5a(StateBase):
     # A question
-    def __init__(self, game: any, screen: any, question_idx: int):
+    def __init__(self, game: any, screen: any, question_idx: int) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune5_text
         self.image = self.game.resources['images']['reaper']
@@ -367,7 +367,7 @@ class Fortune5a(StateBase):
 
         self.next_question = question_idx + 1
 
-    def draw(self):
+    def draw(self) -> None:
         if self.reaper is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
@@ -383,13 +383,13 @@ class Fortune5a(StateBase):
             rect = pygame.Rect(1000, 300, 190, 49)
             self.right_button = pygame_gui.elements.UIButton(rect, self.answers[1][1], self.game.manager, object_id='#menubutton')
 
-    def next_state(self):
+    def next_state(self) -> StateBase:
         if self.next_question >= len(self.screen.questions):
             return Fortune6(self.game, self.screen)
         else:
             return Fortune5a(self.game, self.screen, self.next_question)
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.left_button:
                 self.screen.answers.append(self.answers[0][0])
@@ -401,7 +401,7 @@ class Fortune5a(StateBase):
 
 class Fortune6(StateBase):
     # "In the distance..."
-    def __init__(self, game: any, screen: any):
+    def __init__(self, game: any, screen: any) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune6_text
         self.image = self.game.resources['images']['reaper']
@@ -413,11 +413,11 @@ class Fortune6(StateBase):
         self.next_button = None
         self.clicked_next = False
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         if self.clicked_next:
             self.fade.update(dt)
 
-    def draw(self):
+    def draw(self) -> None:
         if self.reaper is not None:
             self.game.manager.draw_ui(self.game.surface)
         else:
@@ -435,20 +435,20 @@ class Fortune6(StateBase):
             if self.fade.is_done():
                 self.done = True
 
-    def next_state(self):
+    def next_state(self) -> StateBase:
         return Fortune8(self.game, self.screen)
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.next_button:
                 self.clicked_next = True
 
 
 class Fortune8(StateBase):
-    def __init__(self, game: any, screen: any):
+    def __init__(self, game: any, screen: any) -> None:
         super().__init__(game, screen)
 
-    def draw(self):
+    def draw(self) -> None:
         draw_29x21(self.game.surface)
 
         self.screen.map.render('Ground', self.game.surface, self.screen.viewport, 8, 8)
@@ -459,7 +459,7 @@ class Fortune8(StateBase):
 
 
 class NewGame(Base):
-    def __init__(self, game: any):
+    def __init__(self, game: any) -> None:
         super().__init__(game)
         self.next_screen = 'Journey'  # TODO: Should be 'Game'
         '''
@@ -577,7 +577,7 @@ class NewGame(Base):
         self.ani_idx = 1
         '''
 
-    def draw(self):
+    def draw(self) -> None:
         self.game.surface.fill(BLACK)
 
         self.state.draw()
@@ -585,7 +585,7 @@ class NewGame(Base):
         self.ani[self.ani_idx]:draw()
         '''
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.state.update(dt)
 
         if self.state.is_done():
@@ -604,5 +604,5 @@ class NewGame(Base):
         end
         '''
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         self.state.userevent(event)

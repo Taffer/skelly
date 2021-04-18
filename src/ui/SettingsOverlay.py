@@ -22,7 +22,7 @@ from pygame_gui.elements import UIDropDownMenu, UIHorizontalSlider, UILabel
 
 
 class SettingsOverlay:
-    def __init__(self, game: any):
+    def __init__(self, game: any) -> None:
         self.manager = game.manager
         self.settings = game.settings
         self.text = game.text
@@ -56,7 +56,7 @@ class SettingsOverlay:
         rect = pygame.Rect(150, 250, 250, 25)
         self.language_menu = UIDropDownMenu(settings_text['translations'], 'English', rect, self.manager, self.window)
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_WINDOW_CLOSE:
             if event.ui_element == self.window:
                 self.overlay_closed = True

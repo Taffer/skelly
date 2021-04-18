@@ -24,7 +24,7 @@ SETTINGS_FILENAME = 'settings.ini'
 
 
 class Game:
-    def __init__(self, surface: pygame.Surface):
+    def __init__(self, surface: pygame.Surface) -> None:
         self.surface = surface
         self.manager = pygame_gui.UIManager((WINDOW_WIDTH, WINDOW_HEIGHT), 'graphics/ui-theme.json')
 
@@ -74,11 +74,11 @@ class Game:
 
         return src.GameSettings(path, defaults)
 
-    def save_settings(self):
+    def save_settings(self) -> None:
         self.settings.save()
         self.manager.draw_ui(self.surface)
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.screen.update(dt)
         self.manager.update(dt)
 
@@ -103,23 +103,23 @@ class Game:
                 pygame.mixer.music.stop()
                 sys.exit()
 
-    def draw(self):
+    def draw(self) -> None:
         self.screen.draw()
 
-    def keypressed(self, event: pygame.event.Event):
+    def keypressed(self, event: pygame.event.Event) -> None:
         self.screen.keypressed(event)
 
-    def keyreleased(self, event: pygame.event.Event):
+    def keyreleased(self, event: pygame.event.Event) -> None:
         self.screen.keyreleased(event)
 
-    def mousemoved(self, event: pygame.event.Event):
+    def mousemoved(self, event: pygame.event.Event) -> None:
         self.screen.mousemoved(event)
 
-    def mousedown(self, event: pygame.event.Event):
+    def mousedown(self, event: pygame.event.Event) -> None:
         self.screen.mousedown(event)
 
-    def mouseup(self, event: pygame.event.Event):
+    def mouseup(self, event: pygame.event.Event) -> None:
         self.screen.mouseup(event)
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         self.screen.userevent(event)

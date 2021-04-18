@@ -13,7 +13,7 @@ WHITE = pygame.Color('white')
 
 
 class Base:
-    def __init__(self, game: any):
+    def __init__(self, game: any) -> None:
         ''' Initialize.
 
         @param game Game global state.
@@ -26,35 +26,35 @@ class Base:
         self.has_title = False
         self.title_ui = []  # For Title elements.
 
-    def draw(self):
+    def draw(self) -> None:
         ''' Draw the screen's contents.
         '''
         pass
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         ''' Update the screen's contents.
         '''
         pass
 
-    def keypressed(self, event: pygame.event.Event):
+    def keypressed(self, event: pygame.event.Event) -> None:
         pass
 
-    def keyreleased(self, event: pygame.event.Event):
+    def keyreleased(self, event: pygame.event.Event) -> None:
         pass
 
-    def mousemoved(self, event: pygame.event.Event):
+    def mousemoved(self, event: pygame.event.Event) -> None:
         pass
 
-    def mousedown(self, event: pygame.event.Event):
+    def mousedown(self, event: pygame.event.Event) -> None:
         pass
 
-    def mouseup(self, event: pygame.event.Event):
+    def mouseup(self, event: pygame.event.Event) -> None:
         pass
 
-    def userevent(self, event: pygame.event.Event):
+    def userevent(self, event: pygame.event.Event) -> None:
         pass
 
-    def add_title(self):
+    def add_title(self) -> None:
         title_text = self.game.text.get_text('title')
         skelly_text = self.game.text.get_text('skelly_title')
         subtitle_text = title_text['subtitle_text']
@@ -69,7 +69,7 @@ class Base:
 
         self.has_title = True
 
-    def draw_title(self):
+    def draw_title(self) -> None:
         if self.has_title:
             for item in self.title_ui:
                 item.draw()

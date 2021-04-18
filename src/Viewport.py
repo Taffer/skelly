@@ -9,13 +9,13 @@ import pygame
 class Viewport:
     ''' View into the map in tile co-ords.
     '''
-    def __init__(self, map_width: int, map_height: int, rect: pygame.Rect):
+    def __init__(self, map_width: int, map_height: int, rect: pygame.Rect) -> None:
         self.map_tile_width = map_width
         self.map_tile_height = map_height
 
         self.rect = rect
 
-    def set_position(self, x: int, y: int):
+    def set_position(self, x: int, y: int) -> None:
         if x + self.rect.width > self.map_tile_width:
             self.rect.x = self.map_tile_width - self.rect.width
         else:

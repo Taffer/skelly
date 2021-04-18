@@ -66,7 +66,7 @@ def loader(game: any, file_list: dict, done_text: str) -> str:
 
 
 class Title(Base):
-    def __init__(self, game: any):
+    def __init__(self, game: any) -> None:
         super().__init__(game)
 
         self.next_screen = 'Journey'
@@ -95,7 +95,7 @@ class Title(Base):
                                    WHITE, 'left')
         self.ui.append(self.loading_label)
 
-    def draw(self):
+    def draw(self) -> None:
         self.game.surface.fill(BLACK)
         self.draw_title()
 
@@ -104,7 +104,7 @@ class Title(Base):
 
         self.fade.draw()
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.fade.update(dt)
 
         if self.fade_out:

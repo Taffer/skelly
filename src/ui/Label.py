@@ -10,7 +10,7 @@ from . import Base
 
 
 class Label(Base):
-    def __init__(self, x: int, y: int, text: str, font: pygame.freetype.Font, color: pygame.Color, align: str):
+    def __init__(self, x: int, y: int, text: str, font: pygame.freetype.Font, color: pygame.Color, align: str) -> None:
         super().__init__()
 
         self.orig_x = x
@@ -25,10 +25,10 @@ class Label(Base):
 
         self.set_text(text)
 
-    def draw(self):
+    def draw(self) -> None:
         pygame.display.get_surface().blit(self.texture, self.rect)
 
-    def set_text(self, text: str):
+    def set_text(self, text: str) -> None:
         self.texture, self.rect = self.font.render(text, self.color)
 
         if self.align == 'right':

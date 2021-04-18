@@ -13,7 +13,7 @@ import time
 from Game import Game, PYGAME_VERSION, WINDOW_HEIGHT, WINDOW_TITLE, WINDOW_WIDTH
 
 
-def main():
+def main() -> None:
     if PYGAME_VERSION > pygame.version.vernum:
         raise SystemExit('Pygame version too old: {0}'.format(pygame.version.ver))
 

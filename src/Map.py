@@ -15,7 +15,7 @@ from . import Viewport
 
 
 class Map:
-    def __init__(self, map_path: str):
+    def __init__(self, map_path: str) -> None:
         tree = ElementTree.parse(map_path)
         self.root = tree.getroot()
         layers = self.root.findall('layer')
@@ -75,7 +75,7 @@ class Map:
 
             self.layer_data[layer.attrib['name']] = this_data
 
-    def render(self, layer: str, surface: pygame.Surface, viewport: Viewport, offset_x: int, offset_y: int):
+    def render(self, layer: str, surface: pygame.Surface, viewport: Viewport, offset_x: int, offset_y: int) -> None:
         # This use case seems to be faster than using blits(); the overhead of
         # creating a list of tuples is probably what kills it.
         view_rect = viewport.rect

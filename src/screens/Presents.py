@@ -17,7 +17,7 @@ WHITE = pygame.Color('white')
 
 
 class Presents(Base):
-    def __init__(self, game: any):
+    def __init__(self, game: any) -> None:
         super().__init__(game)
 
         self.next_screen = 'Title'
@@ -57,7 +57,7 @@ class Presents(Base):
         self.ui.append(Label(self.game.screen_width / 2, 640, self.pygame_text, self.game.resources['fonts']['default_mono'],
                        WHITE, 'centre'))
 
-    def draw(self):
+    def draw(self) -> None:
         self.game.surface.fill(BLACK)
 
         for item in self.ui:
@@ -65,7 +65,7 @@ class Presents(Base):
 
         self.fade.draw()
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.fade.update(dt)
 
         if self.fade_out:

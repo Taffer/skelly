@@ -50,7 +50,7 @@ FRAMES = {
 
 
 class LPCSprite:
-    def __init__(self, texture: pygame.Surface):
+    def __init__(self, texture: pygame.Surface) -> None:
         self.width = 64
         self.height = 64
 
@@ -93,21 +93,21 @@ class LPCSprite:
         for fv in LPC_FACING:
             self.frames['idle'][fv] = [self.frames['walk'][fv][0]]
 
-    def check_frame(self):
+    def check_frame(self) -> None:
         if self.frame >= FRAMES[self.animation]:
             self.frame = 0
 
-    def next_frame(self):
+    def next_frame(self) -> None:
         self.frame += 1
         self.check_frame()
 
-    def set_facing(self, facing: str):
+    def set_facing(self, facing: str) -> None:
         self.facing = facing
         self.check_frame()
 
-    def set_animation(self, animation: str):
+    def set_animation(self, animation: str) -> None:
         self.animation = animation
         self.check_frame()
 
-    def get_texture(self):
-        self.frames[self.animation][self.facing][self.frame]
+    def get_texture(self) -> pygame.Surface:
+        return self.frames[self.animation][self.facing][self.frame]

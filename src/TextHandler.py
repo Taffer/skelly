@@ -7,19 +7,19 @@ from typing import Union
 
 
 class TextHandler:
-    def __init__(self):
+    def __init__(self) -> None:
         self.default = None
         self.current = None
         self.lang = {}
 
-    def addLanguage(self, code: str, dictionary: dict):
+    def addLanguage(self, code: str, dictionary: dict) -> None:
         ''' Add language strings. The first one is the default.
         '''
         self.lang[code] = dictionary
         if self.default is None:
             self.default = code
 
-    def setLanguage(self, code: str):
+    def setLanguage(self, code: str) -> None:
         self.current = code
 
     def get_text(self, tag: str) -> Union[str, dict, list]:

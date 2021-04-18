@@ -15,7 +15,7 @@ WHITE = pygame.Color('white')
 
 
 class Credits(Base):
-    def __init__(self, game: any):
+    def __init__(self, game: any) -> None:
         super().__init__(game)
 
         self.next_screen = 'Journey'
@@ -41,7 +41,7 @@ class Credits(Base):
 
         self.add_title()
 
-    def draw(self):
+    def draw(self) -> None:
         self.game.surface.fill(BLACK)
         self.draw_title()
 
@@ -60,7 +60,7 @@ class Credits(Base):
         if not self.fade.is_done():
             self.fade.draw()
 
-    def update(self, dt: float):
+    def update(self, dt: float) -> None:
         self.fade.update(dt)
 
         self.ticks += dt
@@ -75,8 +75,8 @@ class Credits(Base):
 
                 self.lines_to_add -= 0.25
 
-    def keyreleased(self, event: pygame.event.Event):
+    def keyreleased(self, event: pygame.event.Event) -> None:
         self.can_exit = True
 
-    def mouseup(self, event: pygame.event.Event):
+    def mouseup(self, event: pygame.event.Event) -> None:
         self.can_exit = True

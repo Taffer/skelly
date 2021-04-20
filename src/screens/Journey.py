@@ -6,7 +6,7 @@
 import pygame
 import pygame_gui
 
-from . import Base
+from .ScreenBase import ScreenBase
 from ..ui import ColorFade
 
 BLACK = pygame.Color('black')
@@ -14,7 +14,7 @@ BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully tra
 WHITE = pygame.Color('white')
 
 
-class Journey(Base):
+class Journey(ScreenBase):
     def __init__(self, game: 'Game') -> None:
         super().__init__(game)
 

@@ -6,7 +6,7 @@ MIT license, see LICENSE.md for details.
 
 import pygame
 
-from . import Base
+from .ScreenBase import ScreenBase
 from .. import RESOURCE_LIST
 from ..ui import ColorFade
 from ..ui import Label
@@ -65,7 +65,7 @@ def loader(game: 'Game', file_list: dict, done_text: str) -> str:
     yield done_text
 
 
-class Title(Base):
+class Title(ScreenBase):
     def __init__(self, game: 'Game') -> None:
         super().__init__(game)
 

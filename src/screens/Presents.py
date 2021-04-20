@@ -6,7 +6,7 @@ MIT license, see LICENSE.md for details.
 
 import pygame
 
-from . import Base
+from .ScreenBase import ScreenBase
 from ..ui import ColorFade
 from ..ui import ImageButton
 from ..ui import Label
@@ -16,7 +16,7 @@ BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully tra
 WHITE = pygame.Color('white')
 
 
-class Presents(Base):
+class Presents(ScreenBase):
     def __init__(self, game: 'Game') -> None:
         super().__init__(game)
 

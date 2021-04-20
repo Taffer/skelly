@@ -5,7 +5,7 @@
 
 import pygame
 
-from . import Base
+from .ScreenBase import ScreenBase
 from ..ui import SettingsOverlay
 from ..ui import ColorFade
 
@@ -14,7 +14,7 @@ BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully tra
 WHITE = pygame.Color('white')
 
 
-class Settings(Base):
+class Settings(ScreenBase):
     def __init__(self, game: 'Game') -> None:
         super().__init__(game)
 

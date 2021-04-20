@@ -12,7 +12,7 @@ from ..ui import Label
 WHITE = pygame.Color('white')
 
 
-class Base:
+class ScreenBase:
     def __init__(self, game: 'Game') -> None:
         ''' Initialize.
 

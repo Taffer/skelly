@@ -4,7 +4,7 @@
 
 import pygame
 
-from . import Base
+from .ScreenBase import ScreenBase
 from ..ui import ColorFade
 
 BLACK = pygame.Color('black')
@@ -13,7 +13,7 @@ CREDITS_BLACK = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 3 * 255 // 4)  # BLACK, 
 WHITE = pygame.Color('white')
 
 
-class Credits(Base):
+class Credits(ScreenBase):
     def __init__(self, game: 'Game') -> None:
         super().__init__(game)
 

@@ -444,6 +444,12 @@ class Fortune6(StateBase):
                 self.clicked_next = True
 
 
+class Fortune7(StateBase):
+    # Rock, paper, scissors
+    def __init__(self, game: any, screen: Base) -> None:
+        pass
+
+
 class Fortune8(StateBase):
     def __init__(self, game: any, screen: Base) -> None:
         super().__init__(game, screen)

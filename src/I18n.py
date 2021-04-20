@@ -121,31 +121,40 @@ I18N_EN: Final = {
             ]
         ),
         'q3': (
-            '<i>Strength vs. Finesse?</i>',
+            '<i>Are you a dog person or a cat person?</i>',
             [
-                ('STR', 'Strength'),
-                ('DEX', 'Finesse')
+                ('STR', 'Dog'),
+                ('DEX', 'Cat')
             ]
         ),
         'q4': (
-            '<i>Physical toughness vs. Mental toughness?</i>',
+            '<i>Would you open a banana at the top or bottom?</i>',
             [
-                ('CAL', 'Physical'),
-                ('WIL', 'Mental')
+                ('CAL', 'Top'),
+                ('WIL', 'Bottom')
             ]
         ),
         'q5': (
-            '<i>Physical toughness vs. Mental toughness?</i>',
+            '<i>Do you prefer winter or summer?</i>',
             [
-                ('CAL', 'Physical'),
-                ('WIL', 'Mental')
+                ('CAL', 'Winter'),
+                ('WIL', 'Summer')
             ]
         ),
         'q6': (
-            '<i>Physical toughness vs. Mental toughness?</i>',
+            '<i>Would you rather do ten push-ups or remember five things?</i>',
             [
-                ('CAL', 'Physical'),
-                ('WIL', 'Mental')
+                ('CAL', 'Push-ups'),
+                ('WIL', 'Remember')
+            ]
+        ),
+
+        'rockpaperscissors': (
+            '<i>Rock, paper, or scissors?</i>',
+            [
+                'Rock',
+                'Paper',
+                'Scissors'
             ]
         ),
     },

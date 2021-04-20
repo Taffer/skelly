@@ -400,6 +400,77 @@ class Fortune5a(StateBase):
 
 
 class Fortune6(StateBase):
+    # Rock, paper, scissors
+    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+        super().__init__(game, screen)
+
+        self.image = self.game.resources['images']['reaper']
+
+        self.reaper = None
+        self.textbox = None
+        self.left_button = None
+        self.centre_button = None
+        self.right_button = None
+
+        self.rps_question = self.screen.rps_text[0]
+        self.rps = self.screen.rps_text[1]
+        random.shuffle(self.rps)
+
+        self.rps_choice = self.rps[0][0]
+        random.shuffle(self.rps)  # Shuffle again for display.
+
+    def draw(self) -> None:
+        if self.reaper is not None:
+            self.game.manager.draw_ui(self.game.surface)
+        else:
+            rect = pygame.Rect(0, 0, self.game.screen_width, self.game.screen_height)
+            self.reaper = pygame_gui.elements.UIImage(rect, self.image, self.game.manager)
+
+            rect = pygame.Rect(550, 110, 650, 100)
+            self.textbox = pygame_gui.elements.UITextBox(self.rps_question, rect, self.game.manager, object_id='#fortuneteller')
+
+            rect = pygame.Rect(600, 300, 190, 49)
+            self.left_button = pygame_gui.elements.UIButton(rect, self.rps[0][1], self.game.manager, object_id='#menubutton')
+
+            rect = pygame.Rect(800, 300, 190, 49)
+            self.centre_button = pygame_gui.elements.UIButton(rect, self.rps[1][1], self.game.manager, object_id='#menubutton')
+
+            rect = pygame.Rect(1000, 300, 190, 49)
+            self.right_button = pygame_gui.elements.UIButton(rect, self.rps[2][1], self.game.manager, object_id='#menubutton')
+
+    def next_state(self) -> StateBase:
+        return Fortune7(self.game, self.screen)
+
+    def win_rps(self, choice: str) -> bool:
+        # Did you win at rock, paper, scissors?
+        if choice == 'R' and self.rps_choice == 'S':
+            return True
+        elif choice == 'P' and self.rps_choice == 'R':
+            return True
+        elif choice == 'S' and self.rps_choice == 'P':
+            return True
+
+        return False
+
+    def userevent(self, event: pygame.event.Event) -> None:
+        if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+            won_rps = False
+            if event.ui_element == self.left_button:
+                won_rps = self.win_rps(self.rps[0][0])
+                self.done = True
+            elif event.ui_element == self.centre_button:
+                won_rps = self.win_rps(self.rps[1][0])
+                self.done = True
+            elif event.ui_element == self.right_button:
+                won_rps = self.win_rps(self.rps[2][0])
+                self.done = True
+
+            if won_rps:
+                # This might be too much.
+                self.screen.answers += ['STR', 'DEX', 'CAL', 'WIL']
+
+
+class Fortune7(StateBase):
     # "In the distance..."
     def __init__(self, game: 'Game', screen: ScreenBase) -> None:
         super().__init__(game, screen)
@@ -442,12 +513,6 @@ class Fortune6(StateBase):
         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == self.next_button:
                 self.clicked_next = True
-
-
-class Fortune7(StateBase):
-    # Rock, paper, scissors
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
-        pass
 
 
 class Fortune8(StateBase):
@@ -499,6 +564,7 @@ class NewGame(ScreenBase):
         self.fortune4_text = fortune_text['fortune4']
         self.fortune5_text = fortune_text['fortune5']
         self.fortune6_text = fortune_text['fortune6']
+        self.rps_text = fortune_text['rockpaperscissors']
 
         str_vs_fin = [
             fortune_text['q1'],

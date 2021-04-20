@@ -15,7 +15,7 @@
         },
         {
             "name": "Launch PyGame",
-            "shell_cmd": "cd $project_path ; python3 main.py",
+            "shell_cmd": "cd $project_path ; python3 -u main.py",
         },
     ],
 }

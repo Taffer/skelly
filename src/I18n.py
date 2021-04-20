@@ -152,9 +152,9 @@ I18N_EN: Final = {
         'rockpaperscissors': (
             '<i>Rock, paper, or scissors?</i>',
             [
-                'Rock',
-                'Paper',
-                'Scissors'
+                ('R', 'Rock'),
+                ('P', 'Paper'),
+                ('S', 'Scissors')
             ]
         ),
     },

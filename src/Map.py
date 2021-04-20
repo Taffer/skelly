@@ -90,6 +90,9 @@ class Map:
     def get_index(self, x: int, y: int) -> int:
         return x + y * self.map_width + 1
 
+    def get_tile(self, layer: str, x: int, y: int) -> int:
+        return self.layer_data[layer][self.get_index(x, y)]
+
     def point_to_screen(self, viewport: Viewport, offset_x: int, offset_y: int, x: int, y: int) -> Tuple[int, int]:
         # Convert a map point location to an on-screen location. Returns None if
         # the point is outside the viewport.

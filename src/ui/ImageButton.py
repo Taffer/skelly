@@ -5,10 +5,10 @@
 
 import pygame
 
-from . import Base
+from .UIBase import UIBase
 
 
-class ImageButton(Base):
+class ImageButton(UIBase):
     def __init__(self, x: int, y: int, texture: pygame.Surface) -> None:
         super().__init__()
 

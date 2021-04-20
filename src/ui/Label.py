@@ -6,10 +6,10 @@
 import pygame
 import pygame.freetype
 
-from . import Base
+from .UIBase import UIBase
 
 
-class Label(Base):
+class Label(UIBase):
     def __init__(self, x: int, y: int, text: str, font: pygame.freetype.Font, color: pygame.Color, align: str) -> None:
         super().__init__()
 

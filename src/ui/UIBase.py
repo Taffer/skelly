@@ -7,7 +7,7 @@ MIT license, see LICENSE.md for details.
 import pygame
 
 
-class Base:
+class UIBase:
     def __init__(self) -> None:
         self.rect = pygame.Rect((0, 0, 0, 0))
 

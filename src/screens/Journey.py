@@ -15,7 +15,7 @@ WHITE = pygame.Color('white')
 
 
 class Journey(Base):
-    def __init__(self, game: any) -> None:
+    def __init__(self, game: 'Game') -> None:
         super().__init__(game)
 
         # next_screen is set when a button is clicked.

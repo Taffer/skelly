@@ -22,7 +22,7 @@ from pygame_gui.elements import UIDropDownMenu, UIHorizontalSlider, UILabel
 
 
 class SettingsOverlay:
-    def __init__(self, game: any) -> None:
+    def __init__(self, game: 'Game') -> None:
         self.manager = game.manager
         self.settings = game.settings
         self.text = game.text

@@ -15,7 +15,7 @@ WHITE = pygame.Color('white')
 
 
 class Settings(Base):
-    def __init__(self, game: any) -> None:
+    def __init__(self, game: 'Game') -> None:
         super().__init__(game)
 
         self.next_screen = 'Journey'

@@ -79,6 +79,7 @@ class LPCSprite:
                 y += self.height
 
         # "hurt" has to be special-cased because it only has one facing.
+        self.frames['hurt'] = {}
         y = texture.get_height() - self.height
         for fv in LPC_FACING:
             # We'll use this animation for all four facings.
@@ -90,6 +91,7 @@ class LPCSprite:
                 self.frames['hurt'][fv].append(texture.subsurface(rect))
 
         # "idle" is fake, just the first frame from "walk"
+        self.frames['idle'] = {}
         for fv in LPC_FACING:
             self.frames['idle'][fv] = [self.frames['walk'][fv][0]]
 

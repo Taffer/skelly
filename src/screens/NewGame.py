@@ -151,7 +151,7 @@ end
 
 
 class StateBase:  # New Game screen state base class
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         self.game = game
         self.screen = screen
         self.done = False
@@ -174,7 +174,7 @@ class StateBase:  # New Game screen state base class
 
 class Fortune1(StateBase):
     # "You are at peace..."
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune1_text
 
@@ -209,7 +209,7 @@ class Fortune1(StateBase):
 
 class Fortune2(StateBase):
     # "In the distance..."
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune2_text
 
@@ -244,7 +244,7 @@ class Fortune2(StateBase):
 
 class Fortune3(StateBase):
     # Death fades in
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
         self.image = self.game.resources['images']['reaper']
 
@@ -272,7 +272,7 @@ class Fortune3(StateBase):
 
 class Fortune4(StateBase):
     # "What was your name..."
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune4_text
         self.image = self.game.resources['images']['reaper']
@@ -315,7 +315,7 @@ class Fortune4(StateBase):
 
 class Fortune5(StateBase):
     # "There are things I must know..."
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune5_text
         self.image = self.game.resources['images']['reaper']
@@ -351,7 +351,7 @@ class Fortune5(StateBase):
 
 class Fortune5a(StateBase):
     # A question
-    def __init__(self, game: 'Game', screen: ScreenBase, question_idx: int) -> None:
+    def __init__(self, game, screen: ScreenBase, question_idx: int) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune5_text
         self.image = self.game.resources['images']['reaper']
@@ -401,7 +401,7 @@ class Fortune5a(StateBase):
 
 class Fortune6(StateBase):
     # Rock, paper, scissors
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
 
         self.image = self.game.resources['images']['reaper']
@@ -472,7 +472,7 @@ class Fortune6(StateBase):
 
 class Fortune7(StateBase):
     # "In the distance..."
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
         self.text = screen.fortune6_text
         self.image = self.game.resources['images']['reaper']
@@ -516,7 +516,7 @@ class Fortune7(StateBase):
 
 
 class Fortune8(StateBase):
-    def __init__(self, game: 'Game', screen: ScreenBase) -> None:
+    def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
 
     def draw(self) -> None:
@@ -530,7 +530,7 @@ class Fortune8(StateBase):
 
 
 class NewGame(ScreenBase):
-    def __init__(self, game: 'Game') -> None:
+    def __init__(self, game) -> None:
         super().__init__(game)
         self.next_screen = 'Journey'  # TODO: Should be 'Game'
         '''
@@ -631,7 +631,8 @@ class NewGame(ScreenBase):
         self.state = Fortune1(game, self)
 
         '''
-        self.skeleton_sprite = LPCSprite:new(gameResources.images.skeleton_sprite)
+        self.skeleton_sprite =
+            LPCSprite:new(gameResources.images.skeleton_sprite)
         self.sprite_locs = {
             {   5, 617},
             { 577, 610},
@@ -642,8 +643,8 @@ class NewGame(ScreenBase):
         self.ani = {
             WaitFor:new(2), -- Wait for 2 seconds
             PanViewport:new(self.viewport), -- Pan to the bottom
-            -- Walk a skeleton from army_path_1 to army_path_2. These will need to
-            -- be converted from map co-ords to screen co-ords.
+            -- Walk a skeleton from army_path_1 to army_path_2. These will need
+            -- to be converted from map co-ords to screen co-ords.
             WalkTo:new(self.skeleton_sprite, self.sprite_locs, self.viewport)
         }
         self.ani_idx = 1

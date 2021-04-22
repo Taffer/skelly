@@ -17,7 +17,7 @@ WHITE = pygame.Color('white')
 
 
 class Presents(ScreenBase):
-    def __init__(self, game: 'Game') -> None:
+    def __init__(self, game) -> None:
         super().__init__(game)
 
         self.next_screen = 'Title'

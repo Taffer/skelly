@@ -16,7 +16,7 @@ BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully tra
 WHITE = pygame.Color('white')
 
 
-def loader(game: 'Game', file_list: dict, done_text: str) -> str:
+def loader(game, file_list: dict, done_text: str) -> str:
     ''' Load the files in the RESOURCE_LIST.
     '''
     yield ''
@@ -66,7 +66,7 @@ def loader(game: 'Game', file_list: dict, done_text: str) -> str:
 
 
 class Title(ScreenBase):
-    def __init__(self, game: 'Game') -> None:
+    def __init__(self, game) -> None:
         super().__init__(game)
 
         self.next_screen = 'Journey'

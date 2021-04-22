@@ -81,7 +81,7 @@ class Map:
         view_rect = viewport.rect
         for y in range(view_rect.height):
             for x in range(view_rect.width):
-                tile = self.tiles[self.layer_data[layer][self.get_index(x, y)]]
+                tile = self.tiles[self.layer_data[layer][self.get_index(x + viewport.x, y + viewport.y)]]
                 target = pygame.Rect(offset_x + x * self.tile_width, offset_y + y * self.tile_height,
                                      self.tile_width, self.tile_height)
                 if tile is not None:

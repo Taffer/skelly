@@ -13,7 +13,7 @@ WHITE = pygame.Color('white')
 
 
 class ScreenBase:
-    def __init__(self, game: 'Game') -> None:
+    def __init__(self, game) -> None:
         ''' Initialize.
 
         @param game Game global state.

@@ -13,7 +13,7 @@ CREDITS_BLACK = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 3 * 255 // 4)  # BLACK, 
 WHITE = pygame.Color('white')
 
 
-class Credits(ScreenBase):
+class CreditsScreen(ScreenBase):
     def __init__(self, game) -> None:
         super().__init__(game)
 

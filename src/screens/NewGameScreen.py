@@ -529,7 +529,7 @@ class Fortune8(StateBase):
             item.draw()
 
 
-class NewGame(ScreenBase):
+class NewGameScreen(ScreenBase):
     def __init__(self, game) -> None:
         super().__init__(game)
         self.next_screen = 'Journey'  # TODO: Should be 'Game'

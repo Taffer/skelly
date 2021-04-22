@@ -65,7 +65,7 @@ def loader(game, file_list: dict, done_text: str) -> str:
     yield done_text
 
 
-class Title(ScreenBase):
+class TitleScreen(ScreenBase):
     def __init__(self, game) -> None:
         super().__init__(game)
 

@@ -14,7 +14,7 @@ BLACK_ALPHA = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 0)  # BLACK, but fully tra
 WHITE = pygame.Color('white')
 
 
-class Journey(ScreenBase):
+class JourneyScreen(ScreenBase):
     def __init__(self, game) -> None:
         super().__init__(game)
 

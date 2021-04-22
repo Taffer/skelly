@@ -4,20 +4,20 @@ By Chris Herborth (https://github.com/Taffer)
 MIT license, see LICENSE.md for details.
 '''
 
-from .Credits import Credits
-from .Journey import Journey
-from .NewGame import NewGame
-from .Presents import Presents
+from .CreditsScreen import CreditsScreen
+from .JourneyScreen import JourneyScreen
+from .NewGameScreen import NewGameScreen
+from .PresentsScreen import PresentsScreen
 from .ScreenBase import ScreenBase
-from .Settings import Settings
-from .Title import Title
+from .SettingsScreen import SettingsScreen
+from .TitleScreen import TitleScreen
 
 __all__ = [
-    'Credits',
-    'Journey',
-    'NewGame',
-    'Presents',
+    'CreditsScreen',
+    'JourneyScreen',
+    'NewGameScreen',
+    'PresentsScreen',
     'ScreenBase',
-    'Settings',
-    'Title',
+    'SettingsScreen',
+    'TitleScreen',
 ]

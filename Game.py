@@ -49,7 +49,7 @@ class Game:
         self.text.addLanguage('es', src.I18N_ES)
         self.text.setLanguage('en')
 
-        self.screen = src.screens.Presents(self)
+        self.screen = src.screens.PresentsScreen(self)
 
     def find_config_dir(self) -> str:
         ''' Based on the OS, find the configuration directory.
@@ -88,17 +88,17 @@ class Game:
         if self.screen.can_exit:
             next_screen = self.screen.next_screen
             if next_screen == 'Credits':  # Credits screen
-                self.screen = src.screens.Credits(self)
+                self.screen = src.screens.CreditsScreen(self)
             elif next_screen == 'Journey':  # "Journey Onwards" screen
-                self.screen = src.screens.Journey(self)
+                self.screen = src.screens.JourneyScreen(self)
             elif next_screen == 'NewGame':  # New Game/Intro screen
-                self.screen = src.screens.NewGame(self)
+                self.screen = src.screens.NewGameScreen(self)
             elif next_screen == 'Presents':  # "Taffer presents" screen
-                self.screen = src.screens.Presents(self)
+                self.screen = src.screens.PresentsScreen(self)
             elif next_screen == 'Settings':  # Blank with Settings overlay
-                self.screen = src.screens.Settings(self)
+                self.screen = src.screens.SettingsScreen(self)
             elif next_screen == 'Title':  # Title screen
-                self.screen = src.screens.Title(self)
+                self.screen = src.screens.TitleScreen(self)
             else:
                 self.save_settings()
                 pygame.mixer.music.stop()

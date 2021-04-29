@@ -37,7 +37,10 @@ def main() -> None:
 
     prev_time = time.time()
     dt = 0
-    while True:
+
+    playing = True
+
+    while playing:
         now = time.time()
         dt = now - prev_time
         prev_time = now
@@ -51,7 +54,7 @@ def main() -> None:
             skelly.manager.process_events(event)
 
             if event.type == pygame.QUIT:
-                sys.exit()
+                playing = False
             elif event.type == pygame.KEYDOWN:
                 skelly.keypressed(event)
             elif event.type == pygame.KEYUP:
@@ -64,6 +67,9 @@ def main() -> None:
                 skelly.mouseup(event)
             elif event.type == pygame.USEREVENT:
                 skelly.userevent(event)
+
+    pygame.quit()
+    sys.exit()
 
 
 if __name__ == '__main__':

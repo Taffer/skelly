@@ -9,13 +9,14 @@
     "build_systems":
     [
         {
-            "name": "Launch Löve2D",
-            "shell_cmd": "love $project_path",
-            "file_regex": "^Error: (?:[^:]+: )?([^: ]+?):(\\d+):() ([^:]*)$",
-        },
-        {
-            "name": "Launch PyGame",
-            "shell_cmd": "cd $project_path ; python3 -u main.py",
+            "name": "Pygame - Main",
+            "working_dir": "$project_path",
+            "linux": {
+                "shell_cmd": "python3 -u main.py",
+            },
+            "windows": {
+               "shell_cmd": "python -u main.py",
+            }
         },
     ],
 }

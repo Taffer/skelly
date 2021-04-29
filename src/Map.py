@@ -88,7 +88,7 @@ class Map:
                     surface.blit(tile, target)
 
     def get_index(self, x: int, y: int) -> int:
-        return x + y * self.map_width + 1
+        return x + y * self.map_width
 
     def get_tile(self, layer: str, x: int, y: int) -> int:
         return self.layer_data[layer][self.get_index(x, y)]

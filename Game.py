@@ -57,6 +57,8 @@ class Game:
         system = platform.system()
         if system == 'Linux':
             return os.path.join(os.getenv('HOME'), '.config', GAME_IDENTITY)
+        elif system == 'Windows':
+            return os.path.join(os.getenv('LOCALAPPDATA'), GAME_IDENTITY)
         else:
             raise RuntimeError(f'Unsupported system: {system}')
 
@@ -102,6 +104,7 @@ class Game:
             else:
                 self.save_settings()
                 pygame.mixer.music.stop()
+                pygame.quit()
                 sys.exit()
 
     def draw(self) -> None:

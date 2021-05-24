@@ -9,6 +9,7 @@ import pygame_gui
 import random
 
 from .ScreenBase import ScreenBase
+from .. import Camera
 from .. import Map
 from .. import Viewport
 from ..ui import ColorFade
@@ -522,8 +523,10 @@ class Fortune8(StateBase):
     def draw(self) -> None:
         draw_29x21(self.game.surface)
 
-        self.screen.map.render('Ground', self.game.surface, self.screen.viewport, 8, 8)
-        self.screen.map.render('Buildings', self.game.surface, self.screen.viewport, 8, 8)
+        # self.screen.map.render('Ground', self.game.surface, self.screen.viewport, 8, 8)
+        # self.screen.map.render('Buildings', self.game.surface, self.screen.viewport, 8, 8)
+        self.screen.camera.draw('Ground')
+        self.screen.camera.draw('Buildings')
 
         for item in self.screen.ui:
             item.draw()
@@ -588,6 +591,10 @@ class NewGameScreen(ScreenBase):
         self.map = Map(game.resources['maps']['scene1_farm'])
         rect = pygame.Rect(0, 0, 29, 21)
         self.viewport = Viewport(self.map.map_width, self.map.map_height, rect)
+        self.camera = Camera(self.game.surface, self.map)
+        rect = pygame.Rect(8, 8, 29 * 32, 21 * 32)  # TODO: Don't hard-code.
+        self.camera.set_viewport(rect)
+        self.camera.set_edge(7)  # TODO: this is in map properties as edge_tile.
 
         x = 16
         y = game.screen_height - 40

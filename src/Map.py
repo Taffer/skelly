@@ -60,11 +60,9 @@ class Map:
 
             this_data = []
             if data.attrib['encoding'] == 'csv':
-                lines = data_contents.split()
-                for line in lines:
-                    for c in line.split(','):
-                        if c != '':
-                            this_data.append(int(c))
+                for c in data_contents.split(','):
+                    if c != '':
+                        this_data.append(int(c))
             elif data.attrib['encoding'] == 'base64' and data.attrib.get('compression', 'none') == 'zlib':
                 the_data = base64.b64decode(data_contents)
 
@@ -92,6 +90,9 @@ class Map:
 
     def get_tile(self, layer: str, x: int, y: int) -> int:
         return self.layer_data[layer][self.get_index(x, y)]
+
+    def get_tile_texture(self, idx: int) -> pygame.Surface:
+        return self.tiles[idx]
 
     def point_to_screen(self, viewport: Viewport, offset_x: int, offset_y: int, x: int, y: int) -> Tuple[int, int]:
         # Convert a map point location to an on-screen location. Returns None if

@@ -16,12 +16,9 @@
             "dark_bg": "#D3BF8F"
         },
         "font": {
-            "name": "LiberationSerif",
-            "size": 16,
-            "bold_path": "graphics/LiberationSerif-Bold.ttf",
-            "bold_italic_path": "graphics/LiberationSerif-BoldItalic.ttf",
-            "italic_path": "graphics/LiberationSerif-Italic.ttf",
-            "regular_path": "graphics/LiberationSerif-Regular.ttf"
+            "name": "Germania",
+            "size": 18,
+            "regular_path": "graphics/GermaniaOne-Regular.ttf"
         }
     },
     "#menubutton": {
@@ -40,12 +37,9 @@
             "active_text": "#000000"
         },
         "font": {
-            "name": "LiberationSerif",
-            "size": 16,
-            "bold_path": "graphics/LiberationSerif-Bold.ttf",
-            "bold_italic_path": "graphics/LiberationSerif-BoldItalic.ttf",
-            "italic_path": "graphics/LiberationSerif-Italic.ttf",
-            "regular_path": "graphics/LiberationSerif-Regular.ttf"
+            "name": "Germania",
+            "size": 19,
+            "regular_path": "graphics/GermaniaOne-Regular.ttf"
         },
         "images": {
             "normal_image": {

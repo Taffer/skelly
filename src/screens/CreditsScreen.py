@@ -26,7 +26,7 @@ class CreditsScreen(ScreenBase):
         self.ticks = 0
         self.credits_area = pygame.Rect(200, 250, 880, 450)
 
-        self.font = game.resources['fonts']['default_mono']
+        self.font = game.resources['fonts']['germania']
         rect = self.font.get_rect('M')
         self.font_em = rect.width
         self.font_lh = self.font.get_sized_height()

@@ -39,6 +39,9 @@ Fonts:
   [A Font with Serifs](https://www.fontfreak.com/font_A-Font-With-Serifs.htm)
   (regular) by A. Skersys (extate) on
   [fontfreak.com](https://www.fontfreak.com/).
+* `GermaniaOne-Regular.ttf` - A free font created by John Vargas Beltrán,
+  released under the
+  [SIL Open Font License](http://scripts.sil.org/OFL).
 * `Gypsy Curse.ttf` - A free font created by Chad Savage at
   [Sinister Fonts](https://www.sinisterfonts.com/)
 * `LiberationMono-Bold.ttf`, `LiberationSerif-Bold.ttf` - An open source font

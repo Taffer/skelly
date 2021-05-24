@@ -75,7 +75,7 @@ class TitleScreen(ScreenBase):
         self.game.resources['images']['skelly_title'] = pygame.image.load('graphics/Gersdorff_Feldbuch_skeleton.png').convert()
 
         self.loading_x = 16
-        self.loading_y = self.game.screen_height - 16 - self.game.resources['fonts']['default_mono'].get_sized_height()
+        self.loading_y = self.game.screen_height - 16 - self.game.resources['fonts']['germania'].get_sized_height()
 
         title_text = self.game.text.get_text('title')
         self.loading_text = title_text['loading_text']
@@ -91,7 +91,7 @@ class TitleScreen(ScreenBase):
         self.add_title()
 
         self.ui = []
-        self.loading_label = Label(self.loading_x, self.loading_y, self.loading_text, self.game.resources['fonts']['default_mono'],
+        self.loading_label = Label(self.loading_x, self.loading_y, self.loading_text, self.game.resources['fonts']['germania'],
                                    WHITE, 'left')
         self.ui.append(self.loading_label)
 

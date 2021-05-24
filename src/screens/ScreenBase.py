@@ -63,7 +63,7 @@ class ScreenBase:
             ImageButton(0, 0, self.game.resources['images']['skelly_title']),
             Label(self.game.screen_width / 2, 40, skelly_text, self.game.resources['fonts']['skelly_title'],
                   WHITE, 'centre'),
-            Label(self.game.screen_width / 2, 220, subtitle_text, self.game.resources['fonts']['default_mono'],
+            Label(self.game.screen_width / 2, 220, subtitle_text, self.game.resources['fonts']['germania'],
                   WHITE, 'centre'),
         ]
 

@@ -27,6 +27,7 @@ class PresentsScreen(ScreenBase):
 
         self.game.resources['fonts']['default_serif'] = pygame.freetype.Font('graphics/A_Font_with_Serifs.ttf', 72)
         self.game.resources['fonts']['default_mono'] = pygame.freetype.Font('graphics/LiberationMono-Bold.ttf', 16)
+        self.game.resources['fonts']['germania'] = pygame.freetype.Font('graphics/GermaniaOne-Regular.ttf', 18)
 
         self.game.resources['images']['pygame_logo'] = pygame.image.load('graphics/pygame-logo.png').convert_alpha()
         self.game.resources['images']['taffer'] = pygame.image.load('graphics/taffer-ronos.png').convert_alpha()
@@ -54,7 +55,7 @@ class PresentsScreen(ScreenBase):
         self.ui.append(Label(self.game.screen_width / 2, 16, self.taffer_text, self.game.resources['fonts']['default_serif'],
                        WHITE, 'centre'))
 
-        self.ui.append(Label(self.game.screen_width / 2, 640, self.pygame_text, self.game.resources['fonts']['default_mono'],
+        self.ui.append(Label(self.game.screen_width / 2, 640, self.pygame_text, self.game.resources['fonts']['germania'],
                        WHITE, 'centre'))
 
     def draw(self) -> None:

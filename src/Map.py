@@ -11,7 +11,6 @@ import zlib
 
 from typing import Tuple, Union
 from xml.etree import ElementTree
-from . import Viewport
 
 
 class Map:
@@ -73,18 +72,6 @@ class Map:
 
             self.layer_data[layer.attrib['name']] = this_data
 
-    def render(self, layer: str, surface: pygame.Surface, viewport: Viewport, offset_x: int, offset_y: int) -> None:
-        # This use case seems to be faster than using blits(); the overhead of
-        # creating a list of tuples is probably what kills it.
-        view_rect = viewport.rect
-        for y in range(view_rect.height):
-            for x in range(view_rect.width):
-                tile = self.tiles[self.layer_data[layer][self.get_index(x + view_rect.x, y + view_rect.y)]]
-                target = pygame.Rect(offset_x + x * self.tile_width, offset_y + y * self.tile_height,
-                                     self.tile_width, self.tile_height)
-                if tile is not None:
-                    surface.blit(tile, target)
-
     def get_index(self, x: int, y: int) -> int:
         return x + y * self.map_width
 
@@ -93,26 +80,6 @@ class Map:
 
     def get_tile_texture(self, idx: int) -> pygame.Surface:
         return self.tiles[idx]
-
-    def point_to_screen(self, viewport: Viewport, offset_x: int, offset_y: int, x: int, y: int) -> Tuple[int, int]:
-        # Convert a map point location to an on-screen location. Returns None if
-        # the point is outside the viewport.
-        #
-        # offset_x, offset_y are where the map gets drawn (8,8 in our case.)
-        viewport_x = viewport.x * self.tile_width
-        viewport_y = viewport.y * self.tile_height
-        viewport_width = viewport.width * self.tile_width
-        viewport_height = viewport.height * self.tile_height
-
-        if x < viewport_x or x > (viewport_x + viewport_width):
-            return None
-        if y < viewport_y or y > (viewport_y + viewport_height):
-            return None
-
-        screen_x = x + offset_x - viewport_x
-        screen_y = y + offset_y - viewport_y
-
-        return (screen_x, screen_y)
 
     def find_point(self, layer_name: str, object_name: str) -> Union[None, Tuple[int, int]]:
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))

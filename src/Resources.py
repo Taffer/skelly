@@ -11,7 +11,7 @@ RESOURCE_LIST: Final = {
         'LiberationSerif': {
             'regular': 'graphics/LiberationSerif-Regular.ttf',
             'bold': 'graphics/LiberationSerif-Bold.ttf',
-            'bold_italic': 'graphics/LiberationSerif-BolidItalic.ttf',
+            'bold_italic': 'graphics/LiberationSerif-BoldItalic.ttf',
             'italic': 'graphics/LiberationSerif-Italic.ttf'
         },
         'LiberationSerif-Bold': {

@@ -11,7 +11,6 @@ from .LPCSprite import LPCSprite
 from .Map import Map
 from .Resources import RESOURCE_LIST
 from .TextHandler import TextHandler
-from .Viewport import Viewport
 
 __all__ = [
     'Camera',
@@ -22,5 +21,4 @@ __all__ = [
     'Map',
     'RESOURCE_LIST',
     'TextHandler',
-    'Viewport',
 ]

@@ -43,113 +43,6 @@ def draw_29x21(surface: pygame.Surface) -> None:
     pygame.gfxdraw.box(surface, rect, BLUE)
 
 
-'''
--- =============================================================================
--- Sloppy animation classes
--- =============================================================================
-local PanViewport = Class('PanViewport')
-function PanViewport:initialize(viewport)
-    self.viewport = viewport
-    self.ticks = 0
-    self.done = false
-
-    self.step = 0.2 -- Tick every 0.2 seconds
-end
-
-function PanViewport:update(dt, _)
-    self.ticks = self.ticks + dt
-    if self.ticks > self.step then
-        self.ticks = self.ticks - self.step
-
-        local x = self.viewport.x
-        local y = self.viewport.y + 1
-        self.viewport:set_position(x, y)
-
-        if self.viewport.y ~= y then
-            self.done = true
-        end
-    end
-end
-
-function PanViewport:draw()
-    -- Do nothing.
-end
-
-local WaitFor = Class('WaitFor')
-function WaitFor:initialize(length)
-    self.length = length
-    self.ticks = 0
-    self.done = false
-end
-
-function WaitFor:update(dt, _)
-    self.ticks = self.ticks + dt
-    if self.ticks > self.length then
-        self.done = true
-    end
-end
-
-function WaitFor:draw()
-    love.graphics.setColor(1, 1, 1, 0)
-    love.graphics.print(string.format('%d: %d', self.ticks, self.length))
-end
-
-local WalkTo = Class('WalkTo')
-function WalkTo:initialize(sprite, sprite_locs, viewport)
-    self.locs = sprite_locs
-    self.x = self.locs[1][1] - viewport.x * 32
-    self.y = self.locs[1][2] - viewport.y * 32
-    self.target_idx = math.min(2, #self.locs)
-
-    self.target_x = self.locs[self.target_idx][1] - viewport.x * 32
-    self.target_y = self.locs[self.target_idx][2] - viewport.y * 32
-
-    self.actor = SkeletonActor:new(sprite)
-    self.actor.sprite:setFacing('right')
-    self.actor.sprite:setAnimation('walk')
-
-    self.step = 0.01
-    self.ticks = 0
-
-    self.on_screen = true
-end
-
-function WalkTo:update(dt, viewport)
-    self.ticks = self.ticks + dt
-    if self.ticks > self.step then
-        self.ticks = self.ticks - self.step
-
-        if self.x < self.target_x then
-            self.x = self.x + 1
-        end
-        if self.x > self.target_x then
-            self.x = self.x - 1
-        end
-        if self.y < self.target_y then
-            self.y = self.y + 1
-        end
-        if self.y > self.target_y then
-            self.y = self.y - 1
-        end
-
-        if self.x == self.target_x and self.y == self.target_y then
-            self.target_idx = math.min(self.target_idx + 1, #self.locs)
-            self.target_x = self.locs[self.target_idx][1] - viewport.x * 32
-            self.target_y = self.locs[self.target_idx][2] - viewport.y * 32
-        end
-    end
-
-    self.actor:update(dt)
-end
-
-function WalkTo:draw()
-    if self.on_screen then
-        self.actor:draw(self.x, self.y)
-    end
-end
-'''
-
-
 class StateBase:  # New Game screen state base class
     def __init__(self, game, screen: ScreenBase) -> None:
         self.game = game
@@ -516,8 +409,13 @@ class Fortune7(StateBase):
 
 
 class Fortune8(StateBase):
+    # It's the map! Plus some animation.
     def __init__(self, game, screen: ScreenBase) -> None:
         super().__init__(game, screen)
+
+        self.ticks = 0
+        self.wait_ticks = 0
+        self.camera_y = self.screen.camera.y
 
     def draw(self) -> None:
         draw_29x21(self.game.surface)
@@ -527,6 +425,18 @@ class Fortune8(StateBase):
 
         for item in self.screen.ui:
             item.draw()
+
+    def update(self, dt):
+        self.ticks += dt
+        if self.ticks > 1/20:  # TODO: This should be a constant or global.
+            self.ticks -= 1/20
+
+            self.wait_ticks += 1
+
+            if self.wait_ticks > 20:
+                self.camera_y += 1
+                if self.camera_y < 20:  # TODO: Should be a const or something.
+                    self.screen.camera.set_position(self.screen.camera.x, self.camera_y)
 
 
 class NewGameScreen(ScreenBase):
@@ -590,7 +500,7 @@ class NewGameScreen(ScreenBase):
         rect = pygame.Rect(8, 8, 29 * 32, 21 * 32)  # TODO: Don't hard-code.
         self.camera.set_viewport(rect)
         self.camera.set_edge(7)  # TODO: this is in map properties as edge_tile.
-        self.camera.set_position(14, 10)
+        self.camera.set_position(14, 10)  # TODO: Should be const or property.
 
         x = 16
         y = game.screen_height - 40

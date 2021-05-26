@@ -42,6 +42,8 @@ Fonts:
 * `GermaniaOne-Regular.ttf` - A free font created by John Vargas Beltrán,
   released under the
   [SIL Open Font License](http://scripts.sil.org/OFL).
+* `GermaniaOne` Bold, Italic, and Bold-Italic commissioned by me from
+  [minesoul](https://www.fiverr.com/minesoul) on Fiverr.
 * `Gypsy Curse.ttf` - A free font created by Chad Savage at
   [Sinister Fonts](https://www.sinisterfonts.com/)
 * `LiberationMono-Bold.ttf`, `LiberationSerif-Bold.ttf` - An open source font

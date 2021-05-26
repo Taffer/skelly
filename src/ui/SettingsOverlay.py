@@ -31,30 +31,36 @@ class SettingsOverlay:
 
         settings_text = self.text.get_text('settings')
 
-        self.window = pygame_gui.elements.UIWindow(pygame.Rect(100, 250, 1080, 420), self.manager, settings_text['title'])
+        self.window = pygame_gui.elements.UIWindow(pygame.Rect(100, 250, 1080, 420), self.manager, settings_text['title'],
+                                                   object_id='#settings')
 
         rect = pygame.Rect(10, 10, 150, 25)
-        self.master_vol_label = UILabel(rect, settings_text['master_volume'], self.manager, self.window)
+        self.master_vol_label = UILabel(rect, settings_text['master_volume'], self.manager, self.window, object_id='#settings')
         rect.y += 50
-        self.music_vol_label = UILabel(rect, settings_text['music_volume'], self.manager, self.window)
+        self.music_vol_label = UILabel(rect, settings_text['music_volume'], self.manager, self.window, object_id='#settings')
         rect.y += 50
-        self.effects_vol_label = UILabel(rect, settings_text['effects_volume'], self.manager, self.window)
+        self.effects_vol_label = UILabel(rect, settings_text['effects_volume'], self.manager, self.window, object_id='#settings')
         rect.y += 50
-        self.voice_vol_label = UILabel(rect, settings_text['voice_volume'], self.manager, self.window)
+        self.voice_vol_label = UILabel(rect, settings_text['voice_volume'], self.manager, self.window, object_id='#settings')
 
         rect = pygame.Rect(150, 10, 250, 25)
-        self.master_slider = UIHorizontalSlider(rect, self.settings.get('overall_volume'), (0.0, 1.0), self.manager, self.window)
+        self.master_slider = UIHorizontalSlider(rect, self.settings.get('overall_volume'), (0.0, 1.0), self.manager, self.window,
+                                                object_id='#settings')
         rect.y += 50
-        self.music_slider = UIHorizontalSlider(rect, self.settings.get('music_volume'), (0.0, 1.0), self.manager, self.window)
+        self.music_slider = UIHorizontalSlider(rect, self.settings.get('music_volume'), (0.0, 1.0), self.manager, self.window,
+                                               object_id='#settings')
         rect.y += 50
-        self.effects_slider = UIHorizontalSlider(rect, self.settings.get('sfx_volume'), (0.0, 1.0), self.manager, self.window)
+        self.effects_slider = UIHorizontalSlider(rect, self.settings.get('sfx_volume'), (0.0, 1.0), self.manager, self.window,
+                                                 object_id='#settings')
         rect.y += 50
-        self.voice_slider = UIHorizontalSlider(rect, self.settings.get('voice_volume'), (0.0, 1.0), self.manager, self.window)
+        self.voice_slider = UIHorizontalSlider(rect, self.settings.get('voice_volume'), (0.0, 1.0), self.manager, self.window,
+                                               object_id='#settings')
 
         rect = pygame.Rect(10, 250, 100, 23)
-        self.language_label = UILabel(rect, settings_text['language'], self.manager, self.window)
+        self.language_label = UILabel(rect, settings_text['language'], self.manager, self.window, object_id='#settings')
         rect = pygame.Rect(150, 250, 250, 25)
-        self.language_menu = UIDropDownMenu(settings_text['translations'], 'English', rect, self.manager, self.window)
+        self.language_menu = UIDropDownMenu(settings_text['translations'], 'English', rect, self.manager, self.window,
+                                            object_id='#settings')
 
     def userevent(self, event: pygame.event.Event) -> None:
         if event.user_type == pygame_gui.UI_WINDOW_CLOSE:
@@ -62,7 +68,7 @@ class SettingsOverlay:
                 self.overlay_closed = True
         elif event.user_type == pygame_gui.UI_DROP_DOWN_MENU_CHANGED:
             if event.ui_element == self.language_menu:
-                self.settings.set('language', self.text.code_for(event.value))
+                self.settings.set('language', self.text.code_for(event.text))
         elif event.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
             if event.ui_element == self.master_slider:
                 self.settings.set('overall_volume', event.value)

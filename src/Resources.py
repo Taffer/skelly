@@ -8,6 +8,12 @@ from typing import Final
 # List of all resources to load during the Loading... screen.
 RESOURCE_LIST: Final = {
     'font_paths': {
+        'Germania' : {
+            'regular': 'graphics/GermaniaOne-Regular.ttf',
+            'bold': 'graphics/GermaniaOne-Bold.ttf',
+            'bold_italic': 'graphics/GermaniaOne-BoldItalic.ttf',
+            'italic': 'graphics/GermaniaOne-Italic.ttf'
+        },
         'LiberationSerif': {
             'regular': 'graphics/LiberationSerif-Regular.ttf',
             'bold': 'graphics/LiberationSerif-Bold.ttf',
@@ -26,18 +32,18 @@ RESOURCE_LIST: Final = {
         # theme JSON is preloaded automatically. Doing it again here will
         # give you a warning.
         'serif-bold': {
-            'name': 'LiberationSerif',
-            'point_size': 16,
+            'name': 'Germania',
+            'point_size': 18,
             'style': 'bold'
         },
         'serif-bolditalic': {
-            'name': 'LiberationSerif',
-            'point_size': 16,
+            'name': 'Germania',
+            'point_size': 18,
             'style': 'bold_italic'
         },
         'serif-italic': {
-            'name': 'LiberationSerif',
-            'point_size': 16,
+            'name': 'Germania',
+            'point_size': 18,
             'style': 'italic'
         },
     },

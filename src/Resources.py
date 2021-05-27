@@ -9,22 +9,22 @@ from typing import Final
 RESOURCE_LIST: Final = {
     'font_paths': {
         'Germania' : {
-            'regular': 'graphics/GermaniaOne-Regular.ttf',
-            'bold': 'graphics/GermaniaOne-Bold.ttf',
-            'bold_italic': 'graphics/GermaniaOne-BoldItalic.ttf',
-            'italic': 'graphics/GermaniaOne-Italic.ttf'
+            'regular': 'fonts/GermaniaOne-Regular.ttf',
+            'bold': 'fonts/GermaniaOne-Bold.ttf',
+            'bold_italic': 'fonts/GermaniaOne-BoldItalic.ttf',
+            'italic': 'fonts/GermaniaOne-Italic.ttf'
         },
         'LiberationSerif': {
-            'regular': 'graphics/LiberationSerif-Regular.ttf',
-            'bold': 'graphics/LiberationSerif-Bold.ttf',
-            'bold_italic': 'graphics/LiberationSerif-BoldItalic.ttf',
-            'italic': 'graphics/LiberationSerif-Italic.ttf'
+            'regular': 'fonts/LiberationSerif-Regular.ttf',
+            'bold': 'fonts/LiberationSerif-Bold.ttf',
+            'bold_italic': 'fonts/LiberationSerif-BoldItalic.ttf',
+            'italic': 'fonts/LiberationSerif-Italic.ttf'
         },
         'LiberationSerif-Bold': {
-            'regular': 'graphics/LiberationMono-Bold.ttf',
-            'bold': 'graphics/LiberationMono-Bold.ttf',
-            'bold_italic': 'graphics/LiberationMono-Bold.ttf',
-            'italic': 'graphics/LiberationMono-Bold.ttf',
+            'regular': 'fonts/LiberationMono-Bold.ttf',
+            'bold': 'fonts/LiberationMono-Bold.ttf',
+            'bold_italic': 'fonts/LiberationMono-Bold.ttf',
+            'italic': 'fonts/LiberationMono-Bold.ttf',
         }
     },
     'fonts': {

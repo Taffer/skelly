@@ -18,10 +18,10 @@
         "font": {
             "name": "Germania",
             "size": 18,
-            "regular_path": "graphics/GermaniaOne-Regular.ttf",
-            "bold_path": "graphics/GermaniaOne-Bold.ttf",
-            "bold_italic_path": "graphics/GermaniaOne-BoldItalic.ttf",
-            "italic_path": "graphics/GermaniaOne-Italic.ttf"
+            "regular_path": "fonts/GermaniaOne-Regular.ttf",
+            "bold_path": "fonts/GermaniaOne-Bold.ttf",
+            "bold_italic_path": "fonts/GermaniaOne-BoldItalic.ttf",
+            "italic_path": "fonts/GermaniaOne-Italic.ttf"
         }
     },
     "#menubutton": {
@@ -42,10 +42,10 @@
         "font": {
             "name": "Germania",
             "size": 18,
-            "regular_path": "graphics/GermaniaOne-Regular.ttf",
-            "bold_path": "graphics/GermaniaOne-Bold.ttf",
-            "bold_italic_path": "graphics/GermaniaOne-BoldItalic.ttf",
-            "italic_path": "graphics/GermaniaOne-Italic.ttf"
+            "regular_path": "fonts/GermaniaOne-Regular.ttf",
+            "bold_path": "fonts/GermaniaOne-Bold.ttf",
+            "bold_italic_path": "fonts/GermaniaOne-BoldItalic.ttf",
+            "italic_path": "fonts/GermaniaOne-Italic.ttf"
         },
         "images": {
             "normal_image": {
@@ -82,10 +82,10 @@
         "font": {
             "name": "Germania",
             "size": 18,
-            "regular_path": "graphics/GermaniaOne-Regular.ttf",
-            "bold_path": "graphics/GermaniaOne-Bold.ttf",
-            "bold_italic_path": "graphics/GermaniaOne-BoldItalic.ttf",
-            "italic_path": "graphics/GermaniaOne-Italic.ttf"
+            "regular_path": "fonts/GermaniaOne-Regular.ttf",
+            "bold_path": "fonts/GermaniaOne-Bold.ttf",
+            "bold_italic_path": "fonts/GermaniaOne-BoldItalic.ttf",
+            "italic_path": "fonts/GermaniaOne-Italic.ttf"
         }
     },
     "drop_down_menu.#expand_button": {
@@ -126,10 +126,10 @@
         "font": {
             "name": "Germania",
             "size": 18,
-            "regular_path": "graphics/GermaniaOne-Regular.ttf",
-            "bold_path": "graphics/GermaniaOne-Bold.ttf",
-            "bold_italic_path": "graphics/GermaniaOne-BoldItalic.ttf",
-            "italic_path": "graphics/GermaniaOne-Italic.ttf"
+            "regular_path": "fonts/GermaniaOne-Regular.ttf",
+            "bold_path": "fonts/GermaniaOne-Bold.ttf",
+            "bold_italic_path": "fonts/GermaniaOne-BoldItalic.ttf",
+            "italic_path": "fonts/GermaniaOne-Italic.ttf"
         }
     },
     "drop_down_menu.#drop_down_options_list": {
@@ -152,10 +152,10 @@
         "font": {
             "name": "Germania",
             "size": 18,
-            "regular_path": "graphics/GermaniaOne-Regular.ttf",
-            "bold_path": "graphics/GermaniaOne-Bold.ttf",
-            "bold_italic_path": "graphics/GermaniaOne-BoldItalic.ttf",
-            "italic_path": "graphics/GermaniaOne-Italic.ttf"
+            "regular_path": "fonts/GermaniaOne-Regular.ttf",
+            "bold_path": "fonts/GermaniaOne-Bold.ttf",
+            "bold_italic_path": "fonts/GermaniaOne-BoldItalic.ttf",
+            "italic_path": "fonts/GermaniaOne-Italic.ttf"
         }
     },
     "horizontal_slider.#left_button": {
@@ -232,10 +232,10 @@
         "font": {
             "name": "Germania",
             "size": 18,
-            "regular_path": "graphics/GermaniaOne-Regular.ttf",
-            "bold_path": "graphics/GermaniaOne-Bold.ttf",
-            "bold_italic_path": "graphics/GermaniaOne-BoldItalic.ttf",
-            "italic_path": "graphics/GermaniaOne-Italic.ttf"
+            "regular_path": "fonts/GermaniaOne-Regular.ttf",
+            "bold_path": "fonts/GermaniaOne-Bold.ttf",
+            "bold_italic_path": "fonts/GermaniaOne-BoldItalic.ttf",
+            "italic_path": "fonts/GermaniaOne-Italic.ttf"
         }
     },
     "window.#close_button": {
@@ -276,10 +276,10 @@
         "font": {
             "name": "Germania",
             "size": 18,
-            "regular_path": "graphics/GermaniaOne-Regular.ttf",
-            "bold_path": "graphics/GermaniaOne-Bold.ttf",
-            "bold_italic_path": "graphics/GermaniaOne-BoldItalic.ttf",
-            "italic_path": "graphics/GermaniaOne-Italic.ttf"
+            "regular_path": "fonts/GermaniaOne-Regular.ttf",
+            "bold_path": "fonts/GermaniaOne-Bold.ttf",
+            "bold_italic_path": "fonts/GermaniaOne-BoldItalic.ttf",
+            "italic_path": "fonts/GermaniaOne-Italic.ttf"
         }
     }
 }

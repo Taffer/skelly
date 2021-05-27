@@ -15,6 +15,10 @@ from xml.etree import ElementTree
 
 class Map:
     def __init__(self, map_path: str) -> None:
+        self.on_enter = []  # Functions to call when someone enters this map.
+        self.on_exit = []  # Functions to call when someone exits this map.
+        self.triggers = {}  # Tile triggers, indexed by (x,y).
+
         tree = ElementTree.parse(map_path)
         self.root = tree.getroot()
         layers = self.root.findall('layer')

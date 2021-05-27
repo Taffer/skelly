@@ -71,7 +71,7 @@ class TitleScreen(ScreenBase):
 
         self.next_screen = 'Journey'
 
-        self.game.resources['fonts']['skelly_title'] = pygame.freetype.Font('graphics/Gypsy Curse.ttf', 144)
+        self.game.resources['fonts']['skelly_title'] = pygame.freetype.Font('fonts/Gypsy Curse.ttf', 144)
         self.game.resources['images']['skelly_title'] = pygame.image.load('graphics/Gersdorff_Feldbuch_skeleton.png').convert()
 
         self.loading_x = 16

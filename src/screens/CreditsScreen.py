@@ -13,26 +13,58 @@ CREDITS_BLACK = pygame.Color(BLACK.r, BLACK.g, BLACK.g, 3 * 255 // 4)  # BLACK, 
 WHITE = pygame.Color('white')
 
 
+class CreditsText:
+    def __init__(self, font, line):
+        ''' A formatted text line.
+        '''
+        self.text = line
+        self.font = font
+
+    def get_height(self):
+        ''' Lines are double-spaced.
+        '''
+        return self.font.get_sized_height() * 2
+
+    def draw(self, surface, x, y, color):
+        self.font.render_to(surface, (x, y), self.text, WHITE)
+
+
 class CreditsScreen(ScreenBase):
     def __init__(self, game) -> None:
         super().__init__(game)
 
         self.next_screen = 'Journey'
 
-        self.credits = ''
+        self.font = game.resources['fonts']['germania']
+        self.font_h1 = game.resources['fonts']['germania-h1']
+        self.font_h2 = game.resources['fonts']['germania-h2']
+        self.font_h3 = game.resources['fonts']['germania-h3']
+
+        rect = self.font.get_rect('M')
+        self.font_em = rect.width
+        self.font_lh = max(self.font.get_sized_height(), self.font_h1.get_sized_height(), self.font_h2.get_sized_height(),
+                           self.font_h3.get_sized_height())
+
+        self.credits = []
         credits_path = 'text/credits-{0}.md'.format(game.text.get_language())
-        with open(credits_path) as fp:
-            self.credits = fp.readlines()
+        try:
+            with open(credits_path) as fp:
+                for line in fp.readlines():
+                    if line.startswith('# '):
+                        self.credits.append(CreditsText(self.font_h1, line[2:]))
+                    elif line.startswith('## '):
+                        self.credits.append(CreditsText(self.font_h2, line[3:]))
+                    elif line.startswith('### '):
+                        self.credits.append(CreditsText(self.font_h3, line[4:]))
+                    else:
+                        self.credits.append(CreditsText(self.font, line))
+        except FileNotFoundError:
+            self.credits = [CreditsText(self.font, 'Unable to find {0}.'.format(credits_path))]
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
 
         self.ticks = 0
         self.credits_area = pygame.Rect(200, 250, 880, 450)
-
-        self.font = game.resources['fonts']['germania']
-        rect = self.font.get_rect('M')
-        self.font_em = rect.width
-        self.font_lh = self.font.get_sized_height()
 
         self.buffer = []
         self.buffer_idx = 0  # Draw from here.
@@ -56,7 +88,7 @@ class CreditsScreen(ScreenBase):
             buff_start = buff_end - self.max_lines + 1
 
         for i in range(buff_start, buff_end):
-            self.font.render_to(self.game.surface, (self.credits_area.x, self.credits_area.y + delta), self.buffer[i], WHITE)
+            self.buffer[i].draw(self.game.surface, self.credits_area.x, self.credits_area.y + delta, WHITE)
             delta += self.font_lh
 
         if not self.fade.is_done():

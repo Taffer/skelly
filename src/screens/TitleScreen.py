@@ -23,19 +23,12 @@ def loader(game, file_list: dict, done_text: str) -> str:
 
     resource = game.resources
 
-    for k, v in file_list['font_paths'].items():
-        try:
-            game.manager.add_font_paths(k, v['regular'], v['bold'], v['italic'], v['bold_italic'])
-        except Exception as ex:
-            print('Unable to add font paths: {0} {1}'.format(k, ex))
-        yield k
-
     for k, v in file_list['fonts'].items():
         try:
-            game.manager.preload_fonts([v])
+            resource['fonts'][k] = pygame.freetype.Font(v[0], v[1])
         except Exception as ex:
-            print('Unable to load font: {0} {1}'.format(k, ex))
-        yield v['name']
+            print('Unable to load image: {0} {1}'.format(k, ex))
+        yield v
 
     for k, v in file_list['images'].items():
         try:
@@ -61,6 +54,20 @@ def loader(game, file_list: dict, done_text: str) -> str:
     for k, v in file_list['maps'].items():
         resource['maps'][k] = v  # Map class loads from paths.
         yield v
+
+    for k, v in file_list['ui_font_paths'].items():
+        try:
+            game.manager.add_font_paths(k, v['regular'], v['bold'], v['italic'], v['bold_italic'])
+        except Exception as ex:
+            print('Unable to add font paths: {0} {1}'.format(k, ex))
+        yield k
+
+    for k, v in file_list['ui_fonts'].items():
+        try:
+            game.manager.preload_fonts([v])
+        except Exception as ex:
+            print('Unable to load font: {0} {1}'.format(k, ex))
+        yield v['name']
 
     yield done_text
 

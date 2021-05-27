@@ -7,45 +7,11 @@ from typing import Final
 
 # List of all resources to load during the Loading... screen.
 RESOURCE_LIST: Final = {
-    'font_paths': {
-        'Germania' : {
-            'regular': 'fonts/GermaniaOne-Regular.ttf',
-            'bold': 'fonts/GermaniaOne-Bold.ttf',
-            'bold_italic': 'fonts/GermaniaOne-BoldItalic.ttf',
-            'italic': 'fonts/GermaniaOne-Italic.ttf'
-        },
-        'LiberationSerif': {
-            'regular': 'fonts/LiberationSerif-Regular.ttf',
-            'bold': 'fonts/LiberationSerif-Bold.ttf',
-            'bold_italic': 'fonts/LiberationSerif-BoldItalic.ttf',
-            'italic': 'fonts/LiberationSerif-Italic.ttf'
-        },
-        'LiberationSerif-Bold': {
-            'regular': 'fonts/LiberationMono-Bold.ttf',
-            'bold': 'fonts/LiberationMono-Bold.ttf',
-            'bold_italic': 'fonts/LiberationMono-Bold.ttf',
-            'italic': 'fonts/LiberationMono-Bold.ttf',
-        }
-    },
+    # These fonts are used in-game, see below for Pygame GUI fonts.
     'fonts': {
-        # Note that the "regular" flavour of each font specified in the
-        # theme JSON is preloaded automatically. Doing it again here will
-        # give you a warning.
-        'serif-bold': {
-            'name': 'Germania',
-            'point_size': 18,
-            'style': 'bold'
-        },
-        'serif-bolditalic': {
-            'name': 'Germania',
-            'point_size': 18,
-            'style': 'bold_italic'
-        },
-        'serif-italic': {
-            'name': 'Germania',
-            'point_size': 18,
-            'style': 'italic'
-        },
+        'germania-h1': ('fonts/GermaniaOne-Bold.ttf', 32),
+        'germania-h2': ('fonts/GermaniaOne-BoldItalic.ttf', 28),
+        'germania-h3': ('fonts/GermaniaOne-Italic.ttf', 24),
     },
 
     'images': {
@@ -124,5 +90,47 @@ RESOURCE_LIST: Final = {
 
     'maps': {
         'scene1_farm': 'maps/scene1-farm.tmx',
-    }
+    },
+
+    # These fonts are for Pygame GUI.
+    'ui_font_paths': {
+        'Germania': {
+            'regular': 'fonts/GermaniaOne-Regular.ttf',
+            'bold': 'fonts/GermaniaOne-Bold.ttf',
+            'bold_italic': 'fonts/GermaniaOne-BoldItalic.ttf',
+            'italic': 'fonts/GermaniaOne-Italic.ttf'
+        },
+        'LiberationSerif': {
+            'regular': 'fonts/LiberationSerif-Regular.ttf',
+            'bold': 'fonts/LiberationSerif-Bold.ttf',
+            'bold_italic': 'fonts/LiberationSerif-BoldItalic.ttf',
+            'italic': 'fonts/LiberationSerif-Italic.ttf'
+        },
+        'LiberationSerif-Bold': {
+            'regular': 'fonts/LiberationMono-Bold.ttf',
+            'bold': 'fonts/LiberationMono-Bold.ttf',
+            'bold_italic': 'fonts/LiberationMono-Bold.ttf',
+            'italic': 'fonts/LiberationMono-Bold.ttf',
+        }
+    },
+    'ui_fonts': {
+        # Note that the "regular" flavour of each font specified in the
+        # theme JSON is preloaded automatically. Doing it again here will
+        # give you a warning.
+        'serif-bold': {
+            'name': 'Germania',
+            'point_size': 18,
+            'style': 'bold'
+        },
+        'serif-bolditalic': {
+            'name': 'Germania',
+            'point_size': 18,
+            'style': 'bold_italic'
+        },
+        'serif-italic': {
+            'name': 'Germania',
+            'point_size': 18,
+            'style': 'italic'
+        },
+    },
 }

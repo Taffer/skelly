@@ -45,9 +45,9 @@ class Game:
         self.settings = self.load_settings(SETTINGS_FILENAME)
 
         self.text = src.TextHandler()
-        self.text.addLanguage('en', src.I18N_EN)
-        self.text.addLanguage('es', src.I18N_ES)
-        self.text.setLanguage('en')
+        self.text.add_language('en', src.I18N_EN)
+        self.text.add_language('es', src.I18N_ES)
+        self.text.set_language('en')
 
         self.screen = src.screens.PresentsScreen(self)
 

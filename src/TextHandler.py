@@ -12,15 +12,18 @@ class TextHandler:
         self.current = None
         self.lang = {}
 
-    def addLanguage(self, code: str, dictionary: dict) -> None:
+    def add_language(self, code: str, dictionary: dict) -> None:
         ''' Add language strings. The first one is the default.
         '''
         self.lang[code] = dictionary
         if self.default is None:
             self.default = code
 
-    def setLanguage(self, code: str) -> None:
+    def set_language(self, code: str) -> None:
         self.current = code
+
+    def get_language(self) -> str:
+        return self.current
 
     def get_text(self, tag: str) -> Union[str, dict, list]:
         return self.lang[self.current].get(tag, self.lang[self.default].get(tag, f'~~{tag} not found~~'))

@@ -5,74 +5,6 @@
 
 from typing import Final
 
-# Currently incomplete and therefore untranslated.
-CREDITS_EN: Final = [  # Credits; the 'h1', 'h2', 'p' are styles to be applied.
-    # Libraries
-    ('h1', 'Additional coding'),
-
-    ('h2', 'Pygame'),
-    ('p', 'Pygame Development Team'),
-    ('p', 'Especially the folks on the Pygame Discord'),
-
-    ('h2', 'Pygame GUI'),
-    ('p', 'Dan Lawrence'),
-
-    # Graphics
-    ('h1', 'Graphics'),
-
-    ('h2', "OpenGameArt.org's Liberated Pixel Cup"),
-    ('p', 'Anamaris and Krusmira (aka? Emilio J Sanchez)'),
-    ('p', 'Barbara Rivera'),
-    ('p', 'Casper Nilsson'),
-    ('p', 'Charles Sanchez (AKA CharlesGabriel)'),
-    ('p', 'Chris Phillips'),
-    ('p', 'Daniel Armstrong (AKA HughSpectrum)'),
-    ('p', 'Daniel Eddeland'),
-    ('p', 'Johann CHARLOT'),
-    ('p', 'Jonas Klinger'),
-    ('p', 'Joshua Taylor'),
-    ('p', 'Lanea Zimmerman (AKA Sharm)'),
-    ('p', 'Leo Villeveygoux'),
-    ('p', 'Manuel Riecke (AKA MrBeast)'),
-    ('p', 'Mark Weyer'),
-    ('p', 'Matthew Nash'),
-    ('p', 'Skyler Robert Colladay'),
-    ('p', 'Stephen Challener (AKA Redshrike)'),
-
-    ('h2', 'Fancy skeleton'),
-    ('p', 'Hans von Gersdorff'),
-
-    ('h2', 'Title screen skeleton'),
-    ('p', 'goo30 (OpenGameArt)'),
-
-    ('h2', 'Pygame game icon'),
-    ('p', 'TheCorruptor'),
-
-    ('h2', 'Taffer logo'),
-    ('p', 'ronos_art (Fiverr)'),
-
-    ('h2', 'UI elements'),
-    ('p', 'Kenney.nl'),
-
-    # Music
-    ('h1', 'Music and Sounds'),
-    ('p', 'Kenney.nl'),
-    ('p', 'Matthew Pablo'),
-
-    # Leftovers
-    ('h1', 'Everything else'),
-    ('h2', 'Design, Coding, Writing'),
-    ('p', 'Taffer (Chris Herborth)'),
-
-    ('h1', 'Special thanks'),
-    ('p', 'Lynette and Alex'),
-    ('p', 'Molly and Maisey and those who came before'),
-    ('p', 'My online nerd buddies'),
-
-    # Blank line for some space.
-    ('h1', '')
-]
-
 # "Complete" text that's been translated.
 I18N_EN: Final = {
     # Original English by Chris Herborth.
@@ -185,9 +117,6 @@ I18N_EN: Final = {
         'ui_languages': {'English', 'Español'},
         'ui_volume': 'Volume',
     },
-
-    # Not translated yet.
-    'credits': CREDITS_EN,
 }
 
 I18N_ES: Final = {
@@ -232,7 +161,4 @@ I18N_ES: Final = {
         'ui_languages': {'English', 'Español'},
         'ui_volume': 'Volumen',
     },
-
-    # Not translated yet.
-    'credits': CREDITS_EN,
 }

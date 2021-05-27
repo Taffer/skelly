@@ -21,9 +21,6 @@ class PresentsScreen(ScreenBase):
         super().__init__(game)
 
         self.next_screen = 'Title'
-        '''
-        self.resources.text:setLanguage(gameState.settings:get('language'))
-        '''
 
         self.game.resources['fonts']['default_serif'] = pygame.freetype.Font('fonts/A_Font_with_Serifs.ttf', 72)
         self.game.resources['fonts']['default_mono'] = pygame.freetype.Font('fonts/LiberationMono-Bold.ttf', 16)

@@ -19,7 +19,10 @@ class CreditsScreen(ScreenBase):
 
         self.next_screen = 'Journey'
 
-        self.credits = game.text.get_text('credits')
+        self.credits = ''
+        credits_path = 'text/credits-{0}.md'.format(game.text.get_language())
+        with open(credits_path) as fp:
+            self.credits = fp.readlines()
 
         self.fade = ColorFade(BLACK, BLACK_ALPHA, 1)
 
@@ -67,7 +70,7 @@ class CreditsScreen(ScreenBase):
             self.lines_to_add += dt
 
             while self.lines_to_add > 0.25:
-                self.buffer.append(self.credits[self.credits_idx][1])
+                self.buffer.append(self.credits[self.credits_idx])
                 self.credits_idx += 1
                 if self.credits_idx >= len(self.credits):
                     self.credits_idx = 0

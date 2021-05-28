@@ -9,14 +9,15 @@ import struct
 import pygame
 import zlib
 
+from . import Actor
+from . import Trigger
 from typing import Tuple, Union
 from xml.etree import ElementTree
 
 
 class Map:
-    def __init__(self, map_path: str) -> None:
-        self.on_enter = []  # Functions to call when someone enters this map.
-        self.on_exit = []  # Functions to call when someone exits this map.
+    def __init__(self: 'Map', map_path: str) -> None:
+        self.map_triggers = []  # Triggers to call when someone enters/exits this map.
         self.triggers = {}  # Tile triggers, indexed by (x,y).
 
         tree = ElementTree.parse(map_path)
@@ -76,16 +77,16 @@ class Map:
 
             self.layer_data[layer.attrib['name']] = this_data
 
-    def get_index(self, x: int, y: int) -> int:
+    def get_index(self: 'Map', x: int, y: int) -> int:
         return x + y * self.map_width
 
-    def get_tile(self, layer: str, x: int, y: int) -> int:
+    def get_tile(self: 'Map', layer: str, x: int, y: int) -> int:
         return self.layer_data[layer][self.get_index(x, y)]
 
-    def get_tile_texture(self, idx: int) -> pygame.Surface:
+    def get_tile_texture(self: 'Map', idx: int) -> pygame.Surface:
         return self.tiles[idx]
 
-    def find_point(self, layer_name: str, object_name: str) -> Union[None, Tuple[int, int]]:
+    def find_point(self: 'Map', layer_name: str, object_name: str) -> Union[None, Tuple[int, int]]:
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
             objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))
@@ -97,7 +98,7 @@ class Map:
 
         return None
 
-    def find_rect(self, layer_name: str, object_name: str) -> Union[None, pygame.Rect]:
+    def find_rect(self: 'Map', layer_name: str, object_name: str) -> Union[None, pygame.Rect]:
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
             objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))
@@ -110,3 +111,38 @@ class Map:
                     return rect
 
         return None
+
+    def add_map_trigger(self: 'Map', map_trigger: Trigger) -> None:
+        ''' Add an On Enter/On Exit trigger to the map.
+
+        On Enter/On Exit functions are called with (x, y, actor) when an actor
+        enters the map. (x, y) will be their spawn point in *tile* co-ordinates.
+
+        Note that you can't remove these triggers.
+        '''
+        self.map_triggers.append(map_trigger)
+
+    def add_trigger(self: 'Map', x: int, y: int, trigger: Trigger) -> None:
+        ''' Add a trigger at (x,y).
+        '''
+        self.triggers[(x, y)] = trigger
+
+    def enter_map(self: 'Map', x: int, y: int, actor: Actor) -> None:
+        for trigger in self.map_triggers:
+            trigger.on_enter(x, y, actor)
+
+    def exit_map(self: 'Map', x: int, y: int, actor: Actor) -> None:
+        for trigger in self.map_triggers:
+            trigger.on_exit(x, y, actor)
+
+    def enter_tile(self: 'Map', x: int, y: int, actor: Actor) -> None:
+        ''' *actor* has entered the tile at (x, y), activate any triggers.
+        '''
+        if (x, y) in self.triggers:
+            self.triggers[(x, y)].on_enter(x, y, actor)
+
+    def exit_tile(self: 'Map', x: int, y: int, actor: Actor) -> None:
+        ''' *actor* is exiting the tile at (x, y), activate any triggers.
+        '''
+        if (x, y) in self.triggers:
+            self.triggers[(x, y)].on_exit(x, y, actor)

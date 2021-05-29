@@ -87,6 +87,10 @@ class Map:
         return self.tiles[idx]
 
     def find_point(self: 'Map', layer_name: str, object_name: str) -> Union[None, Tuple[int, int]]:
+        ''' Returns a Point object's location, in map pixel co-ordinates.
+
+        TODO: Should this return tile co-ordinates?
+        '''
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
             objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))
@@ -99,6 +103,10 @@ class Map:
         return None
 
     def find_rect(self: 'Map', layer_name: str, object_name: str) -> Union[None, pygame.Rect]:
+        ''' Returns a Rect object's location, in map pixel co-ordinates.
+
+        TODO: Should this return tile co-ordinates?
+        '''
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
             objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))

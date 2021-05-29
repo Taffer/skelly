@@ -22,17 +22,17 @@ class PresentsScreen(ScreenBase):
 
         self.next_screen = 'Title'
 
+        self.game.resources['music']['theme'] = pygame.mixer.music.load('music/Heroic Demise (New).ogg')
+
+        pygame.mixer.music.set_volume(self.game.settings.get('music_volume') * self.game.settings.get('overall_volume'))
+        pygame.mixer.music.play()
+
         self.game.resources['fonts']['default_serif'] = pygame.freetype.Font('fonts/A_Font_with_Serifs.ttf', 72)
         self.game.resources['fonts']['default_mono'] = pygame.freetype.Font('fonts/LiberationMono-Bold.ttf', 16)
         self.game.resources['fonts']['germania'] = pygame.freetype.Font('fonts/GermaniaOne-Regular.ttf', 18)
 
         self.game.resources['images']['pygame_logo'] = pygame.image.load('graphics/pygame-logo.png').convert_alpha()
         self.game.resources['images']['taffer'] = pygame.image.load('graphics/taffer-ronos.png').convert_alpha()
-
-        self.game.resources['music']['theme'] = pygame.mixer.music.load('music/Heroic Demise (New).ogg')
-
-        pygame.mixer.music.set_volume(self.game.settings.get('music_volume') * self.game.settings.get('overall_volume'))
-        pygame.mixer.music.play()
 
         presents_text = self.game.text.get_text('presents')
         self.taffer_text = presents_text['taffer_text']

@@ -399,6 +399,9 @@ class Fortune7(StateBase):
             if self.fade.is_done():
                 self.done = True
 
+                # Fade out character creation music.
+                pygame.mixer.music.fade_out(1)
+
     def next_state(self) -> StateBase:
         return Fortune8(self.game, self.screen)
 
@@ -416,6 +419,12 @@ class Fortune8(StateBase):
         self.ticks = 0
         self.wait_ticks = 0
         self.camera_y = self.screen.camera.y
+
+        # Fade out intro music if it's still playing, play character creation
+        # music.
+        pygame.mixer.music.fade_out(1)
+        pygame.mixer.music.load('music/Heroic Demise (New).ogg')
+        pygame.mixer.music.play()
 
     def draw(self) -> None:
         draw_29x21(self.game.surface)
@@ -467,6 +476,12 @@ class NewGameScreen(ScreenBase):
 
         Transition to Game
         '''
+
+        # Fade out intro music if it's still playing, play character creation
+        # music.
+        pygame.mixer.music.fade_out(1)
+        pygame.mixer.music.load('music/Project Utopia.ogg')
+        pygame.mixer.music.play(-1)  # Loop until we quit.
 
         fortune_text = self.game.text.get_text('newgame')
         self.fortune1_text = fortune_text['fortune1']

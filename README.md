@@ -106,3 +106,5 @@ from
   found on
   [OpenGameArt.org](https://opengameart.org/content/heroic-demise-updated-version),
   converted to `.ogg` format for Pygame.
+* `Project Utopia.ogg` - By congusbongus, found on
+  [OpenGameArt.org](https://opengameart.org/content/project-utopia-seamless-loop).

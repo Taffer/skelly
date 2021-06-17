@@ -10,6 +10,7 @@ import random
 
 from .ScreenBase import ScreenBase
 from .. import Camera
+from .. import LPCSprite
 from .. import Map
 from ..ui import ColorFade
 from ..ui import ImageButton
@@ -400,7 +401,7 @@ class Fortune7(StateBase):
                 self.done = True
 
                 # Fade out character creation music.
-                pygame.mixer.music.fade_out(1)
+                pygame.mixer.music.fadeout(1)
 
     def next_state(self) -> StateBase:
         return Fortune8(self.game, self.screen)
@@ -422,7 +423,7 @@ class Fortune8(StateBase):
 
         # Fade out intro music if it's still playing, play character creation
         # music.
-        pygame.mixer.music.fade_out(1)
+        pygame.mixer.music.fadeout(1)
         pygame.mixer.music.load('music/Heroic Demise (New).ogg')
         pygame.mixer.music.play()
 
@@ -446,6 +447,79 @@ class Fortune8(StateBase):
                 self.camera_y += 1
                 if self.camera_y < 20:  # TODO: Should be a const or something.
                     self.screen.camera.set_position(self.screen.camera.x, self.camera_y)
+                else:
+                    self.done = True
+
+    def next_state(self) -> StateBase:
+        return NecroAnimation(self.game, self.screen)
+
+
+class NecroAnimation(StateBase):
+    def __init__(self, game, screen: ScreenBase) -> None:
+        super().__init__(game, screen)
+
+        self.ticks = 0
+
+        self.army = []  # Skeleton army
+        self.army_location = []
+        self.necro = None  # Necromancer
+        self.necro_location = None
+
+        self.map = None
+
+        self.army_points = []  # Skeleton army walks this path.
+        self.necro_points = []  # Necro walks in on this path.
+        self.necro_exit_points = []  # Necro leaves on this path.
+
+        self.map = self.screen.map
+
+        for point in ['army_path_1', 'army_path_2', 'army_path_3', 'army_path_4']:
+            x, y = self.map.find_point('Paths', point)
+            self.army_points.append([x, y])
+
+        for point in ['necro_path_1', 'necro_path_2', 'necro_path_3', 'necro_path_4']:
+            x, y = self.map.find_point('Paths', point)
+            self.necro_points.append([x, y])
+
+        for point in ['necro_path_5', 'necro_path_6', 'necro_path_7', 'necro_path_8', 'necro_path_9']:
+            x, y = self.map.find_point('Paths', point)
+            self.necro_exit_points.append([x, y])
+
+    def draw(self) -> None:
+        draw_29x21(self.game.surface)
+
+        self.screen.camera.draw('Ground')
+        self.screen.camera.draw('Buildings')
+
+        for item in self.screen.ui:
+            item.draw()
+
+        for idx in range(len(self.army)):
+            texture = self.army[idx].get_texture()
+            x, y = self.army_location[idx]
+            self.game.surface.blit(texture, (x, y))
+
+    def update(self, dt):
+        self.ticks += dt
+
+        if len(self.army) < 1:
+            # Spawn a skelly.
+            skelly = LPCSprite(self.game.resources['images']['skeleton_sprite'])
+            skelly.set_facing('right')
+            skelly.set_animation('walk')
+
+            self.army.append(skelly)
+            self.army_location.append(self.army_points[0])
+
+        if self.ticks > 1/20:
+            self.ticks -= 1/20
+
+            for idx in range(len(self.army)):
+                self.army[idx].next_frame()
+                self.army_location[idx][0] += 1  # Move X-wise
+
+    def next_state(self) -> StateBase:
+        pass
 
 
 class NewGameScreen(ScreenBase):
@@ -479,7 +553,7 @@ class NewGameScreen(ScreenBase):
 
         # Fade out intro music if it's still playing, play character creation
         # music.
-        pygame.mixer.music.fade_out(1)
+        pygame.mixer.music.fadeout(1)
         pygame.mixer.music.load('music/Project Utopia.ogg')
         pygame.mixer.music.play(-1)  # Loop until we quit.
 

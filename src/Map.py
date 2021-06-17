@@ -87,35 +87,36 @@ class Map:
         return self.tiles[idx]
 
     def find_point(self: 'Map', layer_name: str, object_name: str) -> Union[None, Tuple[int, int]]:
-        ''' Returns a Point object's location, in map pixel co-ordinates.
-
-        TODO: Should this return tile co-ordinates?
+        ''' Returns a Point object's location, in map tile co-ordinates.
         '''
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
-            objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))
+            objects = groups[0].findall('.//object[@name="{0}"]'.format(object_name))
 
             if len(objects) == 1:
                 if 'width' not in objects[0].attrib and 'height' not in objects[0].attrib:
                     # Then this is a point.
-                    return (int(objects[0].attrib['x']), int(objects[0].attrib['y']))
+                    x = int(float(objects[0].attrib['x'])) // self.tile_width
+                    y = int(float(objects[0].attrib['y'])) // self.tile_height
+                    return (x, y)
 
         return None
 
     def find_rect(self: 'Map', layer_name: str, object_name: str) -> Union[None, pygame.Rect]:
-        ''' Returns a Rect object's location, in map pixel co-ordinates.
-
-        TODO: Should this return tile co-ordinates?
+        ''' Returns a Rect object's location, in map tile co-ordinates.
         '''
         groups = self.root.findall('.//objectgroup[@name="{0}"]'.format(layer_name))
         if len(groups) == 1:
-            objects = groups[0].findall('.//object[@name="{0}"'.format(object_name))
+            objects = groups[0].findall('.//object[@name="{0}"]'.format(object_name))
 
             if len(objects) == 1:
                 if 'width' in objects[0].attrib and 'height' in objects[0].attrib:
                     # Then this is a rect.
-                    rect = pygame.Rect(int(objects[0].attrib['x']), int(objects[0].attrib['y']),
-                                       int(objects[0].attrib['width']), int(objects[0].attrib['height']))
+                    x = int(float(objects[0].attrib['x'])) // self.tile_width
+                    y = int(float(objects[0].attrib['y'])) // self.tile_height
+                    w = int(float(objects[0].attrib['width'])) // self.tile_width
+                    h = int(float(objects[0].attrib['height'])) // self.tile_height
+                    rect = pygame.Rect(x, y, w, h)
                     return rect
 
         return None

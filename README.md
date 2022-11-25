@@ -1,3 +1,11 @@
+# Moved
+
+This repo is has been replaced by: https://codeberg.org/Taffer/skelly
+
+![Logo of the GiveUpGitHub campaign](https://sfconservancy.org/img/GiveUpGitHub.png)
+
+Everything in this repo should be considered out of date.
+
 # Skelly
 
 A small RPG set in the _Skeleton War_.
